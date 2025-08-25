@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,49 +9,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    /* ---------- THEME VARIABLES ---------- */
     :root{
-      --bg:#0b1220;--card:#111b2d;--muted:#8aa0c2;--brand:#3ac4a0;--line:#20314f;
+      --bg:#ffffff; --text:#0c1626; --muted:#5a6b84; --card:#f7f9fc; --line:#e2e8f0; --brand:#12c2a2;
+      --c1:#1f77b4; --c2:#ff7f0e; --c3:#2ca02c; --c4:#d62728; --c5:#9467bd; --c6:#8c564b; --c7:#111827;
     }
+    :root[data-theme="dark"]{
+      --bg:#0b1220; --text:#e7eefc; --muted:#94a3b8; --card:#111b2d; --line:#20314f; --brand:#3ac4a0;
+      --c1:#60a5fa; --c2:#f59e0b; --c3:#34d399; --c4:#f87171; --c5:#a78bfa; --c6:#fbbf24; --c7:#e5e7eb;
+    }
+    @media (prefers-color-scheme: light){
+      :root:not([data-theme]){ /* if you remove data-theme attr, this will kick in */
+        --bg:#ffffff; --text:#0c1626; --muted:#5a6b84; --card:#f7f9fc; --line:#e2e8f0; --brand:#12c2a2;
+      }
+    }
+    @media (prefers-color-scheme: dark){
+      :root:not([data-theme]){
+        --bg:#0b1220; --text:#e7eefc; --muted:#94a3b8; --card:#111b2d; --line:#20314f; --brand:#3ac4a0;
+      }
+    }
+
+    /* ---------- BASE UI ---------- */
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
-    body{background:linear-gradient(180deg,#0b1220 0,#0d1526 100%);color:#e7eefc}
-    header{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px}
+    body{background:var(--bg);color:var(--text)}
+    header{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
     header h1{font-size:clamp(20px,3vw,28px);margin:0;font-weight:700;letter-spacing:.2px}
     header .sub{color:var(--muted);font-size:14px}
+    .theme-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:8px 12px;cursor:pointer}
     main{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1.25fr .75fr;gap:20px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.25);}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,.05)}
     .card h2{margin:0;padding:14px 16px;border-bottom:1px solid var(--line);font-size:16px;font-weight:700}
     .card .content{padding:16px}
     label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input[type=file], input[type=text], select{width:100%;background:#0c1426;border:1px solid var(--line);color:#e7eefc;border-radius:10px;padding:10px 12px}
+    input[type=file], input[type=text], select{width:100%;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .btn{appearance:none;border:none;background:var(--brand);color:#0a0f18;font-weight:700;border-radius:12px;padding:10px 14px;cursor:pointer}
-    .btn.ghost{background:#0c1426;color:#d8e6ff;border:1px solid var(--line)}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
     .btn:disabled{opacity:.5;cursor:not-allowed}
     .stack{display:flex;flex-wrap:wrap;gap:10px}
     .muted{color:var(--muted);font-size:12px}
     .kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .kpi .item{background:#0c1426;border:1px dashed var(--line);padding:10px;border-radius:12px}
-    .item h3{margin:0 0 6px 0;font-size:13px;color:#a9c3ec}
+    .kpi .item{background:transparent;border:1px dashed var(--line);padding:10px;border-radius:12px}
+    .item h3{margin:0 0 6px 0;font-size:13px;color:var(--muted)}
     .item .v{font-size:18px;font-weight:700}
     footer{max-width:1100px;margin:12px auto 40px;padding:0 16px;color:var(--muted);font-size:12px}
-    code.small{font-size:11px;background:#111a2e;color:#a8c0e9;padding:2px 6px;border-radius:6px}
+    code.small{font-size:11px;background:transparent;border:1px solid var(--line);padding:2px 6px;border-radius:6px;color:var(--muted)}
   </style>
 </head>
 <body>
   <header>
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.2l1.1-6.2L3 8.6l6.2-.9L12 2z" fill="var(--brand)"/></svg>
-    <div>
-      <h1>Wood Products Carbon Tracker</h1>
-      <div class="sub"> </div>
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.8 6.4 19.2l1.1-6.2L3 8.6l6.2-.9L12 2z" fill="var(--brand)"/></svg>
+      <div>
+        <h1>Wood Products Carbon Tracker</h1>
+        <div class="sub">Upload data → (optional) upload parameters → run → visualize & export</div>
+      </div>
     </div>
+    <button id="themeToggle" class="theme-btn" title="Toggle light/dark">Switch theme</button>
   </header>
 
   <main>
-    <!-- Left: data + chart -->
+    <!-- Data -->
     <section class="card">
-      <h2>Input Wood Products Data</h2>
+      <h2>1) Input Wood Products Data</h2>
       <div class="content">
         <p class="muted">Expected CSV headers:
           <code class="small">Year,Fuel,Biochar,Building,Exterior_use,Home_application,Paper_Newspaper,Paper_Graphic,Paper_Packing,Paper_Household</code>
@@ -64,18 +87,20 @@
       </div>
     </section>
 
+    <!-- Parameters -->
     <section class="card">
       <h2>2) Parameters</h2>
       <div class="content">
         <div class="stack">
           <input id="paramFile" type="file" accept=".csv" />
-          <button id="btnDownloadParams" class="btn ghost" title="Download the default parameters as CSV">Download default parameters.csv</button>
+          <button id="btnDownloadParams" class="btn ghost" title="Download default parameters as CSV">Download default parameters.csv</button>
           <button id="btnShowParams" class="btn ghost">View current parameters</button>
         </div>
-        <p class="muted" style="margin-top:10px">Parameter CSV format: <code class="small">section,key,value</code>. You can upload edited parameters to override the defaults.</p>
+        <p class="muted" style="margin-top:10px">Parameter CSV format: <code class="small">section,key,value</code>. Upload to override defaults.</p>
       </div>
     </section>
 
+    <!-- Results -->
     <section class="card" style="grid-column:1 / span 2">
       <h2>Results</h2>
       <div class="content">
@@ -83,7 +108,7 @@
           <button id="btnDownloadResults" class="btn" disabled>Download results.csv</button>
           <button id="btnDownloadChart" class="btn ghost" disabled>Download chart.png</button>
         </div>
-        <canvas id="chart" height="90"></canvas>
+        <canvas id="chart" height="96"></canvas>
         <div style="margin-top:16px" class="kpi" id="stats"></div>
       </div>
     </section>
@@ -92,296 +117,16 @@
       <h2>Notes</h2>
       <div class="content">
         <ul class="muted">
-          <li>The calculator runs entirely in your browser.</li>
+          <li>Runs entirely in your browser. Your CSVs never leave your device.</li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer>
-    © 2025 • Wood Products Carbon Tracker. Models adapted from your Python modules (paper, building, exterior use, home application, biochar/charcoal, landfill) and reimplemented in JavaScript.
+    © 2025 • Wood Products Carbon Tracker.
   </footer>
 
-  <script src="tracker.js" type="module"></script>
+  <script type="module" src="tracker.js"></script>
 </body>
 </html>
-
-<!-- tracker.js (create this as a separate file next to index.html) -->
-<!--  ↓  For convenience when previewing, we also inline the full JS below.     -->
-<script type="module" id="__inline_tracker_js__">
-// If you copy just index.html, the app will still work thanks to this inline fallback.
-// When you add a real tracker.js file, this inline block is ignored.
-(async()=>{
-  if (await fetchInlineThenLoad()) return; // if a real tracker.js exists, stop here
-  // Otherwise, run the inlined implementation.
-  const API = createTrackerAPI();
-  attachUI(API);
-})();
-
-async function fetchInlineThenLoad(){
-  try{const res=await fetch('tracker.js',{method:'HEAD'});return res.ok;}catch(e){return false}
-}
-
-function createTrackerAPI(){
-  // ---------- Parameters (defaults) ----------
-  const DEFAULT_PARAMS = {
-    bio:{ ce:96, dc1:0.007, dc2:0.0003 },
-    bud:{ dp1:0.133, dp2:0.028, dp3:80, rp1:0.085, rp2:0.015 },
-    exu:{ dp1:0.326, dp2:0.041, dp3:25 },
-    hma:{ dp1:0.265, dp2:0.031, dp3:30, rp1:0.085, rp2:0.015 },
-    pap_newspaper:{ dp1:3.062, dp2:0.0, dp3:2, rp1:0.225, rp2:0.027 },
-    pap_graphic:{   dp1:1.006, dp2:0.0, dp3:6, rp1:0.225, rp2:0.027 },
-    pap_packing:{   dp1:6.036, dp2:0.0, dp3:1, rp1:0.225, rp2:0.027 },
-    pap_household:{ dp1:12.036,dp2:0.0, dp3:0.5, rp1:0.0,  rp2:0.0 },
-    ldf:{ bud1:0.997,bud2:30, exu1:1.178,exu2:20, hma1:1.329,hma2:15, pap1:0.821,pap2:5 }
-  };
-
-  // ---------- CSV helpers ----------
-  const toCSV=(rows)=>rows.map(r=>r.map(v=>String(v)).join(',')).join('\n');
-  const parseCSV=(text)=>{
-    const lines=text.trim().split(/\r?\n/); const head=lines[0].split(',');
-    return lines.slice(1).map(line=>{
-      const parts=line.split(','); const obj={}; head.forEach((h,i)=>obj[h.trim()]=parseFloat(parts[i])==parts[i]?parseFloat(parts[i]):parts[i]);
-      return obj;
-    });
-  };
-
-  // ---------- Numeric tools ----------
-  const integrate=(fn,a,b,steps=128)=>{ if(!isFinite(a)||!isFinite(b)) return 0; const h=(b-a)/steps; let sum=0; for(let k=0;k<=steps;k++){const x=a+k*h; const w=(k===0||k===steps)?0.5:1; sum+=w*fn(x);} return sum*h; };
-
-  // generic disposal rate (Gaussian-like), matches Python modules
-  const drGaussian=(dp1,dp2,dp3)=>T=>{ return (dp1/Math.exp(Math.sqrt(2*Math.PI))) * Math.exp((-dp2*Math.pow((T-dp3),2))/dp3); };
-  // generic log-based landfill decay, avoids log(0)
-  const drLandfill=(a,b)=>T=>{ if(T<=1e-6) return 0; return (Math.log(T)*a)/(b*Math.sqrt(2*Math.PI)); };
-
-  function poolAndDisposed(ty, inflow, dr, windowYears=null){
-    const P=new Array(ty).fill(0), D=new Array(ty).fill(0);
-    for(let i=0;i<ty;i++){
-      let accA=0, accD=0; const j0 = windowYears? Math.max(0, i - Math.floor(windowYears) + 1) : 0;
-      for(let j=j0;j<=i;j++){
-        const ts=i+1-j; const yrC=inflow[j]||0; const lfr=integrate(dr,0,ts,128);
-        accA += yrC*(1-lfr); // remaining in pool
-        accD += yrC*dr(ts);  // disposed this year
-      }
-      P[i]=accA; D[i]=accD;
-    }
-    return {P,D};
-  }
-
-  function recycleSeries(D, rp1, rp2){
-    return D.map((d,i)=> d*Math.max(0, rp1 + rp2*Math.log(i+1)));
-  }
-
-  // charcoal / bio: pool-size dependent decay
-  function charcoalSeries(ty, fuel, ce, biochar, dc1, dc2){
-    const C=[], P=[], D=[]; let pool=0;
-    for(let i=0;i<ty;i++){
-      const fChar = (fuel[i]||0) * ((100-ce)/100);
-      const yrC = (biochar[i]||0) + fChar; pool += yrC;
-      const dr = dc1 + dc2*Math.log(Math.max(pool,1e-9));
-      const yrD = pool*dr; pool -= yrD; C.push(yrC); P.push(pool); D.push(yrD);
-    }
-    return {C,P,D};
-  }
-
-  // landfill from multiple disposed streams
-  function landfillSeries(ty, Lpap, Lbud, Lexu, Lhma, params){
-    const dPap=drLandfill(params.pap1,params.pap2);
-    const dBud=drLandfill(params.bud1,params.bud2);
-    const dExu=drLandfill(params.exu1,params.exu2);
-    const dHma=drLandfill(params.hma1,params.hma2);
-
-    const comp=(D,dr,win)=>poolAndDisposed(ty,D,dr,win);
-    const Ppap = comp(ty,Lpap,dPap,params.pap2).P; const Dpap = comp(ty,Lpap,dPap,params.pap2).D;
-    const Pbud = comp(ty,Lbud,dBud,params.bud2).P; const Dbud = comp(ty,Lbud,dBud,params.bud2).D;
-    const Pexu = comp(ty,Lexu,dExu,params.exu2).P; const Dexu = comp(ty,Lexu,dExu,params.exu2).D;
-    const Phma = comp(ty,Lhma,dHma,params.hma2).P; const Dharma = comp(ty,Lhma,dHma,params.hma2).D;
-
-    const P=[], D=[], C=[]; for(let i=0;i<ty;i++){ C[i]=(Lpap[i]||0)+(Lbud[i]||0)+(Lexu[i]||0)+(Lhma[i]||0); P[i]=Ppap[i]+Pbud[i]+Pexu[i]+Phma[i]; D[i]=Dpap[i]+Dbud[i]+Dexu[i]+Dharma[i]; }
-    return {C,P,D, components:{Ppap,Pbud,Pexu,Phma,Dpap,Dbud,Dexu,Dharma}};
-  }
-
-  function makeDefaultParamsCSV(){
-    const rows=[["section","key","value"]];
-    const p=DEFAULT_PARAMS;
-    const pushObj=(section,obj)=>Object.entries(obj).forEach(([k,v])=>rows.push([section,k,String(v)]));
-    pushObj('bio',p.bio); pushObj('bud',p.bud); pushObj('exu',p.exu); pushObj('hma',p.hma);
-    pushObj('pap_newspaper',p.pap_newspaper); pushObj('pap_graphic',p.pap_graphic); pushObj('pap_packing',p.pap_packing); pushObj('pap_household',p.pap_household);
-    pushObj('ldf',p.ldf);
-    return rows.map(r=>r.join(',')).join('\n');
-  }
-
-  function paramsFromCSVText(text){
-    const override=JSON.parse(JSON.stringify(DEFAULT_PARAMS));
-    const lines=text.trim().split(/\r?\n/); const [h1,h2,h3]=lines[0].split(',');
-    for(const line of lines.slice(1)){
-      const [section,key,valueRaw]=line.split(','); if(!override[section]) continue; const num=Number(valueRaw); override[section][key]=Number.isFinite(num)?num:valueRaw;
-    }
-    return override;
-  }
-
-  function stats(series){
-    const sum=series.reduce((a,b)=>a+(b||0),0); const n=series.length; const mean=sum/n; const min=Math.min(...series); const max=Math.max(...series); const sd=Math.sqrt(series.reduce((a,b)=>a+Math.pow((b-mean),2),0)/n); return {sum,mean,min,max,sd};
-  }
-
-  // Core compute pipeline
-  function runModel(inputRows, params){
-    // Inflows
-    const Y = inputRows.map(r=>Number(r.Year)); const ty=Y.length;
-    const Fuel = inputRows.map(r=>Number(r.Fuel||0));
-    const Biochar = inputRows.map(r=>Number(r.Biochar||0));
-    const Bud = inputRows.map(r=>Number(r.Building||0));
-    const Exu = inputRows.map(r=>Number(r.Exterior_use||0));
-    const Hma = inputRows.map(r=>Number(r.Home_application||0));
-    const Ppn = inputRows.map(r=>Number(r.Paper_Newspaper||0));
-    const Ppg = inputRows.map(r=>Number(r.Paper_Graphic||0));
-    const Ppp = inputRows.map(r=>Number(r.Paper_Packing||0));
-    const Pph = inputRows.map(r=>Number(r.Paper_Household||0));
-
-    // Charcoal
-    const CC = charcoalSeries(ty,Fuel,params.bio.ce,Biochar,params.bio.dc1,params.bio.dc2);
-
-    // Building / Exterior / HomeApp pools
-    const budDR = drGaussian(params.bud.dp1, params.bud.dp2, params.bud.dp3);
-    const exuDR = drGaussian(params.exu.dp1, params.exu.dp2, params.exu.dp3);
-    const hmaDR = drGaussian(params.hma.dp1, params.hma.dp2, params.hma.dp3);
-
-    const PB = poolAndDisposed(ty,Bud,budDR,params.bud.dp3);
-    const PE = poolAndDisposed(ty,Exu,exuDR,params.exu.dp3);
-    const PH = poolAndDisposed(ty,Hma,hmaDR,params.hma.dp3);
-
-    const RB = recycleSeries(PB.D, params.bud.rp1, params.bud.rp2);
-    const RH = recycleSeries(PH.D, params.hma.rp1, params.hma.rp2);
-
-    const LB = PB.D.map((d,i)=>d-(RB[i]||0));
-    const LE = PE.D.slice();
-    const LH = PH.D.map((d,i)=>d-(RH[i]||0));
-
-    // Papers
-    const mkPap = (inflow, p)=>{ const dr = drGaussian(p.dp1,p.dp2,p.dp3); const P = poolAndDisposed(ty,inflow,dr,p.dp3); const R = recycleSeries(P.D, p.rp1||0, p.rp2||0); const L = P.D.map((d,i)=>d-(R[i]||0)); return {P,R,L}; };
-    const PPN = mkPap(Ppn, params.pap_newspaper);
-    const PPG = mkPap(Ppg, params.pap_graphic);
-    const PPP = mkPap(Ppp, params.pap_packing);
-    const PPH = mkPap(Pph, params.pap_household);
-    const PaperPool = Array.from({length:ty},(_,i)=> (PPN.P.P[i]||0)+(PPG.P.P[i]||0)+(PPP.P.P[i]||0)+(PPH.P.P[i]||0));
-
-    const Lpap = Array.from({length:ty},(_,i)=> (PPN.L[i]||0)+(PPG.L[i]||0)+(PPP.L[i]||0)+(PPH.L[i]||0));
-
-    // Landfill (from disposed streams)
-    const LF = landfillSeries(ty, Lpap, LB, LE, LH, params.ldf);
-
-    // Results per year
-    const rows = [["Year","Charcoal","Building","Exterior_use","Home_application","Paper","Landfill","Total"]];
-    for(let i=0;i<ty;i++){
-      const row=[Y[i], CC.P[i], PB.P[i], PE.P[i], PH.P[i], PaperPool[i], LF.P[i]]; row.push(row.slice(1).reduce((a,b)=>a+b,0)); rows.push(row.map(v=> (typeof v==='number'? Number(v.toFixed(4)) : v)));
-    }
-
-    const series={years:Y, charcoal:CC.P, building:PB.P, exterior:PE.P, home:PH.P, paper:PaperPool, landfill:LF.P, total:rows.slice(1).map(r=>r[7])};
-
-    // Stats
-    const S={
-      Charcoal:stats(series.charcoal),
-      Building:stats(series.building),
-      Exterior_use:stats(series.exterior),
-      Home_application:stats(series.home),
-      Paper:stats(series.paper),
-      Landfill:stats(series.landfill),
-      Total:stats(series.total)
-    };
-
-    return {table:rows, series, stats:S};
-  }
-
-  // ---------- UI glue ----------
-  function attachUI(API){
-    const els={
-      dataFile:document.getElementById('dataFile'),
-      paramFile:document.getElementById('paramFile'),
-      btnRun:document.getElementById('btnRun'),
-      btnReset:document.getElementById('btnReset'),
-      btnDownloadParams:document.getElementById('btnDownloadParams'),
-      btnShowParams:document.getElementById('btnShowParams'),
-      btnDownloadResults:document.getElementById('btnDownloadResults'),
-      btnDownloadChart:document.getElementById('btnDownloadChart'),
-      stats:document.getElementById('stats'),
-      chart:document.getElementById('chart')
-    };
-
-    let PARAMS = API.DEFAULT_PARAMS || DEFAULT_PARAMS; // start with defaults
-    let MODEL=null; let CHART=null; let INPUT_ROWS=null;
-
-    const enable=(b)=>{ els.btnRun.disabled=!b; };
-
-    els.dataFile.addEventListener('change', async (e)=>{
-      const f=e.target.files?.[0]; if(!f) return; const text=await f.text(); INPUT_ROWS=parseCSV(text); enable(true);
-    });
-
-    els.paramFile.addEventListener('change', async (e)=>{
-      const f=e.target.files?.[0]; if(!f) return; const text=await f.text(); PARAMS=paramsFromCSVText(text); alert('Parameters loaded.');
-    });
-
-    els.btnDownloadParams.addEventListener('click', ()=>{
-      const blob=new Blob([makeDefaultParamsCSV()],{type:'text/csv'}); const url=URL.createObjectURL(blob);
-      const a=document.createElement('a'); a.href=url; a.download='parameters_default.csv'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    els.btnShowParams.addEventListener('click', ()=>{
-      const pretty = JSON.stringify(PARAMS,null,2); const w=window.open(''); w.document.write('<pre>'+pretty+'</pre>');
-    });
-
-    els.btnReset.addEventListener('click', ()=>{ location.reload(); });
-
-    els.btnRun.addEventListener('click', ()=>{
-      if(!INPUT_ROWS){ alert('Please select a data CSV first.'); return; }
-      MODEL=runModel(INPUT_ROWS, PARAMS);
-      drawChart(MODEL.series);
-      renderStats(MODEL.stats);
-      els.btnDownloadResults.disabled=false; els.btnDownloadChart.disabled=false;
-    });
-
-    els.btnDownloadResults.addEventListener('click', ()=>{
-      if(!MODEL) return; const blob=new Blob([toCSV(MODEL.table)],{type:'text/csv'}); const url=URL.createObjectURL(blob);
-      const a=document.createElement('a'); a.href=url; a.download='results.csv'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    els.btnDownloadChart.addEventListener('click', ()=>{
-      if(!CHART) return; const a=document.createElement('a'); a.href=CHART.toBase64Image(); a.download='chart.png'; a.click();
-    });
-
-    function number(v){ return Number(v).toLocaleString(undefined,{maximumFractionDigits:2}); }
-
-    function renderStats(S){
-      els.stats.innerHTML = Object.entries(S).map(([k,v])=>`
-        <div class="item">
-          <h3>${k}</h3>
-          <div class="v">Total: ${number(v.sum)}</div>
-          <div class="muted">Mean: ${number(v.mean)} • Min: ${number(v.min)} • Max: ${number(v.max)} • SD: ${number(v.sd)}</div>
-        </div>`).join('');
-    }
-
-    function drawChart(series){
-      const ctx=els.chart.getContext('2d'); if(CHART) CHART.destroy();
-      CHART=new Chart(ctx,{
-        type:'line',
-        data:{labels:series.years,datasets:[
-          {label:'Charcoal',data:series.charcoal, borderWidth:2, fill:false},
-          {label:'Building',data:series.building, borderWidth:2, fill:false},
-          {label:'Exterior use',data:series.exterior, borderWidth:2, fill:false},
-          {label:'Home application',data:series.home, borderWidth:2, fill:false},
-          {label:'Paper',data:series.paper, borderWidth:2, fill:false},
-          {label:'Landfill',data:series.landfill, borderWidth:2, fill:false},
-          {label:'Total',data:series.total, borderWidth:3, fill:false}
-        ]},
-        options:{responsive:true,interaction:{mode:'index',intersect:false},
-          plugins:{legend:{labels:{color:'#cfe2ff'}}, tooltip:{},},
-          scales:{x:{ticks:{color:'#b9c7e6'}},y:{ticks:{color:'#b9c7e6'},grid:{color:'rgba(255,255,255,.06)'}}}
-        }
-      });
-    }
-  }
-
-  return { DEFAULT_PARAMS, runModel, makeDefaultParamsCSV, paramsFromCSVText };
-}
-
-function attachUI(API){ /* replaced below when real tracker.js is used */ }
-</script>
