@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wood Products Carbon Storage Estimator</title>
+  <style>
+    :root{--bg:#0b1020;--card:#121a33;--muted:#94a3b8;--text:#e6edf3;--accent:#7dd3fc;--accent-2:#a78bfa}
+    *{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;background:linear-gradient(180deg,#0b1020,#0f172a);} 
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
+    .title{color:var(--text);font-weight:800;letter-spacing:.3px;font-size:28px;margin:8px 0 2px}
+    .subtitle{color:var(--muted);margin:0 0 18px;font-size:14px}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12;background:rgba(18,26,51,.8);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    @media(min-width:980px){.inputs{grid-column:span 5}.results{grid-column:span 7}}
+    .card h2{margin:0 0 10px;color:var(--text);font-size:18px}
+    label{display:block;color:var(--muted);font-size:12px;margin:10px 0 6px}
+    input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:#0b1226;color:var(--text);outline:none}
+    input[type=range]{padding:0}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1020;border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
+    .btn.secondary{background:#0b1226;color:var(--text);border:1px solid rgba(255,255,255,.12)}
+    .muted{color:var(--muted)}
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{border-bottom:1px solid rgba(255,255,255,.08);padding:10px 6px;text-align:right}
+    th:first-child,td:first-child{text-align:left}
+    .nums{font-variant-numeric:tabular-nums}
+    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(125,211,252,.12);color:var(--accent);font-size:12px}
+    .footer{color:var(--muted);font-size:12px;margin-top:14px}
+    .inline{display:flex;gap:8px;flex-wrap:wrap}
+    details{margin:8px 0}
+    details summary{cursor:pointer;color:var(--accent)}
+    .chart{height:220px;width:100%;margin-top:6px;border-radius:12px;background:#0b1226;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+    .chart canvas{position:absolute;inset:0}
+    .note{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Wood Products Carbon Storage Estimator</div>
+    <p class="subtitle">Upload simple production data or paste values, set assumptions, and estimate stored carbon by product class. Uses a first‑order decay with editable half‑lives.</p>
+
+    <div class="grid">
+      <section class="card inputs">
+        <h2>Input data</h2>
+        <label>Upload CSV (<span class="pill">columns: year, amount</span>, optional: product)</label>
+        <input type="file" id="file" accept=".csv" />
+        <div class="inline" style="margin-top:10px">
+          <button class="btn secondary" id="downloadSample">Download sample CSV</button>
+          <button class="btn secondary" id="useSample">Load sample</button>
+        </div>
+        <label>Or paste rows (CSV)</label>
+        <textarea id="paste" rows="5" placeholder="year,amount,product\n2020,1200,sawnwood\n2021,800,panels\n2022,1000"></textarea>
+
+        <h2 style="margin-top:14px">Assumptions</h2>
+        <div class="row">
+          <div>
+            <label>Input unit</label>
+            <select id="unit">
+              <option value="odt">oven‑dry tonnes (ODT) of wood</option>
+              <option value="m3">m³ roundwood volume</option>
+            </select>
+          </div>
+          <div>
+            <label>Carbon fraction of dry mass</label>
+            <input id="cfrac" type="number" min="0" max="1" step="0.01" value="0.5" />
+          </div>
+        </div>
+        <div class="row" id="densityRow" style="display:none">
+          <div>
+            <label>Basic wood density (kg/m³)</label>
+            <input id="density" type="number" min="100" max="1200" step="10" value="500" />
+          </div>
+          <div>
+            <label>Moisture adj. to ODT (fraction of dry)</label>
+            <input id="moist" type="number" min="0" max="1" step="0.01" value="1.0" />
+          </div>
+        </div>
+
+        <details>
+          <summary>Product allocation (if product column is missing)</summary>
+          <div class="row">
+            <div>
+              <label>Sawnwood share (%)</label>
+              <input id="share_sawn" type="number" value="45" />
+            </div>
+            <div>
+              <label>Panels share (%)</label>
+              <input id="share_panel" type="number" value="35" />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Paper share (%)</label>
+              <input id="share_paper" type="number" value="15" />
+            </div>
+            <div>
+              <label>Other share (%)</label>
+              <input id="share_other" type="number" value="5" />
+            </div>
+          </div>
+          <div class="note">Shares must sum to 100 when used.</div>
+        </details>
+
+        <details>
+          <summary>Half‑lives (years) for decay</summary>
+          <div class="row">
+            <div>
+              <label>Sawnwood</label>
+              <input id="hl_sawn" type="number" value="35" />
+            </div>
+            <div>
+              <label>Panels</label>
+              <input id="hl_panel" type="number" value="25" />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Paper</label>
+              <input id="hl_paper" type="number" value="2" />
+            </div>
+            <div>
+              <label>Other</label>
+              <input id="hl_other" type="number" value="1" />
+            </div>
+          </div>
+        </details>
+
+        <label>Horizon (years after production)</label>
+        <input type="range" id="horizon" min="0" max="100" value="30" />
+        <div class="muted">Horizon: <span id="hzLabel" class="nums">30</span> years</div>
+
+        <div class="inline" style="margin-top:12px">
+          <button class="btn" id="run">Estimate storage</button>
+          <button class="btn secondary" id="export">Export results CSV</button>
+        </div>
+        <div class="footer">Method: converts input to tonnes of carbon (tC), allocates to products (if needed), then applies first‑order decay: <span class="nums">remaining = C · exp(−ln2 · age / half‑life)</span>. CO₂e uses 44/12.</div>
+      </section>
+
+      <section class="card results">
+        <h2>Results</h2>
+        <div class="muted">Totals at horizon <span class="nums" id="hz2">30</span> years after production.</div>
+        <div id="totals" style="margin-top:8px"></div>
+        <div class="chart"><canvas id="chart"></canvas></div>
+        <div id="tableWrap"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // --- Helpers ---
+    const $ = (s)=>document.querySelector(s);
+    const hz = $('#horizon'), hzLabel = $('#hzLabel'), hz2 = $('#hz2');
+    hz.addEventListener('input', ()=>{hzLabel.textContent=hz.value;hz2.textContent=hz.value;});
+    const unitSel = $('#unit'), densityRow = $('#densityRow');
+    unitSel.addEventListener('change',()=>{densityRow.style.display = unitSel.value==='m3' ? 'grid' : 'none';});
+
+    // Sample data
+    const sampleCSV = `year,amount,product\n2015,1200,sawnwood\n2016,800,panels\n2017,600,paper\n2018,900\n2019,1100\n2020,1000,sawnwood\n2021,950,panels\n2022,700\n2023,650\n2024,500,paper`;
+    $('#downloadSample').addEventListener('click',()=>{
+      const blob = new Blob([sampleCSV], {type:'text/csv'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'sample_wood_products.csv'; a.click();
+    });
+    $('#useSample').addEventListener('click',()=>{$('#paste').value = sampleCSV;});
+
+    // Parse CSV (very light, no external deps)
+    function parseCSV(text){
+      const rows = text.trim().split(/\r?\n/).map(r=>r.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map(c=>c.replace(/^\s+|\s+$/g,'')));
+      const header = rows.shift().map(h=>h.toLowerCase());
+      const idxYear = header.indexOf('year');
+      const idxAmt = header.indexOf('amount');
+      const idxProd = header.indexOf('product');
+      if(idxYear<0 || idxAmt<0) throw new Error('CSV must include columns: year, amount');
+      const data = [];
+      for(const r of rows){
+        const y = parseInt(r[idxYear]);
+        const a = parseFloat(r[idxAmt]);
+        if(!Number.isFinite(y) || !Number.isFinite(a)) continue;
+        const p = idxProd>=0 && r[idxProd] ? String(r[idxProd]).toLowerCase() : null;
+        data.push({year:y, amount:a, product:p});
+      }
+      return data.sort((a,b)=>a.year-b.year);
+    }
+
+    function textFromFile(input){
+      return new Promise((resolve,reject)=>{
+        const f = input.files[0];
+        if(!f) return resolve(null);
+        const reader = new FileReader();
+        reader.onload = e=>resolve(e.target.result);
+        reader.onerror = reject; reader.readAsText(f);
+      });
+    }
+
+    function shares(){
+      return {
+        sawnwood: +$('#share_sawn').value||0,
+        panels: +$('#share_panel').value||0,
+        paper: +$('#share_paper').value||0,
+        other: +$('#share_other').value||0,
+      };
+    }
+
+    function halfLives(){
+      return {
+        sawnwood: +$('#hl_sawn').value||35,
+        panels: +$('#hl_panel').value||25,
+        paper: +$('#hl_paper').value||2,
+        other: +$('#hl_other').value||1,
+      };
+    }
+
+    function normalizeShares(s){
+      const sum = s.sawnwood+s.panels+s.paper+s.other;
+      if(sum<=0) return {sawnwood:0,panels:0,paper:0,other:0};
+      const k = 1/sum; return {
+        sawnwood:s.sawnwood*k, panels:s.panels*k, paper:s.paper*k, other:s.other*k
+      };
+    }
+
+    // Convert amount to tonnes of carbon (tC)
+    function toTonnesC(amount){
+      const cfrac = +$('#cfrac').value || 0.5;
+      if(unitSel.value==='odt'){
+        return amount * cfrac; // amount already oven-dry tonnes of wood
+      } else {
+        const density = +$('#density').value || 500; // kg/m3
+        const moist = +$('#moist').value || 1.0;     // fraction of dry
+        const kg = amount * density * moist;         // kg dry wood
+        const tonne = kg / 1000;                     // tonnes dry wood
+        return tonne * cfrac;
+      }
+    }
+
+    const LN2 = Math.log(2);
+    function remainingFraction(age, hl){
+      if(hl<=0) return 0; return Math.exp(-LN2 * age / hl);
+    }
+
+    function allocate(row, s){
+      if(row.product){
+        const p = row.product.toLowerCase();
+        if(['sawnwood','sawn','lumber'].includes(p)) return {sawnwood:1};
+        if(['panel','panels','plywood','osb','mdf'].includes(p)) return {panels:1};
+        if(['paper','pulp'].includes(p)) return {paper:1};
+        if(['other','residual','waste'].includes(p)) return {other:1};
+      }
+      // Use normalized shares
+      const n = normalizeShares(s);
+      return {sawnwood:n.sawnwood, panels:n.panels, paper:n.paper, other:n.other};
+    }
+
+    function range(a,b){const r=[];for(let i=a;i<=b;i++)r.push(i);return r;}
+
+    function estimate(data, horizon){
+      if(!data.length) return {byYear:[], totals:null, series:[]};
+      const yrs = [...new Set(data.map(d=>d.year))];
+      const minY = Math.min(...yrs), maxY = Math.max(...yrs);
+      const s = shares(), hl = halfLives();
+
+      // Build per-year per-product carbon input (tC)
+      const C = {};
+      for(let y=minY;y<=maxY;y++) C[y] = {sawnwood:0,panels:0,paper:0,other:0,total:0};
+      for(const row of data){
+        const c = toTonnesC(row.amount);
+        const alloc = allocate(row, s);
+        for(const k of ['sawnwood','panels','paper','other']){
+          const frac = alloc[k]||0; C[row.year][k]+= c*frac; C[row.year].total += c*frac;
+        }
+      }
+
+      // Totals at horizon & time series of remaining stock each year-through-horizon
+      const series = []; // [{year,stock_tC}]
+      const byYear = []; // per-year contributions at horizon
+      const evalYears = range(minY, Math.max(horizon? maxY+horizon : maxY, maxY));
+
+      for(const Y of evalYears){
+        let stock = 0;
+        for(let y=minY; y<=Math.min(Y, maxY); y++){
+          const age = Math.max(0, Math.min(horizon, Y - y));
+          // Remaining per product for this cohort at age
+          const rS = remainingFraction(age, hl.sawnwood) * C[y].sawnwood;
+          const rP = remainingFraction(age, hl.panels)   * C[y].panels;
+          const rPa= remainingFraction(age, hl.paper)    * C[y].paper;
+          const rO = remainingFraction(age, hl.other)    * C[y].other;
+          stock += rS + rP + rPa + rO;
+          if(Y === maxY + horizon){
+            // Final horizon breakdown: store contributions from cohort y
+            byYear.push({year:y, sawnwood:rS, panels:rP, paper:rPa, other:rO, total:rS+rP+rPa+rO});
+          }
+        }
+        series.push({year:Y, stock});
+      }
+
+      const final = byYear.reduce((acc,r)=>{
+        for(const k of ['sawnwood','panels','paper','other','total']) acc[k] = (acc[k]||0)+r[k];
+        return acc;
+      },{});
+
+      return {byYear, totals:final, series};
+    }
+
+    function fmt(n, d=1){return Number(n).toLocaleString(undefined,{maximumFractionDigits:d,minimumFractionDigits:d});}
+
+    function renderTotals(t){
+      if(!t || !isFinite(t.total)){$('#totals').innerHTML = '<p class="muted">No results yet.</p>'; return;}
+      const co2 = t.total * (44/12);
+      const html = `
+        <div class="row">
+          <div>
+            <div class="muted">Total stored</div>
+            <div class="nums" style="font-size:28px;color:var(--text);font-weight:800">${fmt(t.total,2)} tC</div>
+          </div>
+          <div>
+            <div class="muted">CO₂e</div>
+            <div class="nums" style="font-size:28px;color:var(--text);font-weight:800">${fmt(co2,2)} tCO₂e</div>
+          </div>
+        </div>
+        <div class="row" style="margin-top:6px">
+          <div><span class="muted">Sawnwood</span><div class="nums">${fmt(t.sawnwood,2)} tC</div></div>
+          <div><span class="muted">Panels</span><div class="nums">${fmt(t.panels,2)} tC</div></div>
+          <div><span class="muted">Paper</span><div class="nums">${fmt(t.paper,2)} tC</div></div>
+          <div><span class="muted">Other</span><div class="nums">${fmt(t.other,2)} tC</div></div>
+        </div>`;
+      $('#totals').innerHTML = html;
+    }
+
+    function renderTable(byYear){
+      if(!byYear.length){$('#tableWrap').innerHTML='';return;}
+      let html = '<table><thead><tr><th>Year</th><th>Sawnwood (tC)</th><th>Panels (tC)</th><th>Paper (tC)</th><th>Other (tC)</th><th>Total (tC)</th></tr></thead><tbody>';
+      for(const r of byYear){
+        html += `<tr><td>${r.year}</td><td class="nums">${fmt(r.sawnwood,2)}</td><td class="nums">${fmt(r.panels,2)}</td><td class="nums">${fmt(r.paper,2)}</td><td class="nums">${fmt(r.other,2)}</td><td class="nums">${fmt(r.total,2)}</td></tr>`;
+      }
+      html += '</tbody></table>';
+      $('#tableWrap').innerHTML = html;
+    }
+
+    // Minimal chart (canvas 2D)
+    function renderChart(series){
+      const canvas = $('#chart');
+      const w = canvas.width = canvas.parentElement.clientWidth;
+      const h = canvas.height = canvas.parentElement.clientHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,w,h);
+      if(!series.length) return;
+      const pad = 28; const xs = series.map(s=>s.year); const ys = series.map(s=>s.stock);
+      const xMin = Math.min(...xs), xMax = Math.max(...xs);
+      const yMin = 0, yMax = Math.max(...ys)*1.1 || 1;
+      const X = v => pad + (w-2*pad) * ( (v - xMin) / (xMax - xMin || 1) );
+      const Y = v => h - pad - (h-2*pad) * ( (v - yMin) / (yMax - yMin || 1) );
+
+      // Axes
+      ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(w-pad, Y(0)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pad, pad); ctx.lineTo(pad, h-pad); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.font = '12px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillText(String(xMin), pad, h-8);
+      ctx.fillText(String(xMax), w-pad-24, h-8);
+      ctx.fillText(fmt(yMax,1)+' tC', 6, pad+10);
+
+      // Line
+      ctx.strokeStyle = 'rgba(167,139,250,0.9)'; ctx.lineWidth=2.5; ctx.beginPath();
+      series.forEach((p,i)=>{ const x = X(p.year), y = Y(p.stock); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+      ctx.stroke();
+    }
+
+    // Export results CSV
+    function exportCSV(byYear, totals){
+      if(!byYear.length) return;
+      const head = 'year,sawnwood_tC,panels_tC,paper_tC,other_tC,total_tC';
+      const rows = byYear.map(r=>[r.year,r.sawnwood,r.panels,r.paper,r.other,r.total].join(','));
+      rows.push(['TOTAL','','','','',totals.total||0].join(','));
+      const blob = new Blob([head+'\n'+rows.join('\n')],{type:'text/csv'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='wood_products_storage_results.csv'; a.click();
+    }
+
+    async function run(){
+      try{
+        const fileText = await textFromFile($('#file'));
+        const pasteText = $('#paste').value.trim();
+        const text = fileText || pasteText;
+        if(!text){ alert('Please upload a CSV or paste some rows.'); return; }
+        const data = parseCSV(text);
+        if(!data.length){ alert('No valid rows found.'); return; }
+        const {byYear, totals, series} = estimate(data, +$('#horizon').value);
+        renderTotals(totals); renderTable(byYear); renderChart(series);
+        window._last = {byYear, totals};
+      }catch(err){
+        console.error(err); alert(err.message||String(err));
+      }
+    }
+
+    $('#run').addEventListener('click', run);
+    $('#export').addEventListener('click', ()=>{ if(window._last) exportCSV(window._last.byYear, window._last.totals); });
+  </script>
+</body>
+</html>
