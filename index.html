@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Wood Products Carbon Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <header class="mb-6">
+        <h1 class="text-2xl font-semibold">Wood Products Carbon Tracker</h1>
+      </header>
+
+      <section class="grid lg:grid-cols-2 gap-6">
+        <!-- Left Column -->
+        <div class="space-y-6">
+          <!-- Wood Products Data -->
+          <div class="p-4 bg-white rounded-2xl shadow">
+            <h2 class="text-lg font-semibold mb-3">Wood Products Data</h2>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2">
+                <input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4" checked>
+                <span>Example: <b>Maine</b></span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4">
+                <span>Example: <b>United States</b></span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4">
+                <span>Upload Data:</span>
+              </label>
+              <input id="file-data" type="file" accept=".csv"
+                     class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                     disabled>
+            </div>
+          </div>
+
+          <!-- Tracker Parameters -->
+          <div class="p-4 bg-white rounded-2xl shadow">
+            <h2 class="text-lg font-semibold mb-3">Tracker Parameters</h2>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2">
+                <input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4" checked>
+                <span>Default Parameter</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4">
+                <span>Upload Parameter File:</span>
+              </label>
+              <input id="file-paras" type="file" accept=".csv"
+                     class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100"
+                     disabled>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="p-4 bg-white rounded-2xl shadow">
+            <div class="flex flex-wrap gap-3">
+              <button id="btn-run" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Run Tracker</button>
+              <button id="btn-plot-data" class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700">Plot Data</button>
+              <button id="btn-plot-storage" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Plot Storage</button>
+              <button id="btn-clear" class="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Clear</button>
+            </div>
+            <div id="status" class="text-sm text-gray-600 mt-2">Loading Python (Pyodide)…</div>
+          </div>
+        </div>
+
+        <!-- Right Column: two plots -->
+        <div class="space-y-6">
+          <div class="p-4 bg-white rounded-2xl shadow">
+            <h2 class="text-lg font-semibold mb-2">Data Plot</h2>
+            <div id="plot-data-area" class="border rounded-xl h-72 flex items-center justify-center text-gray-400">
+              <span>No plot yet. Click “Plot Data”.</span>
+            </div>
+          </div>
+          <div class="p-4 bg-white rounded-2xl shadow">
+            <h2 class="text-lg font-semibold mb-2">Storage Plot</h2>
+            <div id="plot-storage-area" class="border rounded-xl h-72 flex items-center justify-center text-gray-400">
+              <span>No plot yet. Click “Plot Storage”.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom: results + download -->
+      <section class="mt-6 p-4 bg-white rounded-2xl shadow">
+        <h2 class="text-lg font-semibold mb-2">Results</h2>
+        <div id="results-preview" class="overflow-auto border rounded-xl p-2 max-h-96"></div>
+        <div class="mt-3">
+          <a id="download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700" download="WPsCT_Results.csv">Download Results CSV</a>
+        </div>
+      </section>
+
+      <footer class="mt-8 text-xs text-gray-500">
+        <p>© 2025 Wood Products Carbon Tracker.</p>
+      </footer>
+    </div>
+
+    <!-- Pyodide -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+    <script>
+      const statusEl = document.getElementById('status');
+      function setStatus(msg){ statusEl.textContent = msg; }
+
+      // Enable/disable file pickers based on radio selection
+      function toggleInputs(){
+        document.getElementById('file-data').disabled  = !document.getElementById('rb-upload-data').checked;
+        document.getElementById('file-paras').disabled = !document.getElementById('rb-upload-para').checked;
+      }
+      ['rb-me','rb-us','rb-upload-data','rb-default-para','rb-upload-para'].forEach(id=>{
+        document.getElementById(id).addEventListener('change', toggleInputs);
+      });
+      toggleInputs();
+
+      let pyodideReadyPromise = null;
+      let pyodide = null;
+
+      async function initPyodideAndPackages(){
+        setStatus('Loading Python (Pyodide)…');
+        pyodide = await loadPyodide({indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/'});
+        setStatus('Loading Python packages…');
+        // pandas, numpy, matplotlib, scipy are in the base distribution
+        await pyodide.loadPackage(['pandas','numpy','matplotlib','scipy']);
+        setStatus('Loading app modules and example data…');
+        // Fetch Python modules and example data into FS
+        await Promise.all([
+          fetch('./app/WPsCT_Functions.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Functions.py', t)),
+          fetch('./app/WPsCT_Main.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Main.py', t)),
+          fetch('./data/Example_ME.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_ME.csv', new Uint8Array(b))),
+          fetch('./data/Example_US.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_US.csv', new Uint8Array(b))),
+          fetch('./data/WPs_Tracker_paras.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/WPs_Tracker_paras.csv', new Uint8Array(b)))
+        ]);
+        pyodide.runPython(`
+import sys, os
+os.makedirs('/tmp', exist_ok=True)
+os.makedirs('/app', exist_ok=True)
+os.makedirs('/data', exist_ok=True)
+import importlib
+if '/app' not in sys.path:
+    sys.path.append('/app')
+        `);
+        setStatus('Ready.');
+      }
+
+      pyodideReadyPromise = initPyodideAndPackages();
+
+      function dataChoice(){
+        if (document.getElementById('rb-me').checked) return 'example_me';
+        if (document.getElementById('rb-us').checked) return 'example_us';
+        if (document.getElementById('rb-upload-data').checked) return 'upload';
+        return 'example_me';
+      }
+      function paraChoice(){
+        if (document.getElementById('rb-default-para').checked) return 'default';
+        if (document.getElementById('rb-upload-para').checked) return 'upload';
+        return 'default';
+      }
+
+      async function getUploadedFileBytes(inputId){
+        const inp = document.getElementById(inputId);
+        if (!inp || !inp.files || inp.files.length===0) return [null,null];
+        const file = inp.files[0];
+        const buf  = await file.arrayBuffer();
+        return [file.name, new Uint8Array(buf)];
+      }
+
+      async function resolveDataPath(){
+        const ch = dataChoice();
+        if (ch==='example_me') return '/data/Example_ME.csv';
+        if (ch==='example_us') return '/data/Example_US.csv';
+        const [name, bytes] = await getUploadedFileBytes('file-data');
+        if (!name) throw new Error('Please choose a data file to upload.');
+        pyodide.FS.writeFile('/tmp/'+name, bytes);
+        return '/tmp/'+name;
+      }
+      async function resolveParaPath(){
+        const ch = paraChoice();
+        if (ch==='default') return '/data/WPs_Tracker_paras.csv';
+        const [name, bytes] = await getUploadedFileBytes('file-paras');
+        if (!name) throw new Error('Please choose a parameter file to upload.');
+        pyodide.FS.writeFile('/tmp/'+name, bytes);
+        return '/tmp/'+name;
+      }
+
+      async function runTracker(){
+        setStatus('Preparing…');
+        await pyodideReadyPromise;
+        const dataPath  = await resolveDataPath();
+        const parasPath = await resolveParaPath();
+        const outCsv    = '/tmp/WPsCT_Results.csv';
+
+        setStatus('Running tracker…');
+        // Import & run
+        pyodide.runPython(`
+import importlib, pandas as pd
+WPsCT_Main = importlib.import_module('WPsCT_Main')
+WPsCT_Main.tracker(r'''${dataPath}''', r'''${parasPath}''', r'''${outCsv}''')
+df = pd.read_csv(r'''${outCsv}''')
+html_preview = df.head(40).to_html(index=False)
+        `);
+        const html = pyodide.globals.get('html_preview');
+        document.getElementById('results-preview').innerHTML = html;
+        // Download link
+        const bytes = pyodide.FS.readFile(outCsv);
+        const blob  = new Blob([bytes], {type: 'text/csv'});
+        const url   = URL.createObjectURL(blob);
+        const link  = document.getElementById('download-link');
+        link.href   = url;
+        link.classList.remove('hidden');
+        setStatus('Done.');
+      }
+
+      async function plotData(){
+        setStatus('Plotting data…');
+        await pyodideReadyPromise;
+        const dataPath = await resolveDataPath();
+        const outPng   = '/tmp/products_plot.png';
+        pyodide.runPython(`
+import importlib
+wf = importlib.import_module('WPsCT_Functions')
+wf.products_plot(r'''${dataPath}''', r'''${outPng}''')
+        `);
+        const bytes = pyodide.FS.readFile(outPng);
+        const blob  = new Blob([bytes], {type: 'image/png'});
+        const url   = URL.createObjectURL(blob);
+        const el    = document.getElementById('plot-data-area');
+        el.innerHTML = '<img class="w-full h-64 object-contain" alt="Data Plot">';
+        el.querySelector('img').src = url;
+        setStatus('Data plot ready.');
+      }
+
+      async function plotStorage(){
+        setStatus('Plotting storage…');
+        await pyodideReadyPromise;
+        const outCsv = '/tmp/WPsCT_Results.csv';
+        // If results are not present, run tracker first with current choices
+        try { pyodide.FS.stat(outCsv); }
+        catch (e) { await runTracker(); }
+        const outPng = '/tmp/pools_plot.png';
+        pyodide.runPython(`
+import importlib
+wf = importlib.import_module('WPsCT_Functions')
+wf.pools_plot(r'''${outCsv}''', r'''${outPng}''')
+        `);
+        const bytes = pyodide.FS.readFile(outPng);
+        const blob  = new Blob([bytes], {type: 'image/png'});
+        const url   = URL.createObjectURL(blob);
+        const el    = document.getElementById('plot-storage-area');
+        el.innerHTML = '<img class="w-full h-64 object-contain" alt="Storage Plot">';
+        el.querySelector('img').src = url;
+        setStatus('Storage plot ready.');
+      }
+
+      function clearAll(){
+        document.getElementById('results-preview').innerHTML = '';
+        document.getElementById('download-link').classList.add('hidden');
+        document.getElementById('plot-data-area').innerHTML = '<span class="text-gray-400">No plot yet. Click “Plot Data”.</span>';
+        document.getElementById('plot-storage-area').innerHTML = '<span class="text-gray-400">No plot yet. Click “Plot Storage”.</span>';
+        setStatus('Cleared. Ready.');
+      }
+
+      document.getElementById('btn-run').addEventListener('click', runTracker);
+      document.getElementById('btn-plot-data').addEventListener('click', plotData);
+      document.getElementById('btn-plot-storage').addEventListener('click', plotStorage);
+      document.getElementById('btn-clear').addEventListener('click', clearAll);
+    </script>
+  </body>
+</html>
