@@ -5,8 +5,27 @@
 #------------------------------------------------------------------------------
 import math
 import pandas as pd
-import scipy.integrate as integrate
-import matplotlib.pyplot as plt
+
+# SciPy fallback: provide a simple trapezoidal integrator if SciPy is unavailable (browser Pyodide)
+try:
+    import scipy.integrate as integrate
+except Exception:
+    class _IntegrateFallback:
+        @staticmethod
+        def quad(func, a, b, **kwargs):
+            # simple trapezoidal rule
+            if b <= a:
+                return (0.0, 0.0)
+            # adaptive number of steps based on interval length
+            n = max(200, int((b - a) * 50))
+            h = (b - a) / n
+            s = 0.5 * (func(a) + func(b))
+            x = a + h
+            for _ in range(1, n):
+                s += func(x)
+                x += h
+            return (s * h, 0.0)
+    integrate = _IntegrateFallback()
 
 #------------------------------------------------------------------------------
 # Biofuel carbon flux (charcoal + emissions)
@@ -98,53 +117,6 @@ def recycle_CF(years, disposals, rp1, rp2):
 
 #------------------------------------------------------------------------------
 # Landfill carbon flux (Decay rate: l(t) = log(t) * k1 / (k2 * sqrt(2*pi)))
-'''
-def landfill_CF(years, landfill_input, k1, k2):
-    
-    landfill_input = pd.Series(landfill_input, dtype=float).reset_index(drop=True)
-    landfill_pool = pd.Series(index=range(years), dtype=float)
-    landfill_decayed = pd.Series(index=range(years), dtype=float)
-
-    def rate(tsd):
-        return (math.log(tsd) * k1) / (k2 * math.sqrt(2 * math.pi))
-
-    def survive(tsd):
-        if tsd >= k2:
-            return 0.0
-        upper = float(min(tsd, k2))
-        fr = abs(integrate.quad(rate, 0.0, upper)[0])
-        val = 1.0 - fr
-        return min(1.0, max(0.0, val))
-
-    # Pool
-    for i in range(years):
-        s = 0.0
-
-        if i <= int(k2):
-            for j in range(i + 1):
-                c = float(landfill_input.iat[j] if j < len(landfill_input) else 0.0)
-                upper = float(i + 1 - j)
-                fr = abs(integrate.quad(rate, 0.0, upper)[0])
-                s += c * (1.0 - fr)
-        else:
-            for j in range(int(k2)):
-                idx = int(i - k2 + j)
-                if 0 <= idx < len(landfill_input):
-                    c = float(landfill_input.iat[idx])
-                    upper = float(k2 - j)
-                    fr = abs(integrate.quad(rate, 0.0, upper)[0])
-                    s += c * (1.0 - fr)
-
-        landfill_pool.iat[i] = s
-
-    for i in range(years):
-        prev = 0.0 if i == 0 else float(landfill_pool.iat[i - 1])
-        inc  = float(landfill_input.iat[i] if i < len(landfill_input) else 0.0)
-        landfill_decayed.iat[i] = prev + inc - float(landfill_pool.iat[i])
-
-    return landfill_pool, landfill_decayed
-'''
-
 def survive(t, k1, k2):
     if k2 <= 0:
         raise ValueError("k2 must be > 0")
@@ -188,107 +160,3 @@ def landfill_CF(years, landfill_input, k1, k2):
         prev = landfill_pool[i]
 
     return landfill_pool, landfill_decayed
-
-#------------------------------------------------------------------------------
-# Plot annual production lines for wood products
-def products_plot(file, savefile):
-
-    df = pd.read_csv(file)
-    x  = df['Year']
-
-    cols = ['Biofuel', 'Biochar', 'Construction', 'Exterior', 'Household',
-            'Graphic Paper', 'Other Paper', 'Household Paper']
-
-    # Fixed, readable colors (color-blind friendly where possible) + distinct widths
-    color_map = {
-        'Biofuel':         'grey',  
-        'Biochar':         'black',  
-        'Construction':    'brown',  
-        'Exterior':        'red',  
-        'Household':       'purple',  
-        'Graphic Paper':   'blue',  
-        'Other Paper':     'lightblue', 
-        'Household Paper': 'yellow',  
-    }
-    width_map = {
-        'Biofuel': 3.0,
-        'Biochar': 1.0,
-        'Construction': 1.0,
-        'Exterior': 2.4,
-        'Household': 2.6,
-        'Graphic Paper': 1.0,
-        'Other Paper': 4.0,
-        'Household Paper': 1.0,
-    }
-
-    plt.figure(figsize=(9, 6))
-    for c in cols:
-        if c in df.columns:
-            plt.plot(x, df[c],
-                     label=c,
-                     color=color_map.get(c, None),
-                     linewidth=width_map.get(c, 2.0))
-
-    plt.xlabel('Year')
-    plt.ylabel('Annual production')
-    plt.title('Annual production of wood products')
-    plt.legend(ncol=2, frameon=True, framealpha=0.8)
-    plt.grid(True, linestyle='--', alpha=0.4)
-    plt.tight_layout()
-    plt.savefig(savefile, dpi=300)
-
-    plt.show()
-    plt.close()
-
-#------------------------------------------------------------------------------
-# Plot WPsCT results carbon pool size
-def pools_plot(file, savefile):
-    df = pd.read_csv(file)
-    x  = df['Year']
-
-    # column -> short label
-    cols_map = {
-        'Biochar_Stock'          : 'Biochar',
-        'Construction_InUse'     : 'Construction',
-        'Household_InUse'        : 'Household',
-        'GraphicPaper_InUse'     : 'GraphicPaper',
-        'OtherPaper_InUse'       : 'OtherPaper',
-        'HouseholdPaper_InUse'   : 'HouseholdPaper',
-        'LF_Stock_Total'         : 'Landfill',
-    }
-
-    # readable colors + distinct widths (optional tweakable)
-    color_map = {
-        'Biochar'        : '#1f77b4',
-        'Construction'   : '#2ca02c',
-        'Household'      : '#9467bd',
-        'GraphicPaper'   : '#8c564b',
-        'OtherPaper'     : '#e377c2',
-        'HouseholdPaper' : '#7f7f7f',
-        'Landfill'       : '#d62728',
-    }
-    width_map = {
-        'Biochar': 3.0, 'Construction': 2.8, 'Household': 2.6,
-        'GraphicPaper': 2.4, 'OtherPaper': 2.2,
-        'HouseholdPaper': 2.2, 'Landfill': 2.8
-    }
-
-    plt.figure(figsize=(9, 6))
-    for col, short in cols_map.items():
-        if col in df.columns:
-            y_TgC = df[col] / 1_000_000_000.0
-            plt.plot(x, y_TgC,
-                     label=short,
-                     color=color_map.get(short, None),
-                     linewidth=width_map.get(short, 2.2))
-
-    plt.xlabel('Year')              # x label kept simple
-    plt.ylabel('Stock (TgC)')       # converted units
-    plt.title('Carbon stocks over time (TgC)')
-    plt.legend(ncol=2, frameon=True, framealpha=0.85)
-    plt.grid(True, linestyle='--', alpha=0.35)
-    plt.tight_layout()
-    plt.savefig(savefile, dpi=300)
-
-    plt.show()
-    plt.close()
