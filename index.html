@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Wood Products Carbon Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
   </head>
   <body class="bg-gray-50 text-gray-900">
     <div class="max-w-6xl mx-auto px-4 py-6">
@@ -58,12 +61,14 @@
           <!-- Actions -->
           <div class="p-4 bg-white rounded-2xl shadow">
             <div class="flex flex-wrap gap-3">
-              <button id="btn-run" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700">Run Tracker</button>
-              <button id="btn-plot-data" class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700">Plot Data</button>
-              <button id="btn-plot-storage" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Plot Storage</button>
-              <button id="btn-clear" class="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Clear</button>
+              <button id="btn-init" class="btn px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700">Initialize Python</button>
+              <button id="btn-run" class="btn px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700" disabled>Run Tracker</button>
+              <button id="btn-plot-data" class="btn px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700" disabled>Plot Data</button>
+              <button id="btn-plot-storage" class="btn px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700" disabled>Plot Storage</button>
+              <button id="btn-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Clear</button>
             </div>
-            <div id="status" class="text-sm text-gray-600 mt-2">Loading Python (Pyodide)…</div>
+            <div id="status" class="text-sm text-gray-700 mt-2">Click “Initialize Python”.</div>
+            <div id="progress" class="text-xs text-gray-500"></div>
           </div>
         </div>
 
@@ -102,9 +107,10 @@
     <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
     <script>
       const statusEl = document.getElementById('status');
+      const progressEl = document.getElementById('progress');
       function setStatus(msg){ statusEl.textContent = msg; }
+      function setProgress(msg){ progressEl.textContent = msg; }
 
-      // Enable/disable file pickers based on radio selection
       function toggleInputs(){
         document.getElementById('file-data').disabled  = !document.getElementById('rb-upload-data').checked;
         document.getElementById('file-paras').disabled = !document.getElementById('rb-upload-para').checked;
@@ -114,37 +120,59 @@
       });
       toggleInputs();
 
-      let pyodideReadyPromise = null;
       let pyodide = null;
+      let pyReady = false;
 
-      async function initPyodideAndPackages(){
-        setStatus('Loading Python (Pyodide)…');
-        pyodide = await loadPyodide({indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/'});
-        setStatus('Loading Python packages…');
-        // pandas, numpy, matplotlib, scipy are in the base distribution
-        await pyodide.loadPackage(['pandas','numpy','matplotlib','scipy']);
-        setStatus('Loading app modules and example data…');
-        // Fetch Python modules and example data into FS
-        await Promise.all([
-          fetch('./app/WPsCT_Functions.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Functions.py', t)),
-          fetch('./app/WPsCT_Main.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Main.py', t)),
-          fetch('./data/Example_ME.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_ME.csv', new Uint8Array(b))),
-          fetch('./data/Example_US.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_US.csv', new Uint8Array(b))),
-          fetch('./data/WPs_Tracker_paras.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/WPs_Tracker_paras.csv', new Uint8Array(b)))
-        ]);
-        pyodide.runPython(`
+      function enableRunButtons(enable){
+        ['btn-run','btn-plot-data','btn-plot-storage'].forEach(id=>{
+          const b = document.getElementById(id);
+          b.disabled = !enable;
+        });
+      }
+
+      async function initPy(){
+        try{
+          setStatus('Loading Python engine…');
+          pyodide = await loadPyodide({
+            indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/',
+            stdout: (t)=>{},
+            stderr: (t)=>{ console.warn(t); }
+          });
+          setProgress('Loading core packages (pandas, numpy, matplotlib)…');
+          await pyodide.loadPackage(['pandas','numpy','matplotlib']); // no scipy needed (fallback integrator)
+          setProgress('Loading app modules and example data…');
+          await Promise.all([
+            fetch('./app/WPsCT_Functions.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Functions.py', t)),
+            fetch('./app/WPsCT_Main.py').then(r=>r.text()).then(t=>pyodide.FS.writeFile('/app/WPsCT_Main.py', t)),
+            fetch('./data/Example_ME.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_ME.csv', new Uint8Array(b))),
+            fetch('./data/Example_US.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/Example_US.csv', new Uint8Array(b))),
+            fetch('./data/WPs_Tracker_paras.csv').then(r=>r.arrayBuffer()).then(b=>pyodide.FS.writeFile('/data/WPs_Tracker_paras.csv', new Uint8Array(b)))
+          ]);
+          pyodide.runPython(`
 import sys, os
 os.makedirs('/tmp', exist_ok=True)
 os.makedirs('/app', exist_ok=True)
 os.makedirs('/data', exist_ok=True)
-import importlib
 if '/app' not in sys.path:
     sys.path.append('/app')
-        `);
-        setStatus('Ready.');
+          `);
+          pyReady = true;
+          enableRunButtons(true);
+          setProgress('');
+          setStatus('Python ready.');
+        }catch(err){
+          console.error(err);
+          setStatus('Initialization failed. See console.');
+        }
       }
 
-      pyodideReadyPromise = initPyodideAndPackages();
+      async function getUploadedFileBytes(inputId){
+        const inp = document.getElementById(inputId);
+        if (!inp || !inp.files || inp.files.length===0) return [null,null];
+        const file = inp.files[0];
+        const buf  = await file.arrayBuffer();
+        return [file.name, new Uint8Array(buf)];
+      }
 
       function dataChoice(){
         if (document.getElementById('rb-me').checked) return 'example_me';
@@ -156,14 +184,6 @@ if '/app' not in sys.path:
         if (document.getElementById('rb-default-para').checked) return 'default';
         if (document.getElementById('rb-upload-para').checked) return 'upload';
         return 'default';
-      }
-
-      async function getUploadedFileBytes(inputId){
-        const inp = document.getElementById(inputId);
-        if (!inp || !inp.files || inp.files.length===0) return [null,null];
-        const file = inp.files[0];
-        const buf  = await file.arrayBuffer();
-        return [file.name, new Uint8Array(buf)];
       }
 
       async function resolveDataPath(){
@@ -185,72 +205,88 @@ if '/app' not in sys.path:
       }
 
       async function runTracker(){
-        setStatus('Preparing…');
-        await pyodideReadyPromise;
-        const dataPath  = await resolveDataPath();
-        const parasPath = await resolveParaPath();
-        const outCsv    = '/tmp/WPsCT_Results.csv';
-
-        setStatus('Running tracker…');
-        // Import & run
-        pyodide.runPython(`
+        if (!pyReady){ setStatus('Please click “Initialize Python” first.'); return; }
+        try{
+          setStatus('Running tracker…');
+          const dataPath  = await resolveDataPath();
+          const parasPath = await resolveParaPath();
+          const outCsv    = '/tmp/WPsCT_Results.csv';
+          // Provide variables via globals to avoid brittle quoting
+          pyodide.globals.set('data_path', dataPath);
+          pyodide.globals.set('paras_path', parasPath);
+          pyodide.globals.set('out_csv', outCsv);
+          await pyodide.runPythonAsync(`
 import importlib, pandas as pd
 WPsCT_Main = importlib.import_module('WPsCT_Main')
-WPsCT_Main.tracker(r'''${dataPath}''', r'''${parasPath}''', r'''${outCsv}''')
-df = pd.read_csv(r'''${outCsv}''')
+WPsCT_Main.tracker(data_path, paras_path, out_csv)
+df = pd.read_csv(out_csv)
 html_preview = df.head(40).to_html(index=False)
-        `);
-        const html = pyodide.globals.get('html_preview');
-        document.getElementById('results-preview').innerHTML = html;
-        // Download link
-        const bytes = pyodide.FS.readFile(outCsv);
-        const blob  = new Blob([bytes], {type: 'text/csv'});
-        const url   = URL.createObjectURL(blob);
-        const link  = document.getElementById('download-link');
-        link.href   = url;
-        link.classList.remove('hidden');
-        setStatus('Done.');
+          `);
+          const html = pyodide.globals.get('html_preview');
+          document.getElementById('results-preview').innerHTML = html;
+          const bytes = pyodide.FS.readFile('/tmp/WPsCT_Results.csv');
+          const blob  = new Blob([bytes], {type: 'text/csv'});
+          const url   = URL.createObjectURL(blob);
+          const link  = document.getElementById('download-link');
+          link.href   = url;
+          link.classList.remove('hidden');
+          setStatus('Done.');
+        }catch(err){
+          console.error(err);
+          setStatus('Run failed. See console for details.');
+        }
       }
 
       async function plotData(){
-        setStatus('Plotting data…');
-        await pyodideReadyPromise;
-        const dataPath = await resolveDataPath();
-        const outPng   = '/tmp/products_plot.png';
-        pyodide.runPython(`
+        if (!pyReady){ setStatus('Please click “Initialize Python” first.'); return; }
+        try{
+          setStatus('Plotting data…');
+          const dataPath = await resolveDataPath();
+          pyodide.globals.set('data_path', dataPath);
+          pyodide.globals.set('out_png', '/tmp/products_plot.png');
+          await pyodide.runPythonAsync(`
 import importlib
 wf = importlib.import_module('WPsCT_Functions')
-wf.products_plot(r'''${dataPath}''', r'''${outPng}''')
-        `);
-        const bytes = pyodide.FS.readFile(outPng);
-        const blob  = new Blob([bytes], {type: 'image/png'});
-        const url   = URL.createObjectURL(blob);
-        const el    = document.getElementById('plot-data-area');
-        el.innerHTML = '<img class="w-full h-64 object-contain" alt="Data Plot">';
-        el.querySelector('img').src = url;
-        setStatus('Data plot ready.');
+wf.products_plot(data_path, out_png)
+          `);
+          const bytes = pyodide.FS.readFile('/tmp/products_plot.png');
+          const blob  = new Blob([bytes], {type: 'image/png'});
+          const url   = URL.createObjectURL(blob);
+          const el    = document.getElementById('plot-data-area');
+          el.innerHTML = '<img class="w-full h-64 object-contain" alt="Data Plot">';
+          el.querySelector('img').src = url;
+          setStatus('Data plot ready.');
+        }catch(err){
+          console.error(err);
+          setStatus('Plot Data failed. See console.');
+        }
       }
 
       async function plotStorage(){
-        setStatus('Plotting storage…');
-        await pyodideReadyPromise;
-        const outCsv = '/tmp/WPsCT_Results.csv';
-        // If results are not present, run tracker first with current choices
-        try { pyodide.FS.stat(outCsv); }
-        catch (e) { await runTracker(); }
-        const outPng = '/tmp/pools_plot.png';
-        pyodide.runPython(`
+        if (!pyReady){ setStatus('Please click “Initialize Python” first.'); return; }
+        try{
+          setStatus('Plotting storage…');
+          const outCsv = '/tmp/WPsCT_Results.csv';
+          // If results not present, run tracker automatically
+          try { pyodide.FS.stat(outCsv); } catch(e){ await runTracker(); }
+          pyodide.globals.set('out_csv', outCsv);
+          pyodide.globals.set('out_png', '/tmp/pools_plot.png');
+          await pyodide.runPythonAsync(`
 import importlib
 wf = importlib.import_module('WPsCT_Functions')
-wf.pools_plot(r'''${outCsv}''', r'''${outPng}''')
-        `);
-        const bytes = pyodide.FS.readFile(outPng);
-        const blob  = new Blob([bytes], {type: 'image/png'});
-        const url   = URL.createObjectURL(blob);
-        const el    = document.getElementById('plot-storage-area');
-        el.innerHTML = '<img class="w-full h-64 object-contain" alt="Storage Plot">';
-        el.querySelector('img').src = url;
-        setStatus('Storage plot ready.');
+wf.pools_plot(out_csv, out_png)
+          `);
+          const bytes = pyodide.FS.readFile('/tmp/pools_plot.png');
+          const blob  = new Blob([bytes], {type: 'image/png'});
+          const url   = URL.createObjectURL(blob);
+          const el    = document.getElementById('plot-storage-area');
+          el.innerHTML = '<img class="w-full h-64 object-contain" alt="Storage Plot">';
+          el.querySelector('img').src = url;
+          setStatus('Storage plot ready.');
+        }catch(err){
+          console.error(err);
+          setStatus('Plot Storage failed. See console.');
+        }
       }
 
       function clearAll(){
@@ -261,6 +297,7 @@ wf.pools_plot(r'''${outCsv}''', r'''${outPng}''')
         setStatus('Cleared. Ready.');
       }
 
+      document.getElementById('btn-init').addEventListener('click', initPy);
       document.getElementById('btn-run').addEventListener('click', runTracker);
       document.getElementById('btn-plot-data').addEventListener('click', plotData);
       document.getElementById('btn-plot-storage').addEventListener('click', plotStorage);
