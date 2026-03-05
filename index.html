@@ -376,11 +376,11 @@
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
               <div id="log-product-grid" class="grid grid-cols-2 gap-2">
                 <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏗️ Construction</div>
-                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🏠 Exterior</div>
                 <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
+                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🏠 Exterior</div>
                 <div class="product-card" data-product="Graphic Paper" onclick="selectProduct('Graphic Paper')">📰 Graphic Paper</div>
-                <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
                 <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">🧻 Household Paper</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
               </div>
               <div id="log-suggestion-note" class="mt-2 text-xs text-emerald-700 font-medium hidden"></div>
               <!-- Conversion efficiency -->
@@ -389,10 +389,10 @@
                 <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.45" class="log-input-field" oninput="onLogInputChange()">
                 <p class="text-xs text-gray-400 mt-0.5" id="log-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
                 <div class="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-500" id="efficiency-defaults-table">
-                  <span>🏗️ Construction</span><span class="text-right">0.60</span>
-                  <span>🪑 Household</span><span class="text-right">0.40</span>
-                  <span>🏠 Exterior</span><span class="text-right">0.75</span>
-                  <span>📰 Graphic Paper</span><span class="text-right">0.80</span>
+                  <span>🏗️ Construction</span><span class="text-right">0.70</span>
+                  <span>🪑 Household</span><span class="text-right">0.65</span>
+                  <span>🏠 Exterior</span><span class="text-right">0.85</span>
+                  <span>📰 Graphic Paper</span><span class="text-right">0.85</span>
                   <span>🧻 Household Paper</span><span class="text-right">0.90</span>
                   <span>📄 Other Paper</span><span class="text-right">0.95</span>
                 </div>
@@ -715,12 +715,12 @@ json.dumps(out, allow_nan=False)
 
       // Conversion efficiency defaults per product
       const EFFICIENCY_DEFAULTS = {
-        'Construction':    0.45,
-        'Exterior':        0.45,
-        'Household':       0.40,
-        'Graphic Paper':   0.35,
-        'Other Paper':     0.35,
-        'Household Paper': 0.30,
+        'Construction':    0.70,
+        'Household':       0.65,
+        'Exterior':        0.85, 
+        'Graphic Paper':   0.85,
+        'Household Paper': 0.90,
+        'Other Paper':     0.95,
       };
 
       window.resetEfficiency = function() {
@@ -935,7 +935,7 @@ json.dumps(out, allow_nan=False)
           pyodide.globals.set('log_para_path',    '/data/WPs_Tracker_paras.csv');
 
           const jsonStr = await pyodide.runPythonAsync(`
-import pandas as pd, numpy as np, json, math, sys
+import pandas as pd, json, math, sys
 sys.path.append('/app')
 import WPsCT_Functions as wf
 
@@ -948,30 +948,30 @@ def get_para(product, variable):
     rows = para.loc[(para['Product'] == product) & (para['Variable'] == variable), 'Parameter']
     return float(rows.values[0]) if len(rows) > 0 else 0.0
 
-# ── Disposal: C0 enters in year 1, no more production after that ──────────────
-# disposal_CF expects annual production series of length n
+# ── Step 1: In-use pool via disposal_CF ───────────────────────────────────────
+# Single cohort: C0 enters in year 1
 production = [C0] + [0.0] * (n - 1)
-
 dp1 = get_para(prod, 'disposal_1')
 dp2 = get_para(prod, 'disposal_2')
 dp3 = get_para(prod, 'disposal_3')
 
 inuse_arr, dispos_arr = wf.disposal_CF(n, production, dp1, dp2, dp3)
-inuse_arr  = [float(v) for v in inuse_arr]
-dispos_arr = [float(v) for v in dispos_arr]
+inuse_arr  = [max(0.0, float(v)) for v in inuse_arr]
+dispos_arr = [max(0.0, float(v)) for v in dispos_arr]
 
-# ── Recycling (reduces landfill input) ────────────────────────────────────────
+# ── Step 2: Recycling reduces landfill input ──────────────────────────────────
 rp1_rows = para.loc[(para['Product'] == prod) & (para['Variable'] == 'recycle_1'), 'Parameter']
-has_recycle = len(rp1_rows) > 0
-if has_recycle:
+if len(rp1_rows) > 0:
     rp1 = float(rp1_rows.values[0])
     rp2 = get_para(prod, 'recycle_2')
-    _, landfill_in = wf.recycle_CF(n, pd.Series(dispos_arr, dtype=float), rp1, rp2)
-    landfill_in = [float(v) for v in landfill_in]
+    _, landfill_in_s = wf.recycle_CF(n, pd.Series(dispos_arr, dtype=float), rp1, rp2)
+    landfill_in = [max(0.0, float(v)) for v in landfill_in_s]
 else:
     landfill_in = dispos_arr[:]
 
-# ── Landfill pool (slow decay of material that enters landfill) ───────────────
+# ── Step 3: Landfill pool with explicit exponential decay ─────────────────────
+# Use half-life = k2 years so the pool visibly decays to zero over time.
+# Each year: pool = (prev_pool + new_inflow) * exp(-ln2/k2)
 lf_map = {
     'Construction':    ('con_decay1','con_decay2'),
     'Exterior':        ('ext_decay1','ext_decay2'),
@@ -981,17 +981,17 @@ lf_map = {
     'Household Paper': ('pap_decay1','pap_decay2'),
 }
 lf_keys = lf_map.get(prod, ('con_decay1','con_decay2'))
-k1 = get_para('Landfill', lf_keys[0])
-k2 = get_para('Landfill', lf_keys[1])
+k2 = get_para('Landfill', lf_keys[1])   # half-life in years
+decay_rate = math.log(2.0) / max(k2, 0.01)
 
-lf_pool_raw, _ = wf.landfill_CF(n, pd.Series(landfill_in, dtype=float), k1, k2)
-lf_pool_arr = [float(v) for v in lf_pool_raw]
+lf_pool_arr = [0.0] * n
+for i in range(n):
+    prev = lf_pool_arr[i-1] if i > 0 else 0.0
+    lf_pool_arr[i] = (prev + landfill_in[i]) * math.exp(-decay_rate)
 
-# ── Derived series ────────────────────────────────────────────────────────────
+# ── Step 4: Derived series ────────────────────────────────────────────────────
 years_arr      = list(range(1, n + 1))
 total_retained = [max(0.0, inuse_arr[i] + lf_pool_arr[i]) for i in range(n)]
-# Cumulative released = C0 minus what is still retained
-# Must be monotonically non-decreasing and bounded [0, C0]
 cumul_released = [max(0.0, min(C0, C0 - total_retained[i])) for i in range(n)]
 
 out = {
@@ -1003,6 +1003,7 @@ out = {
     'C0':             C0,
     'product':        prod,
     'n_years':        n,
+    'lf_halflife':    k2,
 }
 json.dumps(out, allow_nan=False)
           `);
