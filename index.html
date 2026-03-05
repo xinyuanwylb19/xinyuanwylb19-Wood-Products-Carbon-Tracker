@@ -78,7 +78,16 @@
         font-weight: 600;
       }
 
-      /* Coming soon */
+      .vol-method-btn.selected {
+        border-color: #15803d;
+        background: #dcfce7;
+        color: #14532d;
+      }
+      .vol-method-btn:not(.selected):hover {
+        border-color: #86efac;
+        background: #f0fdf4;
+        color: #166534;
+      }
       .coming-soon-overlay {
         display: flex;
         flex-direction: column;
@@ -119,76 +128,96 @@
     <main class="mx-auto px-4 py-5 max-w-[1400px]">
 
       <!-- ===================================================== -->
-      <!-- TAB 1: HWPs Carbon (original tracker)                 -->
+      <!-- TAB 1: HWPs Carbon                                    -->
       <!-- ===================================================== -->
       <div id="tab-hwp" class="tab-panel active">
         <section class="grid lg:grid-cols-3 gap-6">
-          <div class="space-y-6 lg:col-span-1">
+
+          <!-- LEFT: Controls -->
+          <div class="space-y-5 lg:col-span-1">
+
+            <!-- Step 1: Data -->
             <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-lg font-semibold mb-3">Wood Products Data</h2>
-              <div class="space-y-2">
-                <label class="flex items-center gap-2"><input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4" checked><span>Example: <b>Maine</b></span></label>
-                <label class="flex items-center gap-2"><input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4"><span>Example: <b>United States</b></span></label>
-                <label class="flex items-center gap-2"><input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4"><span>Upload Data:</span></label>
-                <input id="file-data" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
+              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
+                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
+                Wood Products Data
+              </h2>
+              <div class="space-y-2 text-sm">
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600" checked><span>Example: <b>Maine</b></span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4 accent-indigo-600"><span>Example: <b>United States</b></span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600"><span>Upload CSV:</span></label>
+                <input id="file-data" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
               </div>
-              <div class="mt-4">
-                <p class="text-sm font-medium mb-1">Input Units</p>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                  <label class="flex items-center gap-2"><input type="radio" name="inputUnits" id="u-lbs" class="h-4 w-4"><span>lbs</span></label>
-                  <label class="flex items-center gap-2"><input type="radio" name="inputUnits" id="u-kg"  class="h-4 w-4" checked><span>kg</span></label>
-                  <label class="flex items-center gap-2"><input type="radio" name="inputUnits" id="u-mt"  class="h-4 w-4"><span>Mt</span></label>
-                  <label class="flex items-center gap-2"><input type="radio" name="inputUnits" id="u-tgc" class="h-4 w-4"><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
+              <div class="mt-4 pt-3 border-t border-gray-100">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Input Units</p>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-lbs" class="h-4 w-4 accent-indigo-600"><span>lbs</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-kg"  class="h-4 w-4 accent-indigo-600" checked><span>kg</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-mt"  class="h-4 w-4 accent-indigo-600"><span>Mt</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-tgc" class="h-4 w-4 accent-indigo-600"><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
                 </div>
               </div>
-              <div class="mt-3">
-                <p class="text-sm font-medium mb-1">Plot Units</p>
+              <div class="mt-3 pt-3 border-t border-gray-100">
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Plot Units</p>
                 <div class="flex gap-6 text-sm">
-                  <label class="flex items-center gap-2"><input type="radio" name="plotUnits" id="p-kg"  class="h-4 w-4"><span>kg</span></label>
-                  <label class="flex items-center gap-2"><input type="radio" name="plotUnits" id="p-tgc" class="h-4 w-4" checked><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-kg"  class="h-4 w-4 accent-indigo-600"><span>kg</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-tgc" class="h-4 w-4 accent-indigo-600" checked><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
                 </div>
               </div>
             </div>
 
+            <!-- Step 2: Parameters -->
             <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-lg font-semibold mb-3">Tracker Parameters</h2>
-              <div class="space-y-2">
-                <label class="flex items-center gap-2"><input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4" checked><span>Default Parameter</span></label>
-                <label class="flex items-center gap-2"><input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4"><span>Upload Parameter File:</span></label>
-                <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100" disabled>
+              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
+                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                Tracker Parameters
+              </h2>
+              <div class="space-y-2 text-sm">
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600" checked><span>Default parameters</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600"><span>Upload parameter CSV:</span></label>
+                <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100" disabled>
               </div>
             </div>
 
+            <!-- Step 3: Run -->
             <div class="p-4 bg-white rounded-2xl shadow">
-              <div class="flex flex-wrap gap-3">
-                <button id="btn-init" class="btn px-4 py-2 rounded-xl bg-purple-600 text-white hover:bg-purple-700">Initialize Tracker</button>
-                <button id="btn-run" class="btn px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700" disabled>Run Tracker</button>
-                <button id="btn-plot-data" class="btn px-4 py-2 rounded-xl bg-sky-600 text-white hover:bg-sky-700" disabled>Plot Data</button>
-                <button id="btn-plot-storage" class="btn px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700" disabled>Plot Storage</button>
-                <button id="btn-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Clear</button>
+              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
+                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                Run Tracker
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                <button id="btn-init"         class="btn px-3 py-2 rounded-xl bg-indigo-600 text-white text-sm hover:bg-indigo-700">Initialize</button>
+                <button id="btn-run"          class="btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" disabled>Run Tracker</button>
+                <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm hover:bg-sky-700" disabled>Plot Data</button>
+                <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm hover:bg-violet-700" disabled>Plot Storage</button>
+                <button id="btn-clear"        class="btn px-3 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm hover:bg-gray-300">Clear</button>
               </div>
-              <div id="status" class="text-sm text-gray-700 mt-2">Click "Initialize Tracker".</div>
-              <div id="progress" class="text-xs text-gray-500"></div>
+              <div id="status"   class="text-sm text-gray-700 mt-3">Click "Initialize" to load Python.</div>
+              <div id="progress" class="text-xs text-gray-500 mt-1"></div>
             </div>
           </div>
 
-          <div class="space-y-6 lg:col-span-2">
+          <!-- RIGHT: Plots -->
+          <div class="space-y-5 lg:col-span-2">
             <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-lg font-semibold mb-2">Plot Wood Products Data</h2>
+              <h2 class="text-base font-semibold mb-2 text-gray-700">Annual Wood Products Production</h2>
               <div id="plot-data-area" class="border rounded-xl h-80"></div>
             </div>
             <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-lg font-semibold mb-2">Plot Carbon Storage in each Pool</h2>
+              <h2 class="text-base font-semibold mb-2 text-gray-700">Carbon Storage by Pool</h2>
               <div id="plot-storage-area" class="border rounded-xl h-80"></div>
             </div>
           </div>
         </section>
 
-        <section class="mt-6 p-4 bg-white rounded-2xl shadow">
-          <h2 class="text-lg font-semibold mb-2">Results</h2>
-          <div id="results-preview" class="overflow-auto border rounded-xl p-2 max-h-96"></div>
+        <!-- Results -->
+        <section class="mt-5 p-4 bg-white rounded-2xl shadow">
+          <h2 class="text-base font-semibold mb-2 text-gray-700 flex items-center gap-2">
+            📋 Results Table
+          </h2>
+          <div id="results-preview" class="overflow-auto border rounded-xl p-2 max-h-96 text-xs"></div>
           <div class="mt-3">
-            <a id="download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700" download="WPsCT_Results.csv">Download Results CSV</a>
+            <a id="download-link" class="hidden px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" download="WPsCT_Results.csv">⬇ Download Results CSV</a>
           </div>
         </section>
       </div><!-- /tab-hwp -->
@@ -209,18 +238,96 @@
                 <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
                 Log Dimensions
               </h2>
-              <div class="space-y-3">
+
+              <!-- Volume method selector -->
+              <div class="mb-3">
+                <p class="log-input-label mb-1">Volume estimation method</p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button onclick="setVolMethod('cylinder')" data-method="cylinder"
+                    class="vol-method-btn selected text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-green-600 bg-green-50 text-green-800 transition-all">
+                    🪵 Cylinder
+                  </button>
+                  <button onclick="setVolMethod('huber')" data-method="huber"
+                    class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
+                    📏 Huber
+                  </button>
+                  <button onclick="setVolMethod('smalian')" data-method="smalian"
+                    class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
+                    📐 Smalian
+                  </button>
+                  <button onclick="setVolMethod('newton')" data-method="newton"
+                    class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
+                    🔬 Newton
+                  </button>
+                </div>
+                <p id="vol-method-desc" class="text-xs text-gray-500 mt-1.5 italic">V = π × r² × L — single diameter, overestimates tapered logs.</p>
+              </div>
+
+              <!-- Cylinder inputs -->
+              <div id="vol-inputs-cylinder" class="space-y-3">
                 <div>
-                  <p class="log-input-label">Diameter at breast height (cm)</p>
+                  <p class="log-input-label">Diameter (cm)</p>
                   <input id="log-diameter" type="number" min="1" max="300" step="0.1" value="30" class="log-input-field" oninput="onLogInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Log length (m)</p>
+                  <p class="log-input-label">Length (m)</p>
                   <input id="log-length" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
                 </div>
+              </div>
+
+              <!-- Huber inputs -->
+              <div id="vol-inputs-huber" class="space-y-3 hidden">
+                <div>
+                  <p class="log-input-label">Mid-point diameter (cm)</p>
+                  <input id="log-d-mid" type="number" min="1" max="300" step="0.1" value="25" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Length (m)</p>
+                  <input id="log-length-h" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+              </div>
+
+              <!-- Smalian inputs -->
+              <div id="vol-inputs-smalian" class="space-y-3 hidden">
+                <div>
+                  <p class="log-input-label">Butt (large end) diameter (cm)</p>
+                  <input id="log-d-butt" type="number" min="1" max="300" step="0.1" value="35" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Tip (small end) diameter (cm)</p>
+                  <input id="log-d-tip" type="number" min="0" max="300" step="0.1" value="20" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Length (m)</p>
+                  <input id="log-length-s" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+              </div>
+
+              <!-- Newton inputs -->
+              <div id="vol-inputs-newton" class="space-y-3 hidden">
+                <div>
+                  <p class="log-input-label">Butt (large end) diameter (cm)</p>
+                  <input id="log-d-butt-n" type="number" min="1" max="300" step="0.1" value="35" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Mid-point diameter (cm)</p>
+                  <input id="log-d-mid-n" type="number" min="1" max="300" step="0.1" value="28" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Tip (small end) diameter (cm)</p>
+                  <input id="log-d-tip-n" type="number" min="0" max="300" step="0.1" value="20" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+                <div>
+                  <p class="log-input-label">Length (m)</p>
+                  <input id="log-length-n" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                </div>
+              </div>
+
+              <!-- Shared fields -->
+              <div class="space-y-3 mt-3 pt-3 border-t border-gray-100">
                 <div>
                   <p class="log-input-label">Wood type</p>
-                  <select id="log-woodtype" class="log-input-field" onchange="onLogInputChange()">
+                  <select id="log-woodtype" class="log-input-field" onchange="syncPhysicalDefaults(); onLogInputChange()">
                     <option value="softwood">Softwood (e.g. Pine, Spruce, Fir)</option>
                     <option value="hardwood">Hardwood (e.g. Oak, Maple, Birch)</option>
                   </select>
@@ -230,6 +337,7 @@
                   <input id="log-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onLogInputChange()">
                 </div>
               </div>
+
               <!-- Carbon estimate display -->
               <div id="log-carbon-estimate" class="mt-3 p-2 bg-green-50 rounded-xl text-sm text-green-900 hidden">
                 <div class="font-semibold mb-1">Estimated Log Carbon</div>
@@ -237,10 +345,32 @@
               </div>
             </div>
 
-            <!-- Step 2: Product Type -->
+            <!-- Step 2: Physical Parameters -->
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-bold text-green-800 mb-1 flex items-center gap-2">
                 <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                Physical Parameters
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Default values based on wood type. Edit to override.</p>
+              <div class="space-y-3">
+                <div>
+                  <p class="log-input-label">Wood density (kg/m³)</p>
+                  <input id="log-density" type="number" min="100" max="1200" step="1" value="450" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 450 · Hardwood default: 600</p>
+                </div>
+                <div>
+                  <p class="log-input-label">Carbon fraction (0–1)</p>
+                  <input id="log-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 0.50 · Hardwood default: 0.48</p>
+                </div>
+                <button onclick="resetPhysicalParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to wood-type defaults</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Product Type -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-green-800 mb-1 flex items-center gap-2">
+                <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
                 Wood Product Type
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
@@ -255,10 +385,10 @@
               <div id="log-suggestion-note" class="mt-2 text-xs text-emerald-700 font-medium hidden"></div>
             </div>
 
-            <!-- Step 3: Run -->
+            <!-- Step 4: Run -->
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-bold text-green-800 mb-3 flex items-center gap-2">
-                <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">4</span>
                 Run Log Carbon Tracker
               </h2>
               <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run — no need to visit the HWPs Carbon tab first.</p>
@@ -322,7 +452,7 @@
 
     <footer class="mt-8 text-xs text-gray-600">
       <div class="mx-auto px-4 pb-8 max-w-[1400px]">
-        <p>© 2025 Wood Products Carbon Tracker (Xinyuan Wei, <a class="underline text-indigo-700" href="xinyuan.wei@maine.edu"><span class="__cf_email__" data-cfemail="e49c8d8a9d91858aca93818da489858d8a81ca818091">[email&#160;protected]</span></a>)</p>
+        <p>© 2025 Wood Products Carbon Tracker (Xinyuan Wei, <a class="underline text-indigo-700" href="mailto:xinyuan.wei@maine.edu">xinyuan.wei@maine.edu</a>)</p>
         <div class="flex items-center gap-8 mt-3">
           <img src="./assets/img/Logo_NSRC.png" alt="Northeastern States Research Cooperative" class="h-16 w-auto md:h-20 object-contain">
           <img src="./assets/img/Logo_WGL.png"  alt="Wheatland Geospatial Lab"          class="h-16 w-auto md:h-20 object-contain">
@@ -562,14 +692,107 @@ json.dumps(out, allow_nan=False)
       // LOG CARBON TAB
       // ══════════════════════════════════════════════════════════════════════
 
-      // Wood density (kg/m³, green) and carbon fraction by type
+      // Wood density (kg/m³) and carbon fraction defaults by type
       const WOOD_PROPS = {
         softwood: { density: 450, carbonFraction: 0.50 },
         hardwood: { density: 600, carbonFraction: 0.48 }
       };
 
-      // Product suggestion rules: [minDiam_cm, woodType, suggestedProduct]
-      // Logic: large softwood -> Construction; medium softwood/hardwood -> Household/Exterior; small -> Paper
+      // Reset physical param fields to wood-type defaults
+      window.resetPhysicalParams = function() {
+        const wt = document.getElementById('log-woodtype').value;
+        const props = WOOD_PROPS[wt];
+        document.getElementById('log-density').value      = props.density;
+        document.getElementById('log-carbon-frac').value  = props.carbonFraction;
+        onLogInputChange();
+      }
+
+      // When wood type changes, auto-fill density/carbon fraction only if still at a default value
+      window.syncPhysicalDefaults = function syncPhysicalDefaults() {
+        const wt = document.getElementById('log-woodtype').value;
+        const props = WOOD_PROPS[wt];
+        const curDensity = parseFloat(document.getElementById('log-density').value);
+        const curFrac    = parseFloat(document.getElementById('log-carbon-frac').value);
+        // Auto-update if the current value matches the OTHER wood type's default (i.e. user hasn't customised)
+        const otherProps = WOOD_PROPS[wt === 'softwood' ? 'hardwood' : 'softwood'];
+        if (curDensity === otherProps.density)     document.getElementById('log-density').value     = props.density;
+        if (curFrac    === otherProps.carbonFraction) document.getElementById('log-carbon-frac').value = props.carbonFraction;
+      }
+
+      // ── Volume method ──────────────────────────────────────────────────────
+      let currentVolMethod = 'cylinder';
+
+      const VOL_METHOD_META = {
+        cylinder: {
+          desc: 'V = π × r² × L — single diameter, overestimates tapered logs.',
+          inputs: 'vol-inputs-cylinder'
+        },
+        huber: {
+          desc: 'V = π × r_mid² × L — mid-point diameter only, most commonly used in practice.',
+          inputs: 'vol-inputs-huber'
+        },
+        smalian: {
+          desc: 'V = π/2 × (r_butt² + r_tip²) × L — uses both end diameters.',
+          inputs: 'vol-inputs-smalian'
+        },
+        newton: {
+          desc: 'V = π/6 × (r_butt² + 4×r_mid² + r_tip²) × L — most accurate, needs 3 measurements.',
+          inputs: 'vol-inputs-newton'
+        }
+      };
+
+      window.setVolMethod = function(method) {
+        currentVolMethod = method;
+        // Update button styles
+        document.querySelectorAll('.vol-method-btn').forEach(btn => {
+          const isSelected = btn.dataset.method === method;
+          btn.classList.toggle('selected', isSelected);
+        });
+        // Show/hide input panels
+        ['cylinder','huber','smalian','newton'].forEach(m => {
+          document.getElementById('vol-inputs-' + m).classList.toggle('hidden', m !== method);
+        });
+        // Update description
+        document.getElementById('vol-method-desc').textContent = VOL_METHOD_META[method].desc;
+        onLogInputChange();
+      }
+
+      function calcVolume() {
+        const pi = Math.PI;
+        const toR = d => (parseFloat(d) / 2) / 100; // cm diameter → m radius
+        const L = m => parseFloat(document.getElementById('log-length' + m).value) || 0;
+
+        if (currentVolMethod === 'cylinder') {
+          const r = toR(document.getElementById('log-diameter').value || 0);
+          const l = L('');
+          if (!r || !l) return null;
+          return { vol: pi * r * r * l, L: l, method: 'Cylinder' };
+
+        } else if (currentVolMethod === 'huber') {
+          const r = toR(document.getElementById('log-d-mid').value || 0);
+          const l = L('-h');
+          if (!r || !l) return null;
+          return { vol: pi * r * r * l, L: l, method: 'Huber' };
+
+        } else if (currentVolMethod === 'smalian') {
+          const rb = toR(document.getElementById('log-d-butt').value || 0);
+          const rt = toR(document.getElementById('log-d-tip').value  || 0);
+          const l  = L('-s');
+          if (!rb || !l) return null;
+          return { vol: (pi / 2) * (rb * rb + rt * rt) * l, L: l, method: 'Smalian' };
+
+        } else if (currentVolMethod === 'newton') {
+          const rb = toR(document.getElementById('log-d-butt-n').value || 0);
+          const rm = toR(document.getElementById('log-d-mid-n').value  || 0);
+          const rt = toR(document.getElementById('log-d-tip-n').value  || 0);
+          const l  = L('-n');
+          if (!rb || !rm || !l) return null;
+          return { vol: (pi / 6) * (rb * rb + 4 * rm * rm + rt * rt) * l, L: l, method: 'Newton' };
+        }
+        return null;
+      }
+
+      // ── Product suggestion (uses first diameter available) ─────────────────
       function suggestProduct(diamCm, woodType) {
         if (woodType === 'softwood') {
           if (diamCm >= 25) return 'Construction';
@@ -586,35 +809,40 @@ json.dumps(out, allow_nan=False)
       let selectedProduct = null;
 
       window.onLogInputChange = function onLogInputChange() {
-        // Estimate carbon
-        const d  = parseFloat(document.getElementById('log-diameter').value) || 0;
-        const L  = parseFloat(document.getElementById('log-length').value)   || 0;
-        const wt = document.getElementById('log-woodtype').value;
-        const props = WOOD_PROPS[wt];
+        const wt      = document.getElementById('log-woodtype').value;
+        const density = parseFloat(document.getElementById('log-density').value)     || WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('log-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
 
-        if (d > 0 && L > 0) {
-          const r = (d / 2) / 100; // radius in metres
-          const vol = Math.PI * r * r * L;  // m³
-          const mass = vol * props.density;  // kg
-          const carbonKg = mass * props.carbonFraction;
+        const result = calcVolume();
+        if (result && result.vol > 0) {
+          const { vol, method } = result;
+          const mass     = vol * density;
+          const carbonKg = mass * cfrac;
 
           document.getElementById('log-carbon-estimate').classList.remove('hidden');
           document.getElementById('log-carbon-display').innerHTML =
-            `Volume: <b>${vol.toFixed(3)} m³</b> &nbsp;|&nbsp; Mass: <b>${mass.toFixed(1)} kg</b><br>` +
+            `Method: <b>${method}</b> &nbsp;|&nbsp; Volume: <b>${vol.toFixed(3)} m³</b><br>` +
+            `Mass: <b>${mass.toFixed(1)} kg</b> (density ${density} kg/m³)<br>` +
             `Carbon content: <b>${carbonKg.toFixed(2)} kg C</b> &nbsp;|&nbsp; ` +
-            `<b>${(carbonKg / 1000).toFixed(4)} Mg C</b>`;
+            `<b>${(carbonKg / 1000).toFixed(4)} Mg C</b> (C fraction ${cfrac})`;
 
-          // Auto-suggest product
-          const sug = suggestProduct(d, wt);
-          document.querySelectorAll('.product-card').forEach(card => {
-            card.classList.remove('suggested');
-            if (card.dataset.product === sug) card.classList.add('suggested');
-          });
-          document.getElementById('log-suggestion-note').textContent = `💡 Suggested: ${sug} (based on log size & type)`;
-          document.getElementById('log-suggestion-note').classList.remove('hidden');
+          // Auto-suggest product using the first/primary diameter
+          let primaryDiam = 0;
+          if (currentVolMethod === 'cylinder')  primaryDiam = parseFloat(document.getElementById('log-diameter').value) || 0;
+          else if (currentVolMethod === 'huber') primaryDiam = parseFloat(document.getElementById('log-d-mid').value) || 0;
+          else if (currentVolMethod === 'smalian') primaryDiam = parseFloat(document.getElementById('log-d-butt').value) || 0;
+          else if (currentVolMethod === 'newton')  primaryDiam = parseFloat(document.getElementById('log-d-butt-n').value) || 0;
 
-          // If nothing selected yet, auto-select suggestion
-          if (!selectedProduct) selectProduct(sug);
+          if (primaryDiam > 0) {
+            const sug = suggestProduct(primaryDiam, wt);
+            document.querySelectorAll('.product-card').forEach(card => {
+              card.classList.remove('suggested');
+              if (card.dataset.product === sug) card.classList.add('suggested');
+            });
+            document.getElementById('log-suggestion-note').textContent = `💡 Suggested: ${sug} (based on log size & type)`;
+            document.getElementById('log-suggestion-note').classList.remove('hidden');
+            if (!selectedProduct) selectProduct(sug);
+          }
         }
       }
 
@@ -638,18 +866,18 @@ json.dumps(out, allow_nan=False)
         }
         if (!selectedProduct) { setLogStatus('Please select a product type first.'); return; }
 
-        const d      = parseFloat(document.getElementById('log-diameter').value);
-        const L      = parseFloat(document.getElementById('log-length').value);
-        const wt     = document.getElementById('log-woodtype').value;
-        const nYears = parseInt(document.getElementById('log-years').value) || 100;
+        const wt      = document.getElementById('log-woodtype').value;
+        const nYears  = parseInt(document.getElementById('log-years').value) || 100;
+        const density = parseFloat(document.getElementById('log-density').value)     || WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('log-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
 
-        if (!d || !L || d <= 0 || L <= 0) { setLogStatus('Please enter valid log dimensions.'); return; }
+        const volResult = calcVolume();
+        if (!volResult || volResult.vol <= 0) { setLogStatus('Please enter valid log dimensions.'); return; }
 
-        const props    = WOOD_PROPS[wt];
-        const r        = (d / 2) / 100;
-        const vol      = Math.PI * r * r * L;
-        const mass     = vol * props.density;
-        const carbonKg = mass * props.carbonFraction;
+        const vol      = volResult.vol;
+        const mass     = vol * density;
+        const carbonKg = mass * cfrac;
+        const L        = volResult.L;
 
         setLogStatus('Running log carbon tracker…');
 
@@ -734,7 +962,7 @@ json.dumps(out, allow_nan=False)
           `);
 
           const res = JSON.parse(jsonStr);
-          renderLogResults(res, carbonKg, d, L, wt, nYears);
+          renderLogResults(res, carbonKg, vol, volResult.method, wt, nYears);
           setLogStatus(`Done — tracked ${nYears} years for ${selectedProduct} wood product.`);
 
         } catch(err) {
@@ -743,7 +971,7 @@ json.dumps(out, allow_nan=False)
         }
       }
 
-      function renderLogResults(res, carbonKg, diam, length, woodType, nYears) {
+      function renderLogResults(res, carbonKg, vol, volMethod, woodType, nYears) {
         const years = res.years;
 
         // ── Summary badges ──────────────────────────────────────────────────
@@ -809,7 +1037,7 @@ json.dumps(out, allow_nan=False)
           xaxis:  { title: { text: 'Years after harvest', standoff: 20 } },
           yaxis:  { title: { text: 'Carbon (kg C)', standoff: 12 } },
           title:  {
-            text: `Log Carbon Tracking — ${selectedProduct} (${woodType}, ∅${diam}cm × ${length}m)`,
+            text: `Log Carbon Tracking — ${selectedProduct} (${woodType}, ${vol.toFixed(3)} m³, ${volMethod})`,
             font: { size: 13 }
           },
           hovermode: 'x unified'
