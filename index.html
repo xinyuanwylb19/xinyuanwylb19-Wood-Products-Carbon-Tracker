@@ -386,7 +386,7 @@
               <!-- Conversion efficiency -->
               <div class="mt-3 pt-3 border-t border-gray-100">
                 <p class="log-input-label">Log-to-product conversion efficiency (0–1)</p>
-                <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.45" class="log-input-field" oninput="onLogInputChange()">
+                <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.70" class="log-input-field" oninput="onLogInputChange()">
                 <p class="text-xs text-gray-400 mt-0.5" id="log-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
                 <div class="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-500" id="efficiency-defaults-table">
                   <span>🏗️ Construction</span><span class="text-right">0.70</span>
@@ -725,7 +725,7 @@ json.dumps(out, allow_nan=False)
 
       window.resetEfficiency = function() {
         const prod = selectedProduct;
-        const val  = prod && EFFICIENCY_DEFAULTS[prod] ? EFFICIENCY_DEFAULTS[prod] : 0.45;
+        const val  = prod && EFFICIENCY_DEFAULTS[prod] ? EFFICIENCY_DEFAULTS[prod] : 0.70;
         document.getElementById('log-efficiency').value = val;
         onLogInputChange();
       }
@@ -851,7 +851,7 @@ json.dumps(out, allow_nan=False)
           const mass     = vol * density;
           const carbonKg = mass * cfrac;
 
-          const eff = parseFloat(document.getElementById('log-efficiency')?.value) || 0.45;
+          const eff = parseFloat(document.getElementById('log-efficiency')?.value) || 0.70;
           const carbonProduct = carbonKg * eff;
           document.getElementById('log-carbon-estimate').classList.remove('hidden');
           document.getElementById('log-carbon-display').innerHTML =
@@ -920,7 +920,7 @@ json.dumps(out, allow_nan=False)
         const vol         = volResult.vol;
         const mass        = vol * density;
         const carbonKgLog = mass * cfrac;          // total carbon in the log
-        const efficiency  = parseFloat(document.getElementById('log-efficiency').value) || 0.45;
+        const efficiency  = parseFloat(document.getElementById('log-efficiency').value) || 0.70;
         const carbonKg    = carbonKgLog * efficiency;  // carbon entering the product
         const L           = volResult.L;
 
@@ -949,29 +949,36 @@ def get_para(product, variable):
     return float(rows.values[0]) if len(rows) > 0 else 0.0
 
 # ── Step 1: In-use pool via disposal_CF ───────────────────────────────────────
-# Single cohort: C0 enters in year 1
 production = [C0] + [0.0] * (n - 1)
 dp1 = get_para(prod, 'disposal_1')
 dp2 = get_para(prod, 'disposal_2')
 dp3 = get_para(prod, 'disposal_3')
 
-inuse_arr, dispos_arr = wf.disposal_CF(n, production, dp1, dp2, dp3)
-inuse_arr  = [max(0.0, float(v)) for v in inuse_arr]
-dispos_arr = [max(0.0, float(v)) for v in dispos_arr]
+inuse_raw, _ = wf.disposal_CF(n, production, dp1, dp2, dp3)
+inuse_arr = [max(0.0, float(v)) for v in inuse_raw]
 
-# ── Step 2: Recycling reduces landfill input ──────────────────────────────────
+# ── Step 2: Landfill inflow = actual decrease in in-use each year ─────────────
+# This correctly captures only what truly leaves in-use; once in-use=0, inflow=0
+landfill_in_raw = []
+for i in range(n):
+    prev_inuse = inuse_arr[i-1] if i > 0 else C0
+    flow = max(0.0, prev_inuse - inuse_arr[i])
+    landfill_in_raw.append(flow)
+
+# ── Step 3: Recycling reduces landfill input ──────────────────────────────────
 rp1_rows = para.loc[(para['Product'] == prod) & (para['Variable'] == 'recycle_1'), 'Parameter']
 if len(rp1_rows) > 0:
     rp1 = float(rp1_rows.values[0])
     rp2 = get_para(prod, 'recycle_2')
-    _, landfill_in_s = wf.recycle_CF(n, pd.Series(dispos_arr, dtype=float), rp1, rp2)
-    landfill_in = [max(0.0, float(v)) for v in landfill_in_s]
+    rr_series = [min(1.0, max(0.0, rp1 + rp2 * math.log(max(i+1.0, 1e-12)))) for i in range(n)]
+    landfill_in = [landfill_in_raw[i] * (1.0 - rr_series[i]) for i in range(n)]
 else:
-    landfill_in = dispos_arr[:]
+    landfill_in = landfill_in_raw[:]
 
-# ── Step 3: Landfill pool with explicit exponential decay ─────────────────────
-# Use half-life = k2 years so the pool visibly decays to zero over time.
-# Each year: pool = (prev_pool + new_inflow) * exp(-ln2/k2)
+# ── Step 4: Landfill pool — cohort survival with exponential decay ────────────
+# Each cohort entering landfill at year j decays with half-life k2.
+# At year i, cohort j has survived for (i-j) years: amount = inflow[j] * exp(-ln2/k2*(i-j))
+# This guarantees: when inflow stops, pool decays cleanly to zero.
 lf_map = {
     'Construction':    ('con_decay1','con_decay2'),
     'Exterior':        ('ext_decay1','ext_decay2'),
@@ -981,15 +988,15 @@ lf_map = {
     'Household Paper': ('pap_decay1','pap_decay2'),
 }
 lf_keys = lf_map.get(prod, ('con_decay1','con_decay2'))
-k2 = get_para('Landfill', lf_keys[1])   # half-life in years
+k2 = get_para('Landfill', lf_keys[1])
 decay_rate = math.log(2.0) / max(k2, 0.01)
 
-lf_pool_arr = [0.0] * n
+lf_pool_arr = []
 for i in range(n):
-    prev = lf_pool_arr[i-1] if i > 0 else 0.0
-    lf_pool_arr[i] = (prev + landfill_in[i]) * math.exp(-decay_rate)
+    pool = sum(landfill_in[j] * math.exp(-decay_rate * (i - j)) for j in range(i + 1))
+    lf_pool_arr.append(max(0.0, pool))
 
-# ── Step 4: Derived series ────────────────────────────────────────────────────
+# ── Step 5: Derived series ────────────────────────────────────────────────────
 years_arr      = list(range(1, n + 1))
 total_retained = [max(0.0, inuse_arr[i] + lf_pool_arr[i]) for i in range(n)]
 cumul_released = [max(0.0, min(C0, C0 - total_retained[i])) for i in range(n)]
