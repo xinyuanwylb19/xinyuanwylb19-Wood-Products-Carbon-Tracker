@@ -145,6 +145,18 @@
         flex-shrink: 0;
       }
     </style>
+
+  <!-- Tab switching defined early so it is always available -->
+  <script>
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      var panel = document.getElementById('tab-' + name);
+      if (panel) panel.classList.add('active');
+      if (btn)   btn.classList.add('active');
+    }
+    window.switchTab = switchTab;
+  </script>
   </head>
   <body class="bg-gray-50 text-gray-900">
 
@@ -163,51 +175,67 @@
     <!-- ========== TABS NAV ========== -->
     <div class="mx-auto px-4 pt-5 max-w-[1400px]">
       <div class="flex flex-wrap gap-1 border-b-2 border-slate-200">
-        <button class="tab-btn active" onclick="switchTab('log',    this)">🪵 Log Carbon</button>
+        <button class="tab-btn active" onclick="switchTab('log',    this)">🪵 Industrial Logs</button>
         <button class="tab-btn"        onclick="switchTab('pps',    this)">📐 Sawn Products</button>
-        <button class="tab-btn"        onclick="switchTab('hwp',    this)">🌲 WPs Carbon</button>
+        <button class="tab-btn"        onclick="switchTab('hwp',    this)">🏠 End-use Products</button>
         <button class="tab-btn"        onclick="switchTab('global', this)">🌍 Global WPs Carbon</button>
-        <button class="tab-btn"        onclick="switchTab('about',  this)">🔬 Research &amp; Team</button>
+        <button class="tab-btn"        onclick="switchTab('about',  this)">🌳 Research &amp; Team</button>
+        <button class="tab-btn"        onclick="switchTab('guide',  this)">📖 User Guide</button>
       </div>
     </div>
 
     <main class="mx-auto px-4 py-5 max-w-[1400px]">
 
+
       <!-- ===================================================== -->
-      <!-- TAB 1: HWPs Carbon                                    -->
+      <!-- TAB 1: End-use Products (WPs Carbon)                  -->
       <!-- ===================================================== -->
       <div id="tab-hwp" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Controls -->
-          <div class="space-y-5 lg:col-span-1">
+          <div class="space-y-4 lg:col-span-1">
 
-            <!-- Step 1: Data -->
+            <!-- Step 1: Data Source -->
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
                 <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
-                Wood Products Data
+                Data Source
               </h2>
-              <div class="space-y-2 text-sm">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600" checked><span>Example: <b>Maine, USA</b></span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4 accent-indigo-600"><span>Example: <b>United States</b></span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600"><span>Upload Wood Products Data:</span></label>
+              <div class="space-y-1 text-sm">
+                <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                  <input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600 mt-0.5" checked>
+                  <div><span class="font-semibold text-gray-800">Maine, USA</span>
+                  <p class="text-xs text-gray-400">Example dataset · 1961–2019</p></div>
+                </label>
+                <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                  <input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4 accent-indigo-600 mt-0.5">
+                  <div><span class="font-semibold text-gray-800">United States</span>
+                  <p class="text-xs text-gray-400">Example dataset · 1961–2020</p></div>
+                </label>
+                <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                  <input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600 mt-0.5">
+                  <div><span class="font-semibold text-gray-800">Upload Custom CSV</span>
+                  <p class="text-xs text-gray-400">Your own production data</p></div>
+                </label>
                 <input id="file-data" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
               </div>
-              <div class="mt-4 pt-3 border-t border-gray-100">
-                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Input Units</p>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-lbs" class="h-4 w-4 accent-indigo-600"><span>lbs</span></label>
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-kg"  class="h-4 w-4 accent-indigo-600" checked><span>kg</span></label>
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-mt"  class="h-4 w-4 accent-indigo-600"><span>Mt</span></label>
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-tgc" class="h-4 w-4 accent-indigo-600"><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
+              <div class="mt-3 pt-3 border-t border-gray-100 grid grid-cols-2 gap-3">
+                <div>
+                  <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Input Units</p>
+                  <div class="space-y-1 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-lbs" class="h-4 w-4 accent-indigo-600"><span>lbs</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-kg"  class="h-4 w-4 accent-indigo-600" checked><span>kg</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-mt"  class="h-4 w-4 accent-indigo-600"><span>Mt</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="inputUnits" id="u-tgc" class="h-4 w-4 accent-indigo-600"><span>Tg C</span></label>
+                  </div>
                 </div>
-              </div>
-              <div class="mt-3 pt-3 border-t border-gray-100">
-                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Plot Units</p>
-                <div class="flex gap-6 text-sm">
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-kg"  class="h-4 w-4 accent-indigo-600"><span>kg</span></label>
-                  <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-tgc" class="h-4 w-4 accent-indigo-600" checked><span>Tg&nbsp;C&nbsp;(MMTC)</span></label>
+                <div>
+                  <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Plot Units</p>
+                  <div class="space-y-1 text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-kg"  class="h-4 w-4 accent-indigo-600"><span>kg</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="plotUnits" id="p-tgc" class="h-4 w-4 accent-indigo-600" checked><span>Tg C</span></label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -216,12 +244,20 @@
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
                 <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                Tracker Parameters
+                Model Parameters
               </h2>
-              <div class="space-y-2 text-sm">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600" checked><span>Default Parameters</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600"><span>Upload Parameter File:</span></label>
-                <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100" disabled>
+              <div class="space-y-1 text-sm">
+                <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                  <input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600 mt-0.5" checked>
+                  <div><span class="font-semibold text-gray-800">Default Parameters</span>
+                  <p class="text-xs text-gray-400">Wei et al. (2023) — CBM</p></div>
+                </label>
+                <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
+                  <input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600 mt-0.5">
+                  <div><span class="font-semibold text-gray-800">Upload Custom Parameters</span>
+                  <p class="text-xs text-gray-400">CSV with disposal/decay values</p></div>
+                </label>
+                <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
               </div>
             </div>
 
@@ -231,39 +267,69 @@
                 <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
                 Run Tracker
               </h2>
-              <div class="flex flex-wrap gap-2">
-                <button id="btn-init"         class="btn px-3 py-2 rounded-xl bg-indigo-600 text-white text-sm hover:bg-indigo-700">Initialize Tracker</button>
-                <button id="btn-run"          class="btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" disabled>Run Carbon Tracker</button>
-                <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm hover:bg-sky-700" disabled>Plot Input Data</button>
-                <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm hover:bg-violet-700" disabled>Plot Storage Results</button>
-                <button id="btn-clear"        class="btn px-3 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm hover:bg-gray-300">Clear</button>
+              <div class="space-y-2">
+                <button id="btn-init" class="btn w-full px-3 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">⚙️ Initialize Python</button>
+                <button id="btn-run"  class="btn w-full px-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" disabled>▶ Run Carbon Tracker</button>
+                <div class="grid grid-cols-2 gap-2">
+                  <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 transition-colors" disabled>📊 Input Data</button>
+                  <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors" disabled>📈 Carbon Stock</button>
+                </div>
+                <button id="btn-clear" class="btn w-full px-3 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 transition-colors border border-gray-200">✕ Clear All</button>
               </div>
-              <div id="status"   class="text-sm text-gray-700 mt-3">Click "Initialize" to load Python.</div>
-              <div id="progress" class="text-xs text-gray-500 mt-1"></div>
+              <div id="status"   class="text-sm text-indigo-700 font-medium mt-3">Click "Initialize Python" to begin.</div>
+              <div id="progress" class="text-xs text-gray-400 mt-1"></div>
+            </div>
+
+            <!-- About -->
+            <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+              <p class="text-xs font-bold text-indigo-800 uppercase tracking-wide mb-1.5">ℹ About</p>
+              <p class="text-xs text-indigo-700 leading-relaxed mb-2">Tracks carbon in-use, recycled, landfill, and bioenergy pools across seven product categories using the IPCC-compatible Gaussian disposal model.</p>
+              <div class="flex flex-wrap gap-1">
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🏠 Construction</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🌉 Exterior</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🪑 Household</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">📰 Graphic Paper</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">📄 Other Paper</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🧻 Household Paper</span>
+              </div>
             </div>
           </div>
 
-          <!-- RIGHT: Plots -->
+          <!-- RIGHT: Charts -->
           <div class="space-y-5 lg:col-span-2">
-            <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-semibold mb-2 text-gray-700">Annual Wood Products Production</h2>
-              <div id="plot-data-area" class="border rounded-xl h-80"></div>
-            </div>
-            <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-semibold mb-2 text-gray-700">Carbon Storage by Pool</h2>
-              <div id="plot-storage-area" class="border rounded-xl h-80"></div>
-            </div>
-          </div>
-        </section>
 
-        <!-- Results -->
-        <section class="mt-5 p-4 bg-white rounded-2xl shadow">
-          <h2 class="text-base font-semibold mb-2 text-gray-700 flex items-center gap-2">
-            📋 Results Table
-          </h2>
-          <div id="results-preview" class="overflow-auto border rounded-xl p-2 max-h-96 text-xs"></div>
-          <div class="mt-3">
-            <a id="download-link" class="hidden px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" download="WPsCT_Results.csv">⬇ Download Results</a>
+            <!-- Summary badges -->
+            <div id="hwp-summary-panel" class="hidden p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Carbon Stock — Latest Year</h2>
+              <div id="hwp-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+            </div>
+
+            <!-- Plot 1: Input Data -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-base font-semibold text-gray-700">Annual Wood Products Production</h2>
+                <span class="text-xs text-gray-400 bg-gray-100 rounded-full px-2 py-0.5">Input Data</span>
+              </div>
+              <div id="plot-data-area" class="rounded-xl bg-gray-50" style="height:380px"></div>
+            </div>
+
+            <!-- Plot 2: Carbon Storage -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-base font-semibold text-gray-700">Carbon Storage by Pool</h2>
+                <span class="text-xs text-gray-400 bg-gray-100 rounded-full px-2 py-0.5">Model Output</span>
+              </div>
+              <div id="plot-storage-area" class="rounded-xl bg-gray-50" style="height:380px"></div>
+            </div>
+
+            <!-- Results table -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-semibold mb-2 text-gray-700">📋 Results Table</h2>
+              <div id="results-preview" class="overflow-auto rounded-xl p-2 max-h-72 text-xs border border-gray-100"></div>
+              <div class="mt-3">
+                <a id="download-link" class="hidden inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" download="WPsCT_Results.csv">⬇ Download Results CSV</a>
+              </div>
+            </div>
           </div>
         </section>
       </div><!-- /tab-hwp -->
@@ -417,7 +483,7 @@
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-bold text-green-800 mb-1 flex items-center gap-2">
                 <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                Wood Product Type
+                End-Use Category
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
               <div id="log-product-grid" class="grid grid-cols-2 gap-2">
@@ -644,30 +710,12 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select service-life category. Determines disposal &amp; decay parameters.</p>
               <div id="pps-product-grid" class="grid grid-cols-2 gap-2">
-                <div class="pps-product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">
-                  <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70" alt="Wood house construction" onerror="this.style.display='none'">
-                  <div class="card-label">🏠 Construction</div>
-                </div>
-                <div class="pps-product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">
-                  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70" alt="Wood bridge exterior" onerror="this.style.display='none'">
-                  <div class="card-label">🌉 Exterior</div>
-                </div>
-                <div class="pps-product-card" data-product="Household" onclick="selectPPsProduct('Household')">
-                  <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=70" alt="Wood furniture" onerror="this.style.display='none'">
-                  <div class="card-label">🪑 Furniture / Interior</div>
-                </div>
-                <div class="pps-product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">
-                  <img src="https://images.unsplash.com/photo-1568667256549-094345857637?w=300&q=70" alt="Graphic paper" onerror="this.style.display='none'">
-                  <div class="card-label">📰 Graphic Paper</div>
-                </div>
-                <div class="pps-product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">
-                  <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&q=70" alt="Tissue paper rolls" onerror="this.style.display='none'">
-                  <div class="card-label">🧻 Tissue / Hygienic</div>
-                </div>
-                <div class="pps-product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">
-                  <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=300&q=70" alt="Other paper products" onerror="this.style.display='none'">
-                  <div class="card-label">📄 Other Paper</div>
-                </div>
+                <div class="product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">🏠 Construction</div>
+                <div class="product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectPPsProduct('Household')">🪑 Furniture / Interior</div>
+                <div class="product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">📰 Graphic Paper</div>
+                <div class="product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">🧻 Tissue / Hygienic</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">📄 Other Paper</div>
               </div>
               <div id="pps-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
               <!-- Processing efficiency -->
@@ -726,16 +774,17 @@
         <div class="bg-gradient-to-r from-green-900 via-teal-800 to-green-800 rounded-2xl shadow-lg p-8 mb-6 text-white">
           <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
             <div class="flex-1">
-              <p class="text-green-300 text-xs font-semibold uppercase tracking-widest mb-1">USDA · Northeastern States Research Cooperative</p>
-              <h2 class="text-2xl font-bold mb-2">Next-Generation Wood Products Carbon Estimator</h2>
-              <p class="text-green-200 text-sm leading-relaxed max-w-xl">A tool for comprehensive stakeholder collaboration and decision-making in forest carbon accounting.</p>
+              <h2 class="text-2xl font-bold mb-2">Web-based Wood Products Carbon Estimator</h2>
             </div>
-            <div class="flex gap-4 flex-shrink-0">
+            <div class="flex flex-wrap gap-4 flex-shrink-0 items-center">
               <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
-                <img src="./assets/img/Logo_NSRC.png" alt="NSRC" class="h-14 w-auto object-contain">
+                <img src="./assets/img/Logo_USDA.png" alt="USDA" class="h-20 w-auto object-contain">
               </div>
               <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
-                <img src="./assets/img/Logo_WGL.png" alt="WGL" class="h-14 w-auto object-contain">
+                <img src="./assets/img/Logo_NSRC.png" alt="NSRC" class="h-20 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_WGL.png" alt="WGL" class="h-20 w-auto object-contain">
               </div>
             </div>
           </div>
@@ -755,20 +804,21 @@
                   <p class="font-bold text-gray-900 text-base">Xinyuan Wei, PhD</p>
                   <p class="text-xs text-teal-700 font-semibold mt-0.5">Principal Investigator</p>
                   <p class="text-xs text-gray-500">School of Forest Resources<br>University of Maine, Orono</p>
-                  <a href="mailto:xinyuan.wei@maine.edu" class="text-xs text-indigo-600 hover:underline mt-1 inline-block">xinyuan.wei@maine.edu</a>
+                  <a href="/cdn-cgi/l/email-protection#bcc4d5d2c5c9ddd292cbd9d5fcd1ddd5d2d992d9d8c9" class="text-xs text-indigo-600 hover:underline mt-1 inline-block"><span class="__cf_email__" data-cfemail="fe869790878b9f90d0899b97be939f97909bd09b9a8b">[email&#160;protected]</span></a>
                 </div>
               </div>
             </div>
 
-            <!-- Collaborators -->
+            <!-- Co-Investigators -->
             <div class="p-5 bg-white rounded-2xl shadow">
-              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Research Collaborators</h3>
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Co-Investigators</h3>
               <div class="space-y-3">
                 <div class="flex items-center gap-3">
                   <div class="team-avatar bg-blue-600">DH</div>
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Daniel Hayes</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
+                    <a href="/cdn-cgi/l/email-protection#3f5b5e51565a53115511575e465a4c7f525e56515a115a5b4a" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="b3d7d2dddad6df9dd99ddbd2cad6c0f3ded2daddd69dd6d7c6">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -776,6 +826,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Aaron Weiskittel</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
+                    <a href="/cdn-cgi/l/email-protection#751414071a1b5b02101c061e1c010110193518141c1b105b101100" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="ddbcbcafb2b3f3aab8b4aeb6b4a9a9b8b19db0bcb4b3b8f3b8b9a8">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -783,6 +834,15 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Jianheng Zhao</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
+                    <a href="/cdn-cgi/l/email-protection#f19b98909f99949f96df8b99909eb19c90989f94df949584" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="8fe5e6eee1e7eae1e8a1f5e7eee0cfe2eee6e1eaa1eaebfa">[email&#160;protected]</span></a>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-rose-600">LL</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Ling Li</p>
+                    <p class="text-xs text-gray-500">University of Maine</p>
+                    <a href="/cdn-cgi/l/email-protection#6e020700094002072e030f07000b400b0a1b" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="274b4e4940094b4e674a464e494209424352">[email&#160;protected]</span></a>
                   </div>
                 </div>
               </div>
@@ -791,9 +851,16 @@
             <!-- Funding -->
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">Funding</h3>
-              <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
-                <p class="text-xs font-bold text-amber-800 mb-1">USDA — Northeastern States Research Cooperative (NSRC)</p>
-                <p class="text-xs text-amber-700 italic leading-relaxed">Next-generation wood products carbon estimator: a tool for comprehensive stakeholder collaboration and decision-making</p>
+              <div class="space-y-3">
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
+                  <p class="text-xs font-bold text-amber-800 mb-1">USDA — Northeastern States Research Cooperative (NSRC)</p>
+                  <p class="text-xs text-amber-700 italic leading-relaxed">Next-generation wood products carbon estimator: a tool for comprehensive stakeholder collaboration and decision-making</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
+                  <p class="text-xs font-bold text-amber-800 mb-1">NASA — Carbon Monitoring System</p>
+                  <p class="text-xs text-amber-700 italic leading-relaxed mb-1">Supporting Stakeholder Data Requirements for Decision-Making in Managed Forests: A Landscape Model-Data Framework for High Resolution Carbon Accounting and Uncertainty Estimation</p>
+                  <p class="text-xs text-amber-700 leading-relaxed">Phase 2 prototype development of a scalable MRV framework that integrates inventory data, remote sensing, and landscape modeling to support stakeholder decision-making for carbon in managed forests</p>
+                </div>
               </div>
             </div>
 
@@ -803,23 +870,23 @@
               <div class="grid grid-cols-2 gap-2">
                 <div class="bg-green-50 rounded-xl p-2.5 text-center">
                   <div class="text-xl mb-1">🪵</div>
-                  <p class="text-xs font-semibold text-green-800">Log Carbon</p>
-                  <p class="text-xs text-gray-500">Single-log tracking</p>
+                  <p class="text-xs font-semibold text-green-800">Industrial Logs</p>
+                  <p class="text-xs text-gray-500">Single-log carbon tracking from harvest</p>
                 </div>
                 <div class="bg-teal-50 rounded-xl p-2.5 text-center">
                   <div class="text-xl mb-1">📐</div>
                   <p class="text-xs font-semibold text-teal-800">Sawn Products</p>
-                  <p class="text-xs text-gray-500">Lumber &amp; panel tracking</p>
+                  <p class="text-xs text-gray-500">Lumber, panels &amp; engineered wood</p>
                 </div>
                 <div class="bg-indigo-50 rounded-xl p-2.5 text-center">
-                  <div class="text-xl mb-1">🌲</div>
-                  <p class="text-xs font-semibold text-indigo-800">WPs Carbon</p>
-                  <p class="text-xs text-gray-500">Regional aggregate flux</p>
+                  <div class="text-xl mb-1">🏠</div>
+                  <p class="text-xs font-semibold text-indigo-800">End-use Products</p>
+                  <p class="text-xs text-gray-500">Regional wood products carbon flux</p>
                 </div>
                 <div class="bg-blue-50 rounded-xl p-2.5 text-center">
                   <div class="text-xl mb-1">🌍</div>
-                  <p class="text-xs font-semibold text-blue-800">Global WPs</p>
-                  <p class="text-xs text-gray-500">International benchmarks</p>
+                  <p class="text-xs font-semibold text-blue-800">Global WPs Carbon</p>
+                  <p class="text-xs text-gray-500">Country-level comparisons &amp; benchmarks</p>
                 </div>
               </div>
             </div>
@@ -827,6 +894,16 @@
 
           <!-- Publications column -->
           <div class="lg:col-span-3 space-y-5">
+
+            <!-- Carbon Flow Diagram -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">🔄 Carbon Flow Framework</h3>
+              <img src="./assets/img/WPs_Carbon Flow.png"
+                   alt="Wood Products Carbon Flow Diagram"
+                   class="w-full rounded-xl border border-gray-100 shadow-sm object-contain max-h-80"
+                   onerror="this.parentElement.style.display='none'">
+              <p class="text-xs text-gray-500 mt-2 text-center italic">Wood products carbon flux framework across pools and life-cycle stages</p>
+            </div>
 
             <!-- Key citation -->
             <div class="p-5 bg-white rounded-2xl shadow">
@@ -847,18 +924,6 @@
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">📚 Related Publications</h3>
               <div class="space-y-3">
-
-                <div class="pub-card">
-                  <p class="text-sm text-gray-800 leading-relaxed">
-                    Li, L., Wei, X., Zhao, J., Hayes, D., Daigneault, A., Weiskittel, A., Kizha, A., &amp; O'Neill, S. (2022).
-                    Technological advancement expands carbon storage in harvested wood products in Maine, USA.
-                    <em>Biomass and Bioenergy</em>. <strong>161</strong>, 106457.
-                  </p>
-                  <a href="https://doi.org/10.1016/j.biombioe.2022.106457" target="_blank"
-                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
-                    doi.org/10.1016/j.biombioe.2022.106457 ↗
-                  </a>
-                </div>
 
                 <div class="pub-card">
                   <p class="text-sm text-gray-800 leading-relaxed">
@@ -883,6 +948,18 @@
                   </a>
                 </div>
 
+                <div class="pub-card">
+                  <p class="text-sm text-gray-800 leading-relaxed">
+                    Li, L., Wei, X., Zhao, J., Hayes, D., Daigneault, A., Weiskittel, A., Kizha, A., &amp; O'Neill, S. (2022).
+                    Technological advancement expands carbon storage in harvested wood products in Maine, USA.
+                    <em>Biomass and Bioenergy</em>. <strong>161</strong>, 106457.
+                  </p>
+                  <a href="https://doi.org/10.1016/j.biombioe.2022.106457" target="_blank"
+                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                    doi.org/10.1016/j.biombioe.2022.106457 ↗
+                  </a>
+                </div>
+
               </div>
             </div>
 
@@ -890,27 +967,284 @@
         </div>
       </div><!-- /tab-about -->
 
+
+
+      <!-- ===================================================== -->
+      <!-- TAB 6: User Guide                                      -->
+      <!-- ===================================================== -->
+      <div id="tab-guide" class="tab-panel">
+        <div class="max-w-5xl mx-auto space-y-6">
+
+          <!-- Header -->
+          <div class="bg-gradient-to-r from-indigo-700 to-teal-600 rounded-2xl p-6 text-white">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+              <div>
+                <h1 class="text-2xl font-bold mb-1">📖 User Guide</h1>
+                <p class="text-indigo-100 text-sm">How to prepare data, run the tracker, and interpret results</p>
+                <p class="text-indigo-200 text-xs mt-1">Based on: Wei et al. (2023) · Carbon Balance and Management 18:1</p>
+              </div>
+              <a href="./assets/docs/WPsCT_UserManual.docx" download
+                 class="flex items-center gap-2 px-4 py-2.5 bg-white text-indigo-700 rounded-xl text-sm font-bold hover:bg-indigo-50 transition-colors shadow">
+                ⬇ Download Full Manual (.docx)
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick-start -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-4">⚡ Quick Start — End-use Products Tracker</h2>
+            <ol class="space-y-3">
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">1</span>
+                <div><p class="font-semibold text-gray-800 text-sm">Select a Data Source</p>
+                <p class="text-gray-500 text-xs mt-0.5">Choose the built-in Maine or US example, or upload your own production CSV (see format below).</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">2</span>
+                <div><p class="font-semibold text-gray-800 text-sm">Choose Model Parameters</p>
+                <p class="text-gray-500 text-xs mt-0.5">Use the default parameters (Wei et al. 2023) or upload a custom parameters CSV for your region.</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">3</span>
+                <div><p class="font-semibold text-gray-800 text-sm">⚙️ Initialize Python</p>
+                <p class="text-gray-500 text-xs mt-0.5">Click "Initialize Python". The first load downloads the Python runtime (~50 MB, 30–90 sec). Subsequent loads within the same session are instant.</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-600 text-white text-sm font-bold flex items-center justify-center">4</span>
+                <div><p class="font-semibold text-gray-800 text-sm">▶ Run Carbon Tracker</p>
+                <p class="text-gray-500 text-xs mt-0.5">Runs the full life-cycle model. Results appear in the table; the Download button activates.</p></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white text-sm font-bold flex items-center justify-center">5</span>
+                <div><p class="font-semibold text-gray-800 text-sm">📊 Plot &amp; Explore</p>
+                <p class="text-gray-500 text-xs mt-0.5">Use "Plot Input" and "Plot Carbon Stock" to visualise production trends and accumulated carbon pools. Hover charts for exact values.</p></div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Input CSV -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-1">📂 Input Data CSV Format</h2>
+            <p class="text-sm text-gray-500 mb-4">The production data file must be a comma-separated (.csv) file with the following columns. All numeric values must be in <strong>kg C per year</strong>.</p>
+
+            <div class="overflow-x-auto rounded-xl border border-gray-100">
+              <table class="w-full text-xs">
+                <thead>
+                  <tr class="bg-indigo-700 text-white">
+                    <th class="px-3 py-2 text-left font-semibold">Column Name</th>
+                    <th class="px-3 py-2 text-left font-semibold">Pool</th>
+                    <th class="px-3 py-2 text-left font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-bold text-indigo-700">Year</td><td class="px-3 py-2">—</td><td class="px-3 py-2">Calendar year (integer). Required. No gaps.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Biofuel</td><td class="px-3 py-2">Bioenergy</td><td class="px-3 py-2">Annual biofuel combustion (kg C/yr) — industrial + residential fuel wood.</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Biochar</td><td class="px-3 py-2">Charcoal</td><td class="px-3 py-2">Non-energy use biochar production (kg C/yr).</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Construction</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Wood in building construction — sawnwood, structural panels (kg C/yr).</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Exterior</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Exterior products — railway ties, wood decking, dock materials (kg C/yr). No recycling.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Household</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Home application — furniture, flooring, interior millwork (kg C/yr).</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Graphic Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Printing &amp; writing paper, newsprint (kg C/yr). Service half-life γ = 6 yr.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Other Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Packaging, cardboard, industrial paperboard (kg C/yr). Service half-life γ = 1 yr.</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Household Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Tissue, toweling, sanitary paper (kg C/yr). Service half-life γ = 0.5 yr. No recycling.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Example CSV -->
+            <h3 class="text-sm font-bold text-gray-700 mt-5 mb-2">Example (Maine, USA — first 3 rows)</h3>
+            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
+              <pre class="text-xs text-green-300 font-mono leading-relaxed">Year,Biofuel,Biochar,Construction,Exterior,Household,Graphic Paper,Other Paper,Household Paper
+1961,285763275,12447848,179817095,74300620,194099473,173635256,264196012,59754273
+1962,282588127,12004344,188776252,99492208,170293682,169884778,270564088,56458288
+1963,293701143,17763045,189602353,71383467,163003331,179487717,297712002,55771351</pre>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">💡 To convert from dry biomass weight to kg C: multiply by <strong>0.50</strong> (wood carbon fraction ≈ 50%).</p>
+          </div>
+
+          <!-- Parameters CSV -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-1">⚙️ Parameters CSV Format</h2>
+            <p class="text-sm text-gray-500 mb-4">The parameters file has exactly three columns: <code class="bg-gray-100 px-1 rounded font-mono text-xs">Product</code>, <code class="bg-gray-100 px-1 rounded font-mono text-xs">Variable</code>, <code class="bg-gray-100 px-1 rounded font-mono text-xs">Parameter</code>. Default values are from Wei et al. (2023) Table 1 and are appropriate for US-based studies.</p>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-5">
+              <!-- Disposal rates -->
+              <div class="rounded-xl border border-gray-100 overflow-hidden">
+                <div class="bg-teal-700 text-white text-xs font-bold px-3 py-2">Disposal Rate Parameters (Eq. 2)</div>
+                <table class="w-full text-xs">
+                  <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">α (dp_1)</th><th class="px-2 py-1.5">β (dp_2)</th><th class="px-2 py-1.5">γ yr (dp_3)</th></tr></thead>
+                  <tbody>
+                    <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.133</td><td class="px-2 py-1.5 text-center">0.028</td><td class="px-2 py-1.5 text-center">80</td></tr>
+                    <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Exterior</td><td class="px-2 py-1.5 text-center">0.326</td><td class="px-2 py-1.5 text-center">0.041</td><td class="px-2 py-1.5 text-center">25</td></tr>
+                    <tr class="border-t"><td class="px-2 py-1.5 font-mono">Household</td><td class="px-2 py-1.5 text-center">0.265</td><td class="px-2 py-1.5 text-center">0.031</td><td class="px-2 py-1.5 text-center">30</td></tr>
+                    <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Graphic Paper</td><td class="px-2 py-1.5 text-center">1.006</td><td class="px-2 py-1.5 text-center">0.0</td><td class="px-2 py-1.5 text-center">6</td></tr>
+                    <tr class="border-t"><td class="px-2 py-1.5 font-mono">Other Paper</td><td class="px-2 py-1.5 text-center">6.036</td><td class="px-2 py-1.5 text-center">0.0</td><td class="px-2 py-1.5 text-center">1</td></tr>
+                    <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Household Paper</td><td class="px-2 py-1.5 text-center">12.036</td><td class="px-2 py-1.5 text-center">0.0</td><td class="px-2 py-1.5 text-center">0.5</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- Recycle + landfill -->
+              <div class="space-y-4">
+                <div class="rounded-xl border border-gray-100 overflow-hidden">
+                  <div class="bg-violet-700 text-white text-xs font-bold px-3 py-2">Recycling Rate Parameters (Eq. 4)</div>
+                  <table class="w-full text-xs">
+                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">λ (rc_1)</th><th class="px-2 py-1.5">μ (rc_2)</th></tr></thead>
+                    <tbody>
+                      <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.085</td><td class="px-2 py-1.5 text-center">0.015</td></tr>
+                      <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Household</td><td class="px-2 py-1.5 text-center">0.085</td><td class="px-2 py-1.5 text-center">0.015</td></tr>
+                      <tr class="border-t"><td class="px-2 py-1.5 font-mono">Graphic Paper</td><td class="px-2 py-1.5 text-center">0.225</td><td class="px-2 py-1.5 text-center">0.027</td></tr>
+                      <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Other Paper</td><td class="px-2 py-1.5 text-center">0.225</td><td class="px-2 py-1.5 text-center">0.027</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="rounded-xl border border-gray-100 overflow-hidden">
+                  <div class="bg-gray-700 text-white text-xs font-bold px-3 py-2">Landfill Decay Parameters (Eq. 5)</div>
+                  <table class="w-full text-xs">
+                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Pool</th><th class="px-2 py-1.5">ξ (decay1)</th><th class="px-2 py-1.5">ω yr (decay2)</th></tr></thead>
+                    <tbody>
+                      <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.997</td><td class="px-2 py-1.5 text-center">30</td></tr>
+                      <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Exterior</td><td class="px-2 py-1.5 text-center">1.178</td><td class="px-2 py-1.5 text-center">20</td></tr>
+                      <tr class="border-t"><td class="px-2 py-1.5 font-mono">Household</td><td class="px-2 py-1.5 text-center">1.329</td><td class="px-2 py-1.5 text-center">15</td></tr>
+                      <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Paper</td><td class="px-2 py-1.5 text-center">0.821</td><td class="px-2 py-1.5 text-center">5</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="text-sm font-bold text-gray-700 mb-2">Example Parameters CSV</h3>
+            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
+              <pre class="text-xs text-green-300 font-mono leading-relaxed">Product,Variable,Parameter
+Biofuel,efficiency,1
+Biochar,decay_1,0.007
+Biochar,decay_2,0.0003
+Construction,disposal_1,0.133
+Construction,disposal_2,0.028
+Construction,disposal_3,80
+Construction,recycle_1,0.085
+Construction,recycle_2,0.015
+Exterior,disposal_1,0.326
+Exterior,disposal_2,0.041
+Exterior,disposal_3,25
+Household,disposal_1,0.265
+Household,disposal_2,0.031
+Household,disposal_3,30
+Household,recycle_1,0.085
+Household,recycle_2,0.015
+Graphic Paper,disposal_1,1.006
+Graphic Paper,disposal_2,0
+Graphic Paper,disposal_3,6
+Graphic Paper,recycle_1,0.225
+Graphic Paper,recycle_2,0.027
+Other Paper,disposal_1,6.036
+Other Paper,disposal_2,0
+Other Paper,disposal_3,1
+Other Paper,recycle_1,0.225
+Other Paper,recycle_2,0.027
+Household Paper,disposal_1,12.036
+Household Paper,disposal_2,0
+Household Paper,disposal_3,0.5
+Landfill,con_decay1,0.997
+Landfill,con_decay2,30
+Landfill,ext_decay1,1.178
+Landfill,ext_decay2,20
+Landfill,hou_decay1,1.329
+Landfill,hou_decay2,15
+Landfill,pap_decay1,0.821
+Landfill,pap_decay2,5</pre>
+            </div>
+          </div>
+
+          <!-- Carbon Pools -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-4">🌲 Carbon Pools &amp; Flux Equations</h2>
+            <p class="text-sm text-gray-600 mb-4">The tracker maintains three main carbon sub-pools, governed by the equations from Wei et al. (2023):</p>
+            <div class="grid md:grid-cols-3 gap-4 mb-5">
+              <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
+                <p class="font-bold text-emerald-800 text-sm mb-1">① End-use Products</p>
+                <p class="text-xs text-emerald-700 mb-2">Carbon remaining in in-use wood products (construction, furniture, paper).</p>
+                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 2–3: Gaussian disposal<br>ρ<sub>wp</sub> = α/e√(2π) · exp(−β(t<sub>w</sub>−γ)²/γ)</p>
+              </div>
+              <div class="rounded-xl bg-amber-50 border border-amber-100 p-4">
+                <p class="font-bold text-amber-800 text-sm mb-1">② Landfill Pool</p>
+                <p class="text-xs text-amber-700 mb-2">Disposed wood undergoing slow decomposition in landfills.</p>
+                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 5: Log-normal decay<br>ρ<sub>lf</sub> = ξ · ln(t<sub>l</sub>) / (ω·√(2π))</p>
+              </div>
+              <div class="rounded-xl bg-stone-50 border border-stone-200 p-4">
+                <p class="font-bold text-stone-700 text-sm mb-1">③ Biochar / Charcoal</p>
+                <p class="text-xs text-stone-600 mb-2">Recalcitrant carbon from biofuel combustion and biochar production.</p>
+                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 1: Pool-size decay<br>ρ<sub>cha</sub> = τ + σ · ln(C<sub>cha</sub>)</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-400">Recycling pathway (Eq. 4): r = λ + μ · ln(k), where k = years since initial year. Recycling diverts disposed wood from landfill, increasing effective carbon retention.</p>
+          </div>
+
+          <!-- GitHub instructions -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-1">🐙 Hosting Files on GitHub</h2>
+            <p class="text-sm text-gray-500 mb-4">All supplementary files (this manual, example CSVs, images) should live in your repository alongside <code class="bg-gray-100 px-1 rounded font-mono text-xs">index.html</code>. GitHub Pages will serve them automatically.</p>
+            <h3 class="text-sm font-bold text-gray-700 mb-2">Recommended folder structure</h3>
+            <div class="bg-gray-900 rounded-xl p-4 mb-4 overflow-x-auto">
+              <pre class="text-xs text-green-300 font-mono leading-relaxed">your-repo/
+├── index.html
+├── assets/
+│   ├── img/
+│   │   ├── Logo_USDA.png
+│   │   ├── Logo_NSRC.png
+│   │   ├── Logo_WGL.png
+│   │   └── WPs_Carbon Flow.png
+│   └── docs/
+│       └── WPsCT_UserManual.docx   ← place this file here
+└── data/
+    ├── Maine_example.csv
+    └── US_example.csv</pre>
+            </div>
+            <h3 class="text-sm font-bold text-gray-700 mb-2">Uploading via GitHub browser interface</h3>
+            <ol class="space-y-2 text-sm text-gray-600">
+              <li class="flex gap-2"><span class="font-bold text-indigo-600">1.</span>Open your repository on GitHub.com → click <strong>Add file → Upload files</strong>.</li>
+              <li class="flex gap-2"><span class="font-bold text-indigo-600">2.</span>Navigate to <code class="bg-gray-100 px-1 rounded font-mono text-xs">assets/docs/</code> (create the folder by typing it in the path bar).</li>
+              <li class="flex gap-2"><span class="font-bold text-indigo-600">3.</span>Drag and drop <strong>WPsCT_UserManual.docx</strong> → click <strong>Commit changes</strong>.</li>
+              <li class="flex gap-2"><span class="font-bold text-indigo-600">4.</span>The file is now available at:<br>
+                <code class="bg-gray-100 px-1.5 py-0.5 rounded font-mono text-xs text-indigo-700 break-all">https://&lt;username&gt;.github.io/&lt;repo&gt;/assets/docs/WPsCT_UserManual.docx</code></li>
+            </ol>
+            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800">
+              <strong>File size limits:</strong> GitHub browser upload limit is 25 MB. This manual is ~25 KB — well within limits. For large datasets (&gt;25 MB), use <a href="https://zenodo.org" target="_blank" class="underline">Zenodo</a> or <a href="https://osf.io" target="_blank" class="underline">OSF</a> and link to the DOI.
+            </div>
+          </div>
+
+          <!-- Citation -->
+          <div class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-lg font-bold text-indigo-800 mb-3">📑 Citation</h2>
+            <div class="bg-teal-50 border-l-4 border-teal-600 rounded-r-xl p-4 text-sm text-gray-700 italic leading-relaxed mb-3">
+              Wei, X., Zhao, J., Hayes, D.J., Daigneault, A., &amp; Zhu, H. (2023). A life cycle and product type based estimator for quantifying the carbon stored in wood products. <em>Carbon Balance and Management</em>, 18, 1.
+              <a href="https://doi.org/10.1186/s13021-022-00220-y" target="_blank" class="text-teal-700 underline not-italic ml-1">https://doi.org/10.1186/s13021-022-00220-y</a>
+            </div>
+            <p class="text-xs text-gray-400">Open Access · Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
+          </div>
+
+        </div>
+      </div><!-- /tab-guide -->
+
     </main>
 
     <footer class="mt-8 border-t border-gray-200 text-xs text-gray-500">
       <div class="mx-auto px-4 py-4 max-w-[1400px] flex flex-wrap items-center justify-between gap-2">
         <p>© 2025 Wood Products Carbon Tracker &nbsp;·&nbsp; Xinyuan Wei &nbsp;·&nbsp;
-           <a class="underline text-indigo-600 hover:text-indigo-800" href="mailto:xinyuan.wei@maine.edu">xinyuan.wei@maine.edu</a></p>
+           <a class="underline text-indigo-600 hover:text-indigo-800" href="/cdn-cgi/l/email-protection#5e263730272b3f3070293b371e333f37303b703b3a2b"><span class="__cf_email__" data-cfemail="c0b8a9aeb9b5a1aeeeb7a5a980ada1a9aea5eea5a4b5">[email&#160;protected]</span></a></p>
         <p class="text-gray-400">Supported by USDA · NSRC &nbsp;·&nbsp; University of Maine</p>
       </div>
     </footer>
 
     <!-- ========== EMBEDDED PYTHON + DATA (unchanged from original) ========== -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="emb-main" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIG1haW5lCiMgQ3JlYXRlZCBvbiBGcmkgU2VwIDEyIDA5OjQzOjEyIDIwMjUgICAgICAgICAgICAgICAgCiMgYXV0aG9yOiB4aW55dWFuLndlaQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IFdQc0NUX0Z1bmN0aW9ucyBhcyB3ZgoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIEZ1bmN0aW9uIHRvIHRyYWNrIHdvb2QgcHJvZHVjdHMgY2FyYm9uIGZsdXgKZGVmIHRyYWNrZXIgKHdwX2RhdGEsIHdwX3BhcmEsIHNhdmVmaWxlKToKICAgICMgUmVhZCBkYXRhIGFuZCBwYXJhbWV0ZXJzCiAgICBkYXRhID0gcGQucmVhZF9jc3Yod3BfZGF0YSkKICAgIHBhcmEgPSBwZC5yZWFkX2Nzdih3cF9wYXJhKQogICAgdHlyICA9IGxlbihkYXRhWydZZWFyJ10pCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIEJpb2Z1ZWwgLyBCaW9jaGFyIC8gQ2hhcmNvYWwgIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tCiAgICAjIEJpb2Z1ZWwgYnVybmluZyBlZmZpY2llbmN5CiAgICBiZl9lZmYgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQmlvZnVlbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdlZmZpY2llbmN5JyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaWYgYmZfZWZmID4gMTogICMgYWNjZXB0IDAuLjEwMCBvciAwLi4xCiAgICAgICAgYmZfZWZmID0gYmZfZWZmIC8gMTAwLjAKCiAgICAjIEJpb2NoYXIgZGVjYXkgcGFyYW1ldGVycwogICAgYmNfZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0Jpb2NoYXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGVjYXlfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGJjX2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdCaW9jaGFyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2RlY2F5XzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCgogICAgIyBCaW9mdWVsIC0+IChjaGFyY29hbCBpbmZsb3csIGVtaXNzaW9ucykKICAgIGNoX2luZmxvdywgZnVlbF9lbWlzID0gd2YuYmlvZnVlbF9DRih0eXIsIGRhdGFbJ0Jpb2Z1ZWwnXSwgYmZfZWZmKQoKICAgICMgQmlvY2hhciBzdG9jayBhbmQgZGVjYXkgKGV4cGxpY2l0IHByb2R1Y3Rpb24gKyBjaGFyY29hbCBmcm9tIGJpb2Z1ZWwpCiAgICBiaW9jaGFyX3Byb2QgPSBwZC5TZXJpZXMoZGF0YVsnQmlvY2hhciddLCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKSArIHBkLlNlcmllcyhjaF9pbmZsb3csIGR0eXBlPWZsb2F0KQogICAgYmNfc3RvY2ssIGJjX2RlY2F5ID0gd2YuYmlvY2hhcl9DRih0eXIsIGJpb2NoYXJfcHJvZCwgYmNfZGMxLCBiY19kYzIpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFdvb2QgcHJvZHVjdHMgZGlzcG9zYWwgYW5kIHJlY3ljbGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIENvbnN0cnVjdGlvbiB3b29kIHByb2R1Y3RzCiAgICBjb2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0NvbnN0cnVjdGlvbicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvX2ludXNlLCBjb19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0NvbnN0cnVjdGlvbiddLCBjb2RwMSwgY29kcDIsIGNvZHAzKQogICAgY29fcmVjeWMsIGNvX2xmaW4gID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhjb19kaXNwb3MsIGR0eXBlPWZsb2F0KSwgY29ycDEsIGNvcnAyKQoKICAgICMgRXh0ZXJpb3IgKG5vIHJlY3ljbGluZykKICAgIGV4ZHAxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0V4dGVyaW9yJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBleGRwMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdFeHRlcmlvcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nRXh0ZXJpb3InKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4X2ludXNlLCBleF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0V4dGVyaW9yJ10sIGV4ZHAxLCBleGRwMiwgZXhkcDMpCiAgICBleF9sZmluID0gcGQuU2VyaWVzKGV4X2Rpc3BvcywgZHR5cGU9ZmxvYXQpICAjIG5vIHJlY3ljbGluZwoKICAgICMgSG91c2Vob2xkCiAgICBob2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvX2ludXNlLCBob19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0hvdXNlaG9sZCddLCBob2RwMSwgaG9kcDIsIGhvZHAzKQogICAgaG9fcmVjeWMsIGhvX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoaG9fZGlzcG9zLCBkdHlwZT1mbG9hdCksIGhvcnAxLCBob3JwMikKCiAgICAjIEdyYXBoaWMgUGFwZXIKICAgIGdwZDEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdHcmFwaGljIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGdwcjEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BfaW51c2UsIGdwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnR3JhcGhpYyBQYXBlciddLCBncGQxLCBncGQyLCBncGQzKQogICAgZ3BfcmVjeWMsIGdwX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksIGdwcjEsIGdwcjIpCgogICAgIyBPdGhlciBQYXBlcgogICAgb3BkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMyA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3ByMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBvcHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J090aGVyIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIG9wX2ludXNlLCBvcF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ090aGVyIFBhcGVyJ10sIG9wZDEsIG9wZDIsIG9wZDMpCiAgICBvcF9yZWN5Yywgb3BfbGZpbiAgID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhvcF9kaXNwb3MsIGR0eXBlPWZsb2F0KSwgb3ByMSwgb3ByMikKCiAgICAjIEhvdXNlaG9sZCBQYXBlciAobm8gcmVjeWNsaW5nKQogICAgaHBkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhwZDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBocGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaHBfaW51c2UsIGhwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnSG91c2Vob2xkIFBhcGVyJ10sIGhwZDEsIGhwZDIsIGhwZDMpCiAgICBocF9sZmluID0gcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIExhbmRmaWxsIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIExhbmRmaWxsIGRlY2F5IHBhcmFtZXRlcnMKICAgIGNvZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Nvbl9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdjb25fZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkYzEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZXh0X2RlY2F5MScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4ZGMyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2V4dF9kZWNheTInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob2RjMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdob3VfZGVjYXkxJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kYzIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0naG91X2RlY2F5MicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIHBhZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3BhcF9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBwYWRjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdwYXBfZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQoKICAgICMgUGFwZXItbGFuZGZpbGwgaW5wdXQgPSBHcmFwaGljICsgT3RoZXIKICAgIGxmX3BhcCA9IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMob3BfbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KQoKICAgICMgTGFuZGZpbGwgcGVyIHN0cmVhbQogICAgY29uX3Bvb2wsIGNvbl9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIHBkLlNlcmllcyhjb19sZmluLCBkdHlwZT1mbG9hdCksIGNvZGMxLCBjb2RjMikKICAgIGV4dF9wb29sLCBleHRfZGVjID0gd2YubGFuZGZpbGxfQ0YodHlyLCBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLCBleGRjMSwgZXhkYzIpCiAgICBob3VfcG9vbCwgaG91X2RlYyA9IHdmLmxhbmRmaWxsX0NGKHR5ciwgcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwgaG9kYzEsIGhvZGMyKQogICAgcGFwX3Bvb2wsIHBhcF9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIGxmX3BhcCwgcGFkYzEsIHBhZGMyKQoKICAgICMgVG90YWxzIGZvciBzYXZpbmcKICAgIFNfbGYgPSBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGV4X2xmaW4sIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhob19sZmluICsgbGZfcGFwLCBkdHlwZT1mbG9hdCkKICAgIFBfbGYgPSBwZC5TZXJpZXMoY29uX3Bvb2wsIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhleHRfcG9vbCwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9wb29sICsgcGFwX3Bvb2wsIGR0eXBlPWZsb2F0KQogICAgRF9sZiA9IHBkLlNlcmllcyhjb25fZGVjLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMoZXh0X2RlYywgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9kZWMgKyBwYXBfZGVjLCBkdHlwZT1mbG9hdCkKCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFNhdmUgcmVzdWx0cyAtLS0tLS0tLS0tLS0tLS0tCiAgICBvdXQgPSBwZC5EYXRhRnJhbWUoewogICAgICAgICdZZWFyJzogZGF0YVsnWWVhciddLAoKICAgICAgICAnRnVlbF9FbWlzc2lvbnMnOiBwZC5TZXJpZXMoZnVlbF9lbWlzLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfU3RvY2snIDogcGQuU2VyaWVzKGJjX3N0b2NrLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfRGVjYXknIDogcGQuU2VyaWVzKGJjX2RlY2F5LCBkdHlwZT1mbG9hdCksCgogICAgICAgICdDb25zdHJ1Y3Rpb25fSW5Vc2UnICAgOiBwZC5TZXJpZXMoY29faW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGNvX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdDb25zdHJ1Y3Rpb25fUmVjeWNsZWQnOiBwZC5TZXJpZXMoY29fcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnRXh0ZXJpb3JfSW5Vc2UnICAgOiBwZC5TZXJpZXMoZXhfaW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnRXh0ZXJpb3JfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZXhfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0V4dGVyaW9yX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnSG91c2Vob2xkX0luVXNlJyAgIDogcGQuU2VyaWVzKGhvX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9EaXNwb3NlZCc6IHBkLlNlcmllcyhob19kaXNwb3MsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnSG91c2Vob2xkX1JlY3ljbGVkJzogcGQuU2VyaWVzKGhvX3JlY3ljLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9JblVzZScgICA6IHBkLlNlcmllcyhncF9pbnVzZSwgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9SZWN5Y2xlZCc6IHBkLlNlcmllcyhncF9yZWN5YywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfTGFuZGZpbGxJbic6IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCksCgogICAgICAgICdPdGhlclBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKG9wX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMob3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfUmVjeWNsZWQnOiBwZC5TZXJpZXMob3BfcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnT3RoZXJQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKG9wX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKGhwX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdIb3VzZWhvbGRQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0xGX0lucHV0X1RvdGFsJyA6IHBkLlNlcmllcyhTX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX1N0b2NrX1RvdGFsJyA6IHBkLlNlcmllcyhQX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX0RlY2F5X1RvdGFsJyA6IHBkLlNlcmllcyhEX2xmLCBkdHlwZT1mbG9hdCkKICAgIH0pCgogICAgb3V0LnRvX2NzdihmJ3tzYXZlZmlsZX0nLCBpbmRleD1GYWxzZSkKICAgIHByaW50KGYiU2F2ZWQgcmVzdWx0cyAtPiB7c2F2ZWZpbGV9IikK</script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="emb-main" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIG1haW5lCiMgQ3JlYXRlZCBvbiBGcmkgU2VwIDEyIDA5OjQzOjEyIDIwMjUgICAgICAgICAgICAgICAgCiMgYXV0aG9yOiB4aW55dWFuLndlaQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IFdQc0NUX0Z1bmN0aW9ucyBhcyB3ZgoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIEZ1bmN0aW9uIHRvIHRyYWNrIHdvb2QgcHJvZHVjdHMgY2FyYm9uIGZsdXgKZGVmIHRyYWNrZXIgKHdwX2RhdGEsIHdwX3BhcmEsIHNhdmVmaWxlKToKICAgICMgUmVhZCBkYXRhIGFuZCBwYXJhbWV0ZXJzCiAgICBkYXRhID0gcGQucmVhZF9jc3Yod3BfZGF0YSkKICAgIHBhcmEgPSBwZC5yZWFkX2Nzdih3cF9wYXJhKQogICAgdHlyICA9IGxlbihkYXRhWydZZWFyJ10pCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIEJpb2Z1ZWwgLyBCaW9jaGFyIC8gQ2hhcmNvYWwgIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tCiAgICAjIEJpb2Z1ZWwgYnVybmluZyBlZmZpY2llbmN5CiAgICBiZl9lZmYgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQmlvZnVlbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdlZmZpY2llbmN5JyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaWYgYmZfZWZmID4gMTogICMgYWNjZXB0IDAuLjEwMCBvciAwLi4xCiAgICAgICAgYmZfZWZmID0gYmZfZWZmIC8gMTAwLjAKCiAgICAjIEJpb2NoYXIgZGVjYXkgcGFyYW1ldGVycwogICAgYmNfZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0Jpb2NoYXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGVjYXlfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGJjX2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdCaW9jaGFyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2RlY2F5XzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCgogICAgIyBCaW9mdWVsIC0+IChjaGFyY29hbCBpbmZsb3csIGVtaXNzaW9ucykKICAgIGNoX2luZmxvdywgZnVlbF9lbWlzID0gd2YuYmlvZnVlbF9DRih0eXIsIGRhdGFbJ0Jpb2Z1ZWwnXSwgYmZfZWZmKQoKICAgICMgQmlvY2hhciBzdG9jayBhbmQgZGVjYXkgKGV4cGxpY2l0IHByb2R1Y3Rpb24gKyBjaGFyY29hbCBmcm9tIGJpb2Z1ZWwpCiAgICBiaW9jaGFyX3Byb2QgPSBwZC5TZXJpZXMoZGF0YVsnQmlvY2hhciddLCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKSArIHBkLlNlcmllcyhjaF9pbmZsb3csIGR0eXBlPWZsb2F0KQogICAgYmNfc3RvY2ssIGJjX2RlY2F5ID0gd2YuYmlvY2hhcl9DRih0eXIsIGJpb2NoYXJfcHJvZCwgYmNfZGMxLCBiY19kYzIpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFdvb2QgcHJvZHVjdHMgZGlzcG9zYWwgYW5kIHJlY3ljbGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIENvbnN0cnVjdGlvbiB3b29kIHByb2R1Y3RzCiAgICBjb2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0NvbnN0cnVjdGlvbicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvX2ludXNlLCBjb19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0NvbnN0cnVjdGlvbiddLCBjb2RwMSwgY29kcDIsIGNvZHAzKQogICAgY29fcmVjeWMsIGNvX2xmaW4gID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhjb19kaXNwb3MsIGR0eXBlPWZsb2F0KSwgY29ycDEsIGNvcnAyKQoKICAgICMgRXh0ZXJpb3IgKG5vIHJlY3ljbGluZykKICAgIGV4ZHAxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0V4dGVyaW9yJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBleGRwMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdFeHRlcmlvcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nRXh0ZXJpb3InKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4X2ludXNlLCBleF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0V4dGVyaW9yJ10sIGV4ZHAxLCBleGRwMiwgZXhkcDMpCiAgICBleF9sZmluID0gcGQuU2VyaWVzKGV4X2Rpc3BvcywgZHR5cGU9ZmxvYXQpICAjIG5vIHJlY3ljbGluZwoKICAgICMgSG91c2Vob2xkCiAgICBob2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvX2ludXNlLCBob19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0hvdXNlaG9sZCddLCBob2RwMSwgaG9kcDIsIGhvZHAzKQogICAgaG9fcmVjeWMsIGhvX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoaG9fZGlzcG9zLCBkdHlwZT1mbG9hdCksIGhvcnAxLCBob3JwMikKCiAgICAjIEdyYXBoaWMgUGFwZXIKICAgIGdwZDEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdHcmFwaGljIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGdwcjEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BfaW51c2UsIGdwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnR3JhcGhpYyBQYXBlciddLCBncGQxLCBncGQyLCBncGQzKQogICAgZ3BfcmVjeWMsIGdwX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksIGdwcjEsIGdwcjIpCgogICAgIyBPdGhlciBQYXBlcgogICAgb3BkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMyA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3ByMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBvcHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J090aGVyIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIG9wX2ludXNlLCBvcF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ090aGVyIFBhcGVyJ10sIG9wZDEsIG9wZDIsIG9wZDMpCiAgICBvcF9yZWN5Yywgb3BfbGZpbiAgID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhvcF9kaXNwb3MsIGR0eXBlPWZsb2F0KSwgb3ByMSwgb3ByMikKCiAgICAjIEhvdXNlaG9sZCBQYXBlciAobm8gcmVjeWNsaW5nKQogICAgaHBkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhwZDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBocGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaHBfaW51c2UsIGhwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnSG91c2Vob2xkIFBhcGVyJ10sIGhwZDEsIGhwZDIsIGhwZDMpCiAgICBocF9sZmluID0gcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIExhbmRmaWxsIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIExhbmRmaWxsIGRlY2F5IHBhcmFtZXRlcnMKICAgIGNvZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Nvbl9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdjb25fZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkYzEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZXh0X2RlY2F5MScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4ZGMyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2V4dF9kZWNheTInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob2RjMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdob3VfZGVjYXkxJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kYzIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0naG91X2RlY2F5MicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIHBhZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3BhcF9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBwYWRjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdwYXBfZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQoKICAgICMgUGFwZXItbGFuZGZpbGwgaW5wdXQgPSBHcmFwaGljICsgT3RoZXIKICAgIGxmX3BhcCA9IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMob3BfbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KQoKICAgICMgTGFuZGZpbGwgcGVyIHN0cmVhbQogICAgY29uX3Bvb2wsIGNvbl9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIHBkLlNlcmllcyhjb19sZmluLCBkdHlwZT1mbG9hdCksIGNvZGMxLCBjb2RjMikKICAgIGV4dF9wb29sLCBleHRfZGVjID0gd2YubGFuZGZpbGxfQ0YodHlyLCBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLCBleGRjMSwgZXhkYzIpCiAgICBob3VfcG9vbCwgaG91X2RlYyA9IHdmLmxhbmRmaWxsX0NGKHR5ciwgcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwgaG9kYzEsIGhvZGMyKQogICAgcGFwX3Bvb2wsIHBhcF9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIGxmX3BhcCwgcGFkYzEsIHBhZGMyKQoKICAgICMgVG90YWxzIGZvciBzYXZpbmcKICAgIFNfbGYgPSBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGV4X2xmaW4sIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhob19sZmluICsgbGZfcGFwLCBkdHlwZT1mbG9hdCkKICAgIFBfbGYgPSBwZC5TZXJpZXMoY29uX3Bvb2wsIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhleHRfcG9vbCwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9wb29sICsgcGFwX3Bvb2wsIGR0eXBlPWZsb2F0KQogICAgRF9sZiA9IHBkLlNlcmllcyhjb25fZGVjLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMoZXh0X2RlYywgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9kZWMgKyBwYXBfZGVjLCBkdHlwZT1mbG9hdCkKCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFNhdmUgcmVzdWx0cyAtLS0tLS0tLS0tLS0tLS0tCiAgICBvdXQgPSBwZC5EYXRhRnJhbWUoewogICAgICAgICdZZWFyJzogZGF0YVsnWWVhciddLAoKICAgICAgICAnRnVlbF9FbWlzc2lvbnMnOiBwZC5TZXJpZXMoZnVlbF9lbWlzLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfU3RvY2snIDogcGQuU2VyaWVzKGJjX3N0b2NrLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfRGVjYXknIDogcGQuU2VyaWVzKGJjX2RlY2F5LCBkdHlwZT1mbG9hdCksCgogICAgICAgICdDb25zdHJ1Y3Rpb25fSW5Vc2UnICAgOiBwZC5TZXJpZXMoY29faW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGNvX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdDb25zdHJ1Y3Rpb25fUmVjeWNsZWQnOiBwZC5TZXJpZXMoY29fcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnRXh0ZXJpb3JfSW5Vc2UnICAgOiBwZC5TZXJpZXMoZXhfaW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnRXh0ZXJpb3JfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZXhfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0V4dGVyaW9yX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnSG91c2Vob2xkX0luVXNlJyAgIDogcGQuU2VyaWVzKGhvX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9EaXNwb3NlZCc6IHBkLlNlcmllcyhob19kaXNwb3MsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnSG91c2Vob2xkX1JlY3ljbGVkJzogcGQuU2VyaWVzKGhvX3JlY3ljLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9JblVzZScgICA6IHBkLlNlcmllcyhncF9pbnVzZSwgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9SZWN5Y2xlZCc6IHBkLlNlcmllcyhncF9yZWN5YywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfTGFuZGZpbGxJbic6IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCksCgogICAgICAgICdPdGhlclBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKG9wX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMob3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfUmVjeWNsZWQnOiBwZC5TZXJpZXMob3BfcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnT3RoZXJQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKG9wX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKGhwX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdIb3VzZWhvbGRQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0xGX0lucHV0X1RvdGFsJyA6IHBkLlNlcmllcyhTX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX1N0b2NrX1RvdGFsJyA6IHBkLlNlcmllcyhQX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX0RlY2F5X1RvdGFsJyA6IHBkLlNlcmllcyhEX2xmLCBkdHlwZT1mbG9hdCkKICAgIH0pCgogICAgb3V0LnRvX2NzdihmJ3tzYXZlZmlsZX0nLCBpbmRleD1GYWxzZSkKICAgIHByaW50KGYiU2F2ZWQgcmVzdWx0cyAtPiB7c2F2ZWZpbGV9IikK</script>
     <script id="emb-funcs" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIEZ1bmN0aW9ucwojIENyZWF0ZWQgb24gRnJpIFNlcCAxMiAwOTo0MzoxMiAyMDI1ICAgICAgICAgICAgICAgIAojIGF1dGhvcjogeGlueXVhbi53ZWkKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQppbXBvcnQgbWF0aAppbXBvcnQgcGFuZGFzIGFzIHBkCnRyeToKICAgIGltcG9ydCBzY2lweS5pbnRlZ3JhdGUgYXMgaW50ZWdyYXRlCmV4Y2VwdCBFeGNlcHRpb246CiAgICBjbGFzcyBfSW50ZWdyYXRlRmFsbGJhY2s6CiAgICAgICAgQHN0YXRpY21ldGhvZAogICAgICAgIGRlZiBxdWFkKGZ1bmMsIGEsIGIsICoqa3dhcmdzKToKICAgICAgICAgICAgaWYgYiA8PSBhOgogICAgICAgICAgICAgICAgcmV0dXJuICgwLjAsIDAuMCkKICAgICAgICAgICAgbiA9IG1heCgyMDAsIGludCgoYiAtIGEpICogNTApKQogICAgICAgICAgICBoID0gKGIgLSBhKSAvIG4KICAgICAgICAgICAgcyA9IDAuNSAqIChmdW5jKGEpICsgZnVuYyhiKSkKICAgICAgICAgICAgeCA9IGEgKyBoCiAgICAgICAgICAgIGZvciBfIGluIHJhbmdlKDEsIG4pOgogICAgICAgICAgICAgICAgcyArPSBmdW5jKHgpCiAgICAgICAgICAgICAgICB4ICs9IGgKICAgICAgICAgICAgcmV0dXJuIChzICogaCwgMC4wKQogICAgaW50ZWdyYXRlID0gX0ludGVncmF0ZUZhbGxiYWNrKCkKCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBCaW9mdWVsIGNhcmJvbiBmbHV4IChjaGFyY29hbCArIGVtaXNzaW9ucykKZGVmIGJpb2Z1ZWxfQ0YoeWVhcnMsIGZ1ZWwsIGVmZmljaWVuY3kpOgoKICAgIGZ1ZWwgPSBwZC5TZXJpZXMoZnVlbCwgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIGNoYXJjb2FsX2luZmxvdyA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KSAKICAgIGVtaXNzaW9ucyA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgCiAgICBmb3IgaSBpbiByYW5nZSh5ZWFycyk6CiAgICAgICAgZiA9IGZsb2F0KGZ1ZWwuaWF0W2ldIGlmIGkgPCBsZW4oZnVlbCkgZWxzZSAwLjApCiAgICAgICAgY2ggPSAoMS4wIC0gZWZmaWNpZW5jeSkgKiBmCiAgICAgICAgZW0gPSBlZmZpY2llbmN5ICogZgogICAgICAgIGNoYXJjb2FsX2luZmxvdy5pYXRbaV0gPSBjaAogICAgICAgIGVtaXNzaW9ucy5pYXRbaV0gPSBlbQogICAgICAgIAogICAgcmV0dXJuIGNoYXJjb2FsX2luZmxvdywgZW1pc3Npb25zCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBDaGFyY29hbCBjYXJib24gZmx1eCAocG9vbC1zaXplIGJhc2VkIGRlY2F5OiBkciA9IGRjMSArIGRjMiAqIGxuKHN0b2NrKSkKZGVmIGJpb2NoYXJfQ0YoeWVhcnMsIGluZmxvdywgZGMxLCBkYzIpOgoKICAgIGluZmxvdyA9IHBkLlNlcmllcyhpbmZsb3csIGR0eXBlPWZsb2F0KS5yZXNldF9pbmRleChkcm9wPVRydWUpCiAgICBzdG9jayA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgZGVjYXkgPSBwZC5TZXJpZXMoaW5kZXg9cmFuZ2UoeWVhcnMpLCBkdHlwZT1mbG9hdCkKICAgIGN1cl9wb29sID0gMC4wCiAgICAKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBjdXJfcG9vbCA9IGN1cl9wb29sICsgZmxvYXQoaW5mbG93LmlhdFtpXSBpZiBpIDwgbGVuKGluZmxvdykgZWxzZSAwLjApCiAgICAgICAgZHIgPSBkYzEgKyBkYzIgKiBtYXRoLmxvZyhtYXgoY3VyX3Bvb2wsIDFlLTEyKSkKICAgICAgICBkciA9IG1pbigxLjAsIG1heCgwLjAsIGZsb2F0KGRyKSkpCiAgICAgICAgZCA9IGN1cl9wb29sICogZHIKICAgICAgICBjdXJfcG9vbCA9IGN1cl9wb29sIC0gZAogICAgICAgIHN0b2NrLmlhdFtpXSA9IGN1cl9wb29sCiAgICAgICAgZGVjYXkuaWF0W2ldID0gZAogICAgICAgIAogICAgcmV0dXJuIHN0b2NrLCBkZWNheQoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIERpc3Bvc2FsIG1vZGVsIGZvciBpbi11c2Ugd29vZCBwcm9kdWN0cyAoR2F1c3NpYW4tbGlrZSBiZWxsIGN1cnZlKQpkZWYgZGlzcG9zYWxfcmF0ZSh0LCBkcDEsIGRwMiwgZHAzKToKICAgIGEgPSBkcDEgLyBtYXRoLmV4cChtYXRoLnNxcnQoMiAqIG1hdGgucGkpKQogICAgYiA9IG1hdGguZXhwKCgtZHAyICogKCh0IC0gZHAzKSAqKiAyKSkgLyBtYXgoZHAzLCAxZS0xMikpCiAgICBkciA9IGEgKiBiCiAgICByZXR1cm4gbWF4KDAuMCwgZmxvYXQoZHIpKQoKZGVmIGRpc3Bvc2FsX0NGKHllYXJzLCBwcm9kdWN0aW9uLCBkcDEsIGRwMiwgZHAzKToKCiAgICBwcm9kdWN0aW9uID0gcGQuU2VyaWVzKHByb2R1Y3Rpb24sIGR0eXBlPWZsb2F0KS5yZXNldF9pbmRleChkcm9wPVRydWUpCiAgICBpbnVzZSA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgZGlzcG9zID0gcGQuU2VyaWVzKGluZGV4PXJhbmdlKHllYXJzKSwgZHR5cGU9ZmxvYXQpCgogICAgZGVmIGluX3VzZShhZ2UpOgogICAgICAgIHZhbCA9IDEuMCAtIGludGVncmF0ZS5xdWFkKAogICAgICAgICAgICBsYW1iZGEgdHQ6IGRpc3Bvc2FsX3JhdGUodHQsIGRwMSwgZHAyLCBkcDMpLAogICAgICAgICAgICAwLjAsIGZsb2F0KGFnZSkKICAgICAgICApWzBdCiAgICAgICAgcmV0dXJuIG1pbigxLjAsIG1heCgwLjAsIGZsb2F0KHZhbCkpKQoKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBzID0gMC4wCiAgICAgICAgZCA9IDAuMAogICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgYyA9IGZsb2F0KHByb2R1Y3Rpb24uaWF0W2pdIGlmIGogPCBsZW4ocHJvZHVjdGlvbikgZWxzZSAwLjApCiAgICAgICAgICAgIGFnZSA9IGZsb2F0KGkgLSBqICsgMSkKICAgICAgICAgICAgcyArPSBjICogaW5fdXNlKGFnZSkKICAgICAgICAgICAgZCArPSBjICogZGlzcG9zYWxfcmF0ZShhZ2UsIGRwMSwgZHAyLCBkcDMpCiAgICAgICAgaW51c2UuaWF0W2ldID0gcwogICAgICAgIGRpc3Bvcy5pYXRbaV0gPSBkCgogICAgcmV0dXJuIGludXNlLCBkaXNwb3MKCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBSZWN5Y2xlZCBwcm9kdWN0cyBjYXJib24gZmx1eCAoZWVjeWNsaW5nIHJhdGU6IHJyID0gcnAxICsgcnAyICogbG4odCkpCmRlZiByZWN5Y2xlX0NGKHllYXJzLCBkaXNwb3NhbHMsIHJwMSwgcnAyKToKICAgIAogICAgZGlzcG9zYWxzID0gcGQuU2VyaWVzKGRpc3Bvc2FscywgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIHJlY3ljbGVkID0gcGQuU2VyaWVzKGluZGV4PXJhbmdlKHllYXJzKSwgZHR5cGU9ZmxvYXQpCiAgICBsYW5kZmlsbCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQoKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBkID0gZmxvYXQoZGlzcG9zYWxzLmlhdFtpXSBpZiBpIDwgbGVuKGRpc3Bvc2FscykgZWxzZSAwLjApCiAgICAgICAgcnIgPSBmbG9hdChycDEpICsgZmxvYXQocnAyKSAqIG1hdGgubG9nKG1heChpICsgMS4wLCAxZS0xMikpCiAgICAgICAgcnIgPSBtaW4oMS4wLCBtYXgoMC4wLCBycikpCiAgICAgICAgciA9IHJyICogZAogICAgICAgIHJlY3ljbGVkLmlhdFtpXSA9IHIKICAgICAgICBsYW5kZmlsbC5pYXRbaV0gPSBkIC0gcgogICAgICAgIAogICAgcmV0dXJuIHJlY3ljbGVkLCBsYW5kZmlsbAoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIExhbmRmaWxsIGNhcmJvbiBmbHV4IChEZWNheSByYXRlOiBsKHQpID0gbG9nKHQpICogazEgLyAoazIgKiBzcXJ0KDIqcGkpKSkKJycnCmRlZiBsYW5kZmlsbF9DRih5ZWFycywgbGFuZGZpbGxfaW5wdXQsIGsxLCBrMik6CiAgICAKICAgIGxhbmRmaWxsX2lucHV0ID0gcGQuU2VyaWVzKGxhbmRmaWxsX2lucHV0LCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKQogICAgbGFuZGZpbGxfcG9vbCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgbGFuZGZpbGxfZGVjYXllZCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQoKICAgIGRlZiByYXRlKHRzZCk6CiAgICAgICAgcmV0dXJuIChtYXRoLmxvZyh0c2QpICogazEpIC8gKGsyICogbWF0aC5zcXJ0KDIgKiBtYXRoLnBpKSkKCiAgICBkZWYgc3Vydml2ZSh0c2QpOgogICAgICAgIGlmIHRzZCA+PSBrMjoKICAgICAgICAgICAgcmV0dXJuIDAuMAogICAgICAgIHVwcGVyID0gZmxvYXQobWluKHRzZCwgazIpKQogICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgIHZhbCA9IDEuMCAtIGZyCiAgICAgICAgcmV0dXJuIG1pbigxLjAsIG1heCgwLjAsIHZhbCkpCgogICAgIyBQb29sCiAgICBmb3IgaSBpbiByYW5nZSh5ZWFycyk6CiAgICAgICAgcyA9IDAuMAoKICAgICAgICBpZiBpIDw9IGludChrMik6CiAgICAgICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgICAgIGMgPSBmbG9hdChsYW5kZmlsbF9pbnB1dC5pYXRbal0gaWYgaiA8IGxlbihsYW5kZmlsbF9pbnB1dCkgZWxzZSAwLjApCiAgICAgICAgICAgICAgICB1cHBlciA9IGZsb2F0KGkgKyAxIC0gaikKICAgICAgICAgICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgICAgICAgICAgcyArPSBjICogKDEuMCAtIGZyKQogICAgICAgIGVsc2U6CiAgICAgICAgICAgIGZvciBqIGluIHJhbmdlKGludChrMikpOgogICAgICAgICAgICAgICAgaWR4ID0gaW50KGkgLSBrMiArIGopCiAgICAgICAgICAgICAgICBpZiAwIDw9IGlkeCA8IGxlbihsYW5kZmlsbF9pbnB1dCk6CiAgICAgICAgICAgICAgICAgICAgYyA9IGZsb2F0KGxhbmRmaWxsX2lucHV0LmlhdFtpZHhdKQogICAgICAgICAgICAgICAgICAgIHVwcGVyID0gZmxvYXQoazIgLSBqKQogICAgICAgICAgICAgICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgICAgICAgICAgICAgIHMgKz0gYyAqICgxLjAgLSBmcikKCiAgICAgICAgbGFuZGZpbGxfcG9vbC5pYXRbaV0gPSBzCgogICAgZm9yIGkgaW4gcmFuZ2UoeWVhcnMpOgogICAgICAgIHByZXYgPSAwLjAgaWYgaSA9PSAwIGVsc2UgZmxvYXQobGFuZGZpbGxfcG9vbC5pYXRbaSAtIDFdKQogICAgICAgIGluYyAgPSBmbG9hdChsYW5kZmlsbF9pbnB1dC5pYXRbaV0gaWYgaSA8IGxlbihsYW5kZmlsbF9pbnB1dCkgZWxzZSAwLjApCiAgICAgICAgbGFuZGZpbGxfZGVjYXllZC5pYXRbaV0gPSBwcmV2ICsgaW5jIC0gZmxvYXQobGFuZGZpbGxfcG9vbC5pYXRbaV0pCgogICAgcmV0dXJuIGxhbmRmaWxsX3Bvb2wsIGxhbmRmaWxsX2RlY2F5ZWQKJycnCgpkZWYgc3Vydml2ZSh0LCBrMSwgazIpOgogICAgaWYgazIgPD0gMDoKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJrMiBtdXN0IGJlID4gMCIpCiAgICBpZiB0IDw9IDA6CiAgICAgICAgcmV0dXJuIDEuMAogICAgeiA9IChtYXRoLmxvZyh0KSAtIGsxKSAvIGsyCiAgICBQaGkgPSAwLjUgKiAoMS4wICsgbWF0aC5lcmYoeiAvIG1hdGguc3FydCgyLjApKSkKICAgIFMgPSAxLjAgLSBQaGkKICAgIGlmIFMgPCAwLjA6IAogICAgICAgIHJldHVybiAwLjAKICAgIGlmIFMgPiAxLjA6IAogICAgICAgIHJldHVybiAxLjAKICAgIHJldHVybiBTCgpkZWYgbGFuZGZpbGxfQ0YoeWVhcnMsIGxhbmRmaWxsX2lucHV0LCBrMSwgazIpOgogICAgCiAgICBsYW5kZmlsbF9pbnB1dCA9IHBkLlNlcmllcyhsYW5kZmlsbF9pbnB1dCwgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIG5faW4gPSBsZW4obGFuZGZpbGxfaW5wdXQpCiAgICBwcmludChuX2luKQogICAgYXJyID0gW2Zsb2F0KGxhbmRmaWxsX2lucHV0LmlhdFtpXSkgaWYgaSA8IG5faW4gZWxzZSAwLjAgZm9yIGkgaW4gcmFuZ2Uobl9pbildCgogICAgIyBQcmVjb21wdXRlIHN1cnZpdmFsIGZvciBhZ2VzIDAuLnllYXJzCiAgICBTID0gW3N1cnZpdmUoYSwgazEsIGsyKSBmb3IgYSBpbiByYW5nZShuX2luICsgMSldCgogICAgbGFuZGZpbGxfcG9vbCA9IFswLjBdICogbl9pbgogICAgbGFuZGZpbGxfZGVjYXllZCA9IFswLjBdICogbl9pbgoKICAgIGZvciBpIGluIHJhbmdlKG5faW4pOgogICAgICAgIHMgPSAwLjAKICAgICAgICAjIENvaG9ydHMgMC4uaSwgYWdlIGF0IGVuZCBvZiB5ZWFyIGkgaXMgKGkrMS1qKQogICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgYWdlID0gaSArIDEgLSBqCiAgICAgICAgICAgIHMgKz0gYXJyW2pdICogU1thZ2VdCiAgICAgICAgbGFuZGZpbGxfcG9vbFtpXSA9IHMKCiAgICBwcmV2ID0gMC4wCiAgICBmb3IgaSBpbiByYW5nZShuX2luKToKICAgICAgICBpbmMgPSBhcnJbaV0KICAgICAgICBkZWMgPSAocHJldiArIGluYykgLSBsYW5kZmlsbF9wb29sW2ldCiAgICAgICAgbGFuZGZpbGxfZGVjYXllZFtpXSA9IDAuMCBpZiBkZWMgPCAwLjAgYW5kIGRlYyA+IC0xZS0xMiBlbHNlIG1heCgwLjAsIGRlYykKICAgICAgICBwcmV2ID0gbGFuZGZpbGxfcG9vbFtpXQoKICAgIHJldHVybiBsYW5kZmlsbF9wb29sLCBsYW5kZmlsbF9kZWNheWVkCgojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgUGxvdCBhbm51YWwgcHJvZHVjdGlvbiBsaW5lcyBmb3Igd29vZCBwcm9kdWN0cwo=</script>
     <script id="emb-me" type="application/json">WWVhcixCaW9mdWVsLEJpb2NoYXIsQ29uc3RydWN0aW9uLEV4dGVyaW9yLEhvdXNlaG9sZCxHcmFwaGljIFBhcGVyLE90aGVyIFBhcGVyLEhvdXNlaG9sZCBQYXBlcg0KMTk2MSwyODU3NjMyNzUsMTI0NDc4NDgsMTc5ODE3MDk1LDc0MzAwNjIwLDE5NDA5OTQ3MywxNzM2MzUyNTYuMSwyNjQxOTYwMTIuMSw1OTc1NDI3My4xNQ0KMTk2MiwyODI1ODgxMjcsMTIwMDQzNDQsMTg4Nzc2MjUyLDk5NDkyMjA4LDE3MDI5MzY4MiwxNjk4ODQ3NzcuOSwyNzA1NjQwODguMSw1NjQ1ODI4Ny42DQoxOTYzLDI5MzcwMTE0MywxNzc2MzA0NSwxODk2MDIzNTMsNzEzODM0NjcsMTYzMDAzMzMxLDE3OTQ4NzcxNywyOTc3MTIwMDEuOCw1NTc3MTM1MS4zNQ0KMTk2NCwzMTc1MTQ3NTAsMTM0ODgwMjcsMjAxNjA2MjA4LDg5OTI2MzY4LDIwMTI4OTQ2NSwxNjIzNDc0MjIuNCwyNjg1OTUzNzUuNiw4NDk5ODM2Mi4wMg0KMTk2NSwzMjY1ODY2MDAsMTI0NjI1NDUsMTkwMjcwMTIwLDkzMzE5MDI2LDE4OTk4OTgzOCwxNzU3MDAzMTAuNSwyNzM5NTkwMzEuMSw1MTQ5ODY5Mi45Ng0KMTk2NiwyNTU5NjA0MzQsMTMwODQ2OTcsMjAxOTMwNzI5LDkxNjIzMTIyLDE3MDU4OTk5MiwxNzE5MzUzODMuNiwyNzgwMTQ5NDIuOSw0NTc4NzY5MS45NQ0KMTk2NywzNjUxNDE5NjIsMTg2NjYwNTcsMjYzOTc5NDQ2LDEwMzEwNjgyMSwyMTQzNjgwMDMsMTg3NTkwMTM3LDMyMTYzNDQzMC4yLDU1MTMyNzYxLjk3DQoxOTY4LDM4MTAxNzcwMCwyMDU3NDk1NiwyMzMzMDcwMTcsMTIyMTc1MzI5LDI1NTc3ODE3MCwxODM3NDY0NjAsMzMyMjQzNjAwLjIsNDc1MjM1MzMuMg0KMTk2OSwzODg5NTU1NjgsMTk4ODM0MDksMjU3MDc0MTgyLDExNjYyNDU3OCwyMjkyNDk0MTMsMTk0MjcwMTE4LjksMzQ5MDUwMzYwLjIsNTMxMjIxMDcuNjENCjE5NzAsMzU4NzcxMjU2LDI0NjY5MTEyLDI0NjU2NTM5Myw4MTEyNzY5MywyMjc3MTc2MjEsMTk1NjcxMTcwLDM2MjQ0OTA5NS42LDY1Mzg4OTAyLjE1DQoxOTcxLDQwNDgzMTMwNiwyMTI3NzkzMywyODk1MTAwNDgsMTMzODkyODk2LDIxODYyMDQ3MywyMDMyODYxNTcuNCwzNTkwMjg3NDUuOCw1Njk3NTQ2NC4yNg0KMTk3Miw0MTY3MzgxMTAsMTc3MDMwMzUsMzAyMDU5NjEyLDExMjY4ODk3OSwyMjM2MjU4MTUsMjExMDM3MDIwLjUsMzU0MTc4Nzk1LDYzNDYyNjA5LjIxDQoxOTczLDQxMjc2OTE3NSwxNzIzNzI0MSwyODc0NTY3ODQsOTYyMjEwMjQsMjc1OTI0NjkwLDIyMjk0NjgwNi45LDM3NjU4Nzg3My4xLDUwODYwNDE4LjE4DQoxOTc0LDQyMDcwNzA0NCwyMjcxODE4MCwyODIwMDMzNDUsMTMzNzMxNDYzLDI3NDQwMjM1MiwyMzM1MjY3NTAuNiwzNzg0NDU4MzMuNSw2NTk5NjM0MC40MQ0KMTk3NSw0MzM2MTYwNTksMTY3MDI4OTEsMjgxNzk5ODIwLDExMjgzNTY2MCwyNTUwNDA0MTksMjE3NzkwNjE1LjksMzYxNTQ5NjM4LjUsNTU1NjkwNTMuNTQNCjE5NzYsNDM2NTgyNzgyLDE4NTQ2MDM3LDI5MzIwMjQzOCwxMzQyMTMzMTcsMjY3MzA1NjYxLDI0MDYyMDM2NS43LDM5NjE2NDI0NC4yLDU4NDM2MzczLjcxDQoxOTc3LDQ0NDUyMDY1MCwxOTM2MzMyMCwzMDc3MzE3MzAsMTE0MzIxMDM4LDI3MjgxMTI2NSwyNDYxOTYzNTksMzkwNTY4NTc4LjQsODQ0MTAwNDcuMTUNCjE5NzgsNDUyNDU4NTE5LDE2NDUxMzkyLDMwMDUwMzAwNSwxNTc0MTY3ODIsMzE1NTY3NTk2LDI1MTI1MTk2MSw0MTMzNDI1ODguMyw2NTcwMzg4Mi41Mw0KMTk3OSw0Njc1NDA0NjksMjU3NTIxMjksMzIyMjI0MzA3LDEyNDQ5NDUzOCwyNjU1ODg1MTUsMjMwOTkzOTg2LjEsMzg0MjIzMDY1LDg0MDY1MjQ2Ljk4DQoxOTgwLDQxMzkwMzE1NiwzNjY1NTI2NCwzMDAzNjYwNTgsMTI3NDE4MjQ0LDMyNzIzNjYxNSwyNjQ4MTYyMDMuMSw0MjkxMzUwODkuMyw4MTcxNTAxNC44MQ0KMTk4MSw0ODQyMDk5OTQsMjUyNzU3NjIsMzUwNTk2Mzk3LDEyOTMwMzQ4NiwzMTg0MDQyODgsMjc3NDM4OTYxLjgsNDM0NDg5MjMwLjksOTYxMTI3ODMuOTENCjE5ODIsNDc2MjcyMTI1LDMwNTE5NTE4LDM0NTgyMzczMiwxMjcxMzk1NTYsMzEzNDg4OTYwLDI1MDQ3NDc1My4xLDQyMTk4ODkzOC44LDc4OTQzNDA0LjU0DQoxOTgzLDQ0NDUyMDY1MCwzNDQwNTg5OCwzMzE3NDcyOTEsMTEzNzg0Mjk3LDMxMDYwNDIyMSwyNDk5OTIzOTQuMSw0MzAzODYxOTYuMyw4OTc0MTM2MS43MQ0KMTk4NCw0MzY1ODI3ODIsMjc1MDQ3MTUsMjc4MDU0MTQ0LDExOTEwMzMxMywyNjAxNzQ1NjgsMjUyODUyOTQ2LjEsNDIzNDc5NDYwLjcsNzY4NDg5MTIuMTQNCjE5ODUsNDA4MjMzMjUwLDE3OTI5NjA0LDI4OTMyMDY1MiwxMTc1MjQyODUsMjMxMzUwNTU1LDIzODQyNzg2Ni44LDQwOTYyOTgzMiw3MzA1MjE0Ny43NA0KMTk4Niw1MzAxMzYyMzQsMzMyMDc3MzQsMjc5Njk3MzQzLDEzOTUyNzQxMSwyOTg0NjM3NDIsMjU2MDUwMjU3LjMsNDEwMjg2ODc3LDc3NjUxNjg5LjgzDQoxOTg3LDUzOTc3NTA3NCwzMjA2MjYzOSwyODk2OTg1MzIsMTA5Nzc1NjEyLDI5NjY4NTM0MCwyNTE0NDkwOTIuMiwzODQ2NzMwMjUuOSw3Mjc4OTIyOS4zNw0KMTk4OCw1NDk0MTM5MTUsNTc5NTIxODAsMzAwOTY4MjgzLDEyOTY3MzIwMSwzMjU5NDIzNDIsMjc1NDU2NzAxLjUsNDM2MjQ3NDkzLjEsODA1Nzg0OTYuNTcNCjE5ODksNTU5MDUyNzU3LDU2NzU1MDM2LDI5NTIzNzQ5MSw5NTY0Njc5MiwyOTg2NzEwOTYsMjU4MjczMTUyLjMsNDA0MjY2OTM4LjgsNzY1NTc3MTYuOTUNCjE5OTAsNTcyMTkxMTkwLDYwNTYwNzE2LDI5NzY0NDE3NywxMjAzNzE2ODksMzExMDc5Nzk1LDMwNTcxMTI1MS42LDQ2NDE4ODI4Niw1ODg2MDgyMy40NQ0KMTk5MSw2MTYzOTM0NDgsMjUwNzQ4ODUsMzU3MDMwMjAxLDE0NDYxMjcyNCwzMjIwNjQ5MTIsMjgyMTAyNDU3LjgsNDQwOTAzMjM0LjIsNzU1NzY0NDYuNjYNCjE5OTIsNjE3MDc2ODQyLDMyNjU1NzA2LDQxOTMzMDU2MCwxNDI1MzgwNzEsMzA3MDg5MDYzLDM0MjQ4Njg4MS45LDUwMDM1NTA1My44LDkzNTg0MTIyLjA2DQoxOTkzLDYwMzMxNTk1MSw0Mjc4NzE2NywzMTYzMjY2ODUsMTI2NDIxMDgwLDMxNjY3NTE0NSwyOTgyODUzNjcuNCw0NjgxMTU1ODUuMSwxMDEwMzIxNDEuMg0KMTk5NCw1ODkxMzIyMDQsNTgxMTIwMDEsMzc1MDAzNzE3LDE1MDQzMzgxMSwyOTA0NjYyMzUsMzE4NTIwODgyLjcsNDc0Njk4OTE2LjEsOTM0ODkxNjcuMg0KMTk5NSw2MzAwMjc4NTgsMzI2NjA2NDQsNDE1MjQ4MjQ4LDEzOTYzMzQ3NywzMDc5MDMxODcsMjgwMzQyNzk5LjksNDM1ODkzMzQ3Ljk5MjQwNTYxOS4wMg0KMTk5Niw2NDM3NTE2NTksNTc0NzQxNDgsMzY2MjE1NjQxLDE3MTQwMjY0MywzNDE0NjEyNzAsMjk3NzQzMTcxLjQsNDUzNjU3MzUxLjMsOTU3NzUwODAuODMNCjE5OTcsNjczOTM0MzM4LDI4ODcxMzQ3LDQxNjM4NDg0NiwxOTU1NzE0NzgsMzQzNjk3MjUxLDI3MzY2MzA3NS40LDQyODMyMjk2My42LDk0Njc5MjcwLjQNCjE5OTgsNjY3MDA3NzcyLDYxMjMxMzEzLDM0NzcyNDQ0MiwxNTMwMjMwODMsMzY0ODA3NjgwLDMxNDg4MjE1OSw0NjMzNDIxOTMuNiw5MjY3MjE4Mi40Ng0KMTk5OSw1OTE1MTcyMzksNTgxMzQzMTQsMzM3MjgxMDg2LDEzNzM3NzA0NiwzMzQzMDg3NjMsMjg1MzU1NjE5LjEsNDM4NDI3MTc2LjMsOTA0NTU2NTUuMjkNCjIwMDAsNjAyNDU0MzM1LDQyOTQyOTQ1LDI4NDYyMzA1NSwxMzcyMzE2NzEsMzY4MTk4MjMyLDIzODY2NDUzNy41LDM4NDk0MjgwMy45LDkyNzkyMzM4LjIxDQoyMDAxLDYxMjI2NTk4MSwyMjkyMzIzOCw0MDY2NDI2NTYsMTI5MTcwMTExLDI3MzA0OTY3MiwzMDcxODQ4NzgsNDQyMjgyMDgzLjEsOTQ0Nzk1NTkuNDYNCjIwMDIsNjQ1NjIzMjMyLDQ2NDg0ODczLDQzMzgyOTA5MywxMzg3NDM5ODEsMjg5MTgyMzgzLDI0ODI2ODI1NC41LDM4Mzc1OTcxNy44LDk3ODM0NDY4LjE2DQoyMDAzLDU3ODA0MjUyNSwyNTgwMzgxOCwzMjg3Mzk2MzgsMTE1ODg2ODg2LDMyODA0NjYzNiwzMjE5ODc3NjAuNCw0NTc4MjExMjUuMiwxMDExNTA4NTEuMg0KMjAwNCw2MzAxNDgxNTEsNTA4MTUxNDcsMzQxNzMzNjEzLDExNjM1NzgwMSwzNjM0OTMzMzIsMjc4NzE3Njc2LjQsNDIwNjc1Mjg3LjksMTEzMzU5MTExLjYNCjIwMDUsNTM3NjU5MDY2LDU3ODczNjIyLDM4NTY1NjUyMiwxODYyNDU1MzAsNDE0NjA1MTA5LDIzNTk0NjEwNy41LDM2NTI5NTczNi41LDEwMDI2MjQwOA0KMjAwNiw2NzcwMTkyNDksMzExOTcwNDcsNDgyODIyODUxLDIxMDIyMTMyMSwzOTI4ODQzMzQsMjYxMzY5MDMzLjYsMzkxMTM1OTI4LDg5NDY4Mjk0LjYzDQoyMDA3LDc5ODkyNDcxNyw4NTk5NjI1NywzMTg2Mzg3NTMsMTU0ODgxMDk4LDM3NjkxNzgxNCwyMjk5OTIzOTEuMiwzNjUxMDUxNzcuNiw5NzM3OTc1Ni43Ng0KMjAwOCw3MTE5MzgxNTAsNDQ1OTU4MDYsMzI5ODkyNjQxLDEwMjUzMjA3NywyODExNTc1MTcsMjYyMzg4NDA5LjEsMzk5MjA1ODcxLjMsODc2MjkwODAuMTENCjIwMDksODMzMDc5MDk5LDU4NDgyMTUzLDI2MTQwNDI1MCw4MjkzODQ2MywyNzcwOTY0MjQsMjIzODg0MDcxLjgsMzUwNjU0Mzg1LjUsOTY4MDIzMzUuNjMNCjIwMTAsODMyOTg1ODg1LDU5Njc1MTA5LDI3NTUyNTA0NCw5NTI5MjU4OSwyNTgxNTY3ODEsMjE4Mjc1MjgwLjEsMzM1NDY0NzU4LjIsMTA3MDQyMDc2LjYNCjIwMTEsNjExMDg5MzQxLDUwMzc4MjA1LDI4NzA3OTE0Miw5MTc0NDEyNywyNDc1NDI0NzUsMjE3ODY5NTQwLjUsMzMwOTcxODc3LDEwNDU2MDg3My42DQoyMDEyLDYxNjg3OTkwMywyOTA5MjA1NiwzMTEyMDM5ODcsMTA4ODAyNDQ5LDIzNjc3OTY4MSwxNzg0MTI0MTkuOSwyODQ1OTA4MjMuNywxMTIxMzUzMTEuOQ0KMjAxMyw2Njk4ODk0NDQsNzExNDIyNTksMjg2ODg2NDY4LDgzOTYzNDAyLDI4OTAxNzI3OSwxNzkyMDA4MjcuNSwyODE1MDkwNDQuOSwxMDgyNzc4NTUuNA0KMjAxNCw3NDEzMTIzNDYsNTI1NzM4NzIsMjU5Njg5MzIyLDEwMjI5MDYyMiwzMDU4MjcyNjUsMTU5OTM0MzI2LDI2MjEyMjU1OS4zLDEwNzgxMjA5Mw0KMjAxNSw3NjI2NDkxMTEsNjA0MDE4MTAsMjc0NjE1NDEwLDEwOTg4NjQ1MiwyOTA2NDMwNjcsMTI4ODc4NDQxLjEsMjI1NzA1ODY3LjUsMTA0MDAxMjM0LjUNCjIwMTYsNTQ0MzYzMzkwLDM1NDcwNzE4LDIzNzcwMzQ2OCwxMTAyODA1MjEsMjkzNDU5OTk2LDE0NDIwNzg3OC4xLDIzMjg2NDA2OC42LDEwMzg0MzI2Ni43DQoyMDE3LDU5MDQ5NDIwMSw0ODY4MDM0MiwyMzU4MjcyNDIsMTA2MTM2NzUyLDI3NTA4MTEyNSwxNTU4MzU1OTQuMiwyNDI1MzQ0MTkuMywxMTIzMjYzMjcNCjIwMTgsNTU5MjYzNjc3LDU3NTgxNzg4LDMwMjg3NjIzOSwxMDM3NjAzNDMsMjc2MDg1OTExLDEzMjQyMjQ1OC43LDIxMDM0OTM2MiwxMDU1Mjc5MDguMg0KMjAxOSw0NDA0NTk4NjMsMjIzNTc3NDMsMzMwNzM3OTU0LDEwMzUwNTgwNCwyNTQ2MTMwNDYsMTI3NjI2NTE2LjIsMjEyMjY4MzkzLjUsMTA0NTQ2NzkyLjQNCg==</script>
     <script id="emb-us" type="application/json">WWVhcixCaW9mdWVsLEJpb2NoYXIsQ29uc3RydWN0aW9uLEV4dGVyaW9yLEhvdXNlaG9sZCxHcmFwaGljIFBhcGVyLE90aGVyIFBhcGVyLEhvdXNlaG9sZCBQYXBlcg0KMTk2MSw4Mjg2NDAwMDAwLDIyMjQ1MDAwMCwyMzI1OTUyNDEyNCw3MzE3Njk4OTcyLDM3MjU5MjI1MzIsMzIyNzA1MDAwMCwxMzE3MjA0ODAwMCwxMDQ4NzUwMDAwDQoxOTYyLDY1ODcyMDAwMDAsMjIyMjUwMDAwLDI1MzU1MDk0OTEzLDc2OTgyMjE0MzAsNDEwNTg0NTI1NywzNDI3NDAwMDAwLDEzNzMxNzUwMDAwLDEwOTM2NTAwMDANCjE5NjMsNjA4ODgwMTYwMCwyMjI4NTAwMDAsMjU1NzQyOTU5MDgsNzM3MzgyNDU4OSw0MDgxNDA4MzcxLDM1ODk0NTAwMDAsMTQwOTE3NTIwMDAsMTE2NzEwMDAwMA0KMTk2NCw2NDAwNDAxNjAwLDIyMTUwMDAwMCwyNjc5MTUxNDYyMSw4MDczNTg5MTY4LDQ1MzYxMTA2MjgsMzgxOTM1MDAwMCwxNDkyNzYwMDAwMCwxMjQ0MjAwMDAwDQoxOTY1LDU4Nzg2MDAwMDAsMjY1MDAwMDAwLDI3ODQwODMzOTg0LDgxNTMyODEyNjMsNDU4Mjc3MDc2MSw0MTQ2NDAwMDAwLDE1NjY3NTUyMDAwLDEzMDk1NTAwMDANCjE5NjYsNTg5MDAwMDAwMCwyNDYwMDAwMDAsMjczMTcyODQ3NjYsOTA4NjU0ODQwNiw1MzA4MDg5NTgxLDQ1OTU3MDAwMDAsMTY4MzMwOTgwMDAsMTQwNTcwMDAwMA0KMTk2Nyw2MDM3MjAwMDAwLDIxOTAwMDAwMCwyNzIyMzc2MTc3OSw4NTA1MzUwMzIxLDQ3NTc2NzAwOTksNDU3MjIwMDAwMCwxNjQ2ODM0ODAwMCwxNDQ4OTUwMDAwDQoxOTY4LDYyMTg0MDAwMDAsMjMzMDAwMDAwLDI5ODgzNjk0NDk0LDg2NDk0NzI0MjgsNDY1MDU0NzMzMyw0ODMzMDUwMDAwLDE3NjI5ODQ4MDAwLDE1MzE0MDAwMDANCjE5NjksNjIyOTgwMDAwMCwyMjUwMDAwMDAsMjc5ODQ4MjAxMzIsODQxMDk5Nzc2OSw0NTgyMzE2NDk3LDQ5ODAxMDAwMDAsMTg4NjE0MDQwMDAsMTYyOTAwMDAwMA0KMTk3MCw3MTY0MjAwMDAwLDIzNTAwMDAwMCwyNzE5MjY1NTM0Niw4NjM0MTc0OTI4LDQ0MjYyNDMxMjYsNDg4OTE1MDAwMCwxODMwOTE1NDAwMCwxNjc3NTAwMDAwDQoxOTcxLDY5ODMwMDAwMDAsMjQ4MDAwMDAwLDMyNTQ1MzIwNjQ2LDc4ODM3NTA5NTUsNDAzNjA0MTc5OSw1MDEzNjAwMDAwLDE4NzM2ODA0MDAwLDE3MzE1MDAwMDANCjE5NzIsNzE5MjYwMDAwMCwyNTEwMDAwMDAsMzIwNTEzMjcwMDksNzEyNTgwNTM5NiwzNTI5MTMxMjM3LDU0NTkzNTAwMDAsMjAyNzMzMDAwMDAsMTc5NTAwMDAwMA0KMTk3Myw2ODA3NDAwMDAwLDI0NzI1MDAwMCwzMjA3Njc4MzE5Myw4MTkyMDg0MzM1LDM3NDY1Mzc2NzIsNTk3NjE1MDAwMCwyMTA4NzEwMDAwMCwxODIxNTAwMDAwDQoxOTc0LDc0NTMwMDAwMDAsMjQ5MzUwMDAwLDI4MjMzMDgxMTkyLDk1NjAzOTU5NTAsMzY0NjczNTk3MCw2MDAzNjAwMDAwLDIwNTM0NjU0MDAwLDE4NDI1MDAwMDANCjE5NzUsNzEzMDIwMDAwMCwyMzY4MDAwMDAsMjcxMzc4NjQ2NDgsODY0MTgyMDQ4NiwzMjUyMjQ2ODE5LDQ4Mzk1MDAwMDAsMTc1OTk2MDQwMDAsMTc5MTAwMDAwMA0KMTk3Niw2OTc3MjAwMDAwLDI0MTEwMDAwMCwzMTkzNDg0MjUzNyw4ODQwNDk2MTg0LDMzNzI0MjEyODAsNTg4MDQwMDAwMCwxOTk1NDYwNDAwMCwxODg4NTAwMDAwDQoxOTc3LDg1MDA4MDAwMDAsMjQwNTAwMDAwLDM0NzI2MDk4NTQ5LDg2MzQ0NjEzNjksMzI2Njg2NjM1OSw2MzI0OTAwMDAwLDIwNTEzNjUwMDAwLDE5MzcwMDAwMDANCjE5NzgsMTA3OTQ0MDAwMDAsMjUzNjUwMDAwLDM2NzUwNzE2NzE3LDk2NjU2MzYxMjUsMzM0OTczMDI4Niw2Nzg5NzAwMDAwLDIyMTA0NTAwMDAwLDE5MDI0MDAwMDANCjE5NzksMTI0OTM0MDAwMDAsMjU4OTUwMDAwLDM0NzI0MjE5OTUyLDEwMzMwOTY5NDQyLDM0MTUxNTQ0ODcsNzE1NzU1MDAwMCwyMjA1MTE1NDAwMCwyMDM3ODUwMDAwDQoxOTgwLDE0MjE1MjAwMDAwLDI2MzQ1MDAwMCwyODQ3MDY5Mjc5NSw5MzgzNTA5MTMyLDMwODExMzUzMzYsNzE5OTE1MDAwMCwyMTE5NzMwMDAwMCwxOTU2ODUwMDAwDQoxOTgxLDE1MjkxMDAwMDAwLDI0NTA1MDAwMCwyNzI3MjExMDA3Niw5NTM2Njg2MDI4LDMyMDg5NTA0MjgsNzE5NDQ1MDAwMCwyMTUxNTE1NDAwMCwyMDI1NTUwMDAwDQoxOTgyLDIwMDQ4NjAwMDAwLDI0NjM1MDAwMCwyMzUzODg1MjA1NCw3Nzk4ODM4NjA3LDMxMDE1Njg0MDYsNzMwNDgwMDAwMCwyMDA5NjgwMDAwMCwyMDAyNDUwMDAwDQoxOTgzLDE5MjM4NjAwMDAwLDI0NzYwMDAwMCwzMTM4OTIyNTg0OCw4NTA4NzgzMjcxLDM3Nzg2MjAxNzQsODIxOTgwMDAwMCwyMTI3MDkwMDAwMCwyMTYzODAwMDAwDQoxOTg0LDIwNTM1NjAwMDAwLDI1MTUwMDAwMCwzNTc5OTgyNjg4Nyw5MDQ2NjA0NzAzLDM3NjM2NzAwNjQsOTA5MDEwMDAwMCwyMzA5NzIwMDAwMCwyMjI0MzAwMDAwDQoxOTg1LDE5NTYxNDAwMDAwLDI1MjY1MDAwMCwzNzA4OTAwNzI4OCw4MzM4ODU5NzY0LDM2MzMzODAxMDIsOTE4NDU1MDAwMCwyMjY2ODM1NDAwMCwyMjMyNzUwMDAwDQoxOTg2LDIwMDA4ODAwMDAwLDI1MjQ1MDAwMCw0MTg0ODA3Mjc0NCw4NTU3MDc5OTAwLDQwNjM1NzA1MzYsOTg4MzI1MDAwMCwyMzYzMzI1NDAwMCwyMzA0NDAwMDAwDQoxOTg3LDE2NTg4MDAwMDAwLDI1NTEwMDAwMCw0Mjg3NzQxNDkwNSw5NzQwNDI5MTIyLDUwMjczMTEzODcsMTA0OTYzNTAwMDAsMjQ3Mjg1NTQwMDAsMjM4NjYwMDAwMA0KMTk4OCwxNjQyOTYwMDAwMCwyNTI3MDAwMDAsNDI4NTE1ODczMDksOTUyODI4NzcyMCw0ODY4MzQ3MzcwLDExMTU4NTUwMDAwLDI0ODAyODUwMDAwLDI0NjI2NTAwMDANCjE5ODksMTYxNDA2MDAwMDAsMjUzMjAwMDAwLDQwNzU4MTExNTYxLDEwMDg1MjQ5MTE2LDUxODkyMjc1MDksMTA0OTUzMDQwMDAsMjUwNTIwMDQwMDAsMjYwMTMwMDAwMA0KMTk5MCwxNjQyMzgwMDAwMCwyNTg2NTAwMDAsNDUwNzA3OTMzMjQsMTE2NTkyMjgyMTIsNTgwODQwNjUxNywxMDg4NDYwMDAwMCwyNTU3MTIwMDAwMCwyNjc1MzAwMDAwDQoxOTkxLDIwNTkyMDAwMDAwLDI0OTQwMDAwMCwzODEzNzQxNjAxNywxMDI3OTI4NDg2Niw1MDkyNzIxMTQyLDEwODQ0MDAwMDAwLDI1MDU5MzU0MDAwLDI1NzI5MDAwMDANCjE5OTIsMTYxNzA4NTA4MDAsMjQ2NDAyNTAwLDQxNTExMDc1NzkzLDEwMTAyMTc5NzA0LDUzODE0NDU1MzQsMTEwODQwNDE1MDAsMjU4MTgyNzM1MDAsMjYyMDUwMDAwMA0KMTk5MywxMzkxNDU1MTQwMCwzNjQ0MTU1MDAsNDEzNjA5MDAxMTEsOTc0NzYwNjM2Miw1MjkxNzQ3MTgzLDExNjkyNTA0MDAwLDI2NDY0MzUxNTAwLDI3MzE1MDAwMDANCjE5OTQsMTI1MzI5NjAwMDAsMzc3MjAwMDAwLDQyODc4MDgwMzk1LDEwMTc0OTk3NzI0LDUzNjM5MjI1NzQsMTI4MDE1MDAwMDAsMjczNTg1MDAwMDAsMjc2ODAwMDAwMA0KMTk5NSwxMjIwNTAwMDAwMCwzNzAyMDAwMDAsNDE0MDUxNjQ2NTcsMTA4OTk1Mzk4MTAsNTk4NDQ1MDYyMiwxMjgyOTUwMDAwMCwyOTMwMjAwMDAwMCwyODE4NTAwMDAwDQoxOTk2LDEwOTA2MDAwMDAwLDM4OTAwMDAwMCw0MjkwMzQzODY2NiwxMDMwMjQ2NjU0Nyw1OTU3MTIyNDg1LDEyNTIzMDAwMDAwLDI4MDk4MDAwMDAwLDI4NTQwMDAwMDANCjE5OTcsOTYzNjAwMDAwMCw0MDA2MDAwMDAsNDM2NDEzMzgzNTQsMTEzNjQ0MzY0ODgsNjE0NTQ4NjkwNCwxMzc5MzUwMDAwMCwyOTcyNjUwMDAwMCwyOTU3NTAwMDAwDQoxOTk4LDkyMTQ3NjAwMDAsNDI1OTUwMDAwLDQzMTM2Njc2ODczLDEwNzcxMzkwOTk2LDYyMzA2MDY0NjQsMTMyNzk1MDAwMDAsMjk2NDA1MDAwMDAsMzAyMjA1MDAwMA0KMTk5OSw5MTkwNTQwMDAwLDQzNzQwMDAwMCw0NTUzNjM1ODY2MCwxMTI4MjE2MjEyOCw2NDI0NzIzMDI4LDEzNzM3NTAwMDAwLDMwOTc5NTAwMDAwLDMxNjUwMDAwMDANCjIwMDAsOTE2ODY4MDAwMCw0NjQ1NTAwMDAsNDQ0OTk0ODY2NzQsMTEzMTU0MzkwODMsNjE3MjQ0Mzc1MCwxMzgyMTg1MzUwMCwyOTcyMzkxMDUwMCwzMTUwMzExMDAwDQoyMDAxLDkxNjcyMDAwMDAsNDYwMDAzNTAwLDQzODMwMjA1MDg3LDEwMTM4MTAwNTk4LDU1MzExMzQ5NTMsMTI4NDA0NzYwMDAsMjgxNjA4NTIwMDAsMzIwNzI2NDUwMA0KMjAwMiw4NTk1MDgwMDAwLDQ4ODMyMTUwMCw0NTA0ODkwMjg4NiwxMDMyNzUzNjY4OSw1NDU5ODQyMDA2LDEzMDg3OTk4MDAwLDI4NDQ0OTU2NTAwLDMyNjQzMDQwMDANCjIwMDMsODU4MzE3NjQwMCw1MTExNjYwMDAsNDUyMDYzNDMyNDgsOTg0MTI1MTMzOCw0OTQxODMyMTQwLDEzMTQ4MDU0MDAwLDI4MDk0NDI4NTAwLDMyNTg1MTIwMDANCjIwMDQsODcyOTEzMjAwMCw0ODk2NTAwMDAsNDg0NTg3MTY5OTIsMTA4MTgwNjMwNjIsNTI2ODcyMzA1NSwxNDA4NjYzMzUwMCwyNzkwOTE0MDUwMCwzMjg2NTcwMDAwDQoyMDA1LDg3OTA2ODU4MDAsNDg5NDE3NTAwLDUwNjgyNzE3NDE5LDEwODY3NDAzNDcyLDQ4MTY2NzE2MzcsMTM3OTQxNzUwMDAsMjgxOTY2NjYwMDAsMzQzMTAwNzUwMA0KMjAwNiw4OTg5ODAwMDAwLDQ3MTY2OTAwMCw0ODIyNDQ2MTM0OCwxMTExNTczNDI1NCw0NDE2NTg5NTcyLDEzODU0MDAzMDAwLDI4Mjg1ODMyMDAwLDM0NTgyODIwMDANCjIwMDcsOTI3MDk5NzAwMCw0NzUzMjQ1MDAsNDMyOTE2NDQ4MzAsMTExMzIyMzExNDAsMzkyMTAyNjEyNCwxMzUzNTY2OTAwMCwyNzA0Mzg0NTAwMCwzMzc0NTkxNTAwDQoyMDA4LDg3MDMwODI4MDAsNDc2MjYyMDAwLDM0ODM4MzQ0MTg0LDExMjg3MjY3NjA3LDM2OTg1MjU0NzQsMTIyNDc4ODY1MDAsMjYwNjY1MTYwMDAsMzM0OTg5MDUwMA0KMjAwOSw4MDYyMDcxMDAwLDQ4MTk3ODAwMCwyNzI1NDg1NTA4NSw5OTU4MDIwODU3LDMxMzQ5MzY4NTksOTgxNDEzNTUwMCwyMzA5MDYzNTUwMCwzMzQ0MDI5MDAwDQoyMDEwLDgwNTI1ODk2MDAsNTU2MDIzNTAwLDI2ODc3NzI3Njc4LDk2MDkwMTU0MzksMjgwNjQ1MjE3NCwxMDY5OTYwMTAwMCwyMzYzMDA5MDAwMCwzMzc2MDAwMDAwDQoyMDExLDc5OTUxNTU4MDAsNTQzMzc2NTAwLDI4OTI4NDYwMDA1LDEwMTMwOTAxNjU1LDI3MDEzNDIyNTksOTg2NTU0NjAwMCwyMzg2OTc1NjAwMCwzNDAwNjcxMDAwDQoyMDEyLDgwMDExMjA0MDAsNTQ4NTAwMDAwLDI4MTc4Mjg1MTcyLDk2NzYzNzM4MjUsMjQyMTQyMTQ1MSw5MjMzNDAwMDAwLDIzMjA2MTUwMDAwLDMzNjEwMDAwMDANCjIwMTMsODMxODU4NTgwMCw1MTg1Njc1MDAsMjkzNDI1OTk3OTksOTc4NDk4NjUxNCwyMjYzNzQxOTc5LDkwMzMzMDUwMDAsMjIxNTc4ODE1MDAsMzQ5NzM3OTUwMA0KMjAxNCw4MzQwMjQ5NDAwLDUyNDEzMDAwMCwzMDk2NjI4Njg5MCwxMDA3ODc4NjkzNSwyMTcwNjMxNTczLDkwNzE3Mzk1MDAsMjMwMTMwMDAwMDAsMzQ0MDEzNTUwMA0KMjAxNSw4ODI0OTcwMDAwLDUzMzEzMDAwMCwzMjIyMzc5Mjg1NSwxMDI0OTQzOTQ2MSwyMDUwNjQ5NzM0LDg2MjM1ODEwMDAsMjMwNDMyMzQ1MDAsMzQ4MjUxNTAwMA0KMjAxNiwxMjQwMjYwNDgwMCw0NzA5MDYwMDAsMjk5MzM0NjA4MjgsMTAyNzg5MzI4MjgsMjExNzgxNzQ1Niw4NTAyMDA1MDAwLDIyOTk4MDMwMDAwLDM1NTA4MzYwMDANCjIwMTcsMTI4MTc2MDAwMDAsNDczMDAwNTAwLDMyMjM0MjAzNTg2LDk5NzE2NDMzMjIsMjE5ODk2ODI2NCw3OTQ4ODczNTAwLDIzMjk2MjYxMDAwLDM1NTk0OTYwMDANCjIwMTgsMTQyODE2MzMwMDAsNDcwMTIxMDAwLDMzMzYxNDAwNzc4LDExMDIyMDU3MzU1LDIyNDU3ODcxMTksNzQ5MDAzMTAwMCwyMzM0NDM4NTUwMCwzNTc1OTAyMDAwDQoyMDE5LDE0Mjk2NDUwMDAwLDQ2NTU0NjAwMCwzMDEzNzcwNTMwMCwxMDIzNDE1OTkwNywxOTcyMjU0NTUxLDY3ODA3NjQ1MDAsMjI3ODMyMTI1MDAsMzU5MTc3MDUwMA0KMjAyMCwxMjExMzQxMDIwMCw0OTA0NjE1MDAsMzMxOTk2MTA5NzYsOTQ0NjI2MjQ1OCwyMzk4NzIxOTg0LDUwNTM0Njg1MDAsMjI5NzMzNDg1MDAsMzc1NjY5MzUwMA0K</script>
     <script id="emb-paras" type="application/json">UHJvZHVjdCxWYXJpYWJsZSxQYXJhbWV0ZXINCkJpb2Z1ZWwsZWZmaWNpZW5jeSwxDQpCaW9jaGFyLGRlY2F5XzEsMC4wMDcNCkJpb2NoYXIsZGVjYXlfMiwwLjAwMDMNCkNvbnN0cnVjdGlvbixkaXNwb3NhbF8xLDAuMTMzDQpDb25zdHJ1Y3Rpb24sZGlzcG9zYWxfMiwwLjAyOA0KQ29uc3RydWN0aW9uLGRpc3Bvc2FsXzMsODANCkNvbnN0cnVjdGlvbixyZWN5Y2xlXzEsMC4wODUNCkNvbnN0cnVjdGlvbixyZWN5Y2xlXzIsMC4wMTUNCkV4dGVyaW9yLGRpc3Bvc2FsXzEsMC4zMjYNCkV4dGVyaW9yLGRpc3Bvc2FsXzIsMC4wNDENCkV4dGVyaW9yLGRpc3Bvc2FsXzMsMjUNCkhvdXNlaG9sZCxkaXNwb3NhbF8xLDAuMjY1DQpIb3VzZWhvbGQsZGlzcG9zYWxfMiwwLjAzMQ0KSG91c2Vob2xkLGRpc3Bvc2FsXzMsMzANCkhvdXNlaG9sZCxyZWN5Y2xlXzEsMC4wODUNCkhvdXNlaG9sZCxyZWN5Y2xlXzIsMC4wMTUNCkdyYXBoaWMgUGFwZXIsZGlzcG9zYWxfMSwxLjAwNg0KR3JhcGhpYyBQYXBlcixkaXNwb3NhbF8yLDANCkdyYXBoaWMgUGFwZXIsZGlzcG9zYWxfMyw2DQpHcmFwaGljIFBhcGVyLHJlY3ljbGVfMSwwLjIyNQ0KR3JhcGhpYyBQYXBlcixyZWN5Y2xlXzIsMC4wMjcNCk90aGVyIFBhcGVyLGRpc3Bvc2FsXzEsNi4wMzYNCk90aGVyIFBhcGVyLGRpc3Bvc2FsXzIsMA0KT3RoZXIgUGFwZXIsZGlzcG9zYWxfMywxDQpPdGhlciBQYXBlcixyZWN5Y2xlXzEsMC4yMjUNCk90aGVyIFBhcGVyLHJlY3ljbGVfMiwwLjAyNw0KSG91c2Vob2xkIFBhcGVyLGRpc3Bvc2FsXzEsMTIuMDM2DQpIb3VzZWhvbGQgUGFwZXIsZGlzcG9zYWxfMiwwDQpIb3VzZWhvbGQgUGFwZXIsZGlzcG9zYWxfMywwLjUNCkxhbmRmaWxsLGNvbl9kZWNheTEsMC45OTcNCkxhbmRmaWxsLGNvbl9kZWNheTIsMzANCkxhbmRmaWxsLGV4dF9kZWNheTEsMS4xNzgNCkxhbmRmaWxsLGV4dF9kZWNheTIsMjANCkxhbmRmaWxsLGhvdV9kZWNheTEsMS4zMjkNCkxhbmRmaWxsLGhvdV9kZWNheTIsMTUNCkxhbmRmaWxsLHBhcF9kZWNheTEsMC44MjENCkxhbmRmaWxsLHBhcF9kZWNheTIsNQ0K</script>
 
     <!-- ========== MAIN JAVASCRIPT ========== -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js" defer></script>
     <script>
-      // ── Tab switching ──────────────────────────────────────────────────────
+      // ── Tab switching (also defined early in <head> for safety) ───────────
       window.switchTab = function(name, btn) {
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1031,22 +1365,61 @@ html_preview = df.head(40).to_html(index=False)
         }catch(err){ console.error(err); setStatus('Run failed. See console.'); }
       }
 
-      function plotlySize(div){ const el=document.getElementById(div); return {w:el.clientWidth||800,h:el.clientHeight||400}; }
-      function displayPlot(divId,traces,layout){
-        const size=plotlySize(divId);
-        const baseLayout=Object.assign({
-          autosize:true,width:size.w,height:size.h,
-          margin:{l:60,r:20,t:40,b:80},
-          legend:{orientation:'h',y:-0.35},
-          xaxis:{title:{text:'Year',standoff:24}},
-        },layout||{});
-        Plotly.newPlot(divId,traces,baseLayout,{responsive:true,displayModeBar:true});
+      function plotlySize(div){ const el=document.getElementById(div); return {w:el.clientWidth||820,h:el.clientHeight||380}; }
+
+      // Shared colour palette for consistent product colours across both plots
+      const HWP_COLORS = {
+        'Biofuel':        '#f97316',
+        'Biochar':        '#78350f',
+        'Construction':   '#1d4ed8',
+        'Exterior':       '#0891b2',
+        'Household':      '#7c3aed',
+        'Graphic Paper':  '#059669',
+        'Other Paper':    '#16a34a',
+        'Household Paper':'#65a30d',
+        'GraphicPaper':   '#059669',
+        'OtherPaper':     '#16a34a',
+        'HouseholdPaper': '#65a30d',
+        'Landfill':       '#9ca3af',
+      };
+
+      function hwpBaseLayout(extraLayout){
+        return Object.assign({
+          autosize: true,
+          margin: {l:65, r:25, t:35, b:90},
+          paper_bgcolor: '#f9fafb',
+          plot_bgcolor:  '#ffffff',
+          font: {family: 'Inter, system-ui, sans-serif', size: 12, color: '#374151'},
+          legend: {
+            orientation: 'h',
+            y: -0.28,
+            x: 0,
+            font: {size: 11},
+            bgcolor: 'rgba(0,0,0,0)',
+          },
+          xaxis: {
+            title: {text: 'Year', standoff: 12, font:{size:12}},
+            showgrid: true, gridcolor: '#f3f4f6', gridwidth: 1,
+            zeroline: false,
+            linecolor: '#e5e7eb', linewidth: 1,
+            tickfont: {size: 11},
+          },
+          hovermode: 'x unified',
+          hoverlabel: {bgcolor:'#1e293b', font:{color:'#f8fafc', size:11}, bordercolor:'#334155'},
+        }, extraLayout||{});
+      }
+
+      function displayPlot(divId, traces, extraLayout){
+        Plotly.newPlot(divId, traces, hwpBaseLayout(extraLayout),
+          {responsive:true, displayModeBar:true,
+           modeBarButtonsToRemove:['select2d','lasso2d','autoScale2d'],
+           displaylogo:false});
       }
 
       async function plotData(){
-        if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
+        if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Preparing data plot…');
+          setStatus('Loading input data…');
           const inUnit=getInputUnit(); const pUnit=getPlotUnit();
           const dataPath=await resolveDataPath();
           pyodide.globals.set('data_path',dataPath);
@@ -1065,20 +1438,30 @@ json.dumps(out, allow_nan=False)
           `);
           const o=JSON.parse(jsonStr);
           const years=o["Year"]||[];
-          const seriesOrder=['Biofuel','Biochar','Construction','Exterior','Household','Graphic Paper','Other Paper','Household Paper'];
+          const seriesOrder=['Construction','Exterior','Household','Graphic Paper','Other Paper','Household Paper','Biochar','Biofuel'];
           const traces=[];
           for(const name of seriesOrder){
-            if(o[name]){ const ykg=toKg(o[name],inUnit); const y=fromKg(ykg,pUnit); traces.push({x:years,y,mode:'lines',name}); }
+            if(o[name]){
+              const ykg=toKg(o[name],inUnit); const y=fromKg(ykg,pUnit);
+              traces.push({
+                x:years, y, mode:'lines', name,
+                line:{color:HWP_COLORS[name]||'#6b7280', width:2},
+                hovertemplate:'%{y:.3f}<extra>'+name+'</extra>',
+              });
+            }
           }
-          displayPlot('plot-data-area',traces,{yaxis:{title:{text:'Annual production ('+unitLabel(pUnit,false)+')',standoff:12}}});
-          setStatus('Data plot ready.');
-        }catch(err){ console.error(err); setStatus('Plot Data failed. See console.'); }
+          displayPlot('plot-data-area', traces, {
+            yaxis:{title:{text:'Annual production ('+unitLabel(pUnit,false)+')', standoff:12, font:{size:12}},
+                   showgrid:true, gridcolor:'#f3f4f6', zeroline:false, tickfont:{size:11}},
+          });
+          setStatus('Input data plotted successfully.');
+        }catch(err){ console.error(err); setStatus('Plot failed — see console for details.'); }
       }
 
       async function plotStorage(){
-        if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
+        if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Preparing storage plot…');
+          setStatus('Running model and preparing storage plot…');
           const pUnit=getPlotUnit();
           const outCsv='/tmp/WPsCT_Results.csv';
           try{ pyodide.FS.stat(outCsv); }catch(e){ await runTracker(); }
@@ -1089,36 +1472,81 @@ df = pd.read_csv(out_csv)
 df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
 df = df[df['Year'].notna()].copy()
 cols_map = [
-  ('Biochar_Stock','Biochar'),('Construction_InUse','Construction'),
-  ('Exterior_InUse','Exterior'),('Household_InUse','Household'),
-  ('GraphicPaper_InUse','GraphicPaper'),('OtherPaper_InUse','OtherPaper'),
-  ('HouseholdPaper_InUse','HouseholdPaper'),('LF_Stock_Total','Landfill'),
+  ('Construction_InUse','Construction'),('Exterior_InUse','Exterior'),
+  ('Household_InUse','Household'),('GraphicPaper_InUse','GraphicPaper'),
+  ('OtherPaper_InUse','OtherPaper'),('HouseholdPaper_InUse','HouseholdPaper'),
+  ('Biochar_Stock','Biochar'),('LF_Stock_Total','Landfill'),
 ]
-out = { 'Year': df['Year'].astype(float).tolist(), 'series': {} }
+out = { 'Year': df['Year'].astype(float).tolist(), 'series': {}, 'last': {} }
 for col, short in cols_map:
     if col in df.columns:
         y = pd.to_numeric(df[col], errors='coerce').fillna(0.0)
         out['series'][short] = y.astype(float).tolist()
+        out['last'][short] = float(y.iloc[-1])
 json.dumps(out, allow_nan=False)
           `);
           const o=JSON.parse(jsonStr);
           const years=o["Year"]||[];
           const s=o["series"]||{};
-          const order=['Biochar','Construction','Exterior','Household','GraphicPaper','OtherPaper','HouseholdPaper','Landfill'];
+          const last=o["last"]||{};
+          const order=['Construction','Exterior','Household','GraphicPaper','OtherPaper','HouseholdPaper','Biochar','Landfill'];
+          const displayNames={'GraphicPaper':'Graphic Paper','OtherPaper':'Other Paper','HouseholdPaper':'Household Paper'};
           const traces=[];
           for(const name of order){
-            if(s[name]){ const y=fromKg(s[name],pUnit); traces.push({x:years,y,mode:'lines',name}); }
+            if(s[name]){
+              const y=fromKg(s[name],pUnit);
+              const label=displayNames[name]||name;
+              traces.push({
+                x:years, y,
+                mode:'lines', name:label,
+                fill: name==='Landfill' ? 'tozeroy' : 'none',
+                fillcolor: name==='Landfill' ? 'rgba(156,163,175,0.15)' : undefined,
+                line:{color:HWP_COLORS[name]||'#6b7280', width: name==='Landfill'?1.5:2,
+                      dash: name==='Landfill'?'dot':'solid'},
+                hovertemplate:'%{y:.4f}<extra>'+label+'</extra>',
+              });
+            }
           }
-          displayPlot('plot-storage-area',traces,{yaxis:{title:{text:'Carbon stock ('+unitLabel(pUnit,true)+')',standoff:12}}});
-          setStatus('Storage plot ready.');
-        }catch(err){ console.error(err); setStatus('Plot Storage failed. See console.'); }
+          displayPlot('plot-storage-area', traces, {
+            yaxis:{title:{text:'Carbon stock ('+unitLabel(pUnit,true)+')', standoff:12, font:{size:12}},
+                   showgrid:true, gridcolor:'#f3f4f6', zeroline:false, tickfont:{size:11}},
+          });
+          // Summary badges
+          const panel=document.getElementById('hwp-summary-panel');
+          const badges=document.getElementById('hwp-summary-badges');
+          if(panel && badges){
+            const inUsePools=['Construction','Exterior','Household','GraphicPaper','OtherPaper','HouseholdPaper'];
+            const totalInUse=fromKg([inUsePools.reduce((a,k)=>a+(last[k]||0),0)],pUnit)[0];
+            const lf=fromKg([last['Landfill']||0],pUnit)[0];
+            const bc=fromKg([last['Biochar']||0],pUnit)[0];
+            const total=fromKg([Object.values(last).reduce((a,v)=>a+v,0)],pUnit)[0];
+            const ul=unitLabel(pUnit,true);
+            const yr=years[years.length-1]||'';
+            badges.innerHTML=[
+              ['Total Stock', total.toFixed(3)+' '+ul, '#4f46e5','#eef2ff'],
+              ['In-use Products', totalInUse.toFixed(3)+' '+ul, '#059669','#ecfdf5'],
+              ['Landfill Pool', lf.toFixed(3)+' '+ul, '#6b7280','#f9fafb'],
+              ['Biochar Pool', bc.toFixed(3)+' '+ul, '#78350f','#fef3c7'],
+            ].map(([label,val,color,bg])=>
+              `<div class="rounded-xl p-3 text-center" style="background:${bg}">
+                <p class="text-xs font-semibold uppercase tracking-wide mb-1" style="color:${color}">${label}</p>
+                <p class="text-lg font-bold" style="color:${color}">${val}</p>
+                <p class="text-xs text-gray-400">Year ${yr}</p>
+              </div>`
+            ).join('');
+            panel.classList.remove('hidden');
+          }
+          setStatus('Carbon storage plotted successfully.');
+        }catch(err){ console.error(err); setStatus('Plot failed — see console for details.'); }
       }
 
       function clearAll(){
         document.getElementById('results-preview').innerHTML='';
         document.getElementById('download-link').classList.add('hidden');
+        const panel=document.getElementById('hwp-summary-panel');
+        if(panel) panel.classList.add('hidden');
         Plotly.purge('plot-data-area'); Plotly.purge('plot-storage-area');
-        setStatus('Cleared. Ready.');
+        setStatus('Cleared. Click "Initialize Python" to begin.');
       }
 
       document.getElementById('btn-init').addEventListener('click', initPy);
@@ -1690,7 +2118,7 @@ json.dumps(out, allow_nan=False)
 
       window.selectPPsProduct = function(name) {
         selectedPPsProduct = name;
-        document.querySelectorAll('#pps-product-grid .pps-product-card').forEach(card => {
+        document.querySelectorAll('#pps-product-grid .product-card').forEach(card => {
           card.classList.toggle('selected', card.dataset.product === name);
         });
         const effField = document.getElementById('pps-efficiency');
@@ -1852,33 +2280,4 @@ json.dumps(out, allow_nan=False)
           });
           html += '</tr>';
         }
-        html += '</tbody></table>';
-        document.getElementById('pps-results-preview').innerHTML = html;
-
-        let csv = 'Year,InUse_kgC,LandfillPool_kgC,TotalRetained_kgC,CumulReleased_kgC\n';
-        for (let i=0; i<res.years.length; i++) {
-          csv += `${res.years[i]},${res.inuse[i].toFixed(4)},${res.lf_pool[i].toFixed(4)},${res.total_retained[i].toFixed(4)},${res.cumul_released[i].toFixed(4)}\n`;
-        }
-        const blob = new Blob([csv],{type:'text/csv'});
-        const link = document.getElementById('pps-download-link');
-        link.href = URL.createObjectURL(blob);
-        link.classList.remove('hidden');
-      }
-
-      window.clearPPsTracker = function() {
-        selectedPPsProduct = null;
-        document.querySelectorAll('#pps-product-grid .pps-product-card').forEach(c => c.classList.remove('selected'));
-        document.getElementById('pps-summary-panel').classList.add('hidden');
-        document.getElementById('pps-results-preview').innerHTML = '';
-        document.getElementById('pps-download-link').classList.add('hidden');
-        document.getElementById('pps-estimate').classList.add('hidden');
-        Plotly.purge('pps-plot-area');
-        setPPsStatus('Cleared. Select end-use category, then click Run.');
-      };
-
-      // Init PPs estimate on load
-      onPPsChange();
-
-    </script>
-  </body>
-</html>
+        html 
