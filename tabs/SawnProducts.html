@@ -1,0 +1,195 @@
+      <!-- ===================================================== -->
+      <!-- TAB 2: Sawn Products (PPs) Carbon                      -->
+      <!-- ===================================================== -->
+      <div id="tab-pps" class="tab-panel">
+        <section class="grid lg:grid-cols-3 gap-6">
+
+          <!-- LEFT: Inputs -->
+          <div class="space-y-5 lg:col-span-1">
+
+            <!-- Step 1: Product & Dimensions -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-3 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
+                Product Type &amp; Dimensions
+              </h2>
+
+              <!-- Product type buttons -->
+              <p class="log-input-label mb-2">Product category</p>
+              <div class="grid grid-cols-2 gap-2 mb-3">
+                <button onclick="setPPsType('lumber')" data-ptype="lumber"
+                  class="pps-type-btn selected text-xs font-semibold px-2 py-2 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-800">
+                  🪚 Lumber / Timber
+                </button>
+                <button onclick="setPPsType('panel')" data-ptype="panel"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  🟫 Panel / Board
+                </button>
+                <button onclick="setPPsType('engineered')" data-ptype="engineered"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  🏗️ Engineered Wood
+                </button>
+                <button onclick="setPPsType('other')" data-ptype="other"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  📦 Other Solid Wood
+                </button>
+              </div>
+              <p id="pps-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.</p>
+
+              <!-- Lumber inputs -->
+              <div id="pps-inputs-lumber" class="space-y-2">
+                <div><p class="log-input-label">Thickness (mm)</p>
+                  <input id="pps-thickness" type="number" min="1" max="500" step="1" value="38" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Nominal 2″ = 38 mm; 4″ = 89 mm</p></div>
+                <div><p class="log-input-label">Width (mm)</p>
+                  <input id="pps-width" type="number" min="1" max="1000" step="1" value="89" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-length" type="number" min="0.1" max="30" step="0.01" value="3.66" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">12 ft = 3.66 m; 16 ft = 4.88 m</p></div>
+                <div><p class="log-input-label">Quantity (pieces)</p>
+                  <input id="pps-qty" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Panel inputs -->
+              <div id="pps-inputs-panel" class="space-y-2 hidden">
+                <div><p class="log-input-label">Thickness (mm)</p>
+                  <input id="pps-panel-t" type="number" min="1" max="200" step="0.5" value="18" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Plywood/OSB: 12–19 mm; MDF: 16–25 mm</p></div>
+                <div><p class="log-input-label">Width (m)</p>
+                  <input id="pps-panel-w" type="number" min="0.1" max="10" step="0.01" value="1.22" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Standard 4 ft = 1.22 m</p></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-panel-l" type="number" min="0.1" max="20" step="0.01" value="2.44" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Standard 8 ft = 2.44 m</p></div>
+                <div><p class="log-input-label">Quantity (sheets)</p>
+                  <input id="pps-panel-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Engineered Wood inputs -->
+              <div id="pps-inputs-engineered" class="space-y-2 hidden">
+                <div><p class="log-input-label">Sub-type</p>
+                  <select id="pps-eng-sub" class="log-input-field" onchange="onPPsChange()">
+                    <option value="glulam">Glulam (Glue-laminated Timber)</option>
+                    <option value="clt">CLT (Cross-Laminated Timber)</option>
+                    <option value="lvl">LVL (Laminated Veneer Lumber)</option>
+                    <option value="psl">PSL (Parallel Strand Lumber)</option>
+                    <option value="lsl">LSL (Laminated Strand Lumber)</option>
+                    <option value="ijoist">I-Joist / Wood I-Beam</option>
+                  </select></div>
+                <div><p class="log-input-label">Depth / Height (mm)</p>
+                  <input id="pps-eng-d" type="number" min="1" max="2000" step="1" value="200" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Width (mm)</p>
+                  <input id="pps-eng-w" type="number" min="1" max="1000" step="1" value="130" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-eng-l" type="number" min="0.1" max="40" step="0.01" value="6" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Quantity (pieces)</p>
+                  <input id="pps-eng-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Other Solid Wood -->
+              <div id="pps-inputs-other" class="space-y-2 hidden">
+                <div><p class="log-input-label">Total volume (m³)</p>
+                  <input id="pps-other-vol" type="number" min="0.001" max="10000" step="0.001" value="0.1" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Description (optional)</p>
+                  <input id="pps-other-desc" type="text" placeholder="e.g. wood pallet, railway tie, round post" class="log-input-field"></div>
+              </div>
+
+              <!-- Shared -->
+              <div class="space-y-2 mt-3 pt-3 border-t border-gray-100">
+                <div><p class="log-input-label">Wood species / type</p>
+                  <select id="pps-woodtype" class="log-input-field" onchange="syncPPsDefaults(); onPPsChange()">
+                    <option value="softwood">Softwood — Pine, Spruce, Fir, Cedar</option>
+                    <option value="hardwood">Hardwood — Oak, Maple, Birch, Ash</option>
+                    <option value="tropical">Tropical Hardwood — Teak, Meranti, Ipe</option>
+                  </select></div>
+                <div><p class="log-input-label">Tracking horizon (years)</p>
+                  <input id="pps-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+            </div>
+
+            <!-- Step 2: Physical Parameters -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-1 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                Physical Parameters
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Oven-dry density and carbon fraction defaults by species.</p>
+              <div class="space-y-2">
+                <div><p class="log-input-label">Oven-dry density (kg/m³)</p>
+                  <input id="pps-density" type="number" min="100" max="1200" step="1" value="420" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood ≈ 420 · Hardwood ≈ 580 · Tropical ≈ 680</p></div>
+                <div><p class="log-input-label">Carbon fraction (0–1)</p>
+                  <input id="pps-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Typical range: 0.47–0.51</p></div>
+                <button onclick="resetPPsParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to species defaults</button>
+              </div>
+              <!-- Carbon estimate -->
+              <div id="pps-estimate" class="mt-3 p-2 bg-teal-50 rounded-xl text-sm text-teal-900 hidden">
+                <div class="font-semibold mb-1">📊 Estimated Product Carbon</div>
+                <div id="pps-estimate-display" class="text-xs leading-5"></div>
+              </div>
+            </div>
+
+            <!-- Step 3: End-Use Category -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-1 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                End-Use Category
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Select service-life category. Determines disposal &amp; decay parameters.</p>
+              <div id="pps-product-grid" class="grid grid-cols-2 gap-2">
+                <div class="product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">🏠 Construction</div>
+                <div class="product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectPPsProduct('Household')">🪑 Furniture / Interior</div>
+                <div class="product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">📰 Graphic Paper</div>
+                <div class="product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">🧻 Tissue / Hygienic</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">📄 Other Paper</div>
+              </div>
+              <div id="pps-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
+              <!-- Processing efficiency -->
+              <div class="mt-3 pt-3 border-t border-gray-100">
+                <p class="log-input-label">Processing efficiency (0–1)</p>
+                <input id="pps-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.90" class="log-input-field" oninput="onPPsChange()">
+                <p class="text-xs text-gray-400 mt-0.5">Fraction of product carbon that is serviceable (accounts for trim waste). Sawn lumber ≈ 0.90, panels ≈ 0.85.</p>
+                <button onclick="resetPPsEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to category default</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Run -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-3 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">4</span>
+                Run Product Carbon Tracker
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Python initializes automatically on first run.</p>
+              <div class="flex flex-wrap gap-2">
+                <button id="btn-pps-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runPPsTracker()">▶ Run Tracker</button>
+                <button id="btn-pps-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearPPsTracker()">Clear</button>
+              </div>
+              <div id="pps-status" class="text-sm text-gray-600 mt-2">Select end-use category, then click Run.</div>
+            </div>
+
+          </div><!-- /left -->
+
+          <!-- RIGHT: Output -->
+          <div class="space-y-5 lg:col-span-2">
+            <div id="pps-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
+              <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Sawn Product Carbon Summary</h2>
+              <div id="pps-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+            </div>
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-lg font-semibold mb-2">Carbon Retained Over Time</h2>
+              <div id="pps-plot-area" class="border rounded-xl h-96"></div>
+            </div>
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
+              <div id="pps-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
+              <div class="mt-3">
+                <a id="pps-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">⬇ Download Results</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div><!-- /tab-pps -->
+
+
