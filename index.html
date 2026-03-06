@@ -188,7 +188,7 @@
 
 
       <!-- ===================================================== -->
-      <!-- TAB 1: End-use Products (WPs Carbon)                  -->
+      <!-- TAB 3: End-use Products (WPs Carbon)                  -->
       <!-- ===================================================== -->
       <div id="tab-hwp" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
@@ -332,11 +332,11 @@
             </div>
           </div>
         </section>
-      </div><!-- /tab-hwp -->
+      </div><!-- /tab-hwp (End-use Products) -->
 
 
       <!-- ===================================================== -->
-      <!-- TAB 2: Log Carbon                                      -->
+      <!-- TAB 1: Industrial Logs Carbon                          -->
       <!-- ===================================================== -->
       <div id="tab-log" class="tab-panel active">
         <section class="grid lg:grid-cols-3 gap-6">
@@ -488,8 +488,8 @@
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
               <div id="log-product-grid" class="grid grid-cols-2 gap-2">
                 <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏠 Construction</div>
-                <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
                 <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
                 <div class="product-card" data-product="Graphic Paper" onclick="selectProduct('Graphic Paper')">📰 Graphic Paper</div>
                 <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">🧻 Household Paper</div>
                 <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
@@ -546,11 +546,11 @@
             </div>
           </div>
         </section>
-      </div><!-- /tab-log -->
+      </div><!-- /tab-log (Industrial Logs) -->
 
 
       <!-- ===================================================== -->
-      <!-- TAB 3: Global Data                                     -->
+      <!-- TAB 4: Global WPs Carbon                               -->
       <!-- ===================================================== -->
       <div id="tab-global" class="tab-panel">
         <div class="bg-white rounded-2xl shadow">
@@ -567,11 +567,11 @@
             </div>
           </div>
         </div>
-      </div><!-- /tab-global -->
+      </div><!-- /tab-global (Global WPs Carbon) -->
 
 
       <!-- ===================================================== -->
-      <!-- TAB 2: Sawn Products (PPs) Carbon                      -->
+      <!-- TAB 2: Sawn Products Carbon                            -->
       <!-- ===================================================== -->
       <div id="tab-pps" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
@@ -762,7 +762,7 @@
             </div>
           </div>
         </section>
-      </div><!-- /tab-pps -->
+      </div><!-- /tab-pps (Sawn Products) -->
 
 
       <!-- ===================================================== -->
@@ -965,7 +965,7 @@
 
           </div>
         </div>
-      </div><!-- /tab-about -->
+      </div><!-- /tab-about (Research & Team) -->
 
 
 
@@ -1051,7 +1051,7 @@
             </div>
 
             <!-- Example CSV -->
-            <h3 class="text-sm font-bold text-gray-700 mt-5 mb-2">Example (Maine, USA — first 3 rows)</h3>
+            <h3 class="text-sm font-bold text-gray-700 mt-5 mb-2">Example (first 3 rows)</h3>
             <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
               <pre class="text-xs text-green-300 font-mono leading-relaxed">Year,Biofuel,Biochar,Construction,Exterior,Household,Graphic Paper,Other Paper,Household Paper
 1961,285763275,12447848,179817095,74300620,194099473,173635256,264196012,59754273
@@ -1111,105 +1111,9 @@
               </div>
             </div>
 
-            <h3 class="text-sm font-bold text-gray-700 mb-2">Example Parameters CSV</h3>
-            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
-              <pre class="text-xs text-green-300 font-mono leading-relaxed">Product,Variable,Parameter
-Biofuel,efficiency,1
-Biochar,decay_1,0.007
-Biochar,decay_2,0.0003
-Construction,disposal_1,0.133
-Construction,disposal_2,0.028
-Construction,disposal_3,80
-Construction,recycle_1,0.085
-Construction,recycle_2,0.015
-Exterior,disposal_1,0.326
-Exterior,disposal_2,0.041
-Exterior,disposal_3,25
-Household,disposal_1,0.265
-Household,disposal_2,0.031
-Household,disposal_3,30
-Household,recycle_1,0.085
-Household,recycle_2,0.015
-Graphic Paper,disposal_1,1.006
-Graphic Paper,disposal_2,0
-Graphic Paper,disposal_3,6
-Graphic Paper,recycle_1,0.225
-Graphic Paper,recycle_2,0.027
-Other Paper,disposal_1,6.036
-Other Paper,disposal_2,0
-Other Paper,disposal_3,1
-Other Paper,recycle_1,0.225
-Other Paper,recycle_2,0.027
-Household Paper,disposal_1,12.036
-Household Paper,disposal_2,0
-Household Paper,disposal_3,0.5
-Landfill,con_decay1,0.997
-Landfill,con_decay2,30
-Landfill,ext_decay1,1.178
-Landfill,ext_decay2,20
-Landfill,hou_decay1,1.329
-Landfill,hou_decay2,15
-Landfill,pap_decay1,0.821
-Landfill,pap_decay2,5</pre>
-            </div>
           </div>
 
-          <!-- Carbon Pools -->
-          <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-4">🌲 Carbon Pools &amp; Flux Equations</h2>
-            <p class="text-sm text-gray-600 mb-4">The tracker maintains three main carbon sub-pools, governed by the equations from Wei et al. (2023):</p>
-            <div class="grid md:grid-cols-3 gap-4 mb-5">
-              <div class="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
-                <p class="font-bold text-emerald-800 text-sm mb-1">① End-use Products</p>
-                <p class="text-xs text-emerald-700 mb-2">Carbon remaining in in-use wood products (construction, furniture, paper).</p>
-                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 2–3: Gaussian disposal<br>ρ<sub>wp</sub> = α/e√(2π) · exp(−β(t<sub>w</sub>−γ)²/γ)</p>
-              </div>
-              <div class="rounded-xl bg-amber-50 border border-amber-100 p-4">
-                <p class="font-bold text-amber-800 text-sm mb-1">② Landfill Pool</p>
-                <p class="text-xs text-amber-700 mb-2">Disposed wood undergoing slow decomposition in landfills.</p>
-                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 5: Log-normal decay<br>ρ<sub>lf</sub> = ξ · ln(t<sub>l</sub>) / (ω·√(2π))</p>
-              </div>
-              <div class="rounded-xl bg-stone-50 border border-stone-200 p-4">
-                <p class="font-bold text-stone-700 text-sm mb-1">③ Biochar / Charcoal</p>
-                <p class="text-xs text-stone-600 mb-2">Recalcitrant carbon from biofuel combustion and biochar production.</p>
-                <p class="text-xs font-mono bg-white rounded p-2 text-gray-700">Eq. 1: Pool-size decay<br>ρ<sub>cha</sub> = τ + σ · ln(C<sub>cha</sub>)</p>
-              </div>
-            </div>
-            <p class="text-xs text-gray-400">Recycling pathway (Eq. 4): r = λ + μ · ln(k), where k = years since initial year. Recycling diverts disposed wood from landfill, increasing effective carbon retention.</p>
-          </div>
 
-          <!-- GitHub instructions -->
-          <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-1">🐙 Hosting Files on GitHub</h2>
-            <p class="text-sm text-gray-500 mb-4">All supplementary files (this manual, example CSVs, images) should live in your repository alongside <code class="bg-gray-100 px-1 rounded font-mono text-xs">index.html</code>. GitHub Pages will serve them automatically.</p>
-            <h3 class="text-sm font-bold text-gray-700 mb-2">Recommended folder structure</h3>
-            <div class="bg-gray-900 rounded-xl p-4 mb-4 overflow-x-auto">
-              <pre class="text-xs text-green-300 font-mono leading-relaxed">your-repo/
-├── index.html
-├── assets/
-│   ├── img/
-│   │   ├── Logo_USDA.png
-│   │   ├── Logo_NSRC.png
-│   │   ├── Logo_WGL.png
-│   │   └── WPs_Carbon Flow.png
-│   └── docs/
-│       └── WPsCT_UserManual.docx   ← place this file here
-└── data/
-    ├── Maine_example.csv
-    └── US_example.csv</pre>
-            </div>
-            <h3 class="text-sm font-bold text-gray-700 mb-2">Uploading via GitHub browser interface</h3>
-            <ol class="space-y-2 text-sm text-gray-600">
-              <li class="flex gap-2"><span class="font-bold text-indigo-600">1.</span>Open your repository on GitHub.com → click <strong>Add file → Upload files</strong>.</li>
-              <li class="flex gap-2"><span class="font-bold text-indigo-600">2.</span>Navigate to <code class="bg-gray-100 px-1 rounded font-mono text-xs">assets/docs/</code> (create the folder by typing it in the path bar).</li>
-              <li class="flex gap-2"><span class="font-bold text-indigo-600">3.</span>Drag and drop <strong>WPsCT_UserManual.docx</strong> → click <strong>Commit changes</strong>.</li>
-              <li class="flex gap-2"><span class="font-bold text-indigo-600">4.</span>The file is now available at:<br>
-                <code class="bg-gray-100 px-1.5 py-0.5 rounded font-mono text-xs text-indigo-700 break-all">https://&lt;username&gt;.github.io/&lt;repo&gt;/assets/docs/WPsCT_UserManual.docx</code></li>
-            </ol>
-            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800">
-              <strong>File size limits:</strong> GitHub browser upload limit is 25 MB. This manual is ~25 KB — well within limits. For large datasets (&gt;25 MB), use <a href="https://zenodo.org" target="_blank" class="underline">Zenodo</a> or <a href="https://osf.io" target="_blank" class="underline">OSF</a> and link to the DOI.
-            </div>
-          </div>
 
           <!-- Citation -->
           <div class="bg-white rounded-2xl shadow p-6">
@@ -1222,7 +1126,7 @@ Landfill,pap_decay2,5</pre>
           </div>
 
         </div>
-      </div><!-- /tab-guide -->
+      </div><!-- /tab-guide (User Guide) -->
 
     </main>
 
