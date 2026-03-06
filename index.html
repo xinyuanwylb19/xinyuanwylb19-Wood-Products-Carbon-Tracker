@@ -859,7 +859,7 @@
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
                   <p class="text-xs font-bold text-amber-800 mb-1">NASA — Carbon Monitoring System</p>
                   <p class="text-xs text-amber-700 italic leading-relaxed mb-1">Supporting Stakeholder Data Requirements for Decision-Making in Managed Forests: A Landscape Model-Data Framework for High Resolution Carbon Accounting and Uncertainty Estimation</p>
-                  <p class="text-xs text-amber-700 leading-relaxed">Phase 2 prototype development of a scalable MRV framework that integrates inventory data, remote sensing, and landscape modeling to support stakeholder decision-making for carbon in managed forests</p>
+                  <p class="text-xs text-amber-700 leading-relaxed italic">Phase 2 prototype development of a scalable MRV framework that integrates inventory data, remote sensing, and landscape modeling to support stakeholder decision-making for carbon in managed forests</p>
                 </div>
               </div>
             </div>
@@ -2280,4 +2280,32 @@ json.dumps(out, allow_nan=False)
           });
           html += '</tr>';
         }
-        html 
+        html += '</tbody></table>';
+        document.getElementById('pps-results-preview').innerHTML = html;
+
+        // ── Download CSV ─────────────────────────────────────────────────────
+        let csv = 'Year,InUse_kgC,LandfillPool_kgC,TotalRetained_kgC,CumulReleased_kgC\n';
+        for (let i = 0; i < res.years.length; i++) {
+          csv += `${res.years[i]},${res.inuse[i].toFixed(4)},${res.lf_pool[i].toFixed(4)},${res.total_retained[i].toFixed(4)},${res.cumul_released[i].toFixed(4)}\n`;
+        }
+        const blobP = new Blob([csv], { type: 'text/csv' });
+        const dlP = document.getElementById('pps-download-link');
+        dlP.href = URL.createObjectURL(blobP);
+        dlP.classList.remove('hidden');
+        setPPsStatus('Done. Carbon storage calculated successfully.');
+      }
+
+      window.clearPPs = function clearPPs() {
+        document.getElementById('pps-results-preview').innerHTML = '';
+        document.getElementById('pps-download-link').classList.add('hidden');
+        document.getElementById('pps-estimate').classList.add('hidden');
+        Plotly.purge('pps-plot-area');
+        setPPsStatus('Cleared. Select end-use category, then click Run.');
+      };
+
+      // Init PPs estimate on load
+      onPPsChange();
+
+    </script>
+  </body>
+</html>
