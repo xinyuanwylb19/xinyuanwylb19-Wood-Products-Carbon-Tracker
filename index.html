@@ -96,9 +96,53 @@
         min-height: 400px;
         gap: 1rem;
       }
-      .coming-soon-icon {
-        font-size: 4rem;
-        line-height: 1;
+      .coming-soon-icon { font-size: 4rem; line-height: 1; }
+
+      /* PPs Carbon tab */
+      .pps-type-btn { transition: border-color 0.15s, background 0.15s, color 0.15s; }
+      .pps-type-btn.selected {
+        border-color: #0d9488;
+        background: #ccfbf1;
+        color: #134e4a;
+      }
+      .pps-type-btn:not(.selected):hover {
+        border-color: #5eead4;
+        background: #f0fdfa;
+        color: #0f766e;
+      }
+      .pps-product-card {
+        border: 2px solid #e2e8f0;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: border-color 0.15s, background 0.15s;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #374151;
+        background: #f8fafc;
+        text-align: center;
+        overflow: hidden;
+      }
+      .pps-product-card:hover { border-color: #0d9488; }
+      .pps-product-card.selected { border-color: #0d9488; background: #ccfbf1; color: #134e4a; font-weight: 700; }
+      .pps-product-card.suggested { border-color: #5eead4; }
+      .pps-product-card img { width: 100%; height: 90px; object-fit: cover; }
+      .pps-product-card .card-label { padding: 0.35rem 0.5rem; }
+
+      /* Research tab pub cards */
+      .pub-card {
+        border-left: 4px solid #0d9488;
+        background: #f8fafc;
+        border-radius: 0 0.75rem 0.75rem 0;
+        padding: 0.75rem 1rem;
+        transition: background 0.15s;
+      }
+      .pub-card:hover { background: #f0fdfa; }
+      .team-avatar {
+        width: 2.75rem; height: 2.75rem;
+        border-radius: 9999px;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 0.9rem; color: #fff;
+        flex-shrink: 0;
       }
     </style>
   </head>
@@ -118,10 +162,12 @@
 
     <!-- ========== TABS NAV ========== -->
     <div class="mx-auto px-4 pt-5 max-w-[1400px]">
-      <div class="flex gap-1 border-b-2 border-slate-200">
-        <button class="tab-btn active" onclick="switchTab('hwp', this)">🌲 HWPs Carbon</button>
-        <button class="tab-btn" onclick="switchTab('log', this)">🪵 Log Carbon</button>
-        <button class="tab-btn" onclick="switchTab('global', this)">🌍 Global Data</button>
+      <div class="flex flex-wrap gap-1 border-b-2 border-slate-200">
+        <button class="tab-btn active" onclick="switchTab('log',    this)">🪵 Log Carbon</button>
+        <button class="tab-btn"        onclick="switchTab('pps',    this)">📐 Sawn Products</button>
+        <button class="tab-btn"        onclick="switchTab('hwp',    this)">🌲 WPs Carbon</button>
+        <button class="tab-btn"        onclick="switchTab('global', this)">🌍 Global WPs Carbon</button>
+        <button class="tab-btn"        onclick="switchTab('about',  this)">🔬 Research &amp; Team</button>
       </div>
     </div>
 
@@ -130,7 +176,7 @@
       <!-- ===================================================== -->
       <!-- TAB 1: HWPs Carbon                                    -->
       <!-- ===================================================== -->
-      <div id="tab-hwp" class="tab-panel active">
+      <div id="tab-hwp" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Controls -->
@@ -143,9 +189,9 @@
                 Wood Products Data
               </h2>
               <div class="space-y-2 text-sm">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600" checked><span>Example: <b>Maine</b></span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600" checked><span>Example: <b>Maine, USA</b></span></label>
                 <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4 accent-indigo-600"><span>Example: <b>United States</b></span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600"><span>Upload CSV:</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600"><span>Upload Wood Products Data:</span></label>
                 <input id="file-data" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
               </div>
               <div class="mt-4 pt-3 border-t border-gray-100">
@@ -173,8 +219,8 @@
                 Tracker Parameters
               </h2>
               <div class="space-y-2 text-sm">
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600" checked><span>Default parameters</span></label>
-                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600"><span>Upload parameter CSV:</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600" checked><span>Default Parameters</span></label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600"><span>Upload Parameter File:</span></label>
                 <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100" disabled>
               </div>
             </div>
@@ -186,10 +232,10 @@
                 Run Tracker
               </h2>
               <div class="flex flex-wrap gap-2">
-                <button id="btn-init"         class="btn px-3 py-2 rounded-xl bg-indigo-600 text-white text-sm hover:bg-indigo-700">Initialize</button>
-                <button id="btn-run"          class="btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" disabled>Run Tracker</button>
-                <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm hover:bg-sky-700" disabled>Plot Data</button>
-                <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm hover:bg-violet-700" disabled>Plot Storage</button>
+                <button id="btn-init"         class="btn px-3 py-2 rounded-xl bg-indigo-600 text-white text-sm hover:bg-indigo-700">Initialize Tracker</button>
+                <button id="btn-run"          class="btn px-3 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" disabled>Run Carbon Tracker</button>
+                <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm hover:bg-sky-700" disabled>Plot Input Data</button>
+                <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm hover:bg-violet-700" disabled>Plot Storage Results</button>
                 <button id="btn-clear"        class="btn px-3 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm hover:bg-gray-300">Clear</button>
               </div>
               <div id="status"   class="text-sm text-gray-700 mt-3">Click "Initialize" to load Python.</div>
@@ -217,7 +263,7 @@
           </h2>
           <div id="results-preview" class="overflow-auto border rounded-xl p-2 max-h-96 text-xs"></div>
           <div class="mt-3">
-            <a id="download-link" class="hidden px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" download="WPsCT_Results.csv">⬇ Download Results CSV</a>
+            <a id="download-link" class="hidden px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm hover:bg-emerald-700" download="WPsCT_Results.csv">⬇ Download Results</a>
           </div>
         </section>
       </div><!-- /tab-hwp -->
@@ -226,7 +272,7 @@
       <!-- ===================================================== -->
       <!-- TAB 2: Log Carbon                                      -->
       <!-- ===================================================== -->
-      <div id="tab-log" class="tab-panel">
+      <div id="tab-log" class="tab-panel active">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Inputs -->
@@ -375,9 +421,9 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
               <div id="log-product-grid" class="grid grid-cols-2 gap-2">
-                <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏗️ Construction</div>
+                <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏠 Construction</div>
                 <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
-                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🏠 Exterior</div>
+                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🌉 Exterior</div>
                 <div class="product-card" data-product="Graphic Paper" onclick="selectProduct('Graphic Paper')">📰 Graphic Paper</div>
                 <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">🧻 Household Paper</div>
                 <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
@@ -389,12 +435,6 @@
                 <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.70" class="log-input-field" oninput="onLogInputChange()">
                 <p class="text-xs text-gray-400 mt-0.5" id="log-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
                 <div class="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-500" id="efficiency-defaults-table">
-                  <span>🏗️ Construction</span><span class="text-right">0.70</span>
-                  <span>🪑 Household</span><span class="text-right">0.65</span>
-                  <span>🏠 Exterior</span><span class="text-right">0.85</span>
-                  <span>📰 Graphic Paper</span><span class="text-right">0.85</span>
-                  <span>🧻 Household Paper</span><span class="text-right">0.90</span>
-                  <span>📄 Other Paper</span><span class="text-right">0.95</span>
                 </div>
                 <button onclick="resetEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to product default</button>
               </div>
@@ -435,7 +475,7 @@
               <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
               <div id="log-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
               <div class="mt-3">
-                <a id="log-download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-sm" download="LogCarbon_Results.csv">Download Results CSV</a>
+                <a id="log-download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-sm" download="LogCarbon_Results.csv">Download Results</a>
               </div>
             </div>
           </div>
@@ -463,15 +503,400 @@
         </div>
       </div><!-- /tab-global -->
 
+
+      <!-- ===================================================== -->
+      <!-- TAB 2: Sawn Products (PPs) Carbon                      -->
+      <!-- ===================================================== -->
+      <div id="tab-pps" class="tab-panel">
+        <section class="grid lg:grid-cols-3 gap-6">
+
+          <!-- LEFT: Inputs -->
+          <div class="space-y-5 lg:col-span-1">
+
+            <!-- Step 1: Product & Dimensions -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-3 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
+                Product Type &amp; Dimensions
+              </h2>
+
+              <!-- Product type buttons -->
+              <p class="log-input-label mb-2">Product category</p>
+              <div class="grid grid-cols-2 gap-2 mb-3">
+                <button onclick="setPPsType('lumber')" data-ptype="lumber"
+                  class="pps-type-btn selected text-xs font-semibold px-2 py-2 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-800">
+                  🪚 Lumber / Timber
+                </button>
+                <button onclick="setPPsType('panel')" data-ptype="panel"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  🟫 Panel / Board
+                </button>
+                <button onclick="setPPsType('engineered')" data-ptype="engineered"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  🏗️ Engineered Wood
+                </button>
+                <button onclick="setPPsType('other')" data-ptype="other"
+                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                  📦 Other Solid Wood
+                </button>
+              </div>
+              <p id="pps-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.</p>
+
+              <!-- Lumber inputs -->
+              <div id="pps-inputs-lumber" class="space-y-2">
+                <div><p class="log-input-label">Thickness (mm)</p>
+                  <input id="pps-thickness" type="number" min="1" max="500" step="1" value="38" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Nominal 2″ = 38 mm; 4″ = 89 mm</p></div>
+                <div><p class="log-input-label">Width (mm)</p>
+                  <input id="pps-width" type="number" min="1" max="1000" step="1" value="89" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-length" type="number" min="0.1" max="30" step="0.01" value="3.66" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">12 ft = 3.66 m; 16 ft = 4.88 m</p></div>
+                <div><p class="log-input-label">Quantity (pieces)</p>
+                  <input id="pps-qty" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Panel inputs -->
+              <div id="pps-inputs-panel" class="space-y-2 hidden">
+                <div><p class="log-input-label">Thickness (mm)</p>
+                  <input id="pps-panel-t" type="number" min="1" max="200" step="0.5" value="18" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Plywood/OSB: 12–19 mm; MDF: 16–25 mm</p></div>
+                <div><p class="log-input-label">Width (m)</p>
+                  <input id="pps-panel-w" type="number" min="0.1" max="10" step="0.01" value="1.22" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Standard 4 ft = 1.22 m</p></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-panel-l" type="number" min="0.1" max="20" step="0.01" value="2.44" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Standard 8 ft = 2.44 m</p></div>
+                <div><p class="log-input-label">Quantity (sheets)</p>
+                  <input id="pps-panel-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Engineered Wood inputs -->
+              <div id="pps-inputs-engineered" class="space-y-2 hidden">
+                <div><p class="log-input-label">Sub-type</p>
+                  <select id="pps-eng-sub" class="log-input-field" onchange="onPPsChange()">
+                    <option value="glulam">Glulam (Glue-laminated Timber)</option>
+                    <option value="clt">CLT (Cross-Laminated Timber)</option>
+                    <option value="lvl">LVL (Laminated Veneer Lumber)</option>
+                    <option value="psl">PSL (Parallel Strand Lumber)</option>
+                    <option value="lsl">LSL (Laminated Strand Lumber)</option>
+                    <option value="ijoist">I-Joist / Wood I-Beam</option>
+                  </select></div>
+                <div><p class="log-input-label">Depth / Height (mm)</p>
+                  <input id="pps-eng-d" type="number" min="1" max="2000" step="1" value="200" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Width (mm)</p>
+                  <input id="pps-eng-w" type="number" min="1" max="1000" step="1" value="130" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Length (m)</p>
+                  <input id="pps-eng-l" type="number" min="0.1" max="40" step="0.01" value="6" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Quantity (pieces)</p>
+                  <input id="pps-eng-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+
+              <!-- Other Solid Wood -->
+              <div id="pps-inputs-other" class="space-y-2 hidden">
+                <div><p class="log-input-label">Total volume (m³)</p>
+                  <input id="pps-other-vol" type="number" min="0.001" max="10000" step="0.001" value="0.1" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="log-input-label">Description (optional)</p>
+                  <input id="pps-other-desc" type="text" placeholder="e.g. wood pallet, railway tie, round post" class="log-input-field"></div>
+              </div>
+
+              <!-- Shared -->
+              <div class="space-y-2 mt-3 pt-3 border-t border-gray-100">
+                <div><p class="log-input-label">Wood species / type</p>
+                  <select id="pps-woodtype" class="log-input-field" onchange="syncPPsDefaults(); onPPsChange()">
+                    <option value="softwood">Softwood — Pine, Spruce, Fir, Cedar</option>
+                    <option value="hardwood">Hardwood — Oak, Maple, Birch, Ash</option>
+                    <option value="tropical">Tropical Hardwood — Teak, Meranti, Ipe</option>
+                  </select></div>
+                <div><p class="log-input-label">Tracking horizon (years)</p>
+                  <input id="pps-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onPPsChange()"></div>
+              </div>
+            </div>
+
+            <!-- Step 2: Physical Parameters -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-1 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                Physical Parameters
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Oven-dry density and carbon fraction defaults by species.</p>
+              <div class="space-y-2">
+                <div><p class="log-input-label">Oven-dry density (kg/m³)</p>
+                  <input id="pps-density" type="number" min="100" max="1200" step="1" value="420" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood ≈ 420 · Hardwood ≈ 580 · Tropical ≈ 680</p></div>
+                <div><p class="log-input-label">Carbon fraction (0–1)</p>
+                  <input id="pps-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onPPsChange()">
+                  <p class="text-xs text-gray-400 mt-0.5">Typical range: 0.47–0.51</p></div>
+                <button onclick="resetPPsParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to species defaults</button>
+              </div>
+              <!-- Carbon estimate -->
+              <div id="pps-estimate" class="mt-3 p-2 bg-teal-50 rounded-xl text-sm text-teal-900 hidden">
+                <div class="font-semibold mb-1">📊 Estimated Product Carbon</div>
+                <div id="pps-estimate-display" class="text-xs leading-5"></div>
+              </div>
+            </div>
+
+            <!-- Step 3: End-Use Category -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-1 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                End-Use Category
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Select service-life category. Determines disposal &amp; decay parameters.</p>
+              <div id="pps-product-grid" class="grid grid-cols-2 gap-2">
+                <div class="pps-product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">
+                  <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=300&q=70" alt="Wood house construction" onerror="this.style.display='none'">
+                  <div class="card-label">🏠 Construction</div>
+                </div>
+                <div class="pps-product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">
+                  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=70" alt="Wood bridge exterior" onerror="this.style.display='none'">
+                  <div class="card-label">🌉 Exterior</div>
+                </div>
+                <div class="pps-product-card" data-product="Household" onclick="selectPPsProduct('Household')">
+                  <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=70" alt="Wood furniture" onerror="this.style.display='none'">
+                  <div class="card-label">🪑 Furniture / Interior</div>
+                </div>
+                <div class="pps-product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">
+                  <img src="https://images.unsplash.com/photo-1568667256549-094345857637?w=300&q=70" alt="Graphic paper" onerror="this.style.display='none'">
+                  <div class="card-label">📰 Graphic Paper</div>
+                </div>
+                <div class="pps-product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">
+                  <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&q=70" alt="Tissue paper rolls" onerror="this.style.display='none'">
+                  <div class="card-label">🧻 Tissue / Hygienic</div>
+                </div>
+                <div class="pps-product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">
+                  <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=300&q=70" alt="Other paper products" onerror="this.style.display='none'">
+                  <div class="card-label">📄 Other Paper</div>
+                </div>
+              </div>
+              <div id="pps-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
+              <!-- Processing efficiency -->
+              <div class="mt-3 pt-3 border-t border-gray-100">
+                <p class="log-input-label">Processing efficiency (0–1)</p>
+                <input id="pps-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.90" class="log-input-field" oninput="onPPsChange()">
+                <p class="text-xs text-gray-400 mt-0.5">Fraction of product carbon that is serviceable (accounts for trim waste). Sawn lumber ≈ 0.90, panels ≈ 0.85.</p>
+                <button onclick="resetPPsEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to category default</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Run -->
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-bold text-teal-800 mb-3 flex items-center gap-2">
+                <span class="bg-teal-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">4</span>
+                Run Product Carbon Tracker
+              </h2>
+              <p class="text-xs text-gray-500 mb-3">Python initializes automatically on first run.</p>
+              <div class="flex flex-wrap gap-2">
+                <button id="btn-pps-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runPPsTracker()">▶ Run Tracker</button>
+                <button id="btn-pps-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearPPsTracker()">Clear</button>
+              </div>
+              <div id="pps-status" class="text-sm text-gray-600 mt-2">Select end-use category, then click Run.</div>
+            </div>
+
+          </div><!-- /left -->
+
+          <!-- RIGHT: Output -->
+          <div class="space-y-5 lg:col-span-2">
+            <div id="pps-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
+              <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Sawn Product Carbon Summary</h2>
+              <div id="pps-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+            </div>
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-lg font-semibold mb-2">Carbon Retained Over Time</h2>
+              <div id="pps-plot-area" class="border rounded-xl h-96"></div>
+            </div>
+            <div class="p-4 bg-white rounded-2xl shadow">
+              <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
+              <div id="pps-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
+              <div class="mt-3">
+                <a id="pps-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">⬇ Download Results</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div><!-- /tab-pps -->
+
+
+      <!-- ===================================================== -->
+      <!-- TAB 5: Research & Team                                 -->
+      <!-- ===================================================== -->
+      <div id="tab-about" class="tab-panel">
+
+        <!-- Hero -->
+        <div class="bg-gradient-to-r from-green-900 via-teal-800 to-green-800 rounded-2xl shadow-lg p-8 mb-6 text-white">
+          <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+            <div class="flex-1">
+              <p class="text-green-300 text-xs font-semibold uppercase tracking-widest mb-1">USDA · Northeastern States Research Cooperative</p>
+              <h2 class="text-2xl font-bold mb-2">Next-Generation Wood Products Carbon Estimator</h2>
+              <p class="text-green-200 text-sm leading-relaxed max-w-xl">A tool for comprehensive stakeholder collaboration and decision-making in forest carbon accounting.</p>
+            </div>
+            <div class="flex gap-4 flex-shrink-0">
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_NSRC.png" alt="NSRC" class="h-14 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_WGL.png" alt="WGL" class="h-14 w-auto object-contain">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-5 gap-6">
+
+          <!-- Team column -->
+          <div class="lg:col-span-2 space-y-5">
+
+            <!-- PI card -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Principal Investigator</h3>
+              <div class="flex items-start gap-3">
+                <div class="team-avatar bg-green-700 text-xl">🌲</div>
+                <div>
+                  <p class="font-bold text-gray-900 text-base">Xinyuan Wei, PhD</p>
+                  <p class="text-xs text-teal-700 font-semibold mt-0.5">Principal Investigator</p>
+                  <p class="text-xs text-gray-500">School of Forest Resources<br>University of Maine, Orono</p>
+                  <a href="mailto:xinyuan.wei@maine.edu" class="text-xs text-indigo-600 hover:underline mt-1 inline-block">xinyuan.wei@maine.edu</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Collaborators -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Research Collaborators</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-blue-600">DH</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Daniel Hayes</p>
+                    <p class="text-xs text-gray-500">University of Maine</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-violet-600">AW</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Aaron Weiskittel</p>
+                    <p class="text-xs text-gray-500">University of Maine</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-amber-600">JZ</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Jianheng Zhao</p>
+                    <p class="text-xs text-gray-500">University of Maine</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Funding -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">Funding</h3>
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
+                <p class="text-xs font-bold text-amber-800 mb-1">USDA — Northeastern States Research Cooperative (NSRC)</p>
+                <p class="text-xs text-amber-700 italic leading-relaxed">Next-generation wood products carbon estimator: a tool for comprehensive stakeholder collaboration and decision-making</p>
+              </div>
+            </div>
+
+            <!-- About the tool -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">Module Overview</h3>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-green-50 rounded-xl p-2.5 text-center">
+                  <div class="text-xl mb-1">🪵</div>
+                  <p class="text-xs font-semibold text-green-800">Log Carbon</p>
+                  <p class="text-xs text-gray-500">Single-log tracking</p>
+                </div>
+                <div class="bg-teal-50 rounded-xl p-2.5 text-center">
+                  <div class="text-xl mb-1">📐</div>
+                  <p class="text-xs font-semibold text-teal-800">Sawn Products</p>
+                  <p class="text-xs text-gray-500">Lumber &amp; panel tracking</p>
+                </div>
+                <div class="bg-indigo-50 rounded-xl p-2.5 text-center">
+                  <div class="text-xl mb-1">🌲</div>
+                  <p class="text-xs font-semibold text-indigo-800">WPs Carbon</p>
+                  <p class="text-xs text-gray-500">Regional aggregate flux</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-2.5 text-center">
+                  <div class="text-xl mb-1">🌍</div>
+                  <p class="text-xs font-semibold text-blue-800">Global WPs</p>
+                  <p class="text-xs text-gray-500">International benchmarks</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Publications column -->
+          <div class="lg:col-span-3 space-y-5">
+
+            <!-- Key citation -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">📌 Key Citation</h3>
+              <div class="pub-card">
+                <p class="text-sm text-gray-800 leading-relaxed">
+                  Wei, X., Zhao, J., Hayes, D., Daigneault, A. &amp; Zhu, H. (2023). A life cycle and product type based estimator for quantifying the carbon stored in wood products.
+                  <em>Carbon Balance and Management</em>. <strong>18</strong>, 1.
+                </p>
+                <a href="https://doi.org/10.1186/s13021-022-00220-y" target="_blank"
+                   class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                  doi.org/10.1186/s13021-022-00220-y ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- Related publications -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">📚 Related Publications</h3>
+              <div class="space-y-3">
+
+                <div class="pub-card">
+                  <p class="text-sm text-gray-800 leading-relaxed">
+                    Li, L., Wei, X., Zhao, J., Hayes, D., Daigneault, A., Weiskittel, A., Kizha, A., &amp; O'Neill, S. (2022).
+                    Technological advancement expands carbon storage in harvested wood products in Maine, USA.
+                    <em>Biomass and Bioenergy</em>. <strong>161</strong>, 106457.
+                  </p>
+                  <a href="https://doi.org/10.1016/j.biombioe.2022.106457" target="_blank"
+                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                    doi.org/10.1016/j.biombioe.2022.106457 ↗
+                  </a>
+                </div>
+
+                <div class="pub-card">
+                  <p class="text-sm text-gray-800 leading-relaxed">
+                    Zhao, J., Wei, X., Diao, J., Chen, H., Lin, S., Zhu, Z., Jiang, X., &amp; Zhu, H. (2023).
+                    Exploring plausible contributions of end-use harvested wood products to store atmospheric carbon in China.
+                    <em>Biomass and Bioenergy</em>. <strong>177</strong>, 106934.
+                  </p>
+                  <a href="https://doi.org/10.1016/j.biombioe.2023.106934" target="_blank"
+                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                    doi.org/10.1016/j.biombioe.2023.106934 ↗
+                  </a>
+                </div>
+
+                <div class="pub-card">
+                  <p class="text-sm text-gray-800 leading-relaxed">
+                    Zhao, J., Wei, X., &amp; Li, L. (2022). The potential ability for storing carbon by harvested wood products.
+                    <em>Frontiers in Forests and Global Change</em>. <strong>5</strong>, 1055410.
+                  </p>
+                  <a href="https://doi.org/10.3389/ffgc.2022.1055410" target="_blank"
+                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                    doi.org/10.3389/ffgc.2022.1055410 ↗
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- /tab-about -->
+
     </main>
 
-    <footer class="mt-8 text-xs text-gray-600">
-      <div class="mx-auto px-4 pb-8 max-w-[1400px]">
-        <p>© 2025 Wood Products Carbon Tracker (Xinyuan Wei, <a class="underline text-indigo-700" href="/cdn-cgi/l/email-protection#f38b9a9d8a86929ddd84969ab39e929a9d96dd969786"><span class="__cf_email__" data-cfemail="2f574641565a4e4101584a466f424e46414a014a4b5a">[email&#160;protected]</span></a>)</p>
-        <div class="flex items-center gap-8 mt-3">
-          <img src="./assets/img/Logo_NSRC.png" alt="Northeastern States Research Cooperative" class="h-16 w-auto md:h-20 object-contain">
-          <img src="./assets/img/Logo_WGL.png"  alt="Wheatland Geospatial Lab"          class="h-16 w-auto md:h-20 object-contain">
-        </div>
+    <footer class="mt-8 border-t border-gray-200 text-xs text-gray-500">
+      <div class="mx-auto px-4 py-4 max-w-[1400px] flex flex-wrap items-center justify-between gap-2">
+        <p>© 2025 Wood Products Carbon Tracker &nbsp;·&nbsp; Xinyuan Wei &nbsp;·&nbsp;
+           <a class="underline text-indigo-600 hover:text-indigo-800" href="mailto:xinyuan.wei@maine.edu">xinyuan.wei@maine.edu</a></p>
+        <p class="text-gray-400">Supported by USDA · NSRC &nbsp;·&nbsp; University of Maine</p>
       </div>
     </footer>
 
@@ -1151,6 +1576,309 @@ json.dumps(out, allow_nan=False)
 
       // Initialise estimate display on page load
       onLogInputChange();
+
+      // ══════════════════════════════════════════════════════════════════════
+      // SAWN PRODUCTS (PPs) CARBON TAB
+      // ══════════════════════════════════════════════════════════════════════
+
+      const PPS_WOOD_PROPS = {
+        softwood: { density: 420, carbonFraction: 0.50 },
+        hardwood: { density: 580, carbonFraction: 0.49 },
+        tropical: { density: 680, carbonFraction: 0.48 },
+      };
+
+      const PPS_EFFICIENCY_DEFAULTS = {
+        'Construction': 0.90, 'Exterior': 0.88, 'Household': 0.85,
+        'Graphic Paper': 0.80, 'Household Paper': 0.80, 'Other Paper': 0.82,
+      };
+
+      const PPS_TYPE_DESC = {
+        lumber:      'Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.',
+        panel:       'Sheet goods (plywood, OSB, MDF, particleboard): enter thickness, width, length.',
+        engineered:  'Structural composite lumber (CLT, LVL, Glulam, I-joist): specify sub-type and cross-section.',
+        other:       'Any other solid wood product: enter total serviceable volume directly.',
+      };
+
+      let currentPPsType = 'lumber';
+      let selectedPPsProduct = null;
+
+      window.setPPsType = function(type) {
+        currentPPsType = type;
+        document.querySelectorAll('.pps-type-btn').forEach(btn => {
+          btn.classList.toggle('selected', btn.dataset.ptype === type);
+        });
+        ['lumber','panel','engineered','other'].forEach(t => {
+          document.getElementById('pps-inputs-' + t).classList.toggle('hidden', t !== type);
+        });
+        document.getElementById('pps-type-desc').textContent = PPS_TYPE_DESC[type];
+        onPPsChange();
+      };
+
+      window.syncPPsDefaults = function() {
+        const wt = document.getElementById('pps-woodtype').value;
+        const props = PPS_WOOD_PROPS[wt];
+        document.getElementById('pps-density').value     = props.density;
+        document.getElementById('pps-carbon-frac').value = props.carbonFraction;
+      };
+
+      window.resetPPsParams = function() {
+        syncPPsDefaults();
+        onPPsChange();
+      };
+
+      window.resetPPsEfficiency = function() {
+        const val = selectedPPsProduct && PPS_EFFICIENCY_DEFAULTS[selectedPPsProduct]
+                    ? PPS_EFFICIENCY_DEFAULTS[selectedPPsProduct] : 0.90;
+        document.getElementById('pps-efficiency').value = val;
+        onPPsChange();
+      };
+
+      function calcPPsVolume() {
+        const t = currentPPsType;
+        if (t === 'lumber') {
+          const th = parseFloat(document.getElementById('pps-thickness').value) / 1000;
+          const w  = parseFloat(document.getElementById('pps-width').value) / 1000;
+          const l  = parseFloat(document.getElementById('pps-length').value);
+          const q  = parseFloat(document.getElementById('pps-qty').value) || 1;
+          if (!th || !w || !l) return null;
+          return { vol: th * w * l * q, label: `${document.getElementById('pps-thickness').value}×${document.getElementById('pps-width').value} mm × ${l} m × ${q} pcs` };
+        } else if (t === 'panel') {
+          const th = parseFloat(document.getElementById('pps-panel-t').value) / 1000;
+          const w  = parseFloat(document.getElementById('pps-panel-w').value);
+          const l  = parseFloat(document.getElementById('pps-panel-l').value);
+          const q  = parseFloat(document.getElementById('pps-panel-q').value) || 1;
+          if (!th || !w || !l) return null;
+          return { vol: th * w * l * q, label: `${document.getElementById('pps-panel-t').value} mm × ${w}×${l} m × ${q} sheets` };
+        } else if (t === 'engineered') {
+          const d  = parseFloat(document.getElementById('pps-eng-d').value) / 1000;
+          const w  = parseFloat(document.getElementById('pps-eng-w').value) / 1000;
+          const l  = parseFloat(document.getElementById('pps-eng-l').value);
+          const q  = parseFloat(document.getElementById('pps-eng-q').value) || 1;
+          const sub = document.getElementById('pps-eng-sub').value.toUpperCase();
+          if (!d || !w || !l) return null;
+          return { vol: d * w * l * q, label: `${sub} ${document.getElementById('pps-eng-d').value}×${document.getElementById('pps-eng-w').value} mm × ${l} m × ${q} pcs` };
+        } else {
+          const vol = parseFloat(document.getElementById('pps-other-vol').value);
+          if (!vol) return null;
+          return { vol, label: document.getElementById('pps-other-desc').value || 'Custom volume' };
+        }
+      }
+
+      window.onPPsChange = function() {
+        const wt = document.getElementById('pps-woodtype').value;
+        const density = parseFloat(document.getElementById('pps-density').value) || PPS_WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('pps-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
+        const eff     = parseFloat(document.getElementById('pps-efficiency').value) || 0.90;
+        const vr = calcPPsVolume();
+        if (vr && vr.vol > 0) {
+          const mass = vr.vol * density;
+          const cTotal = mass * cfrac;
+          const cProduct = cTotal * eff;
+          document.getElementById('pps-estimate').classList.remove('hidden');
+          document.getElementById('pps-estimate-display').innerHTML =
+            `Product: <b>${vr.label}</b><br>` +
+            `Volume: <b>${vr.vol.toFixed(4)} m³</b> &nbsp;|&nbsp; Mass: <b>${mass.toFixed(1)} kg</b><br>` +
+            `Total carbon: <b>${cTotal.toFixed(2)} kg C</b> &nbsp;|&nbsp; ` +
+            `Serviceable carbon: <b>${cProduct.toFixed(2)} kg C</b> (eff. ${(eff*100).toFixed(0)}%)`;
+          // auto-suggest end-use
+          if (!selectedPPsProduct) {
+            const sug = (currentPPsType === 'panel' || currentPPsType === 'engineered') ? 'Construction' : 'Household';
+            selectPPsProduct(sug);
+          }
+        }
+      };
+
+      window.selectPPsProduct = function(name) {
+        selectedPPsProduct = name;
+        document.querySelectorAll('#pps-product-grid .pps-product-card').forEach(card => {
+          card.classList.toggle('selected', card.dataset.product === name);
+        });
+        const effField = document.getElementById('pps-efficiency');
+        if (effField && PPS_EFFICIENCY_DEFAULTS[name]) {
+          const cur = parseFloat(effField.value);
+          const isDefault = Object.values(PPS_EFFICIENCY_DEFAULTS).some(v => Math.abs(v - cur) < 0.001);
+          if (isDefault) effField.value = PPS_EFFICIENCY_DEFAULTS[name];
+        }
+        onPPsChange();
+      };
+
+      function setPPsStatus(msg) { document.getElementById('pps-status').textContent = msg; }
+
+      window.runPPsTracker = async function() {
+        if (!pyReady) {
+          setPPsStatus('⏳ Initializing Python…');
+          await initPy();
+          if (!pyReady) { setPPsStatus('❌ Initialization failed.'); return; }
+        }
+        if (!selectedPPsProduct) { setPPsStatus('Please select an end-use category first.'); return; }
+
+        const wt = document.getElementById('pps-woodtype').value;
+        const nYears  = parseInt(document.getElementById('pps-years').value) || 100;
+        const density = parseFloat(document.getElementById('pps-density').value) || PPS_WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('pps-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
+        const eff     = parseFloat(document.getElementById('pps-efficiency').value) || 0.90;
+        const vr = calcPPsVolume();
+        if (!vr || vr.vol <= 0) { setPPsStatus('Please enter valid product dimensions.'); return; }
+
+        const mass       = vr.vol * density;
+        const cTotal     = mass * cfrac;
+        const carbonKg   = cTotal * eff;   // serviceable carbon entering the product
+        setPPsStatus('Running carbon tracker…');
+
+        try {
+          pyodide.globals.set('pps_carbon_kg',    carbonKg);
+          pyodide.globals.set('pps_product_name', selectedPPsProduct);
+          pyodide.globals.set('pps_n_years',      nYears);
+          pyodide.globals.set('pps_para_path',    '/data/WPs_Tracker_paras.csv');
+
+          const jsonStr = await pyodide.runPythonAsync(`
+import pandas as pd, json, math, sys
+sys.path.append('/app')
+import WPsCT_Functions as wf
+
+para = pd.read_csv(pps_para_path)
+prod = pps_product_name
+n    = int(pps_n_years)
+C0   = float(pps_carbon_kg)
+
+def get_para(product, variable):
+    rows = para.loc[(para['Product'] == product) & (para['Variable'] == variable), 'Parameter']
+    return float(rows.values[0]) if len(rows) > 0 else 0.0
+
+production = [C0] + [0.0] * (n - 1)
+dp1 = get_para(prod, 'disposal_1')
+dp2 = get_para(prod, 'disposal_2')
+dp3 = get_para(prod, 'disposal_3')
+inuse_raw, _ = wf.disposal_CF(n, production, dp1, dp2, dp3)
+inuse_arr = [max(0.0, float(v)) for v in inuse_raw]
+
+landfill_in_raw = []
+for i in range(n):
+    prev = inuse_arr[i-1] if i > 0 else C0
+    landfill_in_raw.append(max(0.0, prev - inuse_arr[i]))
+
+rp1_rows = para.loc[(para['Product'] == prod) & (para['Variable'] == 'recycle_1'), 'Parameter']
+if len(rp1_rows) > 0:
+    rp1 = float(rp1_rows.values[0]); rp2 = get_para(prod, 'recycle_2')
+    rr = [min(1.0, max(0.0, rp1 + rp2 * math.log(max(i+1.0,1e-12)))) for i in range(n)]
+    landfill_in = [landfill_in_raw[i] * (1.0 - rr[i]) for i in range(n)]
+else:
+    landfill_in = landfill_in_raw[:]
+
+lf_map = {
+    'Construction':('con_decay1','con_decay2'),'Exterior':('ext_decay1','ext_decay2'),
+    'Household':('hou_decay1','hou_decay2'),'Graphic Paper':('pap_decay1','pap_decay2'),
+    'Other Paper':('pap_decay1','pap_decay2'),'Household Paper':('pap_decay1','pap_decay2'),
+}
+k2 = get_para('Landfill', lf_map.get(prod, ('con_decay1','con_decay2'))[1])
+decay_rate = math.log(2.0) / max(k2, 0.01)
+lf_pool_arr = [max(0.0, sum(landfill_in[j]*math.exp(-decay_rate*(i-j)) for j in range(i+1))) for i in range(n)]
+
+years_arr      = list(range(1, n+1))
+total_retained = [max(0.0, inuse_arr[i]+lf_pool_arr[i]) for i in range(n)]
+cumul_released = [max(0.0, min(C0, C0-total_retained[i])) for i in range(n)]
+out = {'years':years_arr,'inuse':inuse_arr,'lf_pool':lf_pool_arr,
+       'total_retained':total_retained,'cumul_released':cumul_released,'C0':C0}
+json.dumps(out, allow_nan=False)
+          `);
+
+          const res = JSON.parse(jsonStr);
+          renderPPsResults(res, cTotal, carbonKg, eff, vr, wt, nYears);
+          setPPsStatus(`Done — tracked ${nYears} years for ${selectedPPsProduct} (${vr.label}).`);
+        } catch(err) {
+          console.error(err);
+          setPPsStatus('Run failed. See browser console.');
+        }
+      };
+
+      function renderPPsResults(res, cTotal, carbonKg, eff, vr, wt, nYears) {
+        const finalRetained = res.total_retained[res.total_retained.length-1];
+        const finalReleased = res.cumul_released[res.cumul_released.length-1];
+        const retPct = (finalRetained/carbonKg*100).toFixed(1);
+        const relPct = (finalReleased/carbonKg*100).toFixed(1);
+        const effPct = (eff*100).toFixed(0);
+
+        document.getElementById('pps-summary-badges').innerHTML = `
+          <div class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-200">
+            <span class="text-lg font-bold text-gray-700">${cTotal.toFixed(2)} kg C</span>
+            <span class="text-xs text-gray-500 mt-1 text-center">Total product carbon</span>
+          </div>
+          <div class="flex flex-col items-center p-3 bg-teal-50 rounded-xl border border-teal-200">
+            <span class="text-lg font-bold text-teal-700">${carbonKg.toFixed(2)} kg C</span>
+            <span class="text-xs text-gray-500 mt-1 text-center">Serviceable carbon<br>(${effPct}% efficiency)</span>
+          </div>
+          <div class="flex flex-col items-center p-3 bg-blue-50 rounded-xl border border-blue-200">
+            <span class="text-lg font-bold text-blue-700">${finalRetained.toFixed(2)} kg C</span>
+            <span class="text-xs text-gray-500 mt-1 text-center">Retained at year ${nYears}<br>(${retPct}%)</span>
+          </div>
+          <div class="flex flex-col items-center p-3 bg-red-50 rounded-xl border border-red-200">
+            <span class="text-lg font-bold text-red-600">${finalReleased.toFixed(2)} kg C</span>
+            <span class="text-xs text-gray-500 mt-1 text-center">Released at year ${nYears}<br>(${relPct}%)</span>
+          </div>`;
+        document.getElementById('pps-summary-panel').classList.remove('hidden');
+
+        const traces = [
+          { x:res.years, y:res.total_retained, mode:'lines', name:'Total Retained',
+            line:{color:'#0d9488',width:2.5}, fill:'tozeroy', fillcolor:'rgba(13,148,136,0.08)' },
+          { x:res.years, y:res.inuse, mode:'lines', name:'In-use Pool',
+            line:{color:'#2563eb',width:2,dash:'dot'} },
+          { x:res.years, y:res.lf_pool, mode:'lines', name:'Landfill Pool',
+            line:{color:'#9333ea',width:2,dash:'dash'} },
+          { x:res.years, y:res.cumul_released, mode:'lines', name:'Cumulative Released',
+            line:{color:'#dc2626',width:2}, fill:'tozeroy', fillcolor:'rgba(220,38,38,0.06)' }
+        ];
+        Plotly.newPlot('pps-plot-area', traces, {
+          autosize:true, margin:{l:65,r:20,t:50,b:80},
+          legend:{orientation:'h',y:-0.28},
+          xaxis:{title:{text:'Years after production',standoff:20}},
+          yaxis:{title:{text:'Carbon (kg C)',standoff:12}},
+          title:{text:`Sawn Product Carbon — ${selectedPPsProduct} (${wt}, ${vr.vol.toFixed(4)} m³, eff.${effPct}%)`,font:{size:12}},
+          hovermode:'x unified'
+        }, { responsive:true, displayModeBar:true });
+
+        // Table
+        let html = '<table style="border-collapse:collapse;width:100%;font-size:0.78rem"><thead><tr style="background:#f1f5f9">';
+        ['Year','In-use (kg C)','Landfill Pool (kg C)','Total Retained (kg C)','Cumul. Released (kg C)'].forEach(h => {
+          html += `<th style="border:1px solid #e2e8f0;padding:3px 7px;text-align:right">${h}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+        for (let i=0; i<res.years.length; i++) {
+          if (i>=20 && (i+1)%5!==0) continue;
+          const bg = i%2===0?'#fff':'#f8fafc';
+          html += `<tr style="background:${bg}">`;
+          [res.years[i], res.inuse[i].toFixed(3), res.lf_pool[i].toFixed(3),
+           res.total_retained[i].toFixed(3), res.cumul_released[i].toFixed(3)].forEach(v => {
+            html += `<td style="border:1px solid #e2e8f0;padding:3px 7px;text-align:right">${v}</td>`;
+          });
+          html += '</tr>';
+        }
+        html += '</tbody></table>';
+        document.getElementById('pps-results-preview').innerHTML = html;
+
+        let csv = 'Year,InUse_kgC,LandfillPool_kgC,TotalRetained_kgC,CumulReleased_kgC\n';
+        for (let i=0; i<res.years.length; i++) {
+          csv += `${res.years[i]},${res.inuse[i].toFixed(4)},${res.lf_pool[i].toFixed(4)},${res.total_retained[i].toFixed(4)},${res.cumul_released[i].toFixed(4)}\n`;
+        }
+        const blob = new Blob([csv],{type:'text/csv'});
+        const link = document.getElementById('pps-download-link');
+        link.href = URL.createObjectURL(blob);
+        link.classList.remove('hidden');
+      }
+
+      window.clearPPsTracker = function() {
+        selectedPPsProduct = null;
+        document.querySelectorAll('#pps-product-grid .pps-product-card').forEach(c => c.classList.remove('selected'));
+        document.getElementById('pps-summary-panel').classList.add('hidden');
+        document.getElementById('pps-results-preview').innerHTML = '';
+        document.getElementById('pps-download-link').classList.add('hidden');
+        document.getElementById('pps-estimate').classList.add('hidden');
+        Plotly.purge('pps-plot-area');
+        setPPsStatus('Cleared. Select end-use category, then click Run.');
+      };
+
+      // Init PPs estimate on load
+      onPPsChange();
+
     </script>
   </body>
 </html>
