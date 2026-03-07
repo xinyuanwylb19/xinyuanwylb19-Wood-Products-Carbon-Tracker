@@ -175,12 +175,12 @@
     <!-- ========== TABS NAV ========== -->
     <div class="mx-auto px-4 pt-5 max-w-[1400px]">
       <div class="flex flex-wrap gap-1 border-b-2 border-slate-200">
-        <button class="tab-btn active" onclick="switchTab('log',    this)">ðªµ Industrial Logs</button>
-        <button class="tab-btn"        onclick="switchTab('pps',    this)">ð Sawn Products</button>
-        <button class="tab-btn"        onclick="switchTab('hwp',    this)">ð  End-use Products</button>
-        <button class="tab-btn"        onclick="switchTab('global', this)">ð Global WPs Carbon</button>
-        <button class="tab-btn"        onclick="switchTab('guide',  this)">ð User Guide</button>
-        <button class="tab-btn"        onclick="switchTab('about',  this)">ð³ Research &amp; Team</button>
+        <button class="tab-btn active" onclick="switchTab('log',    this)">🪵 Industrial Logs</button>
+        <button class="tab-btn"        onclick="switchTab('pps',    this)">📐 Sawn Products</button>
+        <button class="tab-btn"        onclick="switchTab('hwp',    this)">🏠 End-use Products</button>
+        <button class="tab-btn"        onclick="switchTab('global', this)">🌍 Global WPs Carbon</button>
+        <button class="tab-btn"        onclick="switchTab('guide',  this)">📖 User Guide</button>
+        <button class="tab-btn"        onclick="switchTab('about',  this)">🌳 Research &amp; Team</button>
       </div>
     </div>
 
@@ -206,12 +206,12 @@
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="dataChoice" id="rb-me" class="h-4 w-4 accent-indigo-600 mt-0.5" checked>
                   <div><span class="font-semibold text-gray-800">Maine, USA</span>
-                  <p class="text-xs text-gray-400">Example dataset Â· 1961â2019</p></div>
+                  <p class="text-xs text-gray-400">Example dataset · 1961–2019</p></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="dataChoice" id="rb-us" class="h-4 w-4 accent-indigo-600 mt-0.5">
                   <div><span class="font-semibold text-gray-800">United States</span>
-                  <p class="text-xs text-gray-400">Example dataset Â· 1961â2020</p></div>
+                  <p class="text-xs text-gray-400">Example dataset · 1961–2020</p></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="dataChoice" id="rb-upload-data" class="h-4 w-4 accent-indigo-600 mt-0.5">
@@ -250,7 +250,7 @@
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="paraChoice" id="rb-default-para" class="h-4 w-4 accent-indigo-600 mt-0.5" checked>
                   <div><span class="font-semibold text-gray-800">Default Parameters</span>
-                  <p class="text-xs text-gray-400">Wei et al. (2023) â CBM</p></div>
+                  <p class="text-xs text-gray-400">Wei et al. (2023) — CBM</p></div>
                 </label>
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600 mt-0.5">
@@ -268,13 +268,13 @@
                 Run Tracker
               </h2>
               <div class="space-y-2">
-                <button id="btn-init" class="btn w-full px-3 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">âï¸ Initialize Python</button>
-                <button id="btn-run"  class="btn w-full px-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" disabled>â¶ Run Carbon Tracker</button>
+                <button id="btn-init" class="btn w-full px-3 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">⚙️ Initialize Python</button>
+                <button id="btn-run"  class="btn w-full px-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" disabled>▶ Run Carbon Tracker</button>
                 <div class="grid grid-cols-2 gap-2">
-                  <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 transition-colors" disabled>ð Input Data</button>
-                  <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors" disabled>ð Carbon Stock</button>
+                  <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 transition-colors" disabled>📊 Input Data</button>
+                  <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors" disabled>📈 Carbon Stock</button>
                 </div>
-                <button id="btn-clear" class="btn w-full px-3 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 transition-colors border border-gray-200">â Clear All</button>
+                <button id="btn-clear" class="btn w-full px-3 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 transition-colors border border-gray-200">✕ Clear All</button>
               </div>
               <div id="status"   class="text-sm text-indigo-700 font-medium mt-3">Click "Initialize Python" to begin.</div>
               <div id="progress" class="text-xs text-gray-400 mt-1"></div>
@@ -282,15 +282,15 @@
 
             <!-- About -->
             <div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
-              <p class="text-xs font-bold text-indigo-800 uppercase tracking-wide mb-1.5">â¹ About</p>
+              <p class="text-xs font-bold text-indigo-800 uppercase tracking-wide mb-1.5">ℹ About</p>
               <p class="text-xs text-indigo-700 leading-relaxed mb-2">Tracks carbon in-use, recycled, landfill, and bioenergy pools across seven product categories using the IPCC-compatible Gaussian disposal model.</p>
               <div class="flex flex-wrap gap-1">
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ð  Construction</span>
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ð Exterior</span>
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ðª Household</span>
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ð° Graphic Paper</span>
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ð§» Household Paper</span>
-                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">ð Other Paper</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🏠 Construction</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🌉 Exterior</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🪑 Household</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">📰 Graphic Paper</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">🧻 Household Paper</span>
+                <span class="text-xs bg-white text-indigo-700 border border-indigo-200 rounded-full px-2 py-0.5">📄 Other Paper</span>
               </div>
             </div>
           </div>
@@ -300,7 +300,7 @@
 
             <!-- Summary badges -->
             <div id="hwp-summary-panel" class="hidden p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Carbon Stock â Latest Year</h2>
+              <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Carbon Stock — Latest Year</h2>
               <div id="hwp-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
 
@@ -324,10 +324,10 @@
 
             <!-- Results table -->
             <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-semibold mb-2 text-gray-700">ð Results Table</h2>
+              <h2 class="text-base font-semibold mb-2 text-gray-700">📋 Results Table</h2>
               <div id="results-preview" class="overflow-auto rounded-xl p-2 max-h-72 text-xs border border-gray-100"></div>
               <div class="mt-3">
-                <a id="download-link" class="hidden inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" download="WPsCT_Results.csv">â¬ Download Results CSV</a>
+                <a id="download-link" class="hidden inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" download="WPsCT_Results.csv">⬇ Download Results CSV</a>
               </div>
             </div>
           </div>
@@ -357,22 +357,22 @@
                 <div class="grid grid-cols-2 gap-2">
                   <button onclick="setVolMethod('cylinder')" data-method="cylinder"
                     class="vol-method-btn selected text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-green-600 bg-green-50 text-green-800 transition-all">
-                    ðªµ Cylinder
+                    🪵 Cylinder
                   </button>
                   <button onclick="setVolMethod('huber')" data-method="huber"
                     class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
-                    ð Huber
+                    📏 Huber
                   </button>
                   <button onclick="setVolMethod('smalian')" data-method="smalian"
                     class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
-                    ð Smalian
+                    📐 Smalian
                   </button>
                   <button onclick="setVolMethod('newton')" data-method="newton"
                     class="vol-method-btn text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600 transition-all">
-                    ð¬ Newton
+                    🔬 Newton
                   </button>
                 </div>
-                <p id="vol-method-desc" class="text-xs text-gray-500 mt-1.5 italic">V = Ï Ã rÂ² Ã L â single diameter, overestimates tapered logs.</p>
+                <p id="vol-method-desc" class="text-xs text-gray-500 mt-1.5 italic">V = π × r² × L — single diameter, overestimates tapered logs.</p>
               </div>
 
               <!-- Cylinder inputs -->
@@ -461,20 +461,20 @@
               <p class="text-xs text-gray-500 mb-3">Default values based on wood type. Edit to override.</p>
               <div class="space-y-3">
                 <div>
-                  <p class="log-input-label">Wood density (kg/mÂ³)</p>
+                  <p class="log-input-label">Wood density (kg/m³)</p>
                   <input id="log-density" type="number" min="100" max="1200" step="1" value="450" class="log-input-field" oninput="onLogInputChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 450 Â· Hardwood default: 600</p>
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 450 · Hardwood default: 600</p>
                 </div>
                 <div>
-                  <p class="log-input-label">Carbon fraction (0â1)</p>
+                  <p class="log-input-label">Carbon fraction (0–1)</p>
                   <input id="log-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onLogInputChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 0.50 Â· Hardwood default: 0.48</p>
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood default: 0.50 · Hardwood default: 0.48</p>
                 </div>
-                <button onclick="resetPhysicalParams()" class="text-xs text-indigo-600 hover:underline mt-1">âº Reset to wood-type defaults</button>
+                <button onclick="resetPhysicalParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to wood-type defaults</button>
               </div>
               <!-- Carbon estimate display -->
               <div id="log-carbon-estimate" class="mt-3 p-2 bg-green-50 rounded-xl text-sm text-green-900 hidden">
-                <div class="font-semibold mb-1">ð Estimated Log Carbon</div>
+                <div class="font-semibold mb-1">📊 Estimated Log Carbon</div>
                 <div id="log-carbon-display" class="text-xs leading-5"></div>
               </div>
             </div>
@@ -487,22 +487,22 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
               <div id="log-product-grid" class="grid grid-cols-2 gap-2">
-                <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">ð  Construction</div>
-                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">ð Exterior</div>
-                <div class="product-card" data-product="Household" onclick="selectProduct('Household')">ðª Household</div>
-                <div class="product-card" data-product="Graphic Paper" onclick="selectProduct('Graphic Paper')">ð° Graphic Paper</div>
-                <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">ð§» Household Paper</div>
-                <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">ð Other Paper</div>
+                <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏠 Construction</div>
+                <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
+                <div class="product-card" data-product="Graphic Paper" onclick="selectProduct('Graphic Paper')">📰 Graphic Paper</div>
+                <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">🧻 Household Paper</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
               </div>
               <div id="log-suggestion-note" class="mt-2 text-xs text-emerald-700 font-medium hidden"></div>
               <!-- Conversion efficiency -->
               <div class="mt-3 pt-3 border-t border-gray-100">
-                <p class="log-input-label">Log-to-product conversion efficiency (0â1)</p>
+                <p class="log-input-label">Log-to-product conversion efficiency (0–1)</p>
                 <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.70" class="log-input-field" oninput="onLogInputChange()">
                 <p class="text-xs text-gray-400 mt-0.5" id="log-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
                 <div class="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-500" id="efficiency-defaults-table">
                 </div>
-                <button onclick="resetEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">âº Reset to product default</button>
+                <button onclick="resetEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to product default</button>
               </div>
             </div>
 
@@ -512,7 +512,7 @@
                 <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">4</span>
                 Run Log Carbon Tracker
               </h2>
-              <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run â no need to visit the HWPs Carbon tab first.</p>
+              <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run — no need to visit the HWPs Carbon tab first.</p>
               <div class="flex flex-wrap gap-2">
                 <button id="btn-log-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runLogTracker()">Run Log Tracker</button>
                 <button id="btn-log-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearLogTracker()">Clear</button>
@@ -526,7 +526,7 @@
 
             <!-- Summary panel -->
             <div id="log-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
-              <h2 class="text-base font-semibold mb-3 text-gray-700">ð Log Carbon Summary</h2>
+              <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Log Carbon Summary</h2>
               <div id="log-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
 
@@ -553,141 +553,144 @@
       <!-- TAB 4: Global WPs Carbon                               -->
       <!-- ===================================================== -->
       <div id="tab-global" class="tab-panel">
-        <section class="grid lg:grid-cols-3 gap-6">
+        <!-- ================================================================ -->
+        <!-- GLOBAL WPs CARBON TAB                                            -->
+        <!-- ================================================================ -->
 
-          <!-- ── LEFT: Controls ─────────────────────────────────────────── -->
-          <div class="space-y-4 lg:col-span-1">
+        <!-- ROW 1: Map + side panel -->
+        <div class="grid lg:grid-cols-3 gap-5 mb-5">
 
-            <!-- Step 1: Select Location -->
-            <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
-                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">1</span>
-                Select Location
-              </h2>
+          <!-- Map (2/3 width) -->
+          <div class="lg:col-span-2 bg-white rounded-2xl shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <h3 class="text-sm font-bold text-gray-800">Global Carbon Storage Map</h3>
+                <p class="text-xs text-gray-400">Total in-use wood C stock, latest available year &mdash; click any country</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500 font-medium">Year:</span>
+                <select id="gl-map-year" onchange="glUpdateMap()"
+                  class="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                  <!-- populated by JS -->
+                </select>
+                <select id="gl-map-metric" onchange="glUpdateMap()"
+                  class="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+                  <option value="inuse">Total In-Use Stock</option>
+                  <option value="lf">Landfill Stock</option>
+                  <option value="biochar">Biochar Stock</option>
+                  <option value="emissions">Biofuel Emissions</option>
+                </select>
+              </div>
+            </div>
+            <div id="gl-map" style="height:360px;"></div>
+            <div id="gl-map-status" class="text-xs text-gray-400 mt-1 text-center min-h-[1rem]">Loading country data&hellip;</div>
+          </div>
 
-              <!-- Type toggle -->
-              <div class="flex rounded-xl overflow-hidden border border-gray-200 mb-3 text-sm font-semibold">
-                <button id="gl-btn-country" onclick="glSetType('country')"
+          <!-- Side panel: country selector + KPIs (1/3 width) -->
+          <div class="lg:col-span-1 space-y-4">
+
+            <!-- Country / Region selector -->
+            <div class="bg-white rounded-2xl shadow p-4">
+              <h3 class="text-sm font-bold text-indigo-800 mb-3">Select Location</h3>
+
+              <!-- Tabs -->
+              <div class="flex rounded-xl overflow-hidden border border-gray-200 mb-3 text-xs font-semibold">
+                <button id="gl-tab-country" onclick="glSwitchListTab('country')"
                   class="flex-1 py-1.5 bg-indigo-600 text-white transition-colors">Country</button>
-                <button id="gl-btn-region" onclick="glSetType('region')"
+                <button id="gl-tab-region" onclick="glSwitchListTab('region')"
                   class="flex-1 py-1.5 bg-white text-gray-500 hover:bg-indigo-50 transition-colors">Region</button>
               </div>
 
-              <!-- Search box -->
-              <input id="gl-search" type="text" placeholder="Search..."
-                class="w-full border border-gray-200 rounded-lg px-3 py-1.5 text-sm mb-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                oninput="glFilterList()">
-
-              <!-- Scrollable list -->
-              <div id="gl-list" class="max-h-52 overflow-y-auto rounded-xl border border-gray-100 bg-gray-50 text-sm">
-                <!-- populated by JS -->
+              <!-- Dropdowns -->
+              <div id="gl-country-panel">
+                <select id="gl-country-select" size="7" onchange="glSelectLocation(this.value)"
+                  class="w-full text-sm border border-gray-200 rounded-xl p-1 focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-gray-50">
+                  <!-- populated by JS -->
+                </select>
+              </div>
+              <div id="gl-region-panel" class="hidden">
+                <select id="gl-region-select" size="7" onchange="glSelectLocation(this.value)"
+                  class="w-full text-sm border border-gray-200 rounded-xl p-1 focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-gray-50">
+                  <!-- populated by JS -->
+                </select>
               </div>
             </div>
 
-            <!-- Step 2: Variables -->
-            <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
-                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                Variables to Plot
-              </h2>
-              <div class="space-y-1 text-sm" id="gl-var-checks">
-                <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-indigo-50">
-                  <input type="checkbox" id="glv-inuse" class="accent-indigo-600" checked> <span>In-Use Stock (by product)</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-indigo-50">
-                  <input type="checkbox" id="glv-lf" class="accent-indigo-600" checked> <span>Landfill Stock</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-indigo-50">
-                  <input type="checkbox" id="glv-biochar" class="accent-indigo-600" checked> <span>Biochar Stock</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-indigo-50">
-                  <input type="checkbox" id="glv-emissions" class="accent-indigo-600"> <span>Biofuel Emissions</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer p-1.5 rounded-lg hover:bg-indigo-50">
-                  <input type="checkbox" id="glv-lfdecay" class="accent-indigo-600"> <span>Landfill Decay</span>
-                </label>
+            <!-- KPI cards for selected location -->
+            <div id="gl-kpi-box" class="bg-white rounded-2xl shadow p-4 hidden">
+              <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3" id="gl-kpi-title">—</h3>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="rounded-xl bg-indigo-50 p-2 text-center">
+                  <p class="text-xs text-indigo-400 font-medium">In-Use Stock</p>
+                  <p id="gl-kpi-inuse" class="text-base font-bold text-indigo-700">—</p>
+                </div>
+                <div class="rounded-xl bg-amber-50 p-2 text-center">
+                  <p class="text-xs text-amber-400 font-medium">Landfill Stock</p>
+                  <p id="gl-kpi-lf" class="text-base font-bold text-amber-700">—</p>
+                </div>
+                <div class="rounded-xl bg-yellow-50 p-2 text-center">
+                  <p class="text-xs text-yellow-600 font-medium">Biochar Stock</p>
+                  <p id="gl-kpi-biochar" class="text-base font-bold text-yellow-800">—</p>
+                </div>
+                <div class="rounded-xl bg-orange-50 p-2 text-center">
+                  <p class="text-xs text-orange-400 font-medium">Fuel Emissions</p>
+                  <p id="gl-kpi-emis" class="text-base font-bold text-orange-600">—</p>
+                </div>
               </div>
+              <p class="text-xs text-gray-300 text-right mt-2" id="gl-kpi-year-note">—</p>
             </div>
 
-            <!-- Step 3: Units -->
-            <div class="p-4 bg-white rounded-2xl shadow">
-              <h2 class="text-base font-bold text-indigo-800 mb-3 flex items-center gap-2">
-                <span class="bg-indigo-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                Display Units
-              </h2>
-              <div class="flex rounded-xl overflow-hidden border border-gray-200 text-sm font-semibold">
-                <button id="gl-unit-tg" onclick="glSetUnit('Tg')"
-                  class="flex-1 py-1.5 bg-indigo-600 text-white transition-colors">Tg C</button>
-                <button id="gl-unit-pg" onclick="glSetUnit('Pg')"
-                  class="flex-1 py-1.5 bg-white text-gray-500 hover:bg-indigo-50 transition-colors">Pg C</button>
-                <button id="gl-unit-kg" onclick="glSetUnit('kg')"
-                  class="flex-1 py-1.5 bg-white text-gray-500 hover:bg-indigo-50 transition-colors">kg C</button>
-              </div>
-              <p class="text-xs text-gray-400 mt-2">1 Tg C = 10⁹ kg C &nbsp;·&nbsp; 1 Pg C = 10¹² kg C</p>
-            </div>
+          </div>
+        </div><!-- /ROW 1 -->
 
-            <!-- Load button -->
-            <button onclick="glLoad()"
-              class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow transition-colors">
-              Load &amp; Plot
+        <!-- ROW 2: Time-series charts -->
+        <div class="grid lg:grid-cols-2 gap-5 mb-5">
+
+          <!-- Carbon storage over time -->
+          <div class="bg-white rounded-2xl shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-bold text-gray-800">Carbon Storage Over Time</h3>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500">Unit:</span>
+                <div class="flex rounded-lg overflow-hidden border border-gray-200 text-xs font-semibold">
+                  <button id="gl-u-tg" onclick="glSetUnit('Tg')" class="px-2 py-1 bg-indigo-600 text-white transition-colors">Tg C</button>
+                  <button id="gl-u-pg" onclick="glSetUnit('Pg')" class="px-2 py-1 bg-white text-gray-500 hover:bg-indigo-50 transition-colors">Pg C</button>
+                  <button id="gl-u-kg" onclick="glSetUnit('kg')" class="px-2 py-1 bg-white text-gray-500 hover:bg-indigo-50 transition-colors">kg C</button>
+                </div>
+              </div>
+            </div>
+            <div id="gl-chart-stock" style="height:280px;"></div>
+          </div>
+
+          <!-- Emissions / decay over time -->
+          <div class="bg-white rounded-2xl shadow p-4">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-bold text-gray-800">Carbon Emissions &amp; Decay</h3>
+              <div class="flex flex-wrap gap-1 text-xs">
+                <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-emis" class="accent-indigo-600" checked> Biofuel Emis.</label>
+                <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-lfdecay" class="accent-indigo-600" checked> LF Decay</label>
+                <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-bcdecay" class="accent-indigo-600"> Biochar Decay</label>
+                <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-lfinflow" class="accent-indigo-600"> LF Inflow</label>
+              </div>
+            </div>
+            <div id="gl-chart-emis" style="height:280px;"></div>
+          </div>
+        </div><!-- /ROW 2 -->
+
+        <!-- ROW 3: Summary table + download -->
+        <div class="bg-white rounded-2xl shadow p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-gray-800">Summary Table <span id="gl-table-title" class="font-normal text-gray-400"></span></h3>
+            <button onclick="glDownloadCSV()" id="gl-dl-btn"
+              class="hidden text-xs px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 font-semibold hover:bg-indigo-100 transition-colors">
+              Download CSV
             </button>
-
-            <!-- Status -->
-            <p id="gl-status" class="text-xs text-gray-400 text-center min-h-[1.2rem]"></p>
           </div>
-
-          <!-- ── RIGHT: Charts + KPIs ──────────────────────────────────── -->
-          <div class="space-y-4 lg:col-span-2">
-
-            <!-- KPI cards -->
-            <div id="gl-kpi-row" class="grid grid-cols-2 sm:grid-cols-4 gap-3 hidden">
-              <div class="bg-white rounded-2xl shadow p-3 text-center">
-                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Total In-Use</p>
-                <p id="gl-kpi-inuse" class="text-lg font-bold text-indigo-700">—</p>
-              </div>
-              <div class="bg-white rounded-2xl shadow p-3 text-center">
-                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Landfill Stock</p>
-                <p id="gl-kpi-lf" class="text-lg font-bold text-amber-600">—</p>
-              </div>
-              <div class="bg-white rounded-2xl shadow p-3 text-center">
-                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Biochar Stock</p>
-                <p id="gl-kpi-biochar" class="text-lg font-bold text-yellow-800">—</p>
-              </div>
-              <div class="bg-white rounded-2xl shadow p-3 text-center">
-                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Annual Fuel Emis.</p>
-                <p id="gl-kpi-emis" class="text-lg font-bold text-orange-500">—</p>
-              </div>
-            </div>
-
-            <!-- Carbon stock chart -->
-            <div class="bg-white rounded-2xl shadow p-4">
-              <h3 class="text-sm font-bold text-gray-700 mb-2">Carbon Storage Over Time</h3>
-              <div id="gl-chart-stock" style="height:300px;"></div>
-            </div>
-
-            <!-- Emissions / decay chart -->
-            <div class="bg-white rounded-2xl shadow p-4">
-              <h3 class="text-sm font-bold text-gray-700 mb-2">Carbon Emissions &amp; Decay Over Time</h3>
-              <div id="gl-chart-emis" style="height:260px;"></div>
-            </div>
-
-            <!-- Data table -->
-            <div class="bg-white rounded-2xl shadow p-4">
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="text-sm font-bold text-gray-700">Summary Table (latest 10 years)</h3>
-                <button onclick="glDownloadCSV()"
-                  id="gl-dl-btn"
-                  class="hidden text-xs px-3 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-semibold hover:bg-indigo-100 transition-colors">
-                  Download CSV
-                </button>
-              </div>
-              <div id="gl-table" class="overflow-x-auto text-xs text-gray-600">
-                <p class="text-gray-400 italic">Select a location and click "Load &amp; Plot".</p>
-              </div>
-            </div>
-
+          <div id="gl-table" class="overflow-x-auto">
+            <p class="text-gray-400 italic text-sm">Click a country on the map or select from the list to view data.</p>
           </div>
-        </section>
+        </div>
+
       </div><!-- /tab-global -->
 
 
@@ -712,28 +715,28 @@
               <div class="grid grid-cols-2 gap-2 mb-3">
                 <button onclick="setPPsType('lumber')" data-ptype="lumber"
                   class="pps-type-btn selected text-xs font-semibold px-2 py-2 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-800">
-                  ðª Lumber / Timber
+                  🪚 Lumber / Timber
                 </button>
                 <button onclick="setPPsType('panel')" data-ptype="panel"
                   class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
-                  ð« Panel / Board
+                  🟫 Panel / Board
                 </button>
                 <button onclick="setPPsType('engineered')" data-ptype="engineered"
                   class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
-                  ðï¸ Engineered Wood
+                  🏗️ Engineered Wood
                 </button>
                 <button onclick="setPPsType('other')" data-ptype="other"
                   class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
-                  ð¦ Other Solid Wood
+                  📦 Other Solid Wood
                 </button>
               </div>
-              <p id="pps-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2Ã4, 2Ã6, glulam beams, etc.): enter thickness, width, length.</p>
+              <p id="pps-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.</p>
 
               <!-- Lumber inputs -->
               <div id="pps-inputs-lumber" class="space-y-2">
                 <div><p class="log-input-label">Thickness (mm)</p>
                   <input id="pps-thickness" type="number" min="1" max="500" step="1" value="38" class="log-input-field" oninput="onPPsChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Nominal 2â³ = 38 mm; 4â³ = 89 mm</p></div>
+                  <p class="text-xs text-gray-400 mt-0.5">Nominal 2″ = 38 mm; 4″ = 89 mm</p></div>
                 <div><p class="log-input-label">Width (mm)</p>
                   <input id="pps-width" type="number" min="1" max="1000" step="1" value="89" class="log-input-field" oninput="onPPsChange()"></div>
                 <div><p class="log-input-label">Length (m)</p>
@@ -747,7 +750,7 @@
               <div id="pps-inputs-panel" class="space-y-2 hidden">
                 <div><p class="log-input-label">Thickness (mm)</p>
                   <input id="pps-panel-t" type="number" min="1" max="200" step="0.5" value="18" class="log-input-field" oninput="onPPsChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Plywood/OSB: 12â19 mm; MDF: 16â25 mm</p></div>
+                  <p class="text-xs text-gray-400 mt-0.5">Plywood/OSB: 12–19 mm; MDF: 16–25 mm</p></div>
                 <div><p class="log-input-label">Width (m)</p>
                   <input id="pps-panel-w" type="number" min="0.1" max="10" step="0.01" value="1.22" class="log-input-field" oninput="onPPsChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Standard 4 ft = 1.22 m</p></div>
@@ -781,7 +784,7 @@
 
               <!-- Other Solid Wood -->
               <div id="pps-inputs-other" class="space-y-2 hidden">
-                <div><p class="log-input-label">Total volume (mÂ³)</p>
+                <div><p class="log-input-label">Total volume (m³)</p>
                   <input id="pps-other-vol" type="number" min="0.001" max="10000" step="0.001" value="0.1" class="log-input-field" oninput="onPPsChange()"></div>
                 <div><p class="log-input-label">Description (optional)</p>
                   <input id="pps-other-desc" type="text" placeholder="e.g. wood pallet, railway tie, round post" class="log-input-field"></div>
@@ -791,9 +794,9 @@
               <div class="space-y-2 mt-3 pt-3 border-t border-gray-100">
                 <div><p class="log-input-label">Wood species / type</p>
                   <select id="pps-woodtype" class="log-input-field" onchange="syncPPsDefaults(); onPPsChange()">
-                    <option value="softwood">Softwood â Pine, Spruce, Fir, Cedar</option>
-                    <option value="hardwood">Hardwood â Oak, Maple, Birch, Ash</option>
-                    <option value="tropical">Tropical Hardwood â Teak, Meranti, Ipe</option>
+                    <option value="softwood">Softwood — Pine, Spruce, Fir, Cedar</option>
+                    <option value="hardwood">Hardwood — Oak, Maple, Birch, Ash</option>
+                    <option value="tropical">Tropical Hardwood — Teak, Meranti, Ipe</option>
                   </select></div>
                 <div><p class="log-input-label">Tracking horizon (years)</p>
                   <input id="pps-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onPPsChange()"></div>
@@ -808,17 +811,17 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Oven-dry density and carbon fraction defaults by species.</p>
               <div class="space-y-2">
-                <div><p class="log-input-label">Oven-dry density (kg/mÂ³)</p>
+                <div><p class="log-input-label">Oven-dry density (kg/m³)</p>
                   <input id="pps-density" type="number" min="100" max="1200" step="1" value="420" class="log-input-field" oninput="onPPsChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Softwood â 420 Â· Hardwood â 580 Â· Tropical â 680</p></div>
-                <div><p class="log-input-label">Carbon fraction (0â1)</p>
+                  <p class="text-xs text-gray-400 mt-0.5">Softwood ≈ 420 · Hardwood ≈ 580 · Tropical ≈ 680</p></div>
+                <div><p class="log-input-label">Carbon fraction (0–1)</p>
                   <input id="pps-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onPPsChange()">
-                  <p class="text-xs text-gray-400 mt-0.5">Typical range: 0.47â0.51</p></div>
-                <button onclick="resetPPsParams()" class="text-xs text-indigo-600 hover:underline mt-1">âº Reset to species defaults</button>
+                  <p class="text-xs text-gray-400 mt-0.5">Typical range: 0.47–0.51</p></div>
+                <button onclick="resetPPsParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to species defaults</button>
               </div>
               <!-- Carbon estimate -->
               <div id="pps-estimate" class="mt-3 p-2 bg-teal-50 rounded-xl text-sm text-teal-900 hidden">
-                <div class="font-semibold mb-1">ð Estimated Product Carbon</div>
+                <div class="font-semibold mb-1">📊 Estimated Product Carbon</div>
                 <div id="pps-estimate-display" class="text-xs leading-5"></div>
               </div>
             </div>
@@ -831,20 +834,20 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select service-life category. Determines disposal &amp; decay parameters.</p>
               <div id="pps-product-grid" class="grid grid-cols-2 gap-2">
-                <div class="product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">ð  Construction</div>
-                <div class="product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">ð Exterior</div>
-                <div class="product-card" data-product="Household" onclick="selectPPsProduct('Household')">ðª Furniture / Interior</div>
-                <div class="product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">ð° Graphic Paper</div>
-                <div class="product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">ð§» Tissue / Hygienic</div>
-                <div class="product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">ð Other Paper</div>
+                <div class="product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">🏠 Construction</div>
+                <div class="product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectPPsProduct('Household')">🪑 Furniture / Interior</div>
+                <div class="product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">📰 Graphic Paper</div>
+                <div class="product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">🧻 Tissue / Hygienic</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">📄 Other Paper</div>
               </div>
               <div id="pps-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
               <!-- Processing efficiency -->
               <div class="mt-3 pt-3 border-t border-gray-100">
-                <p class="log-input-label">Processing efficiency (0â1)</p>
+                <p class="log-input-label">Processing efficiency (0–1)</p>
                 <input id="pps-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.90" class="log-input-field" oninput="onPPsChange()">
-                <p class="text-xs text-gray-400 mt-0.5">Fraction of product carbon that is serviceable (accounts for trim waste). Sawn lumber â 0.90, panels â 0.85.</p>
-                <button onclick="resetPPsEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">âº Reset to category default</button>
+                <p class="text-xs text-gray-400 mt-0.5">Fraction of product carbon that is serviceable (accounts for trim waste). Sawn lumber ≈ 0.90, panels ≈ 0.85.</p>
+                <button onclick="resetPPsEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to category default</button>
               </div>
             </div>
 
@@ -856,7 +859,7 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Python initializes automatically on first run.</p>
               <div class="flex flex-wrap gap-2">
-                <button id="btn-pps-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runPPsTracker()">â¶ Run Tracker</button>
+                <button id="btn-pps-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runPPsTracker()">▶ Run Tracker</button>
                 <button id="btn-pps-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearPPsTracker()">Clear</button>
               </div>
               <div id="pps-status" class="text-sm text-gray-600 mt-2">Select end-use category, then click Run.</div>
@@ -867,7 +870,7 @@
           <!-- RIGHT: Output -->
           <div class="space-y-5 lg:col-span-2">
             <div id="pps-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
-              <h2 class="text-base font-semibold mb-3 text-gray-700">ð Sawn Product Carbon Summary</h2>
+              <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Sawn Product Carbon Summary</h2>
               <div id="pps-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
             <div class="p-4 bg-white rounded-2xl shadow">
@@ -878,7 +881,7 @@
               <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
               <div id="pps-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
               <div class="mt-3">
-                <a id="pps-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">â¬ Download Results</a>
+                <a id="pps-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">⬇ Download Results</a>
               </div>
             </div>
           </div>
@@ -920,12 +923,12 @@
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Principal Investigator</h3>
               <div class="flex items-start gap-3">
-                <div class="team-avatar bg-green-700 text-xl">ð²</div>
+                <div class="team-avatar bg-green-700 text-xl">🌲</div>
                 <div>
                   <p class="font-bold text-gray-900 text-base">Xinyuan Wei, PhD</p>
                   <p class="text-xs text-teal-700 font-semibold mt-0.5">Principal Investigator</p>
                   <p class="text-xs text-gray-500">School of Forest Resources<br>University of Maine, Orono</p>
-                  <a href="/cdn-cgi/l/email-protection#146c7d7a6d61757a3a63717d5479757d7a713a717061" class="text-xs text-indigo-600 hover:underline mt-1 inline-block"><span class="__cf_email__" data-cfemail="aed6c7c0d7dbcfc080d9cbc7eec3cfc7c0cb80cbcadb">[email&#160;protected]</span></a>
+                  <a href="/cdn-cgi/l/email-protection#e49c8d8a9d91858aca93818da489858d8a81ca818091" class="text-xs text-indigo-600 hover:underline mt-1 inline-block"><span class="__cf_email__" data-cfemail="1f677671666a7e7131687a765f727e76717a317a7b6a">[email&#160;protected]</span></a>
                 </div>
               </div>
             </div>
@@ -939,7 +942,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Daniel Hayes</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="/cdn-cgi/l/email-protection#4c282d22252920622662242d35293f0c212d25222962292839" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="7f1b1e11161a13511551171e061a0c3f121e16111a511a1b0a">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#492d2827202c256723672128302c3a09242820272c672c2d3c" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="89ede8e7e0ece5a7e3a7e1e8f0ecfac9e4e8e0e7eca7ecedfc">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -947,7 +950,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Aaron Weiskittel</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="/cdn-cgi/l/email-protection#c4a5a5b6abaaeab3a1adb7afadb0b0a1a884a9a5adaaa1eaa1a0b1" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="3b5a5a495455154c5e524850524f4f5e577b565a52555e155e5f4e">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#5d3c3c2f3233732a38342e3634292938311d303c34333873383928" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="accdcddec3c282dbc9c5dfc7c5d8d8c9c0ecc1cdc5c2c982c9c8d9">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -955,7 +958,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Jianheng Zhao</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="/cdn-cgi/l/email-protection#2943404847414c474e075341484669444840474c074c4d5c" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="a0cac9c1cec8c5cec78edac8c1cfe0cdc1c9cec58ec5c4d5">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#8ce6e5ede2e4e9e2eba2f6e4ede3cce1ede5e2e9a2e9e8f9" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="c1aba8a0afa9a4afa6efbba9a0ae81aca0a8afa4efa4a5b4">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -963,7 +966,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Ling Li</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="/cdn-cgi/l/email-protection#abc7c2c5cc85c7c2ebc6cac2c5ce85cecfde" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="523e3b3c357c3e3b123f333b3c377c373627">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#3a5653545d1456537a575b53545f145f5e4f" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="fd9194939ad39194bd909c949398d3989988">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -971,7 +974,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Adam Daigneault</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="/cdn-cgi/l/email-protection#4b2a2f2a26652f2a222c252e2a3e273f0b262a22252e652e2f3e" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="e485808589ca80858d838a8185918890a489858d8a81ca818091">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#3a5b5e5b57145e5b535d545f5b4f564e7a575b53545f145f5e4f" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="d9b8bdb8b4f7bdb8b0beb7bcb8acb5ad99b4b8b0b7bcf7bcbdac">[email&#160;protected]</span></a>
                   </div>
                 </div>
               </div>
@@ -982,11 +985,11 @@
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">Funding</h3>
               <div class="space-y-3">
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
-                  <p class="text-xs font-bold text-amber-800 mb-1">USDA â Northeastern States Research Cooperative (NSRC)</p>
+                  <p class="text-xs font-bold text-amber-800 mb-1">USDA — Northeastern States Research Cooperative (NSRC)</p>
                   <p class="text-xs text-amber-700 italic leading-relaxed">Next-generation wood products carbon estimator: a tool for comprehensive stakeholder collaboration and decision-making</p>
                 </div>
                 <div class="bg-amber-50 border border-amber-200 rounded-xl p-3">
-                  <p class="text-xs font-bold text-amber-800 mb-1">NASA â Carbon Monitoring System</p>
+                  <p class="text-xs font-bold text-amber-800 mb-1">NASA — Carbon Monitoring System</p>
                   <p class="text-xs text-amber-700 italic leading-relaxed mb-1">Supporting Stakeholder Data Requirements for Decision-Making in Managed Forests: A Landscape Model-Data Framework for High Resolution Carbon Accounting and Uncertainty Estimation</p>
                   <p class="text-xs text-amber-700 leading-relaxed italic">Phase 2 prototype development of a scalable MRV framework that integrates inventory data, remote sensing, and landscape modeling to support stakeholder decision-making for carbon in managed forests</p>
                 </div>
@@ -998,22 +1001,22 @@
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">Module Overview</h3>
               <div class="grid grid-cols-2 gap-2">
                 <div class="bg-green-50 rounded-xl p-2.5 text-center">
-                  <div class="text-xl mb-1">ðªµ</div>
+                  <div class="text-xl mb-1">🪵</div>
                   <p class="text-xs font-semibold text-green-800">Industrial Logs</p>
                   <p class="text-xs text-gray-500">Single-log carbon tracking from harvest</p>
                 </div>
                 <div class="bg-teal-50 rounded-xl p-2.5 text-center">
-                  <div class="text-xl mb-1">ð</div>
+                  <div class="text-xl mb-1">📐</div>
                   <p class="text-xs font-semibold text-teal-800">Sawn Products</p>
                   <p class="text-xs text-gray-500">Lumber, panels &amp; engineered wood</p>
                 </div>
                 <div class="bg-indigo-50 rounded-xl p-2.5 text-center">
-                  <div class="text-xl mb-1">ð </div>
+                  <div class="text-xl mb-1">🏠</div>
                   <p class="text-xs font-semibold text-indigo-800">End-use Products</p>
                   <p class="text-xs text-gray-500">Regional wood products carbon flux</p>
                 </div>
                 <div class="bg-blue-50 rounded-xl p-2.5 text-center">
-                  <div class="text-xl mb-1">ð</div>
+                  <div class="text-xl mb-1">🌍</div>
                   <p class="text-xs font-semibold text-blue-800">Global WPs Carbon</p>
                   <p class="text-xs text-gray-500">Country-level comparisons &amp; benchmarks</p>
                 </div>
@@ -1026,7 +1029,7 @@
 
             <!-- Carbon Flow Diagram -->
             <div class="p-5 bg-white rounded-2xl shadow">
-              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">ð Carbon Flow Framework</h3>
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-3">🔄 Carbon Flow Framework</h3>
               <img src="./assets/img/WPs_Carbon Flow.png"
                    alt="Wood Products Carbon Flow Diagram"
                    class="w-full rounded-xl border border-gray-100 shadow-sm object-contain max-h-80"
@@ -1036,7 +1039,7 @@
 
             <!-- Key citation -->
             <div class="p-5 bg-white rounded-2xl shadow">
-              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">ð Key Citation</h3>
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">📌 Key Citation</h3>
               <div class="pub-card">
                 <p class="text-sm text-gray-800 leading-relaxed">
                   Wei, X., Zhao, J., Hayes, D., Daigneault, A. &amp; Zhu, H. (2023). A life cycle and product type based estimator for quantifying the carbon stored in wood products.
@@ -1044,14 +1047,14 @@
                 </p>
                 <a href="https://doi.org/10.1186/s13021-022-00220-y" target="_blank"
                    class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
-                  doi.org/10.1186/s13021-022-00220-y â
+                  doi.org/10.1186/s13021-022-00220-y ↗
                 </a>
               </div>
             </div>
 
             <!-- Related publications -->
             <div class="p-5 bg-white rounded-2xl shadow">
-              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">ð Related Publications</h3>
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">📚 Related Publications</h3>
               <div class="space-y-3">
 
                 <div class="pub-card">
@@ -1062,7 +1065,7 @@
                   </p>
                   <a href="https://doi.org/10.1016/j.biombioe.2023.106934" target="_blank"
                      class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
-                    doi.org/10.1016/j.biombioe.2023.106934 â
+                    doi.org/10.1016/j.biombioe.2023.106934 ↗
                   </a>
                 </div>
 
@@ -1073,7 +1076,7 @@
                   </p>
                   <a href="https://doi.org/10.3389/ffgc.2022.1055410" target="_blank"
                      class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
-                    doi.org/10.3389/ffgc.2022.1055410 â
+                    doi.org/10.3389/ffgc.2022.1055410 ↗
                   </a>
                 </div>
 
@@ -1085,7 +1088,7 @@
                   </p>
                   <a href="https://doi.org/10.1016/j.biombioe.2022.106457" target="_blank"
                      class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
-                    doi.org/10.1016/j.biombioe.2022.106457 â
+                    doi.org/10.1016/j.biombioe.2022.106457 ↗
                   </a>
                 </div>
 
@@ -1108,20 +1111,20 @@
           <div class="bg-gradient-to-r from-indigo-700 to-teal-600 rounded-2xl p-6 text-white">
             <div class="flex items-start justify-between gap-4 flex-wrap">
               <div>
-                <h1 class="text-2xl font-bold mb-1">ð User Guide</h1>
+                <h1 class="text-2xl font-bold mb-1">📖 User Guide</h1>
                 <p class="text-indigo-100 text-sm">How to prepare data, run the tracker, and interpret results</p>
-                <p class="text-indigo-200 text-xs mt-1">Based on: Wei et al. (2023) Â· Carbon Balance and Management 18:1</p>
+                <p class="text-indigo-200 text-xs mt-1">Based on: Wei et al. (2023) · Carbon Balance and Management 18:1</p>
               </div>
               <a href="./assets/docs/WPsCT_UserManual.docx" download
                  class="flex items-center gap-2 px-4 py-2.5 bg-white text-indigo-700 rounded-xl text-sm font-bold hover:bg-indigo-50 transition-colors shadow">
-                â¬ Download Full Manual (.docx)
+                ⬇ Download Full Manual (.docx)
               </a>
             </div>
           </div>
 
           <!-- Quick-start -->
           <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-4">â¡ Quick Start â End-use Products Tracker</h2>
+            <h2 class="text-lg font-bold text-indigo-800 mb-4">⚡ Quick Start — End-use Products Tracker</h2>
             <ol class="space-y-3">
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">1</span>
@@ -1135,17 +1138,17 @@
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">3</span>
-                <div><p class="font-semibold text-gray-800 text-sm">âï¸ Initialize Python</p>
-                <p class="text-gray-500 text-xs mt-0.5">Click "Initialize Python". The first load downloads the Python runtime (~50 MB, 30â90 sec). Subsequent loads within the same session are instant.</p></div>
+                <div><p class="font-semibold text-gray-800 text-sm">⚙️ Initialize Python</p>
+                <p class="text-gray-500 text-xs mt-0.5">Click "Initialize Python". The first load downloads the Python runtime (~50 MB, 30–90 sec). Subsequent loads within the same session are instant.</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-600 text-white text-sm font-bold flex items-center justify-center">4</span>
-                <div><p class="font-semibold text-gray-800 text-sm">â¶ Run Carbon Tracker</p>
+                <div><p class="font-semibold text-gray-800 text-sm">▶ Run Carbon Tracker</p>
                 <p class="text-gray-500 text-xs mt-0.5">Runs the full life-cycle model. Results appear in the table; the Download button activates.</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white text-sm font-bold flex items-center justify-center">5</span>
-                <div><p class="font-semibold text-gray-800 text-sm">ð Plot &amp; Explore</p>
+                <div><p class="font-semibold text-gray-800 text-sm">📊 Plot &amp; Explore</p>
                 <p class="text-gray-500 text-xs mt-0.5">Use "Plot Input" and "Plot Carbon Stock" to visualise production trends and accumulated carbon pools. Hover charts for exact values.</p></div>
               </li>
             </ol>
@@ -1153,7 +1156,7 @@
 
           <!-- Input CSV -->
           <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-1">ð Input Data CSV Format</h2>
+            <h2 class="text-lg font-bold text-indigo-800 mb-1">📂 Input Data CSV Format</h2>
             <p class="text-sm text-gray-500 mb-4">The production data file must be a comma-separated (.csv) file with the following columns. All numeric values must be in <strong>kg C per year</strong>.</p>
 
             <div class="overflow-x-auto rounded-xl border border-gray-100">
@@ -1166,15 +1169,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-bold text-indigo-700">Year</td><td class="px-3 py-2">â</td><td class="px-3 py-2">Calendar year (integer). Required. No gaps.</td></tr>
-                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Biofuel</td><td class="px-3 py-2">Bioenergy</td><td class="px-3 py-2">Annual biofuel combustion (kg C/yr) â industrial + residential fuel wood.</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono font-bold text-indigo-700">Year</td><td class="px-3 py-2">—</td><td class="px-3 py-2">Calendar year (integer). Required. No gaps.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Biofuel</td><td class="px-3 py-2">Bioenergy</td><td class="px-3 py-2">Annual biofuel combustion (kg C/yr) — industrial + residential fuel wood.</td></tr>
                   <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Biochar</td><td class="px-3 py-2">Charcoal</td><td class="px-3 py-2">Non-energy use biochar production (kg C/yr).</td></tr>
-                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Construction</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Wood in building construction â sawnwood, structural panels (kg C/yr).</td></tr>
-                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Exterior</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Exterior products â railway ties, wood decking, dock materials (kg C/yr). No recycling.</td></tr>
-                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Household</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Home application â furniture, flooring, interior millwork (kg C/yr).</td></tr>
-                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Graphic Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Printing &amp; writing paper, newsprint (kg C/yr). Service half-life Î³ = 6 yr.</td></tr>
-                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Household Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Tissue, toweling, sanitary paper (kg C/yr). Service half-life Î³ = 0.5 yr. No recycling.</td></tr>
-                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Other Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Packaging, cardboard, industrial paperboard (kg C/yr). Service half-life Î³ = 1 yr.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Construction</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Wood in building construction — sawnwood, structural panels (kg C/yr).</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Exterior</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Exterior products — railway ties, wood decking, dock materials (kg C/yr). No recycling.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Household</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Home application — furniture, flooring, interior millwork (kg C/yr).</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Graphic Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Printing &amp; writing paper, newsprint (kg C/yr). Service half-life γ = 6 yr.</td></tr>
+                  <tr class="bg-white"><td class="px-3 py-2 font-mono text-indigo-700">Household Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Tissue, toweling, sanitary paper (kg C/yr). Service half-life γ = 0.5 yr. No recycling.</td></tr>
+                  <tr class="bg-gray-50"><td class="px-3 py-2 font-mono text-indigo-700">Other Paper</td><td class="px-3 py-2">End-use</td><td class="px-3 py-2">Packaging, cardboard, industrial paperboard (kg C/yr). Service half-life γ = 1 yr.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1187,12 +1190,12 @@
 1962,282588127,12004344,188776252,99492208,170293682,169884778,270564088,56458288
 1963,293701143,17763045,189602353,71383467,163003331,179487717,297712002,55771351</pre>
             </div>
-            <p class="text-xs text-gray-400 mt-2">ð¡ To convert from dry biomass weight to kg C: multiply by <strong>0.50</strong> (wood carbon fraction â 50%).</p>
+            <p class="text-xs text-gray-400 mt-2">💡 To convert from dry biomass weight to kg C: multiply by <strong>0.50</strong> (wood carbon fraction ≈ 50%).</p>
           </div>
 
           <!-- Parameters CSV -->
           <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-1">âï¸ Parameters CSV Format</h2>
+            <h2 class="text-lg font-bold text-indigo-800 mb-1">⚙️ Parameters CSV Format</h2>
             <p class="text-sm text-gray-500 mb-4">The parameters file has exactly three columns: <code class="bg-gray-100 px-1 rounded font-mono text-xs">Product</code>, <code class="bg-gray-100 px-1 rounded font-mono text-xs">Variable</code>, <code class="bg-gray-100 px-1 rounded font-mono text-xs">Parameter</code>. Default values are from Wei et al. (2023) Table 1 and are appropriate for US-based studies.</p>
 
             <div class="grid md:grid-cols-2 gap-4 mb-5">
@@ -1200,7 +1203,7 @@
               <div class="rounded-xl border border-gray-100 overflow-hidden">
                 <div class="bg-teal-700 text-white text-xs font-bold px-3 py-2">Disposal Rate Parameters (Eq. 2)</div>
                 <table class="w-full text-xs">
-                  <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">Î± (dp_1)</th><th class="px-2 py-1.5">Î² (dp_2)</th><th class="px-2 py-1.5">Î³ yr (dp_3)</th></tr></thead>
+                  <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">α (dp_1)</th><th class="px-2 py-1.5">β (dp_2)</th><th class="px-2 py-1.5">γ yr (dp_3)</th></tr></thead>
                   <tbody>
                     <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.133</td><td class="px-2 py-1.5 text-center">0.028</td><td class="px-2 py-1.5 text-center">80</td></tr>
                     <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Exterior</td><td class="px-2 py-1.5 text-center">0.326</td><td class="px-2 py-1.5 text-center">0.041</td><td class="px-2 py-1.5 text-center">25</td></tr>
@@ -1216,7 +1219,7 @@
                 <div class="rounded-xl border border-gray-100 overflow-hidden">
                   <div class="bg-violet-700 text-white text-xs font-bold px-3 py-2">Recycling Rate Parameters (Eq. 4)</div>
                   <table class="w-full text-xs">
-                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">Î» (rc_1)</th><th class="px-2 py-1.5">Î¼ (rc_2)</th></tr></thead>
+                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Product</th><th class="px-2 py-1.5">λ (rc_1)</th><th class="px-2 py-1.5">μ (rc_2)</th></tr></thead>
                     <tbody>
                       <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.085</td><td class="px-2 py-1.5 text-center">0.015</td></tr>
                       <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Household</td><td class="px-2 py-1.5 text-center">0.085</td><td class="px-2 py-1.5 text-center">0.015</td></tr>
@@ -1228,7 +1231,7 @@
                 <div class="rounded-xl border border-gray-100 overflow-hidden">
                   <div class="bg-gray-700 text-white text-xs font-bold px-3 py-2">Landfill Decay Parameters (Eq. 5)</div>
                   <table class="w-full text-xs">
-                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Pool</th><th class="px-2 py-1.5">Î¾ (decay1)</th><th class="px-2 py-1.5">Ï yr (decay2)</th></tr></thead>
+                    <thead><tr class="bg-gray-50 text-gray-500"><th class="px-2 py-1.5 text-left">Pool</th><th class="px-2 py-1.5">ξ (decay1)</th><th class="px-2 py-1.5">ω yr (decay2)</th></tr></thead>
                     <tbody>
                       <tr class="border-t"><td class="px-2 py-1.5 font-mono">Construction</td><td class="px-2 py-1.5 text-center">0.997</td><td class="px-2 py-1.5 text-center">30</td></tr>
                       <tr class="border-t bg-gray-50"><td class="px-2 py-1.5 font-mono">Exterior</td><td class="px-2 py-1.5 text-center">1.178</td><td class="px-2 py-1.5 text-center">20</td></tr>
@@ -1246,12 +1249,12 @@
 
           <!-- Citation -->
           <div class="bg-white rounded-2xl shadow p-6">
-            <h2 class="text-lg font-bold text-indigo-800 mb-3">ð Citation</h2>
+            <h2 class="text-lg font-bold text-indigo-800 mb-3">📑 Citation</h2>
             <div class="bg-teal-50 border-l-4 border-teal-600 rounded-r-xl p-4 text-sm text-gray-700 italic leading-relaxed mb-3">
               Wei, X., Zhao, J., Hayes, D.J., Daigneault, A., &amp; Zhu, H. (2023). A life cycle and product type based estimator for quantifying the carbon stored in wood products. <em>Carbon Balance and Management</em>, 18, 1.
               <a href="https://doi.org/10.1186/s13021-022-00220-y" target="_blank" class="text-teal-700 underline not-italic ml-1">https://doi.org/10.1186/s13021-022-00220-y</a>
             </div>
-            <p class="text-xs text-gray-400">Open Access Â· Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
+            <p class="text-xs text-gray-400">Open Access · Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
           </div>
 
         </div>
@@ -1261,9 +1264,9 @@
 
     <footer class="mt-8 border-t border-gray-200 text-xs text-gray-500">
       <div class="mx-auto px-4 py-4 max-w-[1400px] flex flex-wrap items-center justify-between gap-2">
-        <p>Â© 2025 Wood Products Carbon Tracker &nbsp;Â·&nbsp; Xinyuan Wei &nbsp;Â·&nbsp;
-           <a class="underline text-indigo-600 hover:text-indigo-800" href="/cdn-cgi/l/email-protection#3149585f4844505f1f465458715c50585f541f545544"><span class="__cf_email__" data-cfemail="ed95848394988c83c39a8884ad808c848388c3888998">[email&#160;protected]</span></a></p>
-        <p class="text-gray-400">Supported by USDA Â· NSRC &nbsp;Â·&nbsp; University of Maine</p>
+        <p>© 2025 Wood Products Carbon Tracker &nbsp;·&nbsp; Xinyuan Wei &nbsp;·&nbsp;
+           <a class="underline text-indigo-600 hover:text-indigo-800" href="/cdn-cgi/l/email-protection#6a120304131f0b04441d0f032a070b03040f440f0e1f"><span class="__cf_email__" data-cfemail="7f071611060a1e1151081a163f121e16111a511a1b0a">[email&#160;protected]</span></a></p>
+        <p class="text-gray-400">Supported by USDA · NSRC &nbsp;·&nbsp; University of Maine</p>
       </div>
     </footer>
 
@@ -1278,317 +1281,302 @@
     <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js" defer></script>
     <script>
 
-      // ════════════════════════════════════════════════════════════════
-      // GLOBAL WPs CARBON TAB
-      // ════════════════════════════════════════════════════════════════
-      (function(){
-        // -- Data -------------------------------------------------------
+      // ================================================================
+      // GLOBAL WPs CARBON TAB  -- all logic in one IIFE
+      // ================================================================
+      (function() {
+        'use strict';
+
+        const GITHUB = 'https://raw.githubusercontent.com/xinyuanwylb19/xinyuanwylb19-Wood-Products-Carbon-Tracker/main/data/WPsCT_Output/';
+        const IN_USE_COLS  = ['Construction_InUse','Exterior_InUse','Household_InUse',
+                              'GraphicPaper_InUse','HouseholdPaper_InUse','OtherPaper_InUse'];
+        const COLORS = {
+          Construction:'#1d4ed8', Exterior:'#0891b2', Household:'#7c3aed',
+          GraphicPaper:'#059669', HouseholdPaper:'#65a30d', OtherPaper:'#16a34a',
+          Landfill:'#92400e', Biochar:'#78350f',
+          FuelEmis:'#f97316', LFDecay:'#b45309', BCDecay:'#a16207', LFInflow:'#9ca3af'
+        };
+        const LABELS = {
+          Construction:'Construction', Exterior:'Exterior', Household:'Household',
+          GraphicPaper:'Graphic Paper', HouseholdPaper:'Household Paper', OtherPaper:'Other Paper',
+          Landfill:'Landfill Stock', Biochar:'Biochar Stock',
+          FuelEmis:'Biofuel Emissions', LFDecay:'Landfill Decay',
+          BCDecay:'Biochar Decay', LFInflow:'Landfill Inflow'
+        };
+
         const GL_COUNTRIES = ["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antigua and Barbuda","Argentina","Armenia","Aruba","Ascension, Saint Helena and Tristan da Cunha","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belgium-Luxembourg","Belize","Benin","Bermuda","Bhutan","Bolivia (Plurinational State of)","Bosnia and Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Cayman Islands","Central African Republic","Chad","Chile","China","China, Hong Kong SAR","China, Macao SAR","China, Taiwan Province of","China, mainland","Christmas Island","Cocos (Keeling) Islands","Colombia","Comoros","Congo","Cook Islands","Costa Rica","Croatia","Cuba","Curaçao","Cyprus","Czechia","Czechoslovakia","Côte d'Ivoire","Democratic People's Republic of Korea","Democratic Republic of the Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Ethiopia PDR","Falkland Islands (Malvinas)","Faroe Islands","Fiji","Finland","France","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran (Islamic Republic of)","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Martinique","Mauritania","Mauritius","Mayotte","Melanesia","Mexico","Micronesia","Micronesia (Federated States of)","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands (Kingdom of the)","Netherlands Antilles (former)","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","North Macedonia","Northern Mariana Islands","Norway","Oman","Pacific Islands Trust Territory","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Polynesia","Portugal","Qatar","Republic of Korea","Republic of Moldova","Romania","Russian Federation","Rwanda","Réunion","Saint Kitts and Nevis","Saint Lucia","Saint Martin (French part)","Saint Pierre and Miquelon","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Serbia and Montenegro","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South America","South Sudan","Spain","Sri Lanka","Sudan","Sudan (former)","Suriname","Sweden","Switzerland","Syrian Arab Republic","Tajikistan","Thailand","Timor-Leste","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkmenistan","Turks and Caicos Islands","Tuvalu","Türkiye","USSR","Uganda","Ukraine","United Arab Emirates","United Kingdom of Great Britain and Northern Ireland","United Republic of Tanzania","United States of America","Uruguay","Uzbekistan","Vanuatu","Venezuela (Bolivarian Republic of)","Viet Nam","Wallis and Futuna Islands","Western Sahara","Yemen","Yugoslav SFR","Zambia","Zimbabwe"];
         const GL_REGIONS   = ["Africa","Americas","Asia","Australia and New Zealand","Caribbean","Central America","Central Asia","Eastern Africa","Eastern Asia","Eastern Europe","Europe","European Union (27)","Land Locked Developing Countries (LLDCs)","Least Developed Countries (LDCs)","Low Income Food Deficit Countries (LIFDCs)","Middle Africa","Net Food Importing Developing Countries (NFIDCs)","Northern Africa","Northern America","Northern Europe","Oceania","Small Island Developing States (SIDS)","South-eastern Asia","Southern Africa","Southern Asia","Southern Europe","Western Africa","Western Asia","Western Europe","World"];
-        const GITHUB_BASE  = 'https://raw.githubusercontent.com/xinyuanwylb19/xinyuanwylb19-Wood-Products-Carbon-Tracker/main/data/WPsCT_Output/';
 
-        // Colors matching HWP_COLORS palette
-        const GL_COLORS = {
-          Construction:   '#1d4ed8',
-          Exterior:       '#0891b2',
-          Household:      '#7c3aed',
-          GraphicPaper:   '#059669',
-          HouseholdPaper: '#65a30d',
-          OtherPaper:     '#16a34a',
-          Landfill:       '#92400e',
-          Biochar:        '#78350f',
-          FuelEmissions:  '#f97316',
-          LFDecay:        '#b45309',
-        };
-        const GL_LABELS = {
-          Construction:   'Construction In-Use',
-          Exterior:       'Exterior In-Use',
-          Household:      'Household In-Use',
-          GraphicPaper:   'Graphic Paper In-Use',
-          HouseholdPaper: 'Household Paper In-Use',
-          OtherPaper:     'Other Paper In-Use',
-          Landfill:       'Landfill Stock',
-          Biochar:        'Biochar Stock',
-          FuelEmissions:  'Biofuel Emissions',
-          LFDecay:        'Landfill Decay',
+        // Name->ISO3 mapping for Plotly choropleth (most common countries)
+        const NAME_TO_ISO3 = {
+          'Afghanistan':'AFG','Albania':'ALB','Algeria':'DZA','Angola':'AGO',
+          'Argentina':'ARG','Armenia':'ARM','Australia':'AUS','Austria':'AUT',
+          'Azerbaijan':'AZE','Bahamas':'BHS','Bahrain':'BHR','Bangladesh':'BGD',
+          'Barbados':'BRB','Belarus':'BLR','Belgium':'BEL','Belize':'BLZ',
+          'Benin':'BEN','Bhutan':'BTN','Bolivia (Plurinational State of)':'BOL',
+          'Bosnia and Herzegovina':'BIH','Botswana':'BWA','Brazil':'BRA',
+          'Brunei Darussalam':'BRN','Bulgaria':'BGR','Burkina Faso':'BFA',
+          'Burundi':'BDI','Cabo Verde':'CPV','Cambodia':'KHM','Cameroon':'CMR',
+          'Canada':'CAN','Central African Republic':'CAF','Chad':'TCD',
+          'Chile':'CHL','China, mainland':'CHN','China':'CHN','Colombia':'COL',
+          'Comoros':'COM','Congo':'COG','Costa Rica':'CRI','Croatia':'HRV',
+          'Cuba':'CUB','Cyprus':'CYP','Czechia':'CZE','Czechoslovakia':'CZE',
+          "Cote d'Ivoire":'CIV',"Cote d\'Ivoire":'CIV',
+          "Democratic People's Republic of Korea":'PRK',
+          'Democratic Republic of the Congo':'COD',
+          'Denmark':'DNK','Djibouti':'DJI','Dominica':'DMA',
+          'Dominican Republic':'DOM','Ecuador':'ECU','Egypt':'EGY',
+          'El Salvador':'SLV','Equatorial Guinea':'GNQ','Eritrea':'ERI',
+          'Estonia':'EST','Eswatini':'SWZ','Ethiopia':'ETH',
+          'Fiji':'FJI','Finland':'FIN','France':'FRA','Gabon':'GAB',
+          'Gambia':'GMB','Georgia':'GEO','Germany':'DEU','Ghana':'GHA',
+          'Greece':'GRC','Greenland':'GRL','Guatemala':'GTM',
+          'Guinea':'GIN','Guinea-Bissau':'GNB','Guyana':'GUY','Haiti':'HTI',
+          'Honduras':'HND','Hungary':'HUN','Iceland':'ISL','India':'IND',
+          'Indonesia':'IDN','Iran (Islamic Republic of)':'IRN','Iraq':'IRQ',
+          'Ireland':'IRL','Israel':'ISR','Italy':'ITA','Jamaica':'JAM',
+          'Japan':'JPN','Jordan':'JOR','Kazakhstan':'KAZ','Kenya':'KEN',
+          'Kuwait':'KWT','Kyrgyzstan':'KGZ',
+          "Lao People's Democratic Republic":'LAO',
+          'Latvia':'LVA','Lebanon':'LBN','Lesotho':'LSO','Liberia':'LBR',
+          'Libya':'LBY','Lithuania':'LTU','Luxembourg':'LUX',
+          'Madagascar':'MDG','Malawi':'MWI','Malaysia':'MYS','Maldives':'MDV',
+          'Mali':'MLI','Malta':'MLT','Mauritania':'MRT','Mauritius':'MUS',
+          'Mexico':'MEX','Mongolia':'MNG','Montenegro':'MNE','Morocco':'MAR',
+          'Mozambique':'MOZ','Myanmar':'MMR','Namibia':'NAM','Nepal':'NPL',
+          'Netherlands (Kingdom of the)':'NLD','New Zealand':'NZL',
+          'Nicaragua':'NIC','Niger':'NER','Nigeria':'NGA','Norway':'NOR',
+          'Oman':'OMN','Pakistan':'PAK','Palestine':'PSE','Panama':'PAN',
+          'Papua New Guinea':'PNG','Paraguay':'PRY','Peru':'PER',
+          'Philippines':'PHL','Poland':'POL','Portugal':'PRT','Qatar':'QAT',
+          'Republic of Korea':'KOR','Republic of Moldova':'MDA',
+          'Romania':'ROU','Russian Federation':'RUS','Rwanda':'RWA',
+          'Saudi Arabia':'SAU','Senegal':'SEN','Serbia':'SRB',
+          'Sierra Leone':'SLE','Singapore':'SGP','Slovakia':'SVK',
+          'Slovenia':'SVN','Solomon Islands':'SLB','Somalia':'SOM',
+          'South Africa':'ZAF','South Sudan':'SSD','Spain':'ESP',
+          'Sri Lanka':'LKA','Sudan':'SDN','Suriname':'SUR','Sweden':'SWE',
+          'Switzerland':'CHE','Syrian Arab Republic':'SYR',
+          'Tajikistan':'TJK','Thailand':'THA','Timor-Leste':'TLS',
+          'Togo':'TGO','Trinidad and Tobago':'TTO','Tunisia':'TUN',
+          'Turkmenistan':'TKM','Turkiye':'TUR',
+          'Uganda':'UGA','Ukraine':'UKR','United Arab Emirates':'ARE',
+          'United Kingdom of Great Britain and Northern Ireland':'GBR',
+          'United Republic of Tanzania':'TZA',
+          'United States of America':'USA','Uruguay':'URY',
+          'Uzbekistan':'UZB','Vanuatu':'VUT',
+          'Venezuela (Bolivarian Republic of)':'VEN',
+          'Viet Nam':'VNM','Zambia':'ZMB','Zimbabwe':'ZWE'
         };
 
         // State
-        let glType       = 'country';   // 'country' | 'region'
-        let glUnit       = 'Tg';        // 'kg' | 'Tg' | 'Pg'
-        let glSelected   = null;
-        let glCurrentData= null;        // parsed CSV rows
+        let glUnit     = 'Tg';
+        let glSelected = null;
+        let glData     = null;      // parsed rows for selected location
+        let glMapData  = {};       // {countryName: {year: value}}
+        let glMapYears = [];
+        let glListTab  = 'country';
+        let glMapLoaded= false;
 
-        // -- Unit helpers -----------------------------------------------
-        function glFromKg(v) {
-          if (glUnit === 'kg') return v;
-          if (glUnit === 'Tg') return v / 1e9;
-          if (glUnit === 'Pg') return v / 1e12;
+        // Unit conversion
+        function fromKg(v) {
+          if (glUnit==='Tg') return v/1e9;
+          if (glUnit==='Pg') return v/1e12;
           return v;
         }
-        function glUnitLabel() {
-          return glUnit === 'kg' ? 'kg C' : glUnit === 'Tg' ? 'Tg C' : 'Pg C';
-        }
-        function glFmt(v) {
-          const x = glFromKg(v);
-          if (Math.abs(x) >= 100)  return x.toFixed(1);
-          if (Math.abs(x) >= 1)    return x.toFixed(2);
-          return x.toExponential(3);
-        }
-
-        // -- Initialise list on first tab-switch -------------------------
-        window.glInit = function() {
-          glPopulateList();
-        };
-
-        function glPopulateList() {
-          const arr = (glType === 'country') ? GL_COUNTRIES : GL_REGIONS;
-          const q   = (document.getElementById('gl-search')||{}).value||'';
-          const filt = arr.filter(n => n.toLowerCase().includes(q.toLowerCase()));
-          const ul = document.getElementById('gl-list');
-          if (!ul) return;
-          ul.innerHTML = filt.map(n => {
-            const sel = (n === glSelected) ? 'bg-indigo-100 font-semibold text-indigo-700' : 'text-gray-700 hover:bg-indigo-50';
-            return `<div class="px-3 py-1.5 cursor-pointer rounded-lg ${sel} transition-colors" onclick="glSelect(this,'${n.replace(/'/g,"\\'")}')">${n}</div>`;
-          }).join('');
+        function unitLbl() { return glUnit==='Tg'?'Tg C':glUnit==='Pg'?'Pg C':'kg C'; }
+        function fmtVal(v) {
+          const x = fromKg(v);
+          if (Math.abs(x)>=1000) return x.toFixed(0);
+          if (Math.abs(x)>=10)   return x.toFixed(1);
+          if (Math.abs(x)>=0.1)  return x.toFixed(2);
+          return x.toExponential(2);
         }
 
-        window.glSetType = function(t) {
-          glType = t;
-          glSelected = null;
-          ['country','region'].forEach(x => {
-            const b = document.getElementById('gl-btn-'+x);
-            if (!b) return;
-            b.className = 'flex-1 py-1.5 transition-colors ' +
-              (x===t ? 'bg-indigo-600 text-white' : 'bg-white text-gray-500 hover:bg-indigo-50');
+        // ── Populate dropdowns ──────────────────────────────────────────
+        function glPopulateDropdowns() {
+          const cSel = document.getElementById('gl-country-select');
+          const rSel = document.getElementById('gl-region-select');
+          if (cSel) {
+            cSel.innerHTML = GL_COUNTRIES.map(n =>
+              `<option value="${n}">${n}</option>`).join('');
+          }
+          if (rSel) {
+            rSel.innerHTML = GL_REGIONS.map(n =>
+              `<option value="${n}">${n}</option>`).join('');
+          }
+        }
+
+        window.glSwitchListTab = function(tab) {
+          glListTab = tab;
+          ['country','region'].forEach(t => {
+            const btn = document.getElementById('gl-tab-'+t);
+            const panel = document.getElementById('gl-'+t+'-panel');
+            if (!btn||!panel) return;
+            const active = t===tab;
+            btn.className = 'flex-1 py-1.5 transition-colors ' +
+              (active ? 'bg-indigo-600 text-white' : 'bg-white text-gray-500 hover:bg-indigo-50');
+            panel.classList.toggle('hidden', !active);
           });
-          glPopulateList();
         };
 
-        window.glFilterList = function() { glPopulateList(); };
-
-        window.glSelect = function(el, name) {
+        window.glSelectLocation = async function(name) {
+          if (!name) return;
           glSelected = name;
-          document.querySelectorAll('#gl-list > div').forEach(d => {
-            d.className = d.className.replace(/bg-indigo-100 font-semibold text-indigo-700/g, 'text-gray-700 hover:bg-indigo-50');
-          });
-          el.className = el.className.replace('text-gray-700 hover:bg-indigo-50', 'bg-indigo-100 font-semibold text-indigo-700');
-          glSetStatus('Selected: ' + name + '. Click "Load & Plot".');
-        };
-
-        window.glSetUnit = function(u) {
-          glUnit = u;
-          ['kg','Tg','Pg'].forEach(x => {
-            const b = document.getElementById('gl-unit-'+x.toLowerCase());
-            if (!b) return;
-            b.className = 'flex-1 py-1.5 transition-colors ' +
-              (x===u ? 'bg-indigo-600 text-white' : 'bg-white text-gray-500 hover:bg-indigo-50');
-          });
-          if (glCurrentData) glRender(glCurrentData);
-        };
-
-        function glSetStatus(msg) {
-          const el = document.getElementById('gl-status');
-          if (el) el.textContent = msg;
-        }
-
-        // -- Load data from GitHub raw CSV ------------------------------
-        window.glLoad = async function() {
-          if (!glSelected) { glSetStatus('Please select a country or region first.'); return; }
-          glSetStatus('Fetching data…');
-          const fname  = glSelected.replace(/ /g,'_') + '.csv';
-          const url    = GITHUB_BASE + encodeURIComponent(fname);
+          glMapStatus('Loading ' + name + '...');
+          const fname = name.replace(/ /g,'_') + '.csv';
+          const url   = GITHUB + encodeURIComponent(fname);
           try {
             const resp = await fetch(url);
-            if (!resp.ok) throw new Error('HTTP ' + resp.status + ' – file not found for: ' + glSelected);
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
             const text = await resp.text();
             const rows = glParseCSV(text);
-            if (!rows.length) throw new Error('Empty dataset.');
-            glCurrentData = rows;
-            glRender(rows);
-            glSetStatus('Loaded ' + rows.length + ' years (1961–' + Math.round(rows[rows.length-1].Year) + ') for ' + glSelected + '.');
+            if (!rows.length) throw new Error('Empty data');
+            glData = rows;
+            glRenderAll(rows, name);
+            glMapStatus('');
           } catch(e) {
-            glSetStatus('Error: ' + e.message);
-            console.error(e);
+            glMapStatus('Could not load data for ' + name + ': ' + e.message);
           }
         };
 
-        // -- Parse CSV text into array of objects -----------------------
+        // ── CSV parser ─────────────────────────────────────────────────
         function glParseCSV(text) {
           const lines = text.trim().split(/\r?\n/);
-          const headers = lines[0].split(',').map(h => h.trim());
+          const headers = lines[0].split(',').map(h=>h.trim());
           const rows = [];
-          for (let i=1; i<lines.length; i++) {
+          for (let i=1;i<lines.length;i++) {
             const vals = lines[i].split(',');
             const obj = {};
-            let valid = true;
-            headers.forEach((h,j) => {
+            let ok = true;
+            headers.forEach((h,j)=>{
               const v = parseFloat(vals[j]);
-              if (h === 'Year' && isNaN(v)) { valid=false; return; }
-              obj[h] = isNaN(v) ? 0 : v;
+              if (h==='Year' && isNaN(v)) { ok=false; return; }
+              obj[h] = isNaN(v)?0:v;
             });
-            if (valid) rows.push(obj);
+            if (ok) rows.push(obj);
           }
           return rows;
         }
 
-        // -- Master render: KPIs + both charts + table ------------------
-        function glRender(rows) {
-          const years = rows.map(r => r.Year);
-          const last  = rows[rows.length - 1];
-
-          // Derived columns
-          const inUseCols = ['Construction_InUse','Exterior_InUse','Household_InUse',
-                             'GraphicPaper_InUse','HouseholdPaper_InUse','OtherPaper_InUse'];
-          const totalInUse = inUseCols.reduce((s,c) => s + (last[c]||0), 0);
-
+        // ── Render everything for selected location ────────────────────
+        function glRenderAll(rows, name) {
           // KPIs
-          const kpiRow = document.getElementById('gl-kpi-row');
-          if (kpiRow) kpiRow.classList.remove('hidden');
-          glSetKpi('gl-kpi-inuse',   totalInUse);
-          glSetKpi('gl-kpi-lf',      last.LF_Stock_Total||0);
-          glSetKpi('gl-kpi-biochar', last.Biochar_Stock||0);
-          glSetKpi('gl-kpi-emis',    last.Fuel_Emissions||0);
+          const last = rows[rows.length-1];
+          const lastYear = Math.round(last.Year);
+          const totalInUse = IN_USE_COLS.reduce((s,c)=>s+(last[c]||0),0);
+          const kpiBox = document.getElementById('gl-kpi-box');
+          if (kpiBox) kpiBox.classList.remove('hidden');
+          const setEl = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
+          setEl('gl-kpi-title', name + ' (' + lastYear + ')');
+          setEl('gl-kpi-inuse',   fmtVal(totalInUse)  + ' ' + unitLbl());
+          setEl('gl-kpi-lf',      fmtVal(last.LF_Stock_Total||0)  + ' ' + unitLbl());
+          setEl('gl-kpi-biochar', fmtVal(last.Biochar_Stock||0)   + ' ' + unitLbl());
+          setEl('gl-kpi-emis',    fmtVal(last.Fuel_Emissions||0)  + ' ' + unitLbl());
+          setEl('gl-kpi-year-note', 'Latest year: ' + lastYear);
 
-          glDrawStockChart(rows, years);
-          glDrawEmisChart(rows, years);
-          glDrawTable(rows);
-
+          glDrawStockChart(rows);
+          glDrawEmisChart(rows);
+          glDrawTable(rows, name);
           const dlBtn = document.getElementById('gl-dl-btn');
           if (dlBtn) dlBtn.classList.remove('hidden');
         }
 
-        function glSetKpi(id, valKg) {
-          const el = document.getElementById(id);
-          if (el) el.textContent = glFmt(valKg) + ' ' + glUnitLabel();
+        // ── Stock chart ────────────────────────────────────────────────
+        function glDrawStockChart(rows) {
+          const years = rows.map(r=>r.Year);
+          const traces = [];
+          const inUseDefs = [
+            ['Construction_InUse','Construction'],
+            ['Exterior_InUse','Exterior'],
+            ['Household_InUse','Household'],
+            ['GraphicPaper_InUse','GraphicPaper'],
+            ['HouseholdPaper_InUse','HouseholdPaper'],
+            ['OtherPaper_InUse','OtherPaper']
+          ];
+          inUseDefs.forEach(([col,key]) => {
+            traces.push({ x:years, y:rows.map(r=>fromKg(r[col]||0)),
+              mode:'lines', name:LABELS[key],
+              line:{color:COLORS[key],width:2},
+              hovertemplate:'%{y:.3f} '+unitLbl()+'<extra>'+LABELS[key]+'</extra>' });
+          });
+          traces.push({ x:years, y:rows.map(r=>fromKg(r.LF_Stock_Total||0)),
+            mode:'lines', name:LABELS.Landfill,
+            line:{color:COLORS.Landfill,width:2,dash:'dot'},
+            hovertemplate:'%{y:.3f} '+unitLbl()+'<extra>'+LABELS.Landfill+'</extra>' });
+          traces.push({ x:years, y:rows.map(r=>fromKg(r.Biochar_Stock||0)),
+            mode:'lines', name:LABELS.Biochar,
+            line:{color:COLORS.Biochar,width:2,dash:'dash'},
+            hovertemplate:'%{y:.3f} '+unitLbl()+'<extra>'+LABELS.Biochar+'</extra>' });
+
+          Plotly.newPlot('gl-chart-stock', traces, glLayout(
+            'Year', 'Carbon Storage (' + unitLbl() + ')'),
+            {responsive:true,displayModeBar:true,
+              modeBarButtonsToRemove:['select2d','lasso2d'],displaylogo:false});
         }
 
-        // -- Chart 1: Carbon storage stacked lines ----------------------
-        function glDrawStockChart(rows, years) {
-          const showInUse   = document.getElementById('glv-inuse')   ?.checked ?? true;
-          const showLF      = document.getElementById('glv-lf')      ?.checked ?? true;
-          const showBiochar = document.getElementById('glv-biochar') ?.checked ?? true;
-          const traces = [];
+        // ── Emissions chart ───────────────────────────────────────────
+        function glDrawEmisChart(rows) {
+          const years = rows.map(r=>r.Year);
+          const showEmis  = document.getElementById('glv-emis')?.checked ?? true;
+          const showLFD   = document.getElementById('glv-lfdecay')?.checked ?? true;
+          const showBCD   = document.getElementById('glv-bcdecay')?.checked ?? false;
+          const showLFI   = document.getElementById('glv-lfinflow')?.checked ?? false;
 
-          if (showInUse) {
-            const inUseDefs = [
-              ['Construction_InUse', 'Construction'],
-              ['Exterior_InUse',     'Exterior'],
-              ['Household_InUse',    'Household'],
-              ['GraphicPaper_InUse', 'GraphicPaper'],
-              ['HouseholdPaper_InUse','HouseholdPaper'],
-              ['OtherPaper_InUse',   'OtherPaper'],
-            ];
-            inUseDefs.forEach(([col, key]) => {
-              const y = rows.map(r => glFromKg(r[col]||0));
-              traces.push({
-                x: years, y, mode:'lines', name: GL_LABELS[key],
-                line:{ color: GL_COLORS[key], width:2 },
-                hovertemplate:'%{y:.3f} ' + glUnitLabel() + '<extra>' + GL_LABELS[key] + '</extra>',
-              });
-            });
-          }
-          if (showLF) {
-            const y = rows.map(r => glFromKg(r.LF_Stock_Total||0));
-            traces.push({ x:years, y, mode:'lines', name:GL_LABELS.Landfill,
-              line:{ color:GL_COLORS.Landfill, width:2, dash:'dot' },
-              hovertemplate:'%{y:.3f} ' + glUnitLabel() + '<extra>' + GL_LABELS.Landfill + '</extra>',
-            });
-          }
-          if (showBiochar) {
-            const y = rows.map(r => glFromKg(r.Biochar_Stock||0));
-            traces.push({ x:years, y, mode:'lines', name:GL_LABELS.Biochar,
-              line:{ color:GL_COLORS.Biochar, width:2, dash:'dash' },
-              hovertemplate:'%{y:.3f} ' + glUnitLabel() + '<extra>' + GL_LABELS.Biochar + '</extra>',
-            });
-          }
-
-          const layout = Object.assign({
-            autosize:true,
-            margin:{l:65,r:20,t:25,b:90},
-            paper_bgcolor:'#f9fafb', plot_bgcolor:'#ffffff',
-            font:{family:'Inter, system-ui, sans-serif',size:12,color:'#374151'},
-            legend:{orientation:'h',y:-0.28,x:0,font:{size:10},bgcolor:'rgba(0,0,0,0)'},
-            hovermode:'x unified',
-            hoverlabel:{bgcolor:'#1e293b',font:{color:'#f8fafc',size:11},bordercolor:'#334155'},
-            xaxis:{title:{text:'Year',standoff:8},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
-            yaxis:{title:{text:'Carbon Storage (' + glUnitLabel() + ')'},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
-          }, {});
-          Plotly.newPlot('gl-chart-stock', traces, layout,
-            {responsive:true,displayModeBar:true,modeBarButtonsToRemove:['select2d','lasso2d'],displaylogo:false});
+          const mk = (col,key,vis) => ({
+            x:years, y:rows.map(r=>fromKg(r[col]||0)),
+            mode:'lines', name:LABELS[key],
+            visible: vis ? true : 'legendonly',
+            line:{color:COLORS[key],width:2},
+            hovertemplate:'%{y:.3f} '+unitLbl()+'/yr<extra>'+LABELS[key]+'</extra>'
+          });
+          const traces = [
+            mk('Fuel_Emissions','FuelEmis', showEmis),
+            mk('LF_Decay_Total','LFDecay',  showLFD),
+            mk('Biochar_Decay','BCDecay',   showBCD),
+            mk('LF_Input_Total','LFInflow', showLFI),
+          ];
+          Plotly.newPlot('gl-chart-emis', traces, glLayout(
+            'Year', 'Carbon Flux (' + unitLbl() + '/yr)'),
+            {responsive:true,displayModeBar:true,
+              modeBarButtonsToRemove:['select2d','lasso2d'],displaylogo:false});
         }
 
-        // -- Chart 2: Emissions & decay lines ---------------------------
-        function glDrawEmisChart(rows, years) {
-          const showEmis   = document.getElementById('glv-emissions')?.checked ?? false;
-          const showLFDecay= document.getElementById('glv-lfdecay')  ?.checked ?? false;
-          const traces = [];
-
-          // Always show biofuel emissions + LF decay as default-on reference
-          const emisY = rows.map(r => glFromKg(r.Fuel_Emissions||0));
-          traces.push({ x:years, y:emisY, mode:'lines', name:'Biofuel Emissions',
-            line:{color:GL_COLORS.FuelEmissions, width:2},
-            visible: showEmis ? true : 'legendonly',
-            hovertemplate:'%{y:.3f} ' + glUnitLabel() + '/yr<extra>Biofuel Emissions</extra>',
-          });
-
-          const lfDecY = rows.map(r => glFromKg(r.LF_Decay_Total||0));
-          traces.push({ x:years, y:lfDecY, mode:'lines', name:'Landfill Decay',
-            line:{color:GL_COLORS.LFDecay, width:2, dash:'dot'},
-            visible: showLFDecay ? true : 'legendonly',
-            hovertemplate:'%{y:.3f} ' + glUnitLabel() + '/yr<extra>Landfill Decay</extra>',
-          });
-
-          const bioDecY = rows.map(r => glFromKg(r.Biochar_Decay||0));
-          traces.push({ x:years, y:bioDecY, mode:'lines', name:'Biochar Decay',
-            line:{color:GL_COLORS.Biochar, width:1.5, dash:'dash'},
-            hovertemplate:'%{y:.3f} ' + glUnitLabel() + '/yr<extra>Biochar Decay</extra>',
-          });
-
-          // Net annual inflow to landfill
-          const lfInY = rows.map(r => glFromKg(r.LF_Input_Total||0));
-          traces.push({ x:years, y:lfInY, mode:'lines', name:'Landfill Inflow',
-            line:{color:'#9ca3af', width:1.5},
-            hovertemplate:'%{y:.3f} ' + glUnitLabel() + '/yr<extra>Landfill Inflow</extra>',
-          });
-
-          const layout = {
-            autosize:true,
-            margin:{l:65,r:20,t:25,b:90},
+        function glLayout(xtitle, ytitle) {
+          return {
+            autosize:true, margin:{l:65,r:20,t:15,b:85},
             paper_bgcolor:'#f9fafb', plot_bgcolor:'#ffffff',
-            font:{family:'Inter, system-ui, sans-serif',size:12,color:'#374151'},
-            legend:{orientation:'h',y:-0.28,x:0,font:{size:10},bgcolor:'rgba(0,0,0,0)'},
+            font:{family:'Inter, system-ui, sans-serif',size:11,color:'#374151'},
+            legend:{orientation:'h',y:-0.32,x:0,font:{size:10},bgcolor:'rgba(0,0,0,0)'},
             hovermode:'x unified',
             hoverlabel:{bgcolor:'#1e293b',font:{color:'#f8fafc',size:11},bordercolor:'#334155'},
-            xaxis:{title:{text:'Year',standoff:8},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
-            yaxis:{title:{text:'Carbon Flux (' + glUnitLabel() + '/yr)'},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
+            xaxis:{title:{text:xtitle,standoff:8},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
+            yaxis:{title:{text:ytitle,standoff:8},showgrid:true,gridcolor:'#f3f4f6',zeroline:false},
           };
-          Plotly.newPlot('gl-chart-emis', traces, layout,
-            {responsive:true,displayModeBar:true,modeBarButtonsToRemove:['select2d','lasso2d'],displaylogo:false});
         }
 
-        // -- Summary table (latest 10 years) ----------------------------
-        function glDrawTable(rows) {
+        // ── Summary table ─────────────────────────────────────────────
+        function glDrawTable(rows, name) {
           const last10 = rows.slice(-10);
-          const inUseCols = ['Construction_InUse','Exterior_InUse','Household_InUse',
-                             'GraphicPaper_InUse','HouseholdPaper_InUse','OtherPaper_InUse'];
+          const tTitle = document.getElementById('gl-table-title');
+          if (tTitle) tTitle.textContent = '— ' + name;
           let html = '<table style="border-collapse:collapse;width:100%;font-size:0.75rem">';
           html += '<thead><tr style="background:#f1f5f9">';
-          ['Year','Total In-Use','Landfill Stock','Biochar Stock','Fuel Emissions','LF Decay'].forEach(h => {
+          ['Year','Total In-Use','Landfill Stock','Biochar Stock',
+           'Fuel Emissions','LF Decay','Unit'].forEach(h => {
             html += `<th style="border:1px solid #e2e8f0;padding:3px 8px;text-align:right;white-space:nowrap">${h}</th>`;
           });
-          html += `<th style="border:1px solid #e2e8f0;padding:3px 8px;text-align:right">Unit</th>`;
           html += '</tr></thead><tbody>';
           last10.forEach((r,i) => {
             const bg = i%2===0?'#fff':'#f8fafc';
-            const inUse = inUseCols.reduce((s,c) => s+(r[c]||0), 0);
+            const inUse = IN_USE_COLS.reduce((s,c)=>s+(r[c]||0),0);
             html += `<tr style="background:${bg}">`;
             [r.Year, inUse, r.LF_Stock_Total||0, r.Biochar_Stock||0,
              r.Fuel_Emissions||0, r.LF_Decay_Total||0].forEach((v,j) => {
-              const disp = j===0 ? Math.round(v) : glFmt(v);
-              html += `<td style="border:1px solid #e2e8f0;padding:3px 8px;text-align:right">${disp}</td>`;
+              const d = j===0 ? Math.round(v) : (fmtVal(v));
+              html += `<td style="border:1px solid #e2e8f0;padding:3px 8px;text-align:right">${d}</td>`;
             });
-            html += `<td style="border:1px solid #e2e8f0;padding:3px 8px;text-align:center;color:#6b7280">${glUnitLabel()}</td>`;
+            html += `<td style="border:1px solid #e2e8f0;padding:3px 8px;text-align:center;color:#9ca3af">${unitLbl()}</td>`;
             html += '</tr>';
           });
           html += '</tbody></table>';
@@ -1596,36 +1584,204 @@
           if (el) el.innerHTML = html;
         }
 
-        // -- CSV download -----------------------------------------------
+        // ── Download CSV ──────────────────────────────────────────────
         window.glDownloadCSV = function() {
-          if (!glCurrentData || !glSelected) return;
-          const headers = Object.keys(glCurrentData[0]);
-          let csv = headers.join(',') + '\n';
-          glCurrentData.forEach(r => {
-            csv += headers.map(h => r[h]).join(',') + '\n';
-          });
-          const blob = new Blob([csv], {type:'text/csv'});
+          if (!glData||!glSelected) return;
+          const headers = Object.keys(glData[0]);
+          let csv = headers.join(',')+'\n';
+          glData.forEach(r => { csv += headers.map(h=>r[h]).join(',')+='\n'; });
+          const blob = new Blob([csv],{type:'text/csv'});
           const a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
-          a.download = glSelected.replace(/ /g,'_') + '_WPsCT_Results.csv';
+          a.download = glSelected.replace(/ /g,'_')+'_WPsCT.csv';
           a.click();
         };
 
-        // -- Initialise list when DOM ready -----------------------------
-        document.addEventListener('DOMContentLoaded', () => {
-          // Patch switchTab to init global tab on first visit
-          const origSwitch = window.switchTab;
-          window.switchTab = function(name, btn) {
-            origSwitch && origSwitch(name, btn);
-            if (name === 'global') glInit();
+        // ── Unit toggle ───────────────────────────────────────────────
+        window.glSetUnit = function(u) {
+          glUnit = u;
+          ['Tg','Pg','kg'].forEach(x => {
+            const b = document.getElementById('gl-u-'+x.toLowerCase());
+            if (!b) return;
+            b.className = 'px-2 py-1 transition-colors ' +
+              (x===u ? 'bg-indigo-600 text-white' : 'bg-white text-gray-500 hover:bg-indigo-50');
+          });
+          if (glData) glRenderAll(glData, glSelected||'');
+          if (glMapLoaded) glUpdateMap();
+        };
+
+        // ── Interactive Choropleth Map ────────────────────────────────
+        // Pre-fetch data for a set of key countries to populate the map
+        // We use cached data: fetch all countries lazily when map is first drawn
+
+        let glCountryCache = {}; // name -> rows
+
+        async function glLoadCountryForMap(name) {
+          if (glCountryCache[name]) return glCountryCache[name];
+          const fname = name.replace(/ /g,'_') + '.csv';
+          const url = GITHUB + encodeURIComponent(fname);
+          try {
+            const resp = await fetch(url, {signal: AbortSignal.timeout(8000)});
+            if (!resp.ok) return null;
+            const rows = glParseCSV(await resp.text());
+            glCountryCache[name] = rows;
+            return rows;
+          } catch(e) { return null; }
+        }
+
+        // Build map data: load all countries listed in ISO3 map
+        async function glBuildMapData() {
+          glMapStatus('Building map — loading country data (this may take a moment)...');
+          const mapCountries = Object.keys(NAME_TO_ISO3);
+
+          // Populate year selector from a sample country (USA)
+          const usaRows = await glLoadCountryForMap('United States of America');
+          if (usaRows) {
+            const years = usaRows.map(r=>Math.round(r.Year));
+            const sel = document.getElementById('gl-map-year');
+            if (sel) {
+              sel.innerHTML = years.map(y=>`<option value="${y}">${y}</option>`).join('');
+              sel.value = years[years.length-1];
+            }
+          }
+
+          // Load all countries in parallel (batched to avoid rate limits)
+          const BATCH = 20;
+          for (let i=0; i<mapCountries.length; i+=BATCH) {
+            const batch = mapCountries.slice(i, i+BATCH);
+            await Promise.all(batch.map(n => glLoadCountryForMap(n)));
+            glMapStatus(`Loading map data: ${Math.min(i+BATCH,mapCountries.length)}/${mapCountries.length} countries...`);
+          }
+          glMapLoaded = true;
+          glMapStatus('');
+          glUpdateMap();
+        }
+
+        window.glUpdateMap = function() {
+          if (!glMapLoaded) return;
+          const yearSel   = document.getElementById('gl-map-year');
+          const metricSel = document.getElementById('gl-map-metric');
+          const yr  = yearSel   ? parseInt(yearSel.value)   : 2020;
+          const metric = metricSel ? metricSel.value : 'inuse';
+
+          const isos=[], vals=[], names=[];
+          for (const [name, iso] of Object.entries(NAME_TO_ISO3)) {
+            const rows = glCountryCache[name];
+            if (!rows) continue;
+            const row = rows.find(r=>Math.round(r.Year)===yr) || rows[rows.length-1];
+            if (!row) continue;
+            let val = 0;
+            if (metric==='inuse')     val = IN_USE_COLS.reduce((s,c)=>s+(row[c]||0),0);
+            else if (metric==='lf')   val = row.LF_Stock_Total||0;
+            else if (metric==='biochar') val = row.Biochar_Stock||0;
+            else if (metric==='emissions') val = row.Fuel_Emissions||0;
+            isos.push(iso);
+            vals.push(fromKg(val));
+            names.push(name);
+          }
+
+          const metricLabels = {inuse:'Total In-Use Stock',lf:'Landfill Stock',
+            biochar:'Biochar Stock',emissions:'Biofuel Emissions'};
+          const trace = {
+            type:'choropleth',
+            locationmode:'ISO-3',
+            locations: isos,
+            z: vals,
+            text: names,
+            colorscale: [
+              [0,'#ecfdf5'],[0.1,'#a7f3d0'],[0.25,'#34d399'],
+              [0.5,'#10b981'],[0.75,'#065f46'],[1,'#022c22']
+            ],
+            colorbar:{
+              title: unitLbl(),
+              thickness:12, len:0.7,
+              titlefont:{size:10}, tickfont:{size:9}
+            },
+            hovertemplate: '<b>%{text}</b><br>' + metricLabels[metric] +
+              ': %{z:.3f} ' + unitLbl() + '<extra></extra>',
+            marker:{line:{color:'#ffffff',width:0.5}}
           };
-          glInit();
+
+          const layout = {
+            autosize:true,
+            margin:{l:0,r:0,t:5,b:0},
+            paper_bgcolor:'#f9fafb',
+            geo:{
+              showframe:false,
+              showcoastlines:true, coastlinecolor:'#d1d5db',
+              showland:true, landcolor:'#f3f4f6',
+              showocean:true, oceancolor:'#eff6ff',
+              showlakes:true, lakecolor:'#eff6ff',
+              showcountries:true, countrycolor:'#e5e7eb',
+              projection:{type:'natural earth'}
+            },
+            title:{
+              text: metricLabels[metric] + ' (' + yr + ') — ' + unitLbl(),
+              font:{size:11,color:'#374151'}, x:0.01, xanchor:'left'
+            }
+          };
+
+          Plotly.newPlot('gl-map', [trace], layout,
+            {responsive:true, displayModeBar:false});
+
+          // Click handler: select country on map click
+          const mapDiv = document.getElementById('gl-map');
+          if (mapDiv) {
+            mapDiv.on('plotly_click', function(data) {
+              if (data.points && data.points.length > 0) {
+                const countryName = data.points[0].text;
+                if (countryName) {
+                  // Sync the dropdown
+                  const sel = document.getElementById('gl-country-select');
+                  if (sel) sel.value = countryName;
+                  glSwitchListTab('country');
+                  glSelectLocation(countryName);
+                }
+              }
+            });
+          }
+        };
+
+        function glMapStatus(msg) {
+          const el = document.getElementById('gl-map-status');
+          if (el) el.textContent = msg;
+        }
+
+        // ── Checkbox change handlers ──────────────────────────────────
+        ['glv-emis','glv-lfdecay','glv-bcdecay','glv-lfinflow'].forEach(id => {
+          document.addEventListener('change', e => {
+            if (e.target && e.target.id === id && glData) glDrawEmisChart(glData);
+          });
+        });
+
+        // ── Initialise on first tab visit ─────────────────────────────
+        function glInit() {
+          glPopulateDropdowns();
+          // Start map build after a short delay to not block page load
+          setTimeout(glBuildMapData, 500);
+        }
+
+        // Patch switchTab
+        document.addEventListener('DOMContentLoaded', function() {
+          const origSwitch = window.switchTab;
+          let glInitDone = false;
+          window.switchTab = function(name, btn) {
+            if (origSwitch) origSwitch(name, btn);
+            if (name==='global' && !glInitDone) { glInitDone=true; glInit(); }
+          };
+          // Also init if already on global tab
+          if (document.getElementById('tab-global')?.classList.contains('active')) {
+            glInitDone = true; glInit();
+          }
         });
 
       })(); // end IIFE
 
-      // ââ Tab switching (also defined early in <head> for safety) âââââââââââ
-      window.switchTab = function(name, btn) {
+
+      // ================================================================
+      // MAIN APP JS (HWP Tracker, Log Tracker, PPs Tracker)
+      // ================================================================
+window.switchTab = function(name, btn) {
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('tab-' + name).classList.add('active');
@@ -2663,4 +2819,22 @@ json.dumps(out, allow_nan=False)
         html += '</tbody></table>';
         document.getElementById('pps-results-preview').innerHTML = html;
 
-        // ââ Download CSV ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+        const ppsHeaders = ['Year','In-use (kg C)','Landfill Pool (kg C)',
+                             'Total Retained (kg C)','Cumul. Released (kg C)'];
+        let ppsCsvRows = [ppsHeaders.join(',')];
+        for (let i=0;i<res.years.length;i++) {
+          ppsCsvRows.push([res.years[i], res.inuse[i].toFixed(6),
+            res.lf_pool[i].toFixed(6), res.total_retained[i].toFixed(6),
+            res.cumul_released[i].toFixed(6)].join(','));
+        }
+        const ppsBlob = new Blob([ppsCsvRows.join('\n')],{type:'text/csv'});
+        const ppsLink = document.getElementById('pps-download-link');
+        if (ppsLink) {
+          ppsLink.href = URL.createObjectURL(ppsBlob);
+          ppsLink.classList.remove('hidden');
+        }
+      } // end renderPPsResults
+
+    </script>
+  </body>
+</html>
