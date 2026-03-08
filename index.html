@@ -1996,12 +1996,6 @@
       // ================================================================
       // MAIN APP JS (End-Use Products Tracker, Industrial Logs Tracker, Sawn Products Tracker)
       // ================================================================
-window.switchTab = function(name, btn) {
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-' + name).classList.add('active');
-        btn.classList.add('active');
-      }
 
       // ── Shared Pyodide state ───────────────────────────────────────────────
       const statusEl   = document.getElementById('status');
@@ -2973,22 +2967,7 @@ json.dumps(out, allow_nan=False)
       function renderSpResults(res, cTotal, carbonKg, eff, vr, wt, nYears) {
         const finalRetained = res.total_retained[res.total_retained.length-1];
         const finalReleased = res.cumul_released[res.cumul_released.length-1];
-        const retPct = (finalRetained/carbonKg*100).toFixed(1);
-        const relPct = (finalReleased/carbonKg*100).toFixed(1);
-        const effPct = (eff*100).toFixed(0);
-
-        document.getElementById('sp-summary-badges').innerHTML = `
-          <div class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-200">
-            <span class="text-lg font-bold text-gray-700">${cTotal.toFixed(2)} kg C</span>
-            <span class="text-xs text-gray-500 mt-1 text-center">Total product carbon</span>
-          </div>
-          <div class="flex flex-col items-center p-3 bg-teal-50 rounded-xl border border-teal-200">
-            <span class="text-lg font-bold text-teal-700">${carbonKg.toFixed(2)} kg C</span>
-            <span class="text-xs text-gray-500 mt-1 text-center">Serviceable carbon<br>(${effPct}% efficiency)</span>
-          </div>
-          <div class="flex flex-col items-center p-3 bg-blue-50 rounded-xl border border-blue-200">
-            <span class="text-lg font-bold text-blue-700">${finalRetained.toFixed(2)} kg C</span>
-            <span class="text-xs text-gray-500 mt-1 text-center">Retained at year ${nYears}<br>(${retPct}%)</span>
+        con00 mt-1 text-center">Retained at year ${nYears}<br>(${retPct}%)</span>
           </div>
           <div class="flex flex-col items-center p-3 bg-red-50 rounded-xl border border-red-200">
             <span class="text-lg font-bold text-red-600">${finalReleased.toFixed(2)} kg C</span>
