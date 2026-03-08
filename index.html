@@ -190,7 +190,7 @@
       <!-- ===================================================== -->
       <!-- TAB 3: End-use Products (WPs Carbon)                  -->
       <!-- ===================================================== -->
-      <div id="tab-hwp" class="tab-panel">
+      <div id="tab-eup" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Controls -->
@@ -299,9 +299,9 @@
           <div class="space-y-5 lg:col-span-2">
 
             <!-- Summary badges -->
-            <div id="hwp-summary-panel" class="hidden p-4 bg-white rounded-2xl shadow">
+            <div id="eup-summary-panel" class="hidden p-4 bg-white rounded-2xl shadow">
               <h2 class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Carbon Stock — Latest Year</h2>
-              <div id="hwp-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+              <div id="eup-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
 
             <!-- Plot 1: Input Data -->
@@ -338,7 +338,7 @@
       <!-- ===================================================== -->
       <!-- TAB 1: Industrial Logs Carbon                          -->
       <!-- ===================================================== -->
-      <div id="tab-log" class="tab-panel active">
+      <div id="tab-il" class="tab-panel active">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Inputs -->
@@ -353,7 +353,7 @@
 
               <!-- Volume method selector -->
               <div class="mb-3">
-                <p class="log-input-label mb-1">Volume estimation method</p>
+                <p class="il-input-label mb-1">Volume estimation method</p>
                 <div class="grid grid-cols-2 gap-2">
                   <button onclick="setVolMethod('cylinder')" data-method="cylinder"
                     class="vol-method-btn selected text-xs font-semibold px-2 py-1.5 rounded-lg border-2 border-green-600 bg-green-50 text-green-800 transition-all">
@@ -378,75 +378,75 @@
               <!-- Cylinder inputs -->
               <div id="vol-inputs-cylinder" class="space-y-3">
                 <div>
-                  <p class="log-input-label">Diameter (cm)</p>
-                  <input id="log-diameter" type="number" min="1" max="300" step="0.1" value="30" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Diameter (cm)</p>
+                  <input id="il-diameter" type="number" min="1" max="300" step="0.1" value="30" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Length (m)</p>
-                  <input id="log-length" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Length (m)</p>
+                  <input id="il-length" type="number" min="0.5" max="50" step="0.1" value="4" class="il-input-field" oninput="onIlInputChange()">
                 </div>
               </div>
 
               <!-- Huber inputs -->
               <div id="vol-inputs-huber" class="space-y-3 hidden">
                 <div>
-                  <p class="log-input-label">Mid-point diameter (cm)</p>
-                  <input id="log-d-mid" type="number" min="1" max="300" step="0.1" value="25" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Mid-point diameter (cm)</p>
+                  <input id="il-d-mid" type="number" min="1" max="300" step="0.1" value="25" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Length (m)</p>
-                  <input id="log-length-h" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Length (m)</p>
+                  <input id="il-length-h" type="number" min="0.5" max="50" step="0.1" value="4" class="il-input-field" oninput="onIlInputChange()">
                 </div>
               </div>
 
               <!-- Smalian inputs -->
               <div id="vol-inputs-smalian" class="space-y-3 hidden">
                 <div>
-                  <p class="log-input-label">Butt (large end) diameter (cm)</p>
-                  <input id="log-d-butt" type="number" min="1" max="300" step="0.1" value="35" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Butt (large end) diameter (cm)</p>
+                  <input id="il-d-butt" type="number" min="1" max="300" step="0.1" value="35" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Tip (small end) diameter (cm)</p>
-                  <input id="log-d-tip" type="number" min="0" max="300" step="0.1" value="20" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Tip (small end) diameter (cm)</p>
+                  <input id="il-d-tip" type="number" min="0" max="300" step="0.1" value="20" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Length (m)</p>
-                  <input id="log-length-s" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Length (m)</p>
+                  <input id="il-length-s" type="number" min="0.5" max="50" step="0.1" value="4" class="il-input-field" oninput="onIlInputChange()">
                 </div>
               </div>
 
               <!-- Newton inputs -->
               <div id="vol-inputs-newton" class="space-y-3 hidden">
                 <div>
-                  <p class="log-input-label">Butt (large end) diameter (cm)</p>
-                  <input id="log-d-butt-n" type="number" min="1" max="300" step="0.1" value="35" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Butt (large end) diameter (cm)</p>
+                  <input id="il-d-butt-n" type="number" min="1" max="300" step="0.1" value="35" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Mid-point diameter (cm)</p>
-                  <input id="log-d-mid-n" type="number" min="1" max="300" step="0.1" value="28" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Mid-point diameter (cm)</p>
+                  <input id="il-d-mid-n" type="number" min="1" max="300" step="0.1" value="28" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Tip (small end) diameter (cm)</p>
-                  <input id="log-d-tip-n" type="number" min="0" max="300" step="0.1" value="20" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Tip (small end) diameter (cm)</p>
+                  <input id="il-d-tip-n" type="number" min="0" max="300" step="0.1" value="20" class="il-input-field" oninput="onIlInputChange()">
                 </div>
                 <div>
-                  <p class="log-input-label">Length (m)</p>
-                  <input id="log-length-n" type="number" min="0.5" max="50" step="0.1" value="4" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Length (m)</p>
+                  <input id="il-length-n" type="number" min="0.5" max="50" step="0.1" value="4" class="il-input-field" oninput="onIlInputChange()">
                 </div>
               </div>
 
               <!-- Shared fields -->
               <div class="space-y-3 mt-3 pt-3 border-t border-gray-100">
                 <div>
-                  <p class="log-input-label">Wood type</p>
-                  <select id="log-woodtype" class="log-input-field" onchange="syncPhysicalDefaults(); onLogInputChange()">
+                  <p class="il-input-label">Wood type</p>
+                  <select id="il-woodtype" class="il-input-field" onchange="syncPhysicalDefaults(); onIlInputChange()">
                     <option value="softwood">Softwood (e.g. Pine, Spruce, Fir)</option>
                     <option value="hardwood">Hardwood (e.g. Oak, Maple, Birch)</option>
                   </select>
                 </div>
                 <div>
-                  <p class="log-input-label">Tracking horizon (years)</p>
-                  <input id="log-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Tracking horizon (years)</p>
+                  <input id="il-years" type="number" min="10" max="500" step="1" value="100" class="il-input-field" oninput="onIlInputChange()">
                 </div>
               </div>
 
@@ -461,21 +461,21 @@
               <p class="text-xs text-gray-500 mb-3">Default values based on wood type. Edit to override.</p>
               <div class="space-y-3">
                 <div>
-                  <p class="log-input-label">Wood density (kg/m³)</p>
-                  <input id="log-density" type="number" min="100" max="1200" step="1" value="450" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Wood density (kg/m³)</p>
+                  <input id="il-density" type="number" min="100" max="1200" step="1" value="450" class="il-input-field" oninput="onIlInputChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Softwood default: 450 · Hardwood default: 600</p>
                 </div>
                 <div>
-                  <p class="log-input-label">Carbon fraction (0–1)</p>
-                  <input id="log-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onLogInputChange()">
+                  <p class="il-input-label">Carbon fraction (0–1)</p>
+                  <input id="il-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="il-input-field" oninput="onIlInputChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Softwood default: 0.50 · Hardwood default: 0.48</p>
                 </div>
                 <button onclick="resetPhysicalParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to wood-type defaults</button>
               </div>
               <!-- Carbon estimate display -->
-              <div id="log-carbon-estimate" class="mt-3 p-2 bg-green-50 rounded-xl text-sm text-green-900 hidden">
+              <div id="il-carbon-estimate" class="mt-3 p-2 bg-green-50 rounded-xl text-sm text-green-900 hidden">
                 <div class="font-semibold mb-1">📊 Estimated Log Carbon</div>
-                <div id="log-carbon-display" class="text-xs leading-5"></div>
+                <div id="il-carbon-display" class="text-xs leading-5"></div>
               </div>
             </div>
 
@@ -486,7 +486,7 @@
                 End-Use Category
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select the end use for this log. Auto-suggested based on log size &amp; type.</p>
-              <div id="log-product-grid" class="grid grid-cols-2 gap-2">
+              <div id="il-product-grid" class="grid grid-cols-2 gap-2">
                 <div class="product-card" data-product="Construction" onclick="selectProduct('Construction')">🏠 Construction</div>
                 <div class="product-card" data-product="Exterior" onclick="selectProduct('Exterior')">🌉 Exterior</div>
                 <div class="product-card" data-product="Household" onclick="selectProduct('Household')">🪑 Household</div>
@@ -494,12 +494,12 @@
                 <div class="product-card" data-product="Household Paper" onclick="selectProduct('Household Paper')">🧻 Household Paper</div>
                 <div class="product-card" data-product="Other Paper" onclick="selectProduct('Other Paper')">📄 Other Paper</div>
               </div>
-              <div id="log-suggestion-note" class="mt-2 text-xs text-emerald-700 font-medium hidden"></div>
+              <div id="il-suggestion-note" class="mt-2 text-xs text-emerald-700 font-medium hidden"></div>
               <!-- Conversion efficiency -->
               <div class="mt-3 pt-3 border-t border-gray-100">
-                <p class="log-input-label">Log-to-product conversion efficiency (0–1)</p>
-                <input id="log-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.70" class="log-input-field" oninput="onLogInputChange()">
-                <p class="text-xs text-gray-400 mt-0.5" id="log-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
+                <p class="il-input-label">Log-to-product conversion efficiency (0–1)</p>
+                <input id="il-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.70" class="il-input-field" oninput="onIlInputChange()">
+                <p class="text-xs text-gray-400 mt-0.5" id="il-efficiency-hint">Fraction of log carbon that enters the product. Default by product shown below.</p>
                 <div class="mt-2 grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs text-gray-500" id="efficiency-defaults-table">
                 </div>
                 <button onclick="resetEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to product default</button>
@@ -514,10 +514,10 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run — no need to visit the HWPs Carbon tab first.</p>
               <div class="flex flex-wrap gap-2">
-                <button id="btn-log-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runLogTracker()">Run Log Tracker</button>
-                <button id="btn-log-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearLogTracker()">Clear</button>
+                <button id="btn-il-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runIlTracker()">Run Log Tracker</button>
+                <button id="btn-il-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearIlTracker()">Clear</button>
               </div>
-              <div id="log-status" class="text-sm text-gray-600 mt-2">Select product type, then click Run.</div>
+              <div id="il-status" class="text-sm text-gray-600 mt-2">Select product type, then click Run.</div>
             </div>
           </div>
 
@@ -525,23 +525,23 @@
           <div class="space-y-5 lg:col-span-2">
 
             <!-- Summary panel -->
-            <div id="log-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
+            <div id="il-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
               <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Log Carbon Summary</h2>
-              <div id="log-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+              <div id="il-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
 
             <!-- Chart -->
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-lg font-semibold mb-2">Carbon Retained Over Time</h2>
-              <div id="log-plot-area" class="border rounded-xl h-96"></div>
+              <div id="il-plot-area" class="border rounded-xl h-96"></div>
             </div>
 
             <!-- Results table -->
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
-              <div id="log-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
+              <div id="il-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
               <div class="mt-3">
-                <a id="log-download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-sm" download="LogCarbon_Results.csv">Download Results</a>
+                <a id="il-download-link" class="hidden px-3 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-sm" download="LogCarbon_Results.csv">Download Results</a>
               </div>
             </div>
           </div>
@@ -552,7 +552,7 @@
       <!-- ===================================================== -->
       <!-- TAB 4: Global WPs Carbon                               -->
       <!-- ===================================================== -->
-      <div id="tab-global" class="tab-panel">
+      <div id="tab-gwp" class="tab-panel">
         <!-- ================================================================ -->
         <!-- GLOBAL WPs CARBON TAB                                            -->
         <!-- ================================================================ -->
@@ -691,7 +691,7 @@
       <!-- ===================================================== -->
       <!-- TAB 2: Sawn Products Carbon                            -->
       <!-- ===================================================== -->
-      <div id="tab-pps" class="tab-panel">
+      <div id="tab-sp" class="tab-panel">
         <section class="grid lg:grid-cols-3 gap-6">
 
           <!-- LEFT: Inputs -->
@@ -705,60 +705,60 @@
               </h2>
 
               <!-- Product type buttons -->
-              <p class="log-input-label mb-2">Product category</p>
+              <p class="il-input-label mb-2">Product category</p>
               <div class="grid grid-cols-2 gap-2 mb-3">
-                <button onclick="setPPsType('lumber')" data-ptype="lumber"
-                  class="pps-type-btn selected text-xs font-semibold px-2 py-2 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-800">
+                <button onclick="setSpType('lumber')" data-ptype="lumber"
+                  class="sp-type-btn selected text-xs font-semibold px-2 py-2 rounded-lg border-2 border-teal-600 bg-teal-50 text-teal-800">
                   🪚 Lumber / Timber
                 </button>
-                <button onclick="setPPsType('panel')" data-ptype="panel"
-                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                <button onclick="setSpType('panel')" data-ptype="panel"
+                  class="sp-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
                   🟫 Panel / Board
                 </button>
-                <button onclick="setPPsType('engineered')" data-ptype="engineered"
-                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                <button onclick="setSpType('engineered')" data-ptype="engineered"
+                  class="sp-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
                   🏗️ Engineered Wood
                 </button>
-                <button onclick="setPPsType('other')" data-ptype="other"
-                  class="pps-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
+                <button onclick="setSpType('other')" data-ptype="other"
+                  class="sp-type-btn text-xs font-semibold px-2 py-2 rounded-lg border-2 border-gray-200 bg-gray-50 text-gray-600">
                   📦 Other Solid Wood
                 </button>
               </div>
-              <p id="pps-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.</p>
+              <p id="sp-type-desc" class="text-xs text-gray-500 mb-3 italic">Dimensional lumber (2×4, 2×6, glulam beams, etc.): enter thickness, width, length.</p>
 
               <!-- Lumber inputs -->
-              <div id="pps-inputs-lumber" class="space-y-2">
-                <div><p class="log-input-label">Thickness (mm)</p>
-                  <input id="pps-thickness" type="number" min="1" max="500" step="1" value="38" class="log-input-field" oninput="onPPsChange()">
+              <div id="sp-inputs-lumber" class="space-y-2">
+                <div><p class="il-input-label">Thickness (mm)</p>
+                  <input id="sp-thickness" type="number" min="1" max="500" step="1" value="38" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Nominal 2″ = 38 mm; 4″ = 89 mm</p></div>
-                <div><p class="log-input-label">Width (mm)</p>
-                  <input id="pps-width" type="number" min="1" max="1000" step="1" value="89" class="log-input-field" oninput="onPPsChange()"></div>
-                <div><p class="log-input-label">Length (m)</p>
-                  <input id="pps-length" type="number" min="0.1" max="30" step="0.01" value="3.66" class="log-input-field" oninput="onPPsChange()">
+                <div><p class="il-input-label">Width (mm)</p>
+                  <input id="sp-width" type="number" min="1" max="1000" step="1" value="89" class="il-input-field" oninput="onSpChange()"></div>
+                <div><p class="il-input-label">Length (m)</p>
+                  <input id="sp-length" type="number" min="0.1" max="30" step="0.01" value="3.66" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">12 ft = 3.66 m; 16 ft = 4.88 m</p></div>
-                <div><p class="log-input-label">Quantity (pieces)</p>
-                  <input id="pps-qty" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="il-input-label">Quantity (pieces)</p>
+                  <input id="sp-qty" type="number" min="1" max="999999" step="1" value="1" class="il-input-field" oninput="onSpChange()"></div>
               </div>
 
               <!-- Panel inputs -->
-              <div id="pps-inputs-panel" class="space-y-2 hidden">
-                <div><p class="log-input-label">Thickness (mm)</p>
-                  <input id="pps-panel-t" type="number" min="1" max="200" step="0.5" value="18" class="log-input-field" oninput="onPPsChange()">
+              <div id="sp-inputs-panel" class="space-y-2 hidden">
+                <div><p class="il-input-label">Thickness (mm)</p>
+                  <input id="sp-panel-t" type="number" min="1" max="200" step="0.5" value="18" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Plywood/OSB: 12–19 mm; MDF: 16–25 mm</p></div>
-                <div><p class="log-input-label">Width (m)</p>
-                  <input id="pps-panel-w" type="number" min="0.1" max="10" step="0.01" value="1.22" class="log-input-field" oninput="onPPsChange()">
+                <div><p class="il-input-label">Width (m)</p>
+                  <input id="sp-panel-w" type="number" min="0.1" max="10" step="0.01" value="1.22" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Standard 4 ft = 1.22 m</p></div>
-                <div><p class="log-input-label">Length (m)</p>
-                  <input id="pps-panel-l" type="number" min="0.1" max="20" step="0.01" value="2.44" class="log-input-field" oninput="onPPsChange()">
+                <div><p class="il-input-label">Length (m)</p>
+                  <input id="sp-panel-l" type="number" min="0.1" max="20" step="0.01" value="2.44" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Standard 8 ft = 2.44 m</p></div>
-                <div><p class="log-input-label">Quantity (sheets)</p>
-                  <input id="pps-panel-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="il-input-label">Quantity (sheets)</p>
+                  <input id="sp-panel-q" type="number" min="1" max="999999" step="1" value="1" class="il-input-field" oninput="onSpChange()"></div>
               </div>
 
               <!-- Engineered Wood inputs -->
-              <div id="pps-inputs-engineered" class="space-y-2 hidden">
-                <div><p class="log-input-label">Sub-type</p>
-                  <select id="pps-eng-sub" class="log-input-field" onchange="onPPsChange()">
+              <div id="sp-inputs-engineered" class="space-y-2 hidden">
+                <div><p class="il-input-label">Sub-type</p>
+                  <select id="sp-eng-sub" class="il-input-field" onchange="onSpChange()">
                     <option value="glulam">Glulam (Glue-laminated Timber)</option>
                     <option value="clt">CLT (Cross-Laminated Timber)</option>
                     <option value="lvl">LVL (Laminated Veneer Lumber)</option>
@@ -766,34 +766,34 @@
                     <option value="lsl">LSL (Laminated Strand Lumber)</option>
                     <option value="ijoist">I-Joist / Wood I-Beam</option>
                   </select></div>
-                <div><p class="log-input-label">Depth / Height (mm)</p>
-                  <input id="pps-eng-d" type="number" min="1" max="2000" step="1" value="200" class="log-input-field" oninput="onPPsChange()"></div>
-                <div><p class="log-input-label">Width (mm)</p>
-                  <input id="pps-eng-w" type="number" min="1" max="1000" step="1" value="130" class="log-input-field" oninput="onPPsChange()"></div>
-                <div><p class="log-input-label">Length (m)</p>
-                  <input id="pps-eng-l" type="number" min="0.1" max="40" step="0.01" value="6" class="log-input-field" oninput="onPPsChange()"></div>
-                <div><p class="log-input-label">Quantity (pieces)</p>
-                  <input id="pps-eng-q" type="number" min="1" max="999999" step="1" value="1" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="il-input-label">Depth / Height (mm)</p>
+                  <input id="sp-eng-d" type="number" min="1" max="2000" step="1" value="200" class="il-input-field" oninput="onSpChange()"></div>
+                <div><p class="il-input-label">Width (mm)</p>
+                  <input id="sp-eng-w" type="number" min="1" max="1000" step="1" value="130" class="il-input-field" oninput="onSpChange()"></div>
+                <div><p class="il-input-label">Length (m)</p>
+                  <input id="sp-eng-l" type="number" min="0.1" max="40" step="0.01" value="6" class="il-input-field" oninput="onSpChange()"></div>
+                <div><p class="il-input-label">Quantity (pieces)</p>
+                  <input id="sp-eng-q" type="number" min="1" max="999999" step="1" value="1" class="il-input-field" oninput="onSpChange()"></div>
               </div>
 
               <!-- Other Solid Wood -->
-              <div id="pps-inputs-other" class="space-y-2 hidden">
-                <div><p class="log-input-label">Total volume (m³)</p>
-                  <input id="pps-other-vol" type="number" min="0.001" max="10000" step="0.001" value="0.1" class="log-input-field" oninput="onPPsChange()"></div>
-                <div><p class="log-input-label">Description (optional)</p>
-                  <input id="pps-other-desc" type="text" placeholder="e.g. wood pallet, railway tie, round post" class="log-input-field"></div>
+              <div id="sp-inputs-other" class="space-y-2 hidden">
+                <div><p class="il-input-label">Total volume (m³)</p>
+                  <input id="sp-other-vol" type="number" min="0.001" max="10000" step="0.001" value="0.1" class="il-input-field" oninput="onSpChange()"></div>
+                <div><p class="il-input-label">Description (optional)</p>
+                  <input id="sp-other-desc" type="text" placeholder="e.g. wood pallet, railway tie, round post" class="il-input-field"></div>
               </div>
 
               <!-- Shared -->
               <div class="space-y-2 mt-3 pt-3 border-t border-gray-100">
-                <div><p class="log-input-label">Wood species / type</p>
-                  <select id="pps-woodtype" class="log-input-field" onchange="syncPPsDefaults(); onPPsChange()">
+                <div><p class="il-input-label">Wood species / type</p>
+                  <select id="sp-woodtype" class="il-input-field" onchange="syncSpDefaults(); onSpChange()">
                     <option value="softwood">Softwood — Pine, Spruce, Fir, Cedar</option>
                     <option value="hardwood">Hardwood — Oak, Maple, Birch, Ash</option>
                     <option value="tropical">Tropical Hardwood — Teak, Meranti, Ipe</option>
                   </select></div>
-                <div><p class="log-input-label">Tracking horizon (years)</p>
-                  <input id="pps-years" type="number" min="10" max="500" step="1" value="100" class="log-input-field" oninput="onPPsChange()"></div>
+                <div><p class="il-input-label">Tracking horizon (years)</p>
+                  <input id="sp-years" type="number" min="10" max="500" step="1" value="100" class="il-input-field" oninput="onSpChange()"></div>
               </div>
             </div>
 
@@ -805,18 +805,18 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Oven-dry density and carbon fraction defaults by species.</p>
               <div class="space-y-2">
-                <div><p class="log-input-label">Oven-dry density (kg/m³)</p>
-                  <input id="pps-density" type="number" min="100" max="1200" step="1" value="420" class="log-input-field" oninput="onPPsChange()">
+                <div><p class="il-input-label">Oven-dry density (kg/m³)</p>
+                  <input id="sp-density" type="number" min="100" max="1200" step="1" value="420" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Softwood ≈ 420 · Hardwood ≈ 580 · Tropical ≈ 680</p></div>
-                <div><p class="log-input-label">Carbon fraction (0–1)</p>
-                  <input id="pps-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="log-input-field" oninput="onPPsChange()">
+                <div><p class="il-input-label">Carbon fraction (0–1)</p>
+                  <input id="sp-carbon-frac" type="number" min="0.1" max="0.9" step="0.01" value="0.50" class="il-input-field" oninput="onSpChange()">
                   <p class="text-xs text-gray-400 mt-0.5">Typical range: 0.47–0.51</p></div>
-                <button onclick="resetPPsParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to species defaults</button>
+                <button onclick="resetSpParams()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to species defaults</button>
               </div>
               <!-- Carbon estimate -->
-              <div id="pps-estimate" class="mt-3 p-2 bg-teal-50 rounded-xl text-sm text-teal-900 hidden">
+              <div id="sp-estimate" class="mt-3 p-2 bg-teal-50 rounded-xl text-sm text-teal-900 hidden">
                 <div class="font-semibold mb-1">📊 Estimated Product Carbon</div>
-                <div id="pps-estimate-display" class="text-xs leading-5"></div>
+                <div id="sp-estimate-display" class="text-xs leading-5"></div>
               </div>
             </div>
 
@@ -827,21 +827,21 @@
                 End-Use Category
               </h2>
               <p class="text-xs text-gray-500 mb-3">Select service-life category. Determines disposal &amp; decay parameters.</p>
-              <div id="pps-product-grid" class="grid grid-cols-2 gap-2">
-                <div class="product-card" data-product="Construction" onclick="selectPPsProduct('Construction')">🏠 Construction</div>
-                <div class="product-card" data-product="Exterior" onclick="selectPPsProduct('Exterior')">🌉 Exterior</div>
-                <div class="product-card" data-product="Household" onclick="selectPPsProduct('Household')">🪑 Furniture / Interior</div>
-                <div class="product-card" data-product="Graphic Paper" onclick="selectPPsProduct('Graphic Paper')">📰 Graphic Paper</div>
-                <div class="product-card" data-product="Household Paper" onclick="selectPPsProduct('Household Paper')">🧻 Tissue / Hygienic</div>
-                <div class="product-card" data-product="Other Paper" onclick="selectPPsProduct('Other Paper')">📄 Other Paper</div>
+              <div id="sp-product-grid" class="grid grid-cols-2 gap-2">
+                <div class="product-card" data-product="Construction" onclick="selectSpProduct('Construction')">🏠 Construction</div>
+                <div class="product-card" data-product="Exterior" onclick="selectSpProduct('Exterior')">🌉 Exterior</div>
+                <div class="product-card" data-product="Household" onclick="selectSpProduct('Household')">🪑 Furniture / Interior</div>
+                <div class="product-card" data-product="Graphic Paper" onclick="selectSpProduct('Graphic Paper')">📰 Graphic Paper</div>
+                <div class="product-card" data-product="Household Paper" onclick="selectSpProduct('Household Paper')">🧻 Tissue / Hygienic</div>
+                <div class="product-card" data-product="Other Paper" onclick="selectSpProduct('Other Paper')">📄 Other Paper</div>
               </div>
-              <div id="pps-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
+              <div id="sp-suggestion-note" class="mt-2 text-xs text-teal-700 font-medium hidden"></div>
               <!-- Processing efficiency -->
               <div class="mt-3 pt-3 border-t border-gray-100">
-                <p class="log-input-label">Processing efficiency (0–1)</p>
-                <input id="pps-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.90" class="log-input-field" oninput="onPPsChange()">
+                <p class="il-input-label">Processing efficiency (0–1)</p>
+                <input id="sp-efficiency" type="number" min="0.01" max="1.0" step="0.01" value="0.90" class="il-input-field" oninput="onSpChange()">
                 <p class="text-xs text-gray-400 mt-0.5">Fraction of product carbon that is serviceable (accounts for trim waste). Sawn lumber ≈ 0.90, panels ≈ 0.85.</p>
-                <button onclick="resetPPsEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to category default</button>
+                <button onclick="resetSpEfficiency()" class="text-xs text-indigo-600 hover:underline mt-1">↺ Reset to category default</button>
               </div>
             </div>
 
@@ -853,29 +853,29 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Python initializes automatically on first run.</p>
               <div class="flex flex-wrap gap-2">
-                <button id="btn-pps-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runPPsTracker()">▶ Run Tracker</button>
-                <button id="btn-pps-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearPPsTracker()">Clear</button>
+                <button id="btn-sp-run" class="btn px-4 py-2 rounded-xl bg-teal-700 text-white hover:bg-teal-800" onclick="runSpTracker()">▶ Run Tracker</button>
+                <button id="btn-sp-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearSpTracker()">Clear</button>
               </div>
-              <div id="pps-status" class="text-sm text-gray-600 mt-2">Select end-use category, then click Run.</div>
+              <div id="sp-status" class="text-sm text-gray-600 mt-2">Select end-use category, then click Run.</div>
             </div>
 
           </div><!-- /left -->
 
           <!-- RIGHT: Output -->
           <div class="space-y-5 lg:col-span-2">
-            <div id="pps-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
+            <div id="sp-summary-panel" class="p-4 bg-white rounded-2xl shadow hidden">
               <h2 class="text-base font-semibold mb-3 text-gray-700">📋 Sawn Product Carbon Summary</h2>
-              <div id="pps-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+              <div id="sp-summary-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
             </div>
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-lg font-semibold mb-2">Carbon Retained Over Time</h2>
-              <div id="pps-plot-area" class="border rounded-xl h-96"></div>
+              <div id="sp-plot-area" class="border rounded-xl h-96"></div>
             </div>
             <div class="p-4 bg-white rounded-2xl shadow">
               <h2 class="text-base font-semibold mb-2 text-gray-700">Results Table</h2>
-              <div id="pps-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
+              <div id="sp-results-preview" class="overflow-auto border rounded-xl p-2 max-h-64 text-xs"></div>
               <div class="mt-3">
-                <a id="pps-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">⬇ Download Results</a>
+                <a id="sp-download-link" class="hidden px-3 py-2 rounded-xl bg-teal-600 text-white hover:bg-teal-700 text-sm" download="PPsCarbon_Results.csv">⬇ Download Results</a>
               </div>
             </div>
           </div>
@@ -892,17 +892,29 @@
         <div class="bg-gradient-to-r from-green-900 via-teal-800 to-green-800 rounded-2xl shadow-lg p-8 mb-6 text-white">
           <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
             <div class="flex-1">
-              <h2 class="text-2xl font-bold mb-2">Web-based Wood Products Carbon Estimator</h2>
+              
             </div>
-            <div class="flex flex-wrap gap-4 flex-shrink-0 items-center">
+            <div class="flex flex-wrap gap-3 flex-shrink-0 items-center">
               <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
-                <img src="./assets/img/Logo_USDA.png" alt="USDA" class="h-20 w-auto object-contain">
+                <img src="./assets/img/Logo_USDA.png" alt="USDA" class="h-16 w-auto object-contain">
               </div>
               <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
-                <img src="./assets/img/Logo_NSRC.png" alt="NSRC" class="h-20 w-auto object-contain">
+                <img src="./assets/img/Logo_FS.png" alt="USDA Forest Service" class="h-16 w-auto object-contain">
               </div>
               <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
-                <img src="./assets/img/Logo_WGL.png" alt="WGL" class="h-20 w-auto object-contain">
+                <img src="./assets/img/Logo_NSRC.png" alt="NSRC" class="h-16 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_NASACMS.png" alt="NASA CMS" class="h-16 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_PERSEUS.png" alt="PERSEUS" class="h-16 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_UMAINE.png" alt="University of Maine" class="h-16 w-auto object-contain">
+              </div>
+              <div class="bg-white/90 rounded-xl px-3 py-2 flex items-center justify-center">
+                <img src="./assets/img/Logo_WGL.png" alt="WGL" class="h-16 w-auto object-contain">
               </div>
             </div>
           </div>
@@ -919,10 +931,9 @@
               <div class="flex items-start gap-3">
                 <div class="team-avatar bg-green-700 text-xl">🌲</div>
                 <div>
-                  <p class="font-bold text-gray-900 text-base">Xinyuan Wei, PhD</p>
-                  <p class="text-xs text-teal-700 font-semibold mt-0.5">Principal Investigator</p>
+                  <p class="font-bold text-gray-900 text-base">Xinyuan Wei</p>
                   <p class="text-xs text-gray-500">School of Forest Resources<br>University of Maine, Orono</p>
-                  <a href="mailto:xinyuan.wei@maine.edu" class="text-xs text-indigo-600 hover:underline mt-1 inline-block">xinyuan.wei@maine.edu</a>
+                  <a href="/cdn-cgi/l/email-protection#453d2c2b3c30242b6b32202c0528242c2b206b202130" class="text-xs text-indigo-600 hover:underline mt-1 inline-block"><span class="__cf_email__" data-cfemail="38405156414d5956164f5d5178555951565d165d5c4d">[email&#160;protected]</span></a>
                 </div>
               </div>
             </div>
@@ -936,7 +947,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Daniel Hayes</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="mailto:daniel.j.hayes@maine.edu" class="text-xs text-indigo-600 hover:underline">daniel.j.hayes@maine.edu</a>
+                    <a href="/cdn-cgi/l/email-protection#375356595e525b195d195f564e5244775a565e595219525342" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="c2a6a3acaba7aeeca8ecaaa3bba7b182afa3abaca7eca7a6b7">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -944,7 +955,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Aaron Weiskittel</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="mailto:aaron.weiskittel@maine.edu" class="text-xs text-indigo-600 hover:underline">aaron.weiskittel@maine.edu</a>
+                    <a href="/cdn-cgi/l/email-protection#147575667b7a3a63717d677f7d606071785479757d7a713a717061" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="046565766b6a2a73616d776f6d707061684469656d6a612a616071">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -952,7 +963,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Jianheng Zhao</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="mailto:jianheng.zhao@maine.edu" class="text-xs text-indigo-600 hover:underline">jianheng.zhao@maine.edu</a>
+                    <a href="/cdn-cgi/l/email-protection#6802010906000d060f461200090728050901060d460d0c1d" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="600a09010e08050e074e1a08010f200d01090e054e050415">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -960,7 +971,7 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Ling Li</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="mailto:ling.li@maine.edu" class="text-xs text-indigo-600 hover:underline">ling.li@maine.edu</a>
+                    <a href="/cdn-cgi/l/email-protection#81ede8efe6afede8c1ece0e8efe4afe4e5f4" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="94f8fdfaf3baf8fdd4f9f5fdfaf1baf1f0e1">[email&#160;protected]</span></a>
                   </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -968,7 +979,28 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Adam Daigneault</p>
                     <p class="text-xs text-gray-500">University of Maine</p>
-                    <a href="mailto:adam.daigneault@maine.edu" class="text-xs text-indigo-600 hover:underline">adam.daigneault@maine.edu</a>
+                    <a href="/cdn-cgi/l/email-protection#d9b8bdb8b4f7bdb8b0beb7bcb8acb5ad99b4b8b0b7bcf7bcbdac" class="text-xs text-indigo-600 hover:underline"><span class="__cf_email__" data-cfemail="1d7c797c7033797c747a73787c6871695d707c74737833787968">[email&#160;protected]</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Collaborators -->
+            <div class="p-5 bg-white rounded-2xl shadow">
+              <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Collaborators</h3>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-emerald-600">CW</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Chris Woodall</p>
+                    <p class="text-xs text-gray-500">CTrees</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-sky-600">BP</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Benjamin Poulter</p>
+                    <p class="text-xs text-gray-500">Spark Climate Solutions</p>
                   </div>
                 </div>
               </div>
@@ -1259,13 +1291,13 @@
     <footer class="mt-8 border-t border-gray-200 text-xs text-gray-500">
       <div class="mx-auto px-4 py-4 max-w-[1400px] flex flex-wrap items-center justify-between gap-2">
         <p>© 2025 Wood Products Carbon Tracker &nbsp;·&nbsp; Xinyuan Wei &nbsp;·&nbsp;
-           <a href="mailto:xinyuan.wei@maine.edu" class="underline text-indigo-600 hover:text-indigo-800">xinyuan.wei@maine.edu</a></p>
+           <a href="/cdn-cgi/l/email-protection#9ce4f5f2e5e9fdf2b2ebf9f5dcf1fdf5f2f9b2f9f8e9" class="underline text-indigo-600 hover:text-indigo-800"><span class="__cf_email__" data-cfemail="3c44555245495d52124b59557c515d55525912595849">[email&#160;protected]</span></a></p>
         <p class="text-gray-400">Supported by USDA · NSRC &nbsp;·&nbsp; University of Maine</p>
       </div>
     </footer>
 
     <!-- ========== EMBEDDED PYTHON + DATA (unchanged from original) ========== -->
-    <script id="emb-main" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIG1haW5lCiMgQ3JlYXRlZCBvbiBGcmkgU2VwIDEyIDA5OjQzOjEyIDIwMjUgICAgICAgICAgICAgICAgCiMgYXV0aG9yOiB4aW55dWFuLndlaQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IFdQc0NUX0Z1bmN0aW9ucyBhcyB3ZgoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIEZ1bmN0aW9uIHRvIHRyYWNrIHdvb2QgcHJvZHVjdHMgY2FyYm9uIGZsdXgKZGVmIHRyYWNrZXIgKHdwX2RhdGEsIHdwX3BhcmEsIHNhdmVmaWxlKToKICAgICMgUmVhZCBkYXRhIGFuZCBwYXJhbWV0ZXJzCiAgICBkYXRhID0gcGQucmVhZF9jc3Yod3BfZGF0YSkKICAgIHBhcmEgPSBwZC5yZWFkX2Nzdih3cF9wYXJhKQogICAgdHlyICA9IGxlbihkYXRhWydZZWFyJ10pCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIEJpb2Z1ZWwgLyBCaW9jaGFyIC8gQ2hhcmNvYWwgIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tCiAgICAjIEJpb2Z1ZWwgYnVybmluZyBlZmZpY2llbmN5CiAgICBiZl9lZmYgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQmlvZnVlbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdlZmZpY2llbmN5JyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaWYgYmZfZWZmID4gMTogICMgYWNjZXB0IDAuLjEwMCBvciAwLi4xCiAgICAgICAgYmZfZWZmID0gYmZfZWZmIC8gMTAwLjAKCiAgICAjIEJpb2NoYXIgZGVjYXkgcGFyYW1ldGVycwogICAgYmNfZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0Jpb2NoYXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGVjYXlfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGJjX2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdCaW9jaGFyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2RlY2F5XzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCgogICAgIyBCaW9mdWVsIC0+IChjaGFyY29hbCBpbmZsb3csIGVtaXNzaW9ucykKICAgIGNoX2luZmxvdywgZnVlbF9lbWlzID0gd2YuYmlvZnVlbF9DRih0eXIsIGRhdGFbJ0Jpb2Z1ZWwnXSwgYmZfZWZmKQoKICAgICMgQmlvY2hhciBzdG9jayBhbmQgZGVjYXkgKGV4cGxpY2l0IHByb2R1Y3Rpb24gKyBjaGFyY29hbCBmcm9tIGJpb2Z1ZWwpCiAgICBiaW9jaGFyX3Byb2QgPSBwZC5TZXJpZXMoZGF0YVsnQmlvY2hhciddLCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKSArIHBkLlNlcmllcyhjaF9pbmZsb3csIGR0eXBlPWZsb2F0KQogICAgYmNfc3RvY2ssIGJjX2RlY2F5ID0gd2YuYmlvY2hhcl9DRih0eXIsIGJpb2NoYXJfcHJvZCwgYmNfZGMxLCBiY19kYzIpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFdvb2QgcHJvZHVjdHMgZGlzcG9zYWwgYW5kIHJlY3ljbGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIENvbnN0cnVjdGlvbiB3b29kIHByb2R1Y3RzCiAgICBjb2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0NvbnN0cnVjdGlvbicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvX2ludXNlLCBjb19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0NvbnN0cnVjdGlvbiddLCBjb2RwMSwgY29kcDIsIGNvZHAzKQogICAgY29fcmVjeWMsIGNvX2xmaW4gID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhjb19kaXNwb3MsIGR0eXBlPWZsb2F0KSwgY29ycDEsIGNvcnAyKQoKICAgICMgRXh0ZXJpb3IgKG5vIHJlY3ljbGluZykKICAgIGV4ZHAxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0V4dGVyaW9yJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBleGRwMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdFeHRlcmlvcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nRXh0ZXJpb3InKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4X2ludXNlLCBleF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0V4dGVyaW9yJ10sIGV4ZHAxLCBleGRwMiwgZXhkcDMpCiAgICBleF9sZmluID0gcGQuU2VyaWVzKGV4X2Rpc3BvcywgZHR5cGU9ZmxvYXQpICAjIG5vIHJlY3ljbGluZwoKICAgICMgSG91c2Vob2xkCiAgICBob2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvX2ludXNlLCBob19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0hvdXNlaG9sZCddLCBob2RwMSwgaG9kcDIsIGhvZHAzKQogICAgaG9fcmVjeWMsIGhvX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoaG9fZGlzcG9zLCBkdHlwZT1mbG9hdCksIGhvcnAxLCBob3JwMikKCiAgICAjIEdyYXBoaWMgUGFwZXIKICAgIGdwZDEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdHcmFwaGljIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGdwcjEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BfaW51c2UsIGdwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnR3JhcGhpYyBQYXBlciddLCBncGQxLCBncGQyLCBncGQzKQogICAgZ3BfcmVjeWMsIGdwX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksIGdwcjEsIGdwcjIpCgogICAgIyBPdGhlciBQYXBlcgogICAgb3BkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMyA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3ByMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBvcHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J090aGVyIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIG9wX2ludXNlLCBvcF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ090aGVyIFBhcGVyJ10sIG9wZDEsIG9wZDIsIG9wZDMpCiAgICBvcF9yZWN5Yywgb3BfbGZpbiAgID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhvcF9kaXNwb3MsIGR0eXBlPWZsb2F0KSwgb3ByMSwgb3ByMikKCiAgICAjIEhvdXNlaG9sZCBQYXBlciAobm8gcmVjeWNsaW5nKQogICAgaHBkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhwZDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBocGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaHBfaW51c2UsIGhwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnSG91c2Vob2xkIFBhcGVyJ10sIGhwZDEsIGhwZDIsIGhwZDMpCiAgICBocF9sZmluID0gcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIExhbmRmaWxsIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIExhbmRmaWxsIGRlY2F5IHBhcmFtZXRlcnMKICAgIGNvZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Nvbl9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdjb25fZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkYzEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZXh0X2RlY2F5MScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4ZGMyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2V4dF9kZWNheTInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob2RjMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdob3VfZGVjYXkxJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kYzIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0naG91X2RlY2F5MicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIHBhZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3BhcF9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBwYWRjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdwYXBfZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQoKICAgICMgUGFwZXItbGFuZGZpbGwgaW5wdXQgPSBHcmFwaGljICsgT3RoZXIKICAgIGxmX3BhcCA9IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMob3BfbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KQoKICAgICMgTGFuZGZpbGwgcGVyIHN0cmVhbQogICAgY29uX3Bvb2wsIGNvbl9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIHBkLlNlcmllcyhjb19sZmluLCBkdHlwZT1mbG9hdCksIGNvZGMxLCBjb2RjMikKICAgIGV4dF9wb29sLCBleHRfZGVjID0gd2YubGFuZGZpbGxfQ0YodHlyLCBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLCBleGRjMSwgZXhkYzIpCiAgICBob3VfcG9vbCwgaG91X2RlYyA9IHdmLmxhbmRmaWxsX0NGKHR5ciwgcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwgaG9kYzEsIGhvZGMyKQogICAgcGFwX3Bvb2wsIHBhcF9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIGxmX3BhcCwgcGFkYzEsIHBhZGMyKQoKICAgICMgVG90YWxzIGZvciBzYXZpbmcKICAgIFNfbGYgPSBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGV4X2xmaW4sIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhob19sZmluICsgbGZfcGFwLCBkdHlwZT1mbG9hdCkKICAgIFBfbGYgPSBwZC5TZXJpZXMoY29uX3Bvb2wsIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhleHRfcG9vbCwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9wb29sICsgcGFwX3Bvb2wsIGR0eXBlPWZsb2F0KQogICAgRF9sZiA9IHBkLlNlcmllcyhjb25fZGVjLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMoZXh0X2RlYywgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9kZWMgKyBwYXBfZGVjLCBkdHlwZT1mbG9hdCkKCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFNhdmUgcmVzdWx0cyAtLS0tLS0tLS0tLS0tLS0tCiAgICBvdXQgPSBwZC5EYXRhRnJhbWUoewogICAgICAgICdZZWFyJzogZGF0YVsnWWVhciddLAoKICAgICAgICAnRnVlbF9FbWlzc2lvbnMnOiBwZC5TZXJpZXMoZnVlbF9lbWlzLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfU3RvY2snIDogcGQuU2VyaWVzKGJjX3N0b2NrLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfRGVjYXknIDogcGQuU2VyaWVzKGJjX2RlY2F5LCBkdHlwZT1mbG9hdCksCgogICAgICAgICdDb25zdHJ1Y3Rpb25fSW5Vc2UnICAgOiBwZC5TZXJpZXMoY29faW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGNvX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdDb25zdHJ1Y3Rpb25fUmVjeWNsZWQnOiBwZC5TZXJpZXMoY29fcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnRXh0ZXJpb3JfSW5Vc2UnICAgOiBwZC5TZXJpZXMoZXhfaW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnRXh0ZXJpb3JfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZXhfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0V4dGVyaW9yX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnSG91c2Vob2xkX0luVXNlJyAgIDogcGQuU2VyaWVzKGhvX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9EaXNwb3NlZCc6IHBkLlNlcmllcyhob19kaXNwb3MsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnSG91c2Vob2xkX1JlY3ljbGVkJzogcGQuU2VyaWVzKGhvX3JlY3ljLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9JblVzZScgICA6IHBkLlNlcmllcyhncF9pbnVzZSwgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9SZWN5Y2xlZCc6IHBkLlNlcmllcyhncF9yZWN5YywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfTGFuZGZpbGxJbic6IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCksCgogICAgICAgICdPdGhlclBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKG9wX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMob3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfUmVjeWNsZWQnOiBwZC5TZXJpZXMob3BfcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnT3RoZXJQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKG9wX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKGhwX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdIb3VzZWhvbGRQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0xGX0lucHV0X1RvdGFsJyA6IHBkLlNlcmllcyhTX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX1N0b2NrX1RvdGFsJyA6IHBkLlNlcmllcyhQX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX0RlY2F5X1RvdGFsJyA6IHBkLlNlcmllcyhEX2xmLCBkdHlwZT1mbG9hdCkKICAgIH0pCgogICAgb3V0LnRvX2NzdihmJ3tzYXZlZmlsZX0nLCBpbmRleD1GYWxzZSkKICAgIHByaW50KGYiU2F2ZWQgcmVzdWx0cyAtPiB7c2F2ZWZpbGV9IikK</script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="emb-main" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIG1haW5lCiMgQ3JlYXRlZCBvbiBGcmkgU2VwIDEyIDA5OjQzOjEyIDIwMjUgICAgICAgICAgICAgICAgCiMgYXV0aG9yOiB4aW55dWFuLndlaQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmltcG9ydCBwYW5kYXMgYXMgcGQKaW1wb3J0IFdQc0NUX0Z1bmN0aW9ucyBhcyB3ZgoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIEZ1bmN0aW9uIHRvIHRyYWNrIHdvb2QgcHJvZHVjdHMgY2FyYm9uIGZsdXgKZGVmIHRyYWNrZXIgKHdwX2RhdGEsIHdwX3BhcmEsIHNhdmVmaWxlKToKICAgICMgUmVhZCBkYXRhIGFuZCBwYXJhbWV0ZXJzCiAgICBkYXRhID0gcGQucmVhZF9jc3Yod3BfZGF0YSkKICAgIHBhcmEgPSBwZC5yZWFkX2Nzdih3cF9wYXJhKQogICAgdHlyICA9IGxlbihkYXRhWydZZWFyJ10pCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIEJpb2Z1ZWwgLyBCaW9jaGFyIC8gQ2hhcmNvYWwgIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tCiAgICAjIEJpb2Z1ZWwgYnVybmluZyBlZmZpY2llbmN5CiAgICBiZl9lZmYgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQmlvZnVlbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdlZmZpY2llbmN5JyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaWYgYmZfZWZmID4gMTogICMgYWNjZXB0IDAuLjEwMCBvciAwLi4xCiAgICAgICAgYmZfZWZmID0gYmZfZWZmIC8gMTAwLjAKCiAgICAjIEJpb2NoYXIgZGVjYXkgcGFyYW1ldGVycwogICAgYmNfZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0Jpb2NoYXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGVjYXlfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGJjX2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdCaW9jaGFyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2RlY2F5XzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCgogICAgIyBCaW9mdWVsIC0+IChjaGFyY29hbCBpbmZsb3csIGVtaXNzaW9ucykKICAgIGNoX2luZmxvdywgZnVlbF9lbWlzID0gd2YuYmlvZnVlbF9DRih0eXIsIGRhdGFbJ0Jpb2Z1ZWwnXSwgYmZfZWZmKQoKICAgICMgQmlvY2hhciBzdG9jayBhbmQgZGVjYXkgKGV4cGxpY2l0IHByb2R1Y3Rpb24gKyBjaGFyY29hbCBmcm9tIGJpb2Z1ZWwpCiAgICBiaW9jaGFyX3Byb2QgPSBwZC5TZXJpZXMoZGF0YVsnQmlvY2hhciddLCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKSArIHBkLlNlcmllcyhjaF9pbmZsb3csIGR0eXBlPWZsb2F0KQogICAgYmNfc3RvY2ssIGJjX2RlY2F5ID0gd2YuYmlvY2hhcl9DRih0eXIsIGJpb2NoYXJfcHJvZCwgYmNfZGMxLCBiY19kYzIpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFdvb2QgcHJvZHVjdHMgZGlzcG9zYWwgYW5kIHJlY3ljbGluZyAtLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIENvbnN0cnVjdGlvbiB3b29kIHByb2R1Y3RzCiAgICBjb2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0NvbnN0cnVjdGlvbicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdDb25zdHJ1Y3Rpb24nKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgY29ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nQ29uc3RydWN0aW9uJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGNvX2ludXNlLCBjb19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0NvbnN0cnVjdGlvbiddLCBjb2RwMSwgY29kcDIsIGNvZHAzKQogICAgY29fcmVjeWMsIGNvX2xmaW4gID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhjb19kaXNwb3MsIGR0eXBlPWZsb2F0KSwgY29ycDEsIGNvcnAyKQoKICAgICMgRXh0ZXJpb3IgKG5vIHJlY3ljbGluZykKICAgIGV4ZHAxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0V4dGVyaW9yJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBleGRwMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdFeHRlcmlvcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nRXh0ZXJpb3InKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4X2ludXNlLCBleF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0V4dGVyaW9yJ10sIGV4ZHAxLCBleGRwMiwgZXhkcDMpCiAgICBleF9sZmluID0gcGQuU2VyaWVzKGV4X2Rpc3BvcywgZHR5cGU9ZmxvYXQpICAjIG5vIHJlY3ljbGluZwoKICAgICMgSG91c2Vob2xkCiAgICBob2RwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvZHAyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kcDMgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzMnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob3JwMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQnKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9ycDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhvX2ludXNlLCBob19kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ0hvdXNlaG9sZCddLCBob2RwMSwgaG9kcDIsIGhvZHAzKQogICAgaG9fcmVjeWMsIGhvX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoaG9fZGlzcG9zLCBkdHlwZT1mbG9hdCksIGhvcnAxLCBob3JwMikKCiAgICAjIEdyYXBoaWMgUGFwZXIKICAgIGdwZDEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdHcmFwaGljIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMycpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGdwcjEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nR3JhcGhpYyBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBncHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0dyYXBoaWMgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0ncmVjeWNsZV8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZ3BfaW51c2UsIGdwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnR3JhcGhpYyBQYXBlciddLCBncGQxLCBncGQyLCBncGQzKQogICAgZ3BfcmVjeWMsIGdwX2xmaW4gICA9IHdmLnJlY3ljbGVfQ0YodHlyLCBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksIGdwcjEsIGdwcjIpCgogICAgIyBPdGhlciBQYXBlcgogICAgb3BkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8xJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8yJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3BkMyA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgb3ByMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdPdGhlciBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdyZWN5Y2xlXzEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBvcHIyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J090aGVyIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3JlY3ljbGVfMicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIG9wX2ludXNlLCBvcF9kaXNwb3MgPSB3Zi5kaXNwb3NhbF9DRih0eXIsIGRhdGFbJ090aGVyIFBhcGVyJ10sIG9wZDEsIG9wZDIsIG9wZDMpCiAgICBvcF9yZWN5Yywgb3BfbGZpbiAgID0gd2YucmVjeWNsZV9DRih0eXIsIHBkLlNlcmllcyhvcF9kaXNwb3MsIGR0eXBlPWZsb2F0KSwgb3ByMSwgb3ByMikKCiAgICAjIEhvdXNlaG9sZCBQYXBlciAobm8gcmVjeWNsaW5nKQogICAgaHBkMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdIb3VzZWhvbGQgUGFwZXInKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZGlzcG9zYWxfMScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGhwZDIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nSG91c2Vob2xkIFBhcGVyJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Rpc3Bvc2FsXzInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBocGQzID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0hvdXNlaG9sZCBQYXBlcicpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdkaXNwb3NhbF8zJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaHBfaW51c2UsIGhwX2Rpc3BvcyA9IHdmLmRpc3Bvc2FsX0NGKHR5ciwgZGF0YVsnSG91c2Vob2xkIFBhcGVyJ10sIGhwZDEsIGhwZDIsIGhwZDMpCiAgICBocF9sZmluID0gcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIExhbmRmaWxsIGNhcmJvbiBmbHV4IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAgICAjIExhbmRmaWxsIGRlY2F5IHBhcmFtZXRlcnMKICAgIGNvZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2Nvbl9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBjb2RjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdjb25fZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgZXhkYzEgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0nZXh0X2RlY2F5MScpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIGV4ZGMyID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J2V4dF9kZWNheTInKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBob2RjMSA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdob3VfZGVjYXkxJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQogICAgaG9kYzIgPSBwYXJhLmxvY1socGFyYVsnUHJvZHVjdCddPT0nTGFuZGZpbGwnKSAmIChwYXJhWydWYXJpYWJsZSddPT0naG91X2RlY2F5MicpLCdQYXJhbWV0ZXInXS52YWx1ZXNbMF0KICAgIHBhZGMxID0gcGFyYS5sb2NbKHBhcmFbJ1Byb2R1Y3QnXT09J0xhbmRmaWxsJykgJiAocGFyYVsnVmFyaWFibGUnXT09J3BhcF9kZWNheTEnKSwnUGFyYW1ldGVyJ10udmFsdWVzWzBdCiAgICBwYWRjMiA9IHBhcmEubG9jWyhwYXJhWydQcm9kdWN0J109PSdMYW5kZmlsbCcpICYgKHBhcmFbJ1ZhcmlhYmxlJ109PSdwYXBfZGVjYXkyJyksJ1BhcmFtZXRlciddLnZhbHVlc1swXQoKICAgICMgUGFwZXItbGFuZGZpbGwgaW5wdXQgPSBHcmFwaGljICsgT3RoZXIKICAgIGxmX3BhcCA9IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMob3BfbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KQoKICAgICMgTGFuZGZpbGwgcGVyIHN0cmVhbQogICAgY29uX3Bvb2wsIGNvbl9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIHBkLlNlcmllcyhjb19sZmluLCBkdHlwZT1mbG9hdCksIGNvZGMxLCBjb2RjMikKICAgIGV4dF9wb29sLCBleHRfZGVjID0gd2YubGFuZGZpbGxfQ0YodHlyLCBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLCBleGRjMSwgZXhkYzIpCiAgICBob3VfcG9vbCwgaG91X2RlYyA9IHdmLmxhbmRmaWxsX0NGKHR5ciwgcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwgaG9kYzEsIGhvZGMyKQogICAgcGFwX3Bvb2wsIHBhcF9kZWMgPSB3Zi5sYW5kZmlsbF9DRih0eXIsIGxmX3BhcCwgcGFkYzEsIHBhZGMyKQoKICAgICMgVG90YWxzIGZvciBzYXZpbmcKICAgIFNfbGYgPSBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGV4X2xmaW4sIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhob19sZmluICsgbGZfcGFwLCBkdHlwZT1mbG9hdCkKICAgIFBfbGYgPSBwZC5TZXJpZXMoY29uX3Bvb2wsIGR0eXBlPWZsb2F0KSArIHBkLlNlcmllcyhleHRfcG9vbCwgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9wb29sICsgcGFwX3Bvb2wsIGR0eXBlPWZsb2F0KQogICAgRF9sZiA9IHBkLlNlcmllcyhjb25fZGVjLCBkdHlwZT1mbG9hdCkgKyBwZC5TZXJpZXMoZXh0X2RlYywgZHR5cGU9ZmxvYXQpICsgcGQuU2VyaWVzKGhvdV9kZWMgKyBwYXBfZGVjLCBkdHlwZT1mbG9hdCkKCgogICAgIyAtLS0tLS0tLS0tLS0tLS0tIFNhdmUgcmVzdWx0cyAtLS0tLS0tLS0tLS0tLS0tCiAgICBvdXQgPSBwZC5EYXRhRnJhbWUoewogICAgICAgICdZZWFyJzogZGF0YVsnWWVhciddLAoKICAgICAgICAnRnVlbF9FbWlzc2lvbnMnOiBwZC5TZXJpZXMoZnVlbF9lbWlzLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfU3RvY2snIDogcGQuU2VyaWVzKGJjX3N0b2NrLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0Jpb2NoYXJfRGVjYXknIDogcGQuU2VyaWVzKGJjX2RlY2F5LCBkdHlwZT1mbG9hdCksCgogICAgICAgICdDb25zdHJ1Y3Rpb25fSW5Vc2UnICAgOiBwZC5TZXJpZXMoY29faW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGNvX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdDb25zdHJ1Y3Rpb25fUmVjeWNsZWQnOiBwZC5TZXJpZXMoY29fcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnQ29uc3RydWN0aW9uX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoY29fbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnRXh0ZXJpb3JfSW5Vc2UnICAgOiBwZC5TZXJpZXMoZXhfaW51c2UsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnRXh0ZXJpb3JfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZXhfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0V4dGVyaW9yX0xhbmRmaWxsSW4nOiBwZC5TZXJpZXMoZXhfbGZpbiwgZHR5cGU9ZmxvYXQpLAoKICAgICAgICAnSG91c2Vob2xkX0luVXNlJyAgIDogcGQuU2VyaWVzKGhvX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9EaXNwb3NlZCc6IHBkLlNlcmllcyhob19kaXNwb3MsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnSG91c2Vob2xkX1JlY3ljbGVkJzogcGQuU2VyaWVzKGhvX3JlY3ljLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZF9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhvX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9JblVzZScgICA6IHBkLlNlcmllcyhncF9pbnVzZSwgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMoZ3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0dyYXBoaWNQYXBlcl9SZWN5Y2xlZCc6IHBkLlNlcmllcyhncF9yZWN5YywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdHcmFwaGljUGFwZXJfTGFuZGZpbGxJbic6IHBkLlNlcmllcyhncF9sZmluLCBkdHlwZT1mbG9hdCksCgogICAgICAgICdPdGhlclBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKG9wX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfRGlzcG9zZWQnOiBwZC5TZXJpZXMob3BfZGlzcG9zLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ090aGVyUGFwZXJfUmVjeWNsZWQnOiBwZC5TZXJpZXMob3BfcmVjeWMsIGR0eXBlPWZsb2F0KSwKICAgICAgICAnT3RoZXJQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKG9wX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0luVXNlJyAgIDogcGQuU2VyaWVzKGhwX2ludXNlLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0hvdXNlaG9sZFBhcGVyX0Rpc3Bvc2VkJzogcGQuU2VyaWVzKGhwX2Rpc3BvcywgZHR5cGU9ZmxvYXQpLAogICAgICAgICdIb3VzZWhvbGRQYXBlcl9MYW5kZmlsbEluJzogcGQuU2VyaWVzKGhwX2xmaW4sIGR0eXBlPWZsb2F0KSwKCiAgICAgICAgJ0xGX0lucHV0X1RvdGFsJyA6IHBkLlNlcmllcyhTX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX1N0b2NrX1RvdGFsJyA6IHBkLlNlcmllcyhQX2xmLCBkdHlwZT1mbG9hdCksCiAgICAgICAgJ0xGX0RlY2F5X1RvdGFsJyA6IHBkLlNlcmllcyhEX2xmLCBkdHlwZT1mbG9hdCkKICAgIH0pCgogICAgb3V0LnRvX2NzdihmJ3tzYXZlZmlsZX0nLCBpbmRleD1GYWxzZSkKICAgIHByaW50KGYiU2F2ZWQgcmVzdWx0cyAtPiB7c2F2ZWZpbGV9IikK</script>
     <script id="emb-funcs" type="application/json">Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFdvb2QgUHJvZHVjdHMgQ2FyYm9uIFRyYWNrZXIg4oCTIEZ1bmN0aW9ucwojIENyZWF0ZWQgb24gRnJpIFNlcCAxMiAwOTo0MzoxMiAyMDI1ICAgICAgICAgICAgICAgIAojIGF1dGhvcjogeGlueXVhbi53ZWkKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQppbXBvcnQgbWF0aAppbXBvcnQgcGFuZGFzIGFzIHBkCnRyeToKICAgIGltcG9ydCBzY2lweS5pbnRlZ3JhdGUgYXMgaW50ZWdyYXRlCmV4Y2VwdCBFeGNlcHRpb246CiAgICBjbGFzcyBfSW50ZWdyYXRlRmFsbGJhY2s6CiAgICAgICAgQHN0YXRpY21ldGhvZAogICAgICAgIGRlZiBxdWFkKGZ1bmMsIGEsIGIsICoqa3dhcmdzKToKICAgICAgICAgICAgaWYgYiA8PSBhOgogICAgICAgICAgICAgICAgcmV0dXJuICgwLjAsIDAuMCkKICAgICAgICAgICAgbiA9IG1heCgyMDAsIGludCgoYiAtIGEpICogNTApKQogICAgICAgICAgICBoID0gKGIgLSBhKSAvIG4KICAgICAgICAgICAgcyA9IDAuNSAqIChmdW5jKGEpICsgZnVuYyhiKSkKICAgICAgICAgICAgeCA9IGEgKyBoCiAgICAgICAgICAgIGZvciBfIGluIHJhbmdlKDEsIG4pOgogICAgICAgICAgICAgICAgcyArPSBmdW5jKHgpCiAgICAgICAgICAgICAgICB4ICs9IGgKICAgICAgICAgICAgcmV0dXJuIChzICogaCwgMC4wKQogICAgaW50ZWdyYXRlID0gX0ludGVncmF0ZUZhbGxiYWNrKCkKCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBCaW9mdWVsIGNhcmJvbiBmbHV4IChjaGFyY29hbCArIGVtaXNzaW9ucykKZGVmIGJpb2Z1ZWxfQ0YoeWVhcnMsIGZ1ZWwsIGVmZmljaWVuY3kpOgoKICAgIGZ1ZWwgPSBwZC5TZXJpZXMoZnVlbCwgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIGNoYXJjb2FsX2luZmxvdyA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KSAKICAgIGVtaXNzaW9ucyA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgCiAgICBmb3IgaSBpbiByYW5nZSh5ZWFycyk6CiAgICAgICAgZiA9IGZsb2F0KGZ1ZWwuaWF0W2ldIGlmIGkgPCBsZW4oZnVlbCkgZWxzZSAwLjApCiAgICAgICAgY2ggPSAoMS4wIC0gZWZmaWNpZW5jeSkgKiBmCiAgICAgICAgZW0gPSBlZmZpY2llbmN5ICogZgogICAgICAgIGNoYXJjb2FsX2luZmxvdy5pYXRbaV0gPSBjaAogICAgICAgIGVtaXNzaW9ucy5pYXRbaV0gPSBlbQogICAgICAgIAogICAgcmV0dXJuIGNoYXJjb2FsX2luZmxvdywgZW1pc3Npb25zCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBDaGFyY29hbCBjYXJib24gZmx1eCAocG9vbC1zaXplIGJhc2VkIGRlY2F5OiBkciA9IGRjMSArIGRjMiAqIGxuKHN0b2NrKSkKZGVmIGJpb2NoYXJfQ0YoeWVhcnMsIGluZmxvdywgZGMxLCBkYzIpOgoKICAgIGluZmxvdyA9IHBkLlNlcmllcyhpbmZsb3csIGR0eXBlPWZsb2F0KS5yZXNldF9pbmRleChkcm9wPVRydWUpCiAgICBzdG9jayA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgZGVjYXkgPSBwZC5TZXJpZXMoaW5kZXg9cmFuZ2UoeWVhcnMpLCBkdHlwZT1mbG9hdCkKICAgIGN1cl9wb29sID0gMC4wCiAgICAKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBjdXJfcG9vbCA9IGN1cl9wb29sICsgZmxvYXQoaW5mbG93LmlhdFtpXSBpZiBpIDwgbGVuKGluZmxvdykgZWxzZSAwLjApCiAgICAgICAgZHIgPSBkYzEgKyBkYzIgKiBtYXRoLmxvZyhtYXgoY3VyX3Bvb2wsIDFlLTEyKSkKICAgICAgICBkciA9IG1pbigxLjAsIG1heCgwLjAsIGZsb2F0KGRyKSkpCiAgICAgICAgZCA9IGN1cl9wb29sICogZHIKICAgICAgICBjdXJfcG9vbCA9IGN1cl9wb29sIC0gZAogICAgICAgIHN0b2NrLmlhdFtpXSA9IGN1cl9wb29sCiAgICAgICAgZGVjYXkuaWF0W2ldID0gZAogICAgICAgIAogICAgcmV0dXJuIHN0b2NrLCBkZWNheQoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIERpc3Bvc2FsIG1vZGVsIGZvciBpbi11c2Ugd29vZCBwcm9kdWN0cyAoR2F1c3NpYW4tbGlrZSBiZWxsIGN1cnZlKQpkZWYgZGlzcG9zYWxfcmF0ZSh0LCBkcDEsIGRwMiwgZHAzKToKICAgIGEgPSBkcDEgLyBtYXRoLmV4cChtYXRoLnNxcnQoMiAqIG1hdGgucGkpKQogICAgYiA9IG1hdGguZXhwKCgtZHAyICogKCh0IC0gZHAzKSAqKiAyKSkgLyBtYXgoZHAzLCAxZS0xMikpCiAgICBkciA9IGEgKiBiCiAgICByZXR1cm4gbWF4KDAuMCwgZmxvYXQoZHIpKQoKZGVmIGRpc3Bvc2FsX0NGKHllYXJzLCBwcm9kdWN0aW9uLCBkcDEsIGRwMiwgZHAzKToKCiAgICBwcm9kdWN0aW9uID0gcGQuU2VyaWVzKHByb2R1Y3Rpb24sIGR0eXBlPWZsb2F0KS5yZXNldF9pbmRleChkcm9wPVRydWUpCiAgICBpbnVzZSA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgZGlzcG9zID0gcGQuU2VyaWVzKGluZGV4PXJhbmdlKHllYXJzKSwgZHR5cGU9ZmxvYXQpCgogICAgZGVmIGluX3VzZShhZ2UpOgogICAgICAgIHZhbCA9IDEuMCAtIGludGVncmF0ZS5xdWFkKAogICAgICAgICAgICBsYW1iZGEgdHQ6IGRpc3Bvc2FsX3JhdGUodHQsIGRwMSwgZHAyLCBkcDMpLAogICAgICAgICAgICAwLjAsIGZsb2F0KGFnZSkKICAgICAgICApWzBdCiAgICAgICAgcmV0dXJuIG1pbigxLjAsIG1heCgwLjAsIGZsb2F0KHZhbCkpKQoKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBzID0gMC4wCiAgICAgICAgZCA9IDAuMAogICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgYyA9IGZsb2F0KHByb2R1Y3Rpb24uaWF0W2pdIGlmIGogPCBsZW4ocHJvZHVjdGlvbikgZWxzZSAwLjApCiAgICAgICAgICAgIGFnZSA9IGZsb2F0KGkgLSBqICsgMSkKICAgICAgICAgICAgcyArPSBjICogaW5fdXNlKGFnZSkKICAgICAgICAgICAgZCArPSBjICogZGlzcG9zYWxfcmF0ZShhZ2UsIGRwMSwgZHAyLCBkcDMpCiAgICAgICAgaW51c2UuaWF0W2ldID0gcwogICAgICAgIGRpc3Bvcy5pYXRbaV0gPSBkCgogICAgcmV0dXJuIGludXNlLCBkaXNwb3MKCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBSZWN5Y2xlZCBwcm9kdWN0cyBjYXJib24gZmx1eCAoZWVjeWNsaW5nIHJhdGU6IHJyID0gcnAxICsgcnAyICogbG4odCkpCmRlZiByZWN5Y2xlX0NGKHllYXJzLCBkaXNwb3NhbHMsIHJwMSwgcnAyKToKICAgIAogICAgZGlzcG9zYWxzID0gcGQuU2VyaWVzKGRpc3Bvc2FscywgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIHJlY3ljbGVkID0gcGQuU2VyaWVzKGluZGV4PXJhbmdlKHllYXJzKSwgZHR5cGU9ZmxvYXQpCiAgICBsYW5kZmlsbCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQoKICAgIGZvciBpIGluIHJhbmdlKHllYXJzKToKICAgICAgICBkID0gZmxvYXQoZGlzcG9zYWxzLmlhdFtpXSBpZiBpIDwgbGVuKGRpc3Bvc2FscykgZWxzZSAwLjApCiAgICAgICAgcnIgPSBmbG9hdChycDEpICsgZmxvYXQocnAyKSAqIG1hdGgubG9nKG1heChpICsgMS4wLCAxZS0xMikpCiAgICAgICAgcnIgPSBtaW4oMS4wLCBtYXgoMC4wLCBycikpCiAgICAgICAgciA9IHJyICogZAogICAgICAgIHJlY3ljbGVkLmlhdFtpXSA9IHIKICAgICAgICBsYW5kZmlsbC5pYXRbaV0gPSBkIC0gcgogICAgICAgIAogICAgcmV0dXJuIHJlY3ljbGVkLCBsYW5kZmlsbAoKIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIExhbmRmaWxsIGNhcmJvbiBmbHV4IChEZWNheSByYXRlOiBsKHQpID0gbG9nKHQpICogazEgLyAoazIgKiBzcXJ0KDIqcGkpKSkKJycnCmRlZiBsYW5kZmlsbF9DRih5ZWFycywgbGFuZGZpbGxfaW5wdXQsIGsxLCBrMik6CiAgICAKICAgIGxhbmRmaWxsX2lucHV0ID0gcGQuU2VyaWVzKGxhbmRmaWxsX2lucHV0LCBkdHlwZT1mbG9hdCkucmVzZXRfaW5kZXgoZHJvcD1UcnVlKQogICAgbGFuZGZpbGxfcG9vbCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQogICAgbGFuZGZpbGxfZGVjYXllZCA9IHBkLlNlcmllcyhpbmRleD1yYW5nZSh5ZWFycyksIGR0eXBlPWZsb2F0KQoKICAgIGRlZiByYXRlKHRzZCk6CiAgICAgICAgcmV0dXJuIChtYXRoLmxvZyh0c2QpICogazEpIC8gKGsyICogbWF0aC5zcXJ0KDIgKiBtYXRoLnBpKSkKCiAgICBkZWYgc3Vydml2ZSh0c2QpOgogICAgICAgIGlmIHRzZCA+PSBrMjoKICAgICAgICAgICAgcmV0dXJuIDAuMAogICAgICAgIHVwcGVyID0gZmxvYXQobWluKHRzZCwgazIpKQogICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgIHZhbCA9IDEuMCAtIGZyCiAgICAgICAgcmV0dXJuIG1pbigxLjAsIG1heCgwLjAsIHZhbCkpCgogICAgIyBQb29sCiAgICBmb3IgaSBpbiByYW5nZSh5ZWFycyk6CiAgICAgICAgcyA9IDAuMAoKICAgICAgICBpZiBpIDw9IGludChrMik6CiAgICAgICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgICAgIGMgPSBmbG9hdChsYW5kZmlsbF9pbnB1dC5pYXRbal0gaWYgaiA8IGxlbihsYW5kZmlsbF9pbnB1dCkgZWxzZSAwLjApCiAgICAgICAgICAgICAgICB1cHBlciA9IGZsb2F0KGkgKyAxIC0gaikKICAgICAgICAgICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgICAgICAgICAgcyArPSBjICogKDEuMCAtIGZyKQogICAgICAgIGVsc2U6CiAgICAgICAgICAgIGZvciBqIGluIHJhbmdlKGludChrMikpOgogICAgICAgICAgICAgICAgaWR4ID0gaW50KGkgLSBrMiArIGopCiAgICAgICAgICAgICAgICBpZiAwIDw9IGlkeCA8IGxlbihsYW5kZmlsbF9pbnB1dCk6CiAgICAgICAgICAgICAgICAgICAgYyA9IGZsb2F0KGxhbmRmaWxsX2lucHV0LmlhdFtpZHhdKQogICAgICAgICAgICAgICAgICAgIHVwcGVyID0gZmxvYXQoazIgLSBqKQogICAgICAgICAgICAgICAgICAgIGZyID0gYWJzKGludGVncmF0ZS5xdWFkKHJhdGUsIDAuMCwgdXBwZXIpWzBdKQogICAgICAgICAgICAgICAgICAgIHMgKz0gYyAqICgxLjAgLSBmcikKCiAgICAgICAgbGFuZGZpbGxfcG9vbC5pYXRbaV0gPSBzCgogICAgZm9yIGkgaW4gcmFuZ2UoeWVhcnMpOgogICAgICAgIHByZXYgPSAwLjAgaWYgaSA9PSAwIGVsc2UgZmxvYXQobGFuZGZpbGxfcG9vbC5pYXRbaSAtIDFdKQogICAgICAgIGluYyAgPSBmbG9hdChsYW5kZmlsbF9pbnB1dC5pYXRbaV0gaWYgaSA8IGxlbihsYW5kZmlsbF9pbnB1dCkgZWxzZSAwLjApCiAgICAgICAgbGFuZGZpbGxfZGVjYXllZC5pYXRbaV0gPSBwcmV2ICsgaW5jIC0gZmxvYXQobGFuZGZpbGxfcG9vbC5pYXRbaV0pCgogICAgcmV0dXJuIGxhbmRmaWxsX3Bvb2wsIGxhbmRmaWxsX2RlY2F5ZWQKJycnCgpkZWYgc3Vydml2ZSh0LCBrMSwgazIpOgogICAgaWYgazIgPD0gMDoKICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJrMiBtdXN0IGJlID4gMCIpCiAgICBpZiB0IDw9IDA6CiAgICAgICAgcmV0dXJuIDEuMAogICAgeiA9IChtYXRoLmxvZyh0KSAtIGsxKSAvIGsyCiAgICBQaGkgPSAwLjUgKiAoMS4wICsgbWF0aC5lcmYoeiAvIG1hdGguc3FydCgyLjApKSkKICAgIFMgPSAxLjAgLSBQaGkKICAgIGlmIFMgPCAwLjA6IAogICAgICAgIHJldHVybiAwLjAKICAgIGlmIFMgPiAxLjA6IAogICAgICAgIHJldHVybiAxLjAKICAgIHJldHVybiBTCgpkZWYgbGFuZGZpbGxfQ0YoeWVhcnMsIGxhbmRmaWxsX2lucHV0LCBrMSwgazIpOgogICAgCiAgICBsYW5kZmlsbF9pbnB1dCA9IHBkLlNlcmllcyhsYW5kZmlsbF9pbnB1dCwgZHR5cGU9ZmxvYXQpLnJlc2V0X2luZGV4KGRyb3A9VHJ1ZSkKICAgIG5faW4gPSBsZW4obGFuZGZpbGxfaW5wdXQpCiAgICBwcmludChuX2luKQogICAgYXJyID0gW2Zsb2F0KGxhbmRmaWxsX2lucHV0LmlhdFtpXSkgaWYgaSA8IG5faW4gZWxzZSAwLjAgZm9yIGkgaW4gcmFuZ2Uobl9pbildCgogICAgIyBQcmVjb21wdXRlIHN1cnZpdmFsIGZvciBhZ2VzIDAuLnllYXJzCiAgICBTID0gW3N1cnZpdmUoYSwgazEsIGsyKSBmb3IgYSBpbiByYW5nZShuX2luICsgMSldCgogICAgbGFuZGZpbGxfcG9vbCA9IFswLjBdICogbl9pbgogICAgbGFuZGZpbGxfZGVjYXllZCA9IFswLjBdICogbl9pbgoKICAgIGZvciBpIGluIHJhbmdlKG5faW4pOgogICAgICAgIHMgPSAwLjAKICAgICAgICAjIENvaG9ydHMgMC4uaSwgYWdlIGF0IGVuZCBvZiB5ZWFyIGkgaXMgKGkrMS1qKQogICAgICAgIGZvciBqIGluIHJhbmdlKGkgKyAxKToKICAgICAgICAgICAgYWdlID0gaSArIDEgLSBqCiAgICAgICAgICAgIHMgKz0gYXJyW2pdICogU1thZ2VdCiAgICAgICAgbGFuZGZpbGxfcG9vbFtpXSA9IHMKCiAgICBwcmV2ID0gMC4wCiAgICBmb3IgaSBpbiByYW5nZShuX2luKToKICAgICAgICBpbmMgPSBhcnJbaV0KICAgICAgICBkZWMgPSAocHJldiArIGluYykgLSBsYW5kZmlsbF9wb29sW2ldCiAgICAgICAgbGFuZGZpbGxfZGVjYXllZFtpXSA9IDAuMCBpZiBkZWMgPCAwLjAgYW5kIGRlYyA+IC0xZS0xMiBlbHNlIG1heCgwLjAsIGRlYykKICAgICAgICBwcmV2ID0gbGFuZGZpbGxfcG9vbFtpXQoKICAgIHJldHVybiBsYW5kZmlsbF9wb29sLCBsYW5kZmlsbF9kZWNheWVkCgojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgUGxvdCBhbm51YWwgcHJvZHVjdGlvbiBsaW5lcyBmb3Igd29vZCBwcm9kdWN0cwo=</script>
     <script id="emb-me" type="application/json">WWVhcixCaW9mdWVsLEJpb2NoYXIsQ29uc3RydWN0aW9uLEV4dGVyaW9yLEhvdXNlaG9sZCxHcmFwaGljIFBhcGVyLE90aGVyIFBhcGVyLEhvdXNlaG9sZCBQYXBlcgoxOTYxLDI4NTc2MzI3NSwxMjQ0Nzg0OCwxNzk4MTcwOTUsNzQzMDA2MjAsMTk0MDk5NDczLDE3MzYzNTI1Ni4xLDI2NDE5NjAxMi4xLDU5NzU0MjczLjE1CjE5NjIsMjgyNTg4MTI3LDEyMDA0MzQ0LDE4ODc3NjI1Miw5OTQ5MjIwOCwxNzAyOTM2ODIsMTY5ODg0Nzc3LjksMjcwNTY0MDg4LjEsNTY0NTgyODcuNgoxOTYzLDI5MzcwMTE0MywxNzc2MzA0NSwxODk2MDIzNTMsNzEzODM0NjcsMTYzMDAzMzMxLDE3OTQ4NzcxNywyOTc3MTIwMDEuOCw1NTc3MTM1MS4zNQoxOTY0LDMxNzUxNDc1MCwxMzQ4ODAyNywyMDE2MDYyMDgsODk5MjYzNjgsMjAxMjg5NDY1LDE2MjM0NzQyMi40LDI2ODU5NTM3NS42LDg0OTk4MzYyLjAyCjE5NjUsMzI2NTg2NjAwLDEyNDYyNTQ1LDE5MDI3MDEyMCw5MzMxOTAyNiwxODk5ODk4MzgsMTc1NzAwMzEwLjUsMjczOTU5MDMxLjEsNTE0OTg2OTIuOTYKMTk2NiwyNTU5NjA0MzQsMTMwODQ2OTcsMjAxOTMwNzI5LDkxNjIzMTIyLDE3MDU4OTk5MiwxNzE5MzUzODMuNiwyNzgwMTQ5NDIuOSw0NTc4NzY5MS45NQoxOTY3LDM2NTE0MTk2MiwxODY2NjA1NywyNjM5Nzk0NDYsMTAzMTA2ODIxLDIxNDM2ODAwMywxODc1OTAxMzcsMzIxNjM0NDMwLjIsNTUxMzI3NjEuOTcKMTk2OCwzODEwMTc3MDAsMjA1NzQ5NTYsMjMzMzA3MDE3LDEyMjE3NTMyOSwyNTU3NzgxNzAsMTgzNzQ2NDYwLDMzMjI0MzYwMC4yLDQ3NTIzNTMzLjIKMTk2OSwzODg5NTU1NjgsMTk4ODM0MDksMjU3MDc0MTgyLDExNjYyNDU3OCwyMjkyNDk0MTMsMTk0MjcwMTE4LjksMzQ5MDUwMzYwLjIsNTMxMjIxMDcuNjEKMTk3MCwzNTg3NzEyNTYsMjQ2NjkxMTIsMjQ2NTY1MzkzLDgxMTI3NjkzLDIyNzcxNzYyMSwxOTU2NzExNzAsMzYyNDQ5MDk1LjYsNjUzODg5MDIuMTUKMTk3MSw0MDQ4MzEzMDYsMjEyNzc5MzMsMjg5NTEwMDQ4LDEzMzg5Mjg5NiwyMTg2MjA0NzMsMjAzMjg2MTU3LjQsMzU5MDI4NzQ1LjgsNTY5NzU0NjQuMjYKMTk3Miw0MTY3MzgxMTAsMTc3MDMwMzUsMzAyMDU5NjEyLDExMjY4ODk3OSwyMjM2MjU4MTUsMjExMDM3MDIwLjUsMzU0MTc4Nzk1LDYzNDYyNjA5LjIxCjE5NzMsNDEyNzY5MTc1LDE3MjM3MjQxLDI4NzQ1Njc4NCw5NjIyMTAyNCwyNzU5MjQ2OTAsMjIyOTQ2ODA2LjksMzc2NTg3ODczLjEsNTA4NjA0MTguMTgKMTk3NCw0MjA3MDcwNDQsMjI3MTgxODAsMjgyMDAzMzQ1LDEzMzczMTQ2MywyNzQ0MDIzNTIsMjMzNTI2NzUwLjYsMzc4NDQ1ODMzLjUsNjU5OTYzNDAuNDEKMTk3NSw0MzM2MTYwNTksMTY3MDI4OTEsMjgxNzk5ODIwLDExMjgzNTY2MCwyNTUwNDA0MTksMjE3NzkwNjE1LjksMzYxNTQ5NjM4LjUsNTU1NjkwNTMuNTQKMTk3Niw0MzY1ODI3ODIsMTg1NDYwMzcsMjkzMjAyNDM4LDEzNDIxMzMxNywyNjczMDU2NjEsMjQwNjIwMzY1LjcsMzk2MTY0MjQ0LjIsNTg0MzYzNzMuNzEKMTk3Nyw0NDQ1MjA2NTAsMTkzNjMzMjAsMzA3NzMxNzMwLDExNDMyMTAzOCwyNzI4MTEyNjUsMjQ2MTk2MzU5LDM5MDU2ODU3OC40LDg0NDEwMDQ3LjE1CjE5NzgsNDUyNDU4NTE5LDE2NDUxMzkyLDMwMDUwMzAwNSwxNTc0MTY3ODIsMzE1NTY3NTk2LDI1MTI1MTk2MSw0MTMzNDI1ODguMyw2NTcwMzg4Mi41MwoxOTc5LDQ2NzU0MDQ2OSwyNTc1MjEyOSwzMjIyMjQzMDcsMTI0NDk0NTM4LDI2NTU4ODUxNSwyMzA5OTM5ODYuMSwzODQyMjMwNjUsODQwNjUyNDYuOTgKMTk4MCw0MTM5MDMxNTYsMzY2NTUyNjQsMzAwMzY2MDU4LDEyNzQxODI0NCwzMjcyMzY2MTUsMjY0ODE2MjAzLjEsNDI5MTM1MDg5LjMsODE3MTUwMTQuODEKMTk4MSw0ODQyMDk5OTQsMjUyNzU3NjIsMzUwNTk2Mzk3LDEyOTMwMzQ4NiwzMTg0MDQyODgsMjc3NDM4OTYxLjgsNDM0NDg5MjMwLjksOTYxMTI3ODMuOTEKMTk4Miw0NzYyNzIxMjUsMzA1MTk1MTgsMzQ1ODIzNzMyLDEyNzEzOTU1NiwzMTM0ODg5NjAsMjUwNDc0NzUzLjEsNDIxOTg4OTM4LjgsNzg5NDM0MDQuNTQKMTk4Myw0NDQ1MjA2NTAsMzQ0MDU4OTgsMzMxNzQ3MjkxLDExMzc4NDI5NywzMTA2MDQyMjEsMjQ5OTkyMzk0LjEsNDMwMzg2MTk2LjMsODk3NDEzNjEuNzEKMTk4NCw0MzY1ODI3ODIsMjc1MDQ3MTUsMjc4MDU0MTQ0LDExOTEwMzMxMywyNjAxNzQ1NjgsMjUyODUyOTQ2LjEsNDIzNDc5NDYwLjcsNzY4NDg5MTIuMTQKMTk4NSw0MDgyMzMyNTAsMTc5Mjk2MDQsMjg5MzIwNjUyLDExNzUyNDI4NSwyMzEzNTA1NTUsMjM4NDI3ODY2LjgsNDA5NjI5ODMyLDczMDUyMTQ3Ljc0CjE5ODYsNTMwMTM2MjM0LDMzMjA3NzM0LDI3OTY5NzM0MywxMzk1Mjc0MTEsMjk4NDYzNzQyLDI1NjA1MDI1Ny4zLDQxMDI4Njg3Nyw3NzY1MTY4OS44MwoxOTg3LDUzOTc3NTA3NCwzMjA2MjYzOSwyODk2OTg1MzIsMTA5Nzc1NjEyLDI5NjY4NTM0MCwyNTE0NDkwOTIuMiwzODQ2NzMwMjUuOSw3Mjc4OTIyOS4zNwoxOTg4LDU0OTQxMzkxNSw1Nzk1MjE4MCwzMDA5NjgyODMsMTI5NjczMjAxLDMyNTk0MjM0MiwyNzU0NTY3MDEuNSw0MzYyNDc0OTMuMSw4MDU3ODQ5Ni41NwoxOTg5LDU1OTA1Mjc1Nyw1Njc1NTAzNiwyOTUyMzc0OTEsOTU2NDY3OTIsMjk4NjcxMDk2LDI1ODI3MzE1Mi4zLDQwNDI2NjkzOC44LDc2NTU3NzE2Ljk1CjE5OTAsNTcyMTkxMTkwLDYwNTYwNzE2LDI5NzY0NDE3NywxMjAzNzE2ODksMzExMDc5Nzk1LDMwNTcxMTI1MS42LDQ2NDE4ODI4Niw1ODg2MDgyMy40NQoxOTkxLDYxNjM5MzQ0OCwyNTA3NDg4NSwzNTcwMzAyMDEsMTQ0NjEyNzI0LDMyMjA2NDkxMiwyODIxMDI0NTcuOCw0NDA5MDMyMzQuMiw3NTU3NjQ0Ni42NgoxOTkyLDYxNzA3Njg0MiwzMjY1NTcwNiw0MTkzMzA1NjAsMTQyNTM4MDcxLDMwNzA4OTA2MywzNDI0ODY4ODEuOSw1MDAzNTUwNTMuOCw5MzU4NDEyMi4wNgoxOTkzLDYwMzMxNTk1MSw0Mjc4NzE2NywzMTYzMjY2ODUsMTI2NDIxMDgwLDMxNjY3NTE0NSwyOTgyODUzNjcuNCw0NjgxMTU1ODUuMSwxMDEwMzIxNDEuMgoxOTk0LDU4OTEzMjIwNCw1ODExMjAwMSwzNzUwMDM3MTcsMTUwNDMzODExLDI5MDQ2NjIzNSwzMTg1MjA4ODIuNyw0NzQ2OTg5MTYuMSw5MzQ4OTE2Ny4yCjE5OTUsNjMwMDI3ODU4LDMyNjYwNjQ0LDQxNTI0ODI0OCwxMzk2MzM0NzcsMzA3OTAzMTg3LDI4MDM0Mjc5OS45LDQzNTg5MzM0Ny45LDkyNDA1NjE5LjAyCjE5OTYsNjQzNzUxNjU5LDU3NDc0MTQ4LDM2NjIxNTY0MSwxNzE0MDI2NDMsMzQxNDYxMjcwLDI5Nzc0MzE3MS40LDQ1MzY1NzM1MS4zLDk1Nzc1MDgwLjgzCjE5OTcsNjczOTM0MzM4LDI4ODcxMzQ3LDQxNjM4NDg0NiwxOTU1NzE0NzgsMzQzNjk3MjUxLDI3MzY2MzA3NS40LDQyODMyMjk2My42LDk0Njc5MjcwLjQKMTk5OCw2NjcwMDc3NzIsNjEyMzEzMTMsMzQ3NzI0NDQyLDE1MzAyMzA4MywzNjQ4MDc2ODAsMzE0ODgyMTU5LDQ2MzM0MjE5My42LDkyNjcyMTgyLjQ2CjE5OTksNTkxNTE3MjM5LDU4MTM0MzE0LDMzNzI4MTA4NiwxMzczNzcwNDYsMzM0MzA4NzYzLDI4NTM1NTYxOS4xLDQzODQyNzE3Ni4zLDkwNDU1NjU1LjI5CjIwMDAsNjAyNDU0MzM1LDQyOTQyOTQ1LDI4NDYyMzA1NSwxMzcyMzE2NzEsMzY4MTk4MjMyLDIzODY2NDUzNy41LDM4NDk0MjgwMy45LDkyNzkyMzM4LjIxCjIwMDEsNjEyMjY1OTgxLDIyOTIzMjM4LDQwNjY0MjY1NiwxMjkxNzAxMTEsMjczMDQ5NjcyLDMwNzE4NDg3OCw0NDIyODIwODMuMSw5NDQ3OTU1OS40NgoyMDAyLDY0NTYyMzIzMiw0NjQ4NDg3Myw0MzM4MjkwOTMsMTM4NzQzOTgxLDI4OTE4MjM4MywyNDgyNjgyNTQuNSwzODM3NTk3MTcuOCw5NzgzNDQ2OC4xNgoyMDAzLDU3ODA0MjUyNSwyNTgwMzgxOCwzMjg3Mzk2MzgsMTE1ODg2ODg2LDMyODA0NjYzNiwzMjE5ODc3NjAuNCw0NTc4MjExMjUuMiwxMDExNTA4NTEuMgoyMDA0LDYzMDE0ODE1MSw1MDgxNTE0NywzNDE3MzM2MTMsMTE2MzU3ODAxLDM2MzQ5MzMzMiwyNzg3MTc2NzYuNCw0MjA2NzUyODcuOSwxMTMzNTkxMTEuNgoyMDA1LDUzNzY1OTA2Niw1Nzg3MzYyMiwzODU2NTY1MjIsMTg2MjQ1NTMwLDQxNDYwNTEwOSwyMzU5NDYxMDcuNSwzNjUyOTU3MzYuNSwxMDAyNjI0MDgKMjAwNiw2NzcwMTkyNDksMzExOTcwNDcsNDgyODIyODUxLDIxMDIyMTMyMSwzOTI4ODQzMzQsMjYxMzY5MDMzLjYsMzkxMTM1OTI4LDg5NDY4Mjk0LjYzCjIwMDcsNzk4OTI0NzE3LDg1OTk2MjU3LDMxODYzODc1MywxNTQ4ODEwOTgsMzc2OTE3ODE0LDIyOTk5MjM5MS4yLDM2NTEwNTE3Ny42LDk3Mzc5NzU2Ljc2CjIwMDgsNzExOTM4MTUwLDQ0NTk1ODA2LDMyOTg5MjY0MSwxMDI1MzIwNzcsMjgxMTU3NTE3LDI2MjM4ODQwOS4xLDM5OTIwNTg3MS4zLDg3NjI5MDgwLjExCjIwMDksODMzMDc5MDk5LDU4NDgyMTUzLDI2MTQwNDI1MCw4MjkzODQ2MywyNzcwOTY0MjQsMjIzODg0MDcxLjgsMzUwNjU0Mzg1LjUsOTY4MDIzMzUuNjMKMjAxMCw4MzI5ODU4ODUsNTk2NzUxMDksMjc1NTI1MDQ0LDk1MjkyNTg5LDI1ODE1Njc4MSwyMTgyNzUyODAuMSwzMzU0NjQ3NTguMiwxMDcwNDIwNzYuNgoyMDExLDYxMTA4OTM0MSw1MDM3ODIwNSwyODcwNzkxNDIsOTE3NDQxMjcsMjQ3NTQyNDc1LDIxNzg2OTU0MC41LDMzMDk3MTg3NywxMDQ1NjA4NzMuNgoyMDEyLDYxNjg3OTkwMywyOTA5MjA1NiwzMTEyMDM5ODcsMTA4ODAyNDQ5LDIzNjc3OTY4MSwxNzg0MTI0MTkuOSwyODQ1OTA4MjMuNywxMTIxMzUzMTEuOQoyMDEzLDY2OTg4OTQ0NCw3MTE0MjI1OSwyODY4ODY0NjgsODM5NjM0MDIsMjg5MDE3Mjc5LDE3OTIwMDgyNy41LDI4MTUwOTA0NC45LDEwODI3Nzg1NS40CjIwMTQsNzQxMzEyMzQ2LDUyNTczODcyLDI1OTY4OTMyMiwxMDIyOTA2MjIsMzA1ODI3MjY1LDE1OTkzNDMyNiwyNjIxMjI1NTkuMywxMDc4MTIwOTMKMjAxNSw3NjI2NDkxMTEsNjA0MDE4MTAsMjc0NjE1NDEwLDEwOTg4NjQ1MiwyOTA2NDMwNjcsMTI4ODc4NDQxLjEsMjI1NzA1ODY3LjUsMTA0MDAxMjM0LjUKMjAxNiw1NDQzNjMzOTAsMzU0NzA3MTgsMjM3NzAzNDY4LDExMDI4MDUyMSwyOTM0NTk5OTYsMTQ0MjA3ODc4LjEsMjMyODY0MDY4LjYsMTAzODQzMjY2LjcKMjAxNyw1OTA0OTQyMDEsNDg2ODAzNDIsMjM1ODI3MjQyLDEwNjEzNjc1MiwyNzUwODExMjUsMTU1ODM1NTk0LjIsMjQyNTM0NDE5LjMsMTEyMzI2MzI3CjIwMTgsNTU5MjYzNjc3LDU3NTgxNzg4LDMwMjg3NjIzOSwxMDM3NjAzNDMsMjc2MDg1OTExLDEzMjQyMjQ1OC43LDIxMDM0OTM2MiwxMDU1Mjc5MDguMgoyMDE5LDQ0MDQ1OTg2MywyMjM1Nzc0MywzMzA3Mzc5NTQsMTAzNTA1ODA0LDI1NDYxMzA0NiwxMjc2MjY1MTYuMiwyMTIyNjgzOTMuNSwxMDQ1NDY3OTIuNAo=</script>
     <script id="emb-us" type="application/json">WWVhcixCaW9mdWVsLEJpb2NoYXIsQ29uc3RydWN0aW9uLEV4dGVyaW9yLEhvdXNlaG9sZCxHcmFwaGljIFBhcGVyLE90aGVyIFBhcGVyLEhvdXNlaG9sZCBQYXBlcg0KMTk2MSw4Mjg2NDAwMDAwLDIyMjQ1MDAwMCwyMzI1OTUyNDEyNCw3MzE3Njk4OTcyLDM3MjU5MjI1MzIsMzIyNzA1MDAwMCwxMzE3MjA0ODAwMCwxMDQ4NzUwMDAwDQoxOTYyLDY1ODcyMDAwMDAsMjIyMjUwMDAwLDI1MzU1MDk0OTEzLDc2OTgyMjE0MzAsNDEwNTg0NTI1NywzNDI3NDAwMDAwLDEzNzMxNzUwMDAwLDEwOTM2NTAwMDANCjE5NjMsNjA4ODgwMTYwMCwyMjI4NTAwMDAsMjU1NzQyOTU5MDgsNzM3MzgyNDU4OSw0MDgxNDA4MzcxLDM1ODk0NTAwMDAsMTQwOTE3NTIwMDAsMTE2NzEwMDAwMA0KMTk2NCw2NDAwNDAxNjAwLDIyMTUwMDAwMCwyNjc5MTUxNDYyMSw4MDczNTg5MTY4LDQ1MzYxMTA2MjgsMzgxOTM1MDAwMCwxNDkyNzYwMDAwMCwxMjQ0MjAwMDAwDQoxOTY1LDU4Nzg2MDAwMDAsMjY1MDAwMDAwLDI3ODQwODMzOTg0LDgxNTMyODEyNjMsNDU4Mjc3MDc2MSw0MTQ2NDAwMDAwLDE1NjY3NTUyMDAwLDEzMDk1NTAwMDANCjE5NjYsNTg5MDAwMDAwMCwyNDYwMDAwMDAsMjczMTcyODQ3NjYsOTA4NjU0ODQwNiw1MzA4MDg5NTgxLDQ1OTU3MDAwMDAsMTY4MzMwOTgwMDAsMTQwNTcwMDAwMA0KMTk2Nyw2MDM3MjAwMDAwLDIxOTAwMDAwMCwyNzIyMzc2MTc3OSw4NTA1MzUwMzIxLDQ3NTc2NzAwOTksNDU3MjIwMDAwMCwxNjQ2ODM0ODAwMCwxNDQ4OTUwMDAwDQoxOTY4LDYyMTg0MDAwMDAsMjMzMDAwMDAwLDI5ODgzNjk0NDk0LDg2NDk0NzI0MjgsNDY1MDU0NzMzMyw0ODMzMDUwMDAwLDE3NjI5ODQ4MDAwLDE1MzE0MDAwMDANCjE5NjksNjIyOTgwMDAwMCwyMjUwMDAwMDAsMjc5ODQ4MjAxMzIsODQxMDk5Nzc2OSw0NTgyMzE2NDk3LDQ5ODAxMDAwMDAsMTg4NjE0MDQwMDAsMTYyOTAwMDAwMA0KMTk3MCw3MTY0MjAwMDAwLDIzNTAwMDAwMCwyNzE5MjY1NTM0Niw4NjM0MTc0OTI4LDQ0MjYyNDMxMjYsNDg4OTE1MDAwMCwxODMwOTE1NDAwMCwxNjc3NTAwMDAwDQoxOTcxLDY5ODMwMDAwMDAsMjQ4MDAwMDAwLDMyNTQ1MzIwNjQ2LDc4ODM3NTA5NTUsNDAzNjA0MTc5OSw1MDEzNjAwMDAwLDE4NzM2ODA0MDAwLDE3MzE1MDAwMDANCjE5NzIsNzE5MjYwMDAwMCwyNTEwMDAwMDAsMzIwNTEzMjcwMDksNzEyNTgwNTM5NiwzNTI5MTMxMjM3LDU0NTkzNTAwMDAsMjAyNzMzMDAwMDAsMTc5NTAwMDAwMA0KMTk3Myw2ODA3NDAwMDAwLDI0NzI1MDAwMCwzMjA3Njc4MzE5Myw4MTkyMDg0MzM1LDM3NDY1Mzc2NzIsNTk3NjE1MDAwMCwyMTA4NzEwMDAwMCwxODIxNTAwMDAwDQoxOTc0LDc0NTMwMDAwMDAsMjQ5MzUwMDAwLDI4MjMzMDgxMTkyLDk1NjAzOTU5NTAsMzY0NjczNTk3MCw2MDAzNjAwMDAwLDIwNTM0NjU0MDAwLDE4NDI1MDAwMDANCjE5NzUsNzEzMDIwMDAwMCwyMzY4MDAwMDAsMjcxMzc4NjQ2NDgsODY0MTgyMDQ4NiwzMjUyMjQ2ODE5LDQ4Mzk1MDAwMDAsMTc1OTk2MDQwMDAsMTc5MTAwMDAwMA0KMTk3Niw2OTc3MjAwMDAwLDI0MTEwMDAwMCwzMTkzNDg0MjUzNyw4ODQwNDk2MTg0LDMzNzI0MjEyODAsNTg4MDQwMDAwMCwxOTk1NDYwNDAwMCwxODg4NTAwMDAwDQoxOTc3LDg1MDA4MDAwMDAsMjQwNTAwMDAwLDM0NzI2MDk4NTQ5LDg2MzQ0NjEzNjksMzI2Njg2NjM1OSw2MzI0OTAwMDAwLDIwNTEzNjUwMDAwLDE5MzcwMDAwMDANCjE5NzgsMTA3OTQ0MDAwMDAsMjUzNjUwMDAwLDM2NzUwNzE2NzE3LDk2NjU2MzYxMjUsMzM0OTczMDI4Niw2Nzg5NzAwMDAwLDIyMTA0NTAwMDAwLDE5MDI0MDAwMDANCjE5NzksMTI0OTM0MDAwMDAsMjU4OTUwMDAwLDM0NzI0MjE5OTUyLDEwMzMwOTY5NDQyLDM0MTUxNTQ0ODcsNzE1NzU1MDAwMCwyMjA1MTE1NDAwMCwyMDM3ODUwMDAwDQoxOTgwLDE0MjE1MjAwMDAwLDI2MzQ1MDAwMCwyODQ3MDY5Mjc5NSw5MzgzNTA5MTMyLDMwODExMzUzMzYsNzE5OTE1MDAwMCwyMTE5NzMwMDAwMCwxOTU2ODUwMDAwDQoxOTgxLDE1MjkxMDAwMDAwLDI0NTA1MDAwMCwyNzI3MjExMDA3Niw5NTM2Njg2MDI4LDMyMDg5NTA0MjgsNzE5NDQ1MDAwMCwyMTUxNTE1NDAwMCwyMDI1NTUwMDAwDQoxOTgyLDIwMDQ4NjAwMDAwLDI0NjM1MDAwMCwyMzUzODg1MjA1NCw3Nzk4ODM4NjA3LDMxMDE1Njg0MDYsNzMwNDgwMDAwMCwyMDA5NjgwMDAwMCwyMDAyNDUwMDAwDQoxOTgzLDE5MjM4NjAwMDAwLDI0NzYwMDAwMCwzMTM4OTIyNTg0OCw4NTA4NzgzMjcxLDM3Nzg2MjAxNzQsODIxOTgwMDAwMCwyMTI3MDkwMDAwMCwyMTYzODAwMDAwDQoxOTg0LDIwNTM1NjAwMDAwLDI1MTUwMDAwMCwzNTc5OTgyNjg4Nyw5MDQ2NjA0NzAzLDM3NjM2NzAwNjQsOTA5MDEwMDAwMCwyMzA5NzIwMDAwMCwyMjI0MzAwMDAwDQoxOTg1LDE5NTYxNDAwMDAwLDI1MjY1MDAwMCwzNzA4OTAwNzI4OCw4MzM4ODU5NzY0LDM2MzMzODAxMDIsOTE4NDU1MDAwMCwyMjY2ODM1NDAwMCwyMjMyNzUwMDAwDQoxOTg2LDIwMDA4ODAwMDAwLDI1MjQ1MDAwMCw0MTg0ODA3Mjc0NCw4NTU3MDc5OTAwLDQwNjM1NzA1MzYsOTg4MzI1MDAwMCwyMzYzMzI1NDAwMCwyMzA0NDAwMDAwDQoxOTg3LDE2NTg4MDAwMDAwLDI1NTEwMDAwMCw0Mjg3NzQxNDkwNSw5NzQwNDI5MTIyLDUwMjczMTEzODcsMTA0OTYzNTAwMDAsMjQ3Mjg1NTQwMDAsMjM4NjYwMDAwMA0KMTk4OCwxNjQyOTYwMDAwMCwyNTI3MDAwMDAsNDI4NTE1ODczMDksOTUyODI4NzcyMCw0ODY4MzQ3MzcwLDExMTU4NTUwMDAwLDI0ODAyODUwMDAwLDI0NjI2NTAwMDANCjE5ODksMTYxNDA2MDAwMDAsMjUzMjAwMDAwLDQwNzU4MTExNTYxLDEwMDg1MjQ5MTE2LDUxODkyMjc1MDksMTA0OTUzMDQwMDAsMjUwNTIwMDQwMDAsMjYwMTMwMDAwMA0KMTk5MCwxNjQyMzgwMDAwMCwyNTg2NTAwMDAsNDUwNzA3OTMzMjQsMTE2NTkyMjgyMTIsNTgwODQwNjUxNywxMDg4NDYwMDAwMCwyNTU3MTIwMDAwMCwyNjc1MzAwMDAwDQoxOTkxLDIwNTkyMDAwMDAwLDI0OTQwMDAwMCwzODEzNzQxNjAxNywxMDI3OTI4NDg2Niw1MDkyNzIxMTQyLDEwODQ0MDAwMDAwLDI1MDU5MzU0MDAwLDI1NzI5MDAwMDANCjE5OTIsMTYxNzA4NTA4MDAsMjQ2NDAyNTAwLDQxNTExMDc1NzkzLDEwMTAyMTc5NzA0LDUzODE0NDU1MzQsMTEwODQwNDE1MDAsMjU4MTgyNzM1MDAsMjYyMDUwMDAwMA0KMTk5MywxMzkxNDU1MTQwMCwzNjQ0MTU1MDAsNDEzNjA5MDAxMTEsOTc0NzYwNjM2Miw1MjkxNzQ3MTgzLDExNjkyNTA0MDAwLDI2NDY0MzUxNTAwLDI3MzE1MDAwMDANCjE5OTQsMTI1MzI5NjAwMDAsMzc3MjAwMDAwLDQyODc4MDgwMzk1LDEwMTc0OTk3NzI0LDUzNjM5MjI1NzQsMTI4MDE1MDAwMDAsMjczNTg1MDAwMDAsMjc2ODAwMDAwMA0KMTk5NSwxMjIwNTAwMDAwMCwzNzAyMDAwMDAsNDE0MDUxNjQ2NTcsMTA4OTk1Mzk4MTAsNTk4NDQ1MDYyMiwxMjgyOTUwMDAwMCwyOTMwMjAwMDAwMCwyODE4NTAwMDAwDQoxOTk2LDEwOTA2MDAwMDAwLDM4OTAwMDAwMCw0MjkwMzQzODY2NiwxMDMwMjQ2NjU0Nyw1OTU3MTIyNDg1LDEyNTIzMDAwMDAwLDI4MDk4MDAwMDAwLDI4NTQwMDAwMDANCjE5OTcsOTYzNjAwMDAwMCw0MDA2MDAwMDAsNDM2NDEzMzgzNTQsMTEzNjQ0MzY0ODgsNjE0NTQ4NjkwNCwxMzc5MzUwMDAwMCwyOTcyNjUwMDAwMCwyOTU3NTAwMDAwDQoxOTk4LDkyMTQ3NjAwMDAsNDI1OTUwMDAwLDQzMTM2Njc2ODczLDEwNzcxMzkwOTk2LDYyMzA2MDY0NjQsMTMyNzk1MDAwMDAsMjk2NDA1MDAwMDAsMzAyMjA1MDAwMA0KMTk5OSw5MTkwNTQwMDAwLDQzNzQwMDAwMCw0NTUzNjM1ODY2MCwxMTI4MjE2MjEyOCw2NDI0NzIzMDI4LDEzNzM3NTAwMDAwLDMwOTc5NTAwMDAwLDMxNjUwMDAwMDANCjIwMDAsOTE2ODY4MDAwMCw0NjQ1NTAwMDAsNDQ0OTk0ODY2NzQsMTEzMTU0MzkwODMsNjE3MjQ0Mzc1MCwxMzgyMTg1MzUwMCwyOTcyMzkxMDUwMCwzMTUwMzExMDAwDQoyMDAxLDkxNjcyMDAwMDAsNDYwMDAzNTAwLDQzODMwMjA1MDg3LDEwMTM4MTAwNTk4LDU1MzExMzQ5NTMsMTI4NDA0NzYwMDAsMjgxNjA4NTIwMDAsMzIwNzI2NDUwMA0KMjAwMiw4NTk1MDgwMDAwLDQ4ODMyMTUwMCw0NTA0ODkwMjg4NiwxMDMyNzUzNjY4OSw1NDU5ODQyMDA2LDEzMDg3OTk4MDAwLDI4NDQ0OTU2NTAwLDMyNjQzMDQwMDANCjIwMDMsODU4MzE3NjQwMCw1MTExNjYwMDAsNDUyMDYzNDMyNDgsOTg0MTI1MTMzOCw0OTQxODMyMTQwLDEzMTQ4MDU0MDAwLDI4MDk0NDI4NTAwLDMyNTg1MTIwMDANCjIwMDQsODcyOTEzMjAwMCw0ODk2NTAwMDAsNDg0NTg3MTY5OTIsMTA4MTgwNjMwNjIsNTI2ODcyMzA1NSwxNDA4NjYzMzUwMCwyNzkwOTE0MDUwMCwzMjg2NTcwMDAwDQoyMDA1LDg3OTA2ODU4MDAsNDg5NDE3NTAwLDUwNjgyNzE3NDE5LDEwODY3NDAzNDcyLDQ4MTY2NzE2MzcsMTM3OTQxNzUwMDAsMjgxOTY2NjYwMDAsMzQzMTAwNzUwMA0KMjAwNiw4OTg5ODAwMDAwLDQ3MTY2OTAwMCw0ODIyNDQ2MTM0OCwxMTExNTczNDI1NCw0NDE2NTg5NTcyLDEzODU0MDAzMDAwLDI4Mjg1ODMyMDAwLDM0NTgyODIwMDANCjIwMDcsOTI3MDk5NzAwMCw0NzUzMjQ1MDAsNDMyOTE2NDQ4MzAsMTExMzIyMzExNDAsMzkyMTAyNjEyNCwxMzUzNTY2OTAwMCwyNzA0Mzg0NTAwMCwzMzc0NTkxNTAwDQoyMDA4LDg3MDMwODI4MDAsNDc2MjYyMDAwLDM0ODM4MzQ0MTg0LDExMjg3MjY3NjA3LDM2OTg1MjU0NzQsMTIyNDc4ODY1MDAsMjYwNjY1MTYwMDAsMzM0OTg5MDUwMA0KMjAwOSw4MDYyMDcxMDAwLDQ4MTk3ODAwMCwyNzI1NDg1NTA4NSw5OTU4MDIwODU3LDMxMzQ5MzY4NTksOTgxNDEzNTUwMCwyMzA5MDYzNTUwMCwzMzQ0MDI5MDAwDQoyMDEwLDgwNTI1ODk2MDAsNTU2MDIzNTAwLDI2ODc3NzI3Njc4LDk2MDkwMTU0MzksMjgwNjQ1MjE3NCwxMDY5OTYwMTAwMCwyMzYzMDA5MDAwMCwzMzc2MDAwMDAwDQoyMDExLDc5OTUxNTU4MDAsNTQzMzc2NTAwLDI4OTI4NDYwMDA1LDEwMTMwOTAxNjU1LDI3MDEzNDIyNTksOTg2NTU0NjAwMCwyMzg2OTc1NjAwMCwzNDAwNjcxMDAwDQoyMDEyLDgwMDExMjA0MDAsNTQ4NTAwMDAwLDI4MTc4Mjg1MTcyLDk2NzYzNzM4MjUsMjQyMTQyMTQ1MSw5MjMzNDAwMDAwLDIzMjA2MTUwMDAwLDMzNjEwMDAwMDANCjIwMTMsODMxODU4NTgwMCw1MTg1Njc1MDAsMjkzNDI1OTk3OTksOTc4NDk4NjUxNCwyMjYzNzQxOTc5LDkwMzMzMDUwMDAsMjIxNTc4ODE1MDAsMzQ5NzM3OTUwMA0KMjAxNCw4MzQwMjQ5NDAwLDUyNDEzMDAwMCwzMDk2NjI4Njg5MCwxMDA3ODc4NjkzNSwyMTcwNjMxNTczLDkwNzE3Mzk1MDAsMjMwMTMwMDAwMDAsMzQ0MDEzNTUwMA0KMjAxNSw4ODI0OTcwMDAwLDUzMzEzMDAwMCwzMjIyMzc5Mjg1NSwxMDI0OTQzOTQ2MSwyMDUwNjQ5NzM0LDg2MjM1ODEwMDAsMjMwNDMyMzQ1MDAsMzQ4MjUxNTAwMA0KMjAxNiwxMjQwMjYwNDgwMCw0NzA5MDYwMDAsMjk5MzM0NjA4MjgsMTAyNzg5MzI4MjgsMjExNzgxNzQ1Niw4NTAyMDA1MDAwLDIyOTk4MDMwMDAwLDM1NTA4MzYwMDANCjIwMTcsMTI4MTc2MDAwMDAsNDczMDAwNTAwLDMyMjM0MjAzNTg2LDk5NzE2NDMzMjIsMjE5ODk2ODI2NCw3OTQ4ODczNTAwLDIzMjk2MjYxMDAwLDM1NTk0OTYwMDANCjIwMTgsMTQyODE2MzMwMDAsNDcwMTIxMDAwLDMzMzYxNDAwNzc4LDExMDIyMDU3MzU1LDIyNDU3ODcxMTksNzQ5MDAzMTAwMCwyMzM0NDM4NTUwMCwzNTc1OTAyMDAwDQoyMDE5LDE0Mjk2NDUwMDAwLDQ2NTU0NjAwMCwzMDEzNzcwNTMwMCwxMDIzNDE1OTkwNywxOTcyMjU0NTUxLDY3ODA3NjQ1MDAsMjI3ODMyMTI1MDAsMzU5MTc3MDUwMA0KMjAyMCwxMjExMzQxMDIwMCw0OTA0NjE1MDAsMzMxOTk2MTA5NzYsOTQ0NjI2MjQ1OCwyMzk4NzIxOTg0LDUwNTM0Njg1MDAsMjI5NzMzNDg1MDAsMzc1NjY5MzUwMA0K</script>
@@ -1276,7 +1308,7 @@
     <script>
 
       // ================================================================
-      // GLOBAL WPs CARBON TAB  -- all logic in one IIFE
+      // GLOBAL WPs CARBON TAB -- all logic in one IIFE
       // ================================================================
       (function() {
         'use strict';
@@ -1933,7 +1965,7 @@
 
 
       // ================================================================
-      // MAIN APP JS (HWP Tracker, Log Tracker, PPs Tracker)
+      // MAIN APP JS (End-Use Products Tracker, Industrial Logs Tracker, Sawn Products Tracker)
       // ================================================================
 window.switchTab = function(name, btn) {
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1976,11 +2008,11 @@ window.switchTab = function(name, btn) {
 
       async function initPy(){
         try{
-          setStatus('Loading Python…');
+          setStatus('Loading Pythonâ¦');
           pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/' });
-          setProgress('Loading packages (pandas, numpy)…');
+          setProgress('Loading packages (pandas, numpy)â¦');
           await pyodide.loadPackage(['pandas','numpy']);
-          setProgress('Writing embedded modules & data…');
+          setProgress('Writing embedded modules & dataâ¦');
           pyodide.FS.mkdirTree('/app'); pyodide.FS.mkdirTree('/data'); pyodide.FS.mkdirTree('/tmp');
           pyodide.FS.writeFile('/app/WPsCT_Main.py',      new TextEncoder().encode(b64text('emb-main')));
           pyodide.FS.writeFile('/app/WPsCT_Functions.py', new TextEncoder().encode(b64text('emb-funcs')));
@@ -2028,11 +2060,11 @@ window.switchTab = function(name, btn) {
         const p='/tmp/'+name; pyodide.FS.writeFile(p,bytes); return p;
       }
 
-      // ── HWP Tab: run / plot ────────────────────────────────────────────────
+      // ── End-Use Products Tab: run / plot ────────────────────────────────────
       async function runTracker(){
         if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
         try{
-          setStatus('Running tracker…');
+          setStatus('Running trackerâ¦');
           const dataPath=await resolveDataPath();
           const parasPath=await resolveParaPath();
           const outCsv='/tmp/WPsCT_Results.csv';
@@ -2073,7 +2105,7 @@ html_preview = df.head(40).to_html(index=False)
         'Landfill':       '#9ca3af',
       };
 
-      function hwpBaseLayout(extraLayout){
+      function eupBaseLayout(extraLayout){
         return Object.assign({
           autosize: true,
           margin: {l:65, r:25, t:35, b:90},
@@ -2100,7 +2132,7 @@ html_preview = df.head(40).to_html(index=False)
       }
 
       function displayPlot(divId, traces, extraLayout){
-        Plotly.newPlot(divId, traces, hwpBaseLayout(extraLayout),
+        Plotly.newPlot(divId, traces, eupBaseLayout(extraLayout),
           {responsive:true, displayModeBar:true,
            modeBarButtonsToRemove:['select2d','lasso2d','autoScale2d'],
            displaylogo:false});
@@ -2109,7 +2141,7 @@ html_preview = df.head(40).to_html(index=False)
       async function plotData(){
         if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Loading input data…');
+          setStatus('Loading input dataâ¦');
           const inUnit=getInputUnit(); const pUnit=getPlotUnit();
           const dataPath=await resolveDataPath();
           pyodide.globals.set('data_path',dataPath);
@@ -2151,7 +2183,7 @@ json.dumps(out, allow_nan=False)
       async function plotStorage(){
         if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Running model and preparing storage plot…');
+          setStatus('Running model and preparing storage plotâ¦');
           const pUnit=getPlotUnit();
           const outCsv='/tmp/WPsCT_Results.csv';
           try{ pyodide.FS.stat(outCsv); }catch(e){ await runTracker(); }
@@ -2202,8 +2234,8 @@ json.dumps(out, allow_nan=False)
                    showgrid:true, gridcolor:'#f3f4f6', zeroline:false, tickfont:{size:11}},
           });
           // Summary badges
-          const panel=document.getElementById('hwp-summary-panel');
-          const badges=document.getElementById('hwp-summary-badges');
+          const panel=document.getElementById('eup-summary-panel');
+          const badges=document.getElementById('eup-summary-badges');
           if(panel && badges){
             const inUsePools=['Construction','Exterior','Household','GraphicPaper','HouseholdPaper','OtherPaper'];
             const totalInUse=fromKg([inUsePools.reduce((a,k)=>a+(last[k]||0),0)],pUnit)[0];
@@ -2233,7 +2265,7 @@ json.dumps(out, allow_nan=False)
       function clearAll(){
         document.getElementById('results-preview').innerHTML='';
         document.getElementById('download-link').classList.add('hidden');
-        const panel=document.getElementById('hwp-summary-panel');
+        const panel=document.getElementById('eup-summary-panel');
         if(panel) panel.classList.add('hidden');
         Plotly.purge('plot-data-area'); Plotly.purge('plot-storage-area');
         setStatus('Cleared. Click "Initialize Python" to begin.');
@@ -2247,7 +2279,7 @@ json.dumps(out, allow_nan=False)
 
 
       // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-      // LOG CARBON TAB
+      // INDUSTRIAL LOGS TAB
       // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
       // Wood density (kg/m³) and carbon fraction defaults by type
@@ -2269,29 +2301,29 @@ json.dumps(out, allow_nan=False)
       window.resetEfficiency = function() {
         const prod = selectedProduct;
         const val  = prod && EFFICIENCY_DEFAULTS[prod] ? EFFICIENCY_DEFAULTS[prod] : 0.70;
-        document.getElementById('log-efficiency').value = val;
-        onLogInputChange();
+        document.getElementById('il-efficiency').value = val;
+        onIlInputChange();
       }
 
       // Reset physical param fields to wood-type defaults
       window.resetPhysicalParams = function() {
-        const wt = document.getElementById('log-woodtype').value;
+        const wt = document.getElementById('il-woodtype').value;
         const props = WOOD_PROPS[wt];
-        document.getElementById('log-density').value      = props.density;
-        document.getElementById('log-carbon-frac').value  = props.carbonFraction;
-        onLogInputChange();
+        document.getElementById('il-density').value      = props.density;
+        document.getElementById('il-carbon-frac').value  = props.carbonFraction;
+        onIlInputChange();
       }
 
       // When wood type changes, auto-fill density/carbon fraction only if still at a default value
       window.syncPhysicalDefaults = function syncPhysicalDefaults() {
-        const wt = document.getElementById('log-woodtype').value;
+        const wt = document.getElementById('il-woodtype').value;
         const props = WOOD_PROPS[wt];
-        const curDensity = parseFloat(document.getElementById('log-density').value);
-        const curFrac    = parseFloat(document.getElementById('log-carbon-frac').value);
+        const curDensity = parseFloat(document.getElementById('il-density').value);
+        const curFrac    = parseFloat(document.getElementById('il-carbon-frac').value);
         // Auto-update if the current value matches the OTHER wood type's default (i.e. user hasn't customised)
         const otherProps = WOOD_PROPS[wt === 'softwood' ? 'hardwood' : 'softwood'];
-        if (curDensity === otherProps.density)     document.getElementById('log-density').value     = props.density;
-        if (curFrac    === otherProps.carbonFraction) document.getElementById('log-carbon-frac').value = props.carbonFraction;
+        if (curDensity === otherProps.density)     document.getElementById('il-density').value     = props.density;
+        if (curFrac    === otherProps.carbonFraction) document.getElementById('il-carbon-frac').value = props.carbonFraction;
       }
 
       // ── Volume method ──────────────────────────────────────────────────────
@@ -2329,37 +2361,37 @@ json.dumps(out, allow_nan=False)
         });
         // Update description
         document.getElementById('vol-method-desc').textContent = VOL_METHOD_META[method].desc;
-        onLogInputChange();
+        onIlInputChange();
       }
 
       function calcVolume() {
         const pi = Math.PI;
         const toR = d => (parseFloat(d) / 2) / 100; // cm diameter â m radius
-        const L = m => parseFloat(document.getElementById('log-length' + m).value) || 0;
+        const L = m => parseFloat(document.getElementById('il-length' + m).value) || 0;
 
         if (currentVolMethod === 'cylinder') {
-          const r = toR(document.getElementById('log-diameter').value || 0);
+          const r = toR(document.getElementById('il-diameter').value || 0);
           const l = L('');
           if (!r || !l) return null;
           return { vol: pi * r * r * l, L: l, method: 'Cylinder' };
 
         } else if (currentVolMethod === 'huber') {
-          const r = toR(document.getElementById('log-d-mid').value || 0);
+          const r = toR(document.getElementById('il-d-mid').value || 0);
           const l = L('-h');
           if (!r || !l) return null;
           return { vol: pi * r * r * l, L: l, method: 'Huber' };
 
         } else if (currentVolMethod === 'smalian') {
-          const rb = toR(document.getElementById('log-d-butt').value || 0);
-          const rt = toR(document.getElementById('log-d-tip').value  || 0);
+          const rb = toR(document.getElementById('il-d-butt').value || 0);
+          const rt = toR(document.getElementById('il-d-tip').value  || 0);
           const l  = L('-s');
           if (!rb || !l) return null;
           return { vol: (pi / 2) * (rb * rb + rt * rt) * l, L: l, method: 'Smalian' };
 
         } else if (currentVolMethod === 'newton') {
-          const rb = toR(document.getElementById('log-d-butt-n').value || 0);
-          const rm = toR(document.getElementById('log-d-mid-n').value  || 0);
-          const rt = toR(document.getElementById('log-d-tip-n').value  || 0);
+          const rb = toR(document.getElementById('il-d-butt-n').value || 0);
+          const rm = toR(document.getElementById('il-d-mid-n').value  || 0);
+          const rt = toR(document.getElementById('il-d-tip-n').value  || 0);
           const l  = L('-n');
           if (!rb || !rm || !l) return null;
           return { vol: (pi / 6) * (rb * rb + 4 * rm * rm + rt * rt) * l, L: l, method: 'Newton' };
@@ -2383,10 +2415,10 @@ json.dumps(out, allow_nan=False)
 
       let selectedProduct = null;
 
-      window.onLogInputChange = function onLogInputChange() {
-        const wt      = document.getElementById('log-woodtype').value;
-        const density = parseFloat(document.getElementById('log-density').value)     || WOOD_PROPS[wt].density;
-        const cfrac   = parseFloat(document.getElementById('log-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
+      window.onIlInputChange = function onIlInputChange() {
+        const wt      = document.getElementById('il-woodtype').value;
+        const density = parseFloat(document.getElementById('il-density').value)     || WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('il-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
 
         const result = calcVolume();
         if (result && result.vol > 0) {
@@ -2394,10 +2426,10 @@ json.dumps(out, allow_nan=False)
           const mass     = vol * density;
           const carbonKg = mass * cfrac;
 
-          const eff = parseFloat(document.getElementById('log-efficiency')?.value) || 0.70;
+          const eff = parseFloat(document.getElementById('il-efficiency')?.value) || 0.70;
           const carbonProduct = carbonKg * eff;
-          document.getElementById('log-carbon-estimate').classList.remove('hidden');
-          document.getElementById('log-carbon-display').innerHTML =
+          document.getElementById('il-carbon-estimate').classList.remove('hidden');
+          document.getElementById('il-carbon-display').innerHTML =
             `Method: <b>${method}</b> &nbsp;|&nbsp; Volume: <b>${vol.toFixed(3)} m³</b><br>` +
             `Mass: <b>${mass.toFixed(1)} kg</b> (density ${density} kg/m³)<br>` +
             `Log carbon: <b>${carbonKg.toFixed(2)} kg C</b> &nbsp;|&nbsp; <b>${(carbonKg/1000).toFixed(4)} Mg C</b><br>` +
@@ -2405,10 +2437,10 @@ json.dumps(out, allow_nan=False)
 
           // Auto-suggest product using the first/primary diameter
           let primaryDiam = 0;
-          if (currentVolMethod === 'cylinder')  primaryDiam = parseFloat(document.getElementById('log-diameter').value) || 0;
-          else if (currentVolMethod === 'huber') primaryDiam = parseFloat(document.getElementById('log-d-mid').value) || 0;
-          else if (currentVolMethod === 'smalian') primaryDiam = parseFloat(document.getElementById('log-d-butt').value) || 0;
-          else if (currentVolMethod === 'newton')  primaryDiam = parseFloat(document.getElementById('log-d-butt-n').value) || 0;
+          if (currentVolMethod === 'cylinder')  primaryDiam = parseFloat(document.getElementById('il-diameter').value) || 0;
+          else if (currentVolMethod === 'huber') primaryDiam = parseFloat(document.getElementById('il-d-mid').value) || 0;
+          else if (currentVolMethod === 'smalian') primaryDiam = parseFloat(document.getElementById('il-d-butt').value) || 0;
+          else if (currentVolMethod === 'newton')  primaryDiam = parseFloat(document.getElementById('il-d-butt-n').value) || 0;
 
           if (primaryDiam > 0) {
             const sug = suggestProduct(primaryDiam, wt);
@@ -2416,8 +2448,8 @@ json.dumps(out, allow_nan=False)
               card.classList.remove('suggested');
               if (card.dataset.product === sug) card.classList.add('suggested');
             });
-            document.getElementById('log-suggestion-note').textContent = `ð¡ Suggested: ${sug} (based on log size & type)`;
-            document.getElementById('log-suggestion-note').classList.remove('hidden');
+            document.getElementById('il-suggestion-note').textContent = `ð¡ Suggested: ${sug} (based on log size & type)`;
+            document.getElementById('il-suggestion-note').classList.remove('hidden');
             if (!selectedProduct) selectProduct(sug);
           }
         }
@@ -2429,45 +2461,45 @@ json.dumps(out, allow_nan=False)
           card.classList.toggle('selected', card.dataset.product === name);
         });
         // Auto-set efficiency to product default if field is still at a generic default
-        const effField = document.getElementById('log-efficiency');
+        const effField = document.getElementById('il-efficiency');
         if (effField && EFFICIENCY_DEFAULTS[name]) {
           // Only auto-fill if value matches one of the known defaults (user hasn't customised)
           const cur = parseFloat(effField.value);
           const isADefault = Object.values(EFFICIENCY_DEFAULTS).some(v => Math.abs(v - cur) < 0.001);
           if (isADefault) effField.value = EFFICIENCY_DEFAULTS[name];
         }
-        onLogInputChange();
+        onIlInputChange();
       }
 
-      function setLogStatus(msg) { document.getElementById('log-status').textContent = msg; }
+      function setIlStatus(msg) { document.getElementById('il-status').textContent = msg; }
 
-      window.runLogTracker = async function runLogTracker() {
+      window.runIlTracker = async function runIlTracker() {
         if (!pyReady) {
-          setLogStatus('⏳ Initializing Python environment, please wait…');
+          setIlStatus('â³ Initializing Python environment, please waitâ¦');
           await initPy();
           if (!pyReady) {
-            setLogStatus('❌ Initialization failed. Please check your internet connection and try again.');
+            setIlStatus('â Initialization failed. Please check your internet connection and try again.');
             return;
           }
         }
-        if (!selectedProduct) { setLogStatus('Please select a product type first.'); return; }
+        if (!selectedProduct) { setIlStatus('Please select a product type first.'); return; }
 
-        const wt      = document.getElementById('log-woodtype').value;
-        const nYears  = parseInt(document.getElementById('log-years').value) || 100;
-        const density = parseFloat(document.getElementById('log-density').value)     || WOOD_PROPS[wt].density;
-        const cfrac   = parseFloat(document.getElementById('log-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
+        const wt      = document.getElementById('il-woodtype').value;
+        const nYears  = parseInt(document.getElementById('il-years').value) || 100;
+        const density = parseFloat(document.getElementById('il-density').value)     || WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('il-carbon-frac').value) || WOOD_PROPS[wt].carbonFraction;
 
         const volResult = calcVolume();
-        if (!volResult || volResult.vol <= 0) { setLogStatus('Please enter valid log dimensions.'); return; }
+        if (!volResult || volResult.vol <= 0) { setIlStatus('Please enter valid log dimensions.'); return; }
 
         const vol         = volResult.vol;
         const mass        = vol * density;
         const carbonKgLog = mass * cfrac;          // total carbon in the log
-        const efficiency  = parseFloat(document.getElementById('log-efficiency').value) || 0.70;
+        const efficiency  = parseFloat(document.getElementById('il-efficiency').value) || 0.70;
         const carbonKg    = carbonKgLog * efficiency;  // carbon entering the product
         const L           = volResult.L;
 
-        setLogStatus('Running log carbon tracker…');
+        setIlStatus('Running log carbon trackerâ¦');
 
         try {
           // Build a 1-year production series: carbon enters in year 1, zeros thereafter
@@ -2559,16 +2591,16 @@ json.dumps(out, allow_nan=False)
           `);
 
           const res = JSON.parse(jsonStr);
-          renderLogResults(res, carbonKgLog, carbonKg, efficiency, vol, volResult.method, wt, nYears);
-          setLogStatus(`Done — tracked ${nYears} years for ${selectedProduct} wood product.`);
+          renderIlResults(res, carbonKgLog, carbonKg, efficiency, vol, volResult.method, wt, nYears);
+          setIlStatus(`Done — tracked ${nYears} years for ${selectedProduct} wood product.`);
 
         } catch(err) {
           console.error(err);
-          setLogStatus('Run failed. See browser console for details.');
+          setIlStatus('Run failed. See browser console for details.');
         }
       }
 
-      function renderLogResults(res, carbonKgLog, carbonKg, efficiency, vol, volMethod, woodType, nYears) {
+      function renderIlResults(res, carbonKgLog, carbonKg, efficiency, vol, volMethod, woodType, nYears) {
         const years = res.years;
 
         // ── Summary badges ──────────────────────────────────────────────────
@@ -2597,8 +2629,8 @@ json.dumps(out, allow_nan=False)
             <span class="text-xs text-gray-500 mt-1 text-center">Released at year ${nYears}<br>(${releasedPct}% of product C)</span>
           </div>
         `;
-        document.getElementById('log-summary-badges').innerHTML = badgesHtml;
-        document.getElementById('log-summary-panel').classList.remove('hidden');
+        document.getElementById('il-summary-badges').innerHTML = badgesHtml;
+        document.getElementById('il-summary-panel').classList.remove('hidden');
 
         // ── Chart ───────────────────────────────────────────────────────────
         const traces = [
@@ -2628,8 +2660,8 @@ json.dumps(out, allow_nan=False)
 
         const layout = {
           autosize: true,
-          width:  document.getElementById('log-plot-area').clientWidth || 800,
-          height: document.getElementById('log-plot-area').clientHeight || 450,
+          width:  document.getElementById('il-plot-area').clientWidth || 800,
+          height: document.getElementById('il-plot-area').clientHeight || 450,
           margin: { l:65, r:20, t:50, b:80 },
           legend: { orientation:'h', y:-0.28 },
           xaxis:  { title: { text: 'Years after harvest', standoff: 20 } },
@@ -2667,7 +2699,7 @@ json.dumps(out, allow_nan=False)
           html += '</tr>';
         }
         html += '</tbody></table>';
-        document.getElementById('log-results-preview').innerHTML = html;
+        document.getElementById('il-results-preview').innerHTML = html;
 
         // ── Download CSV ────────────────────────────────────────────────────
         let csv = `Year,InUse_kgC,LandfillPool_kgC,TotalRetained_kgC,CumulReleased_kgC\n# LogCarbon=${carbonKgLog.toFixed(4)} ProductCarbon=${carbonKg.toFixed(4)} Efficiency=${efficiency} Method=${volMethod} Volume=${vol.toFixed(4)}m3 Product=${selectedProduct}\n`;
@@ -2675,40 +2707,28 @@ json.dumps(out, allow_nan=False)
           csv += `${years[i]},${res.inuse[i].toFixed(4)},${res.lf_pool[i].toFixed(4)},${res.total_retained[i].toFixed(4)},${res.cumul_released[i].toFixed(4)}\n`;
         }
         const blob = new Blob([csv], { type: 'text/csv' });
-        const link = document.getElementById('log-download-link');
+        const link = document.getElementById('il-download-link');
         link.href = URL.createObjectURL(blob);
         link.classList.remove('hidden');
       }
 
-      window.clearLogTracker = function clearLogTracker() {
+      window.clearIlTracker = function clearIlTracker() {
         selectedProduct = null;
         document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
-        document.getElementById('log-summary-panel').classList.add('hidden');
-        document.getElementById('log-results-preview').innerHTML = '';
-        document.getElementById('log-download-link').classList.add('hidden');
-        document.getElementById('log-carbon-estimate').classList.add('hidden');
-        document.getElementById('log-suggestion-note').classList.add('hidden');
-        Plotly.purge('log-plot-area');
-        setLogStatus('Cleared. Select product type and run again.');
-      }
-
-      function clearPPsTracker() {
-        selectedPPsProduct = null;
-        document.querySelectorAll('#pps-product-grid .product-card').forEach(el => el.classList.remove('selected'));
-        document.getElementById('pps-summary-panel').classList.add('hidden');
-        document.getElementById('pps-results-preview').innerHTML = '';
-        document.getElementById('pps-download-link').classList.add('hidden');
-        document.getElementById('pps-estimate-display').classList.add('hidden');
-        document.getElementById('pps-suggestion-note').classList.add('hidden');
-        Plotly.purge('pps-plot-area');
-        setPPsStatus('Cleared. Select end-use category and run again.');
+        document.getElementById('il-summary-panel').classList.add('hidden');
+        document.getElementById('il-results-preview').innerHTML = '';
+        document.getElementById('il-download-link').classList.add('hidden');
+        document.getElementById('il-carbon-estimate').classList.add('hidden');
+        document.getElementById('il-suggestion-note').classList.add('hidden');
+        Plotly.purge('il-plot-area');
+        setIlStatus('Cleared. Select product type and run again.');
       }
 
       // Initialise estimate display on page load
-      onLogInputChange();
+      onIlInputChange();
 
       // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-      // SAWN PRODUCTS (PPs) CARBON TAB
+      // SAWN PRODUCTS TAB
       // ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
       const PPS_WOOD_PROPS = {
@@ -2729,136 +2749,136 @@ json.dumps(out, allow_nan=False)
         other:       'Any other solid wood product: enter total serviceable volume directly.',
       };
 
-      let currentPPsType = 'lumber';
-      let selectedPPsProduct = null;
+      let currentSpType = 'lumber';
+      let selectedSpProduct = null;
 
-      window.setPPsType = function(type) {
-        currentPPsType = type;
-        document.querySelectorAll('.pps-type-btn').forEach(btn => {
+      window.setSpType = function(type) {
+        currentSpType = type;
+        document.querySelectorAll('.sp-type-btn').forEach(btn => {
           btn.classList.toggle('selected', btn.dataset.ptype === type);
         });
         ['lumber','panel','engineered','other'].forEach(t => {
-          document.getElementById('pps-inputs-' + t).classList.toggle('hidden', t !== type);
+          document.getElementById('sp-inputs-' + t).classList.toggle('hidden', t !== type);
         });
-        document.getElementById('pps-type-desc').textContent = PPS_TYPE_DESC[type];
-        onPPsChange();
+        document.getElementById('sp-type-desc').textContent = PPS_TYPE_DESC[type];
+        onSpChange();
       };
 
-      window.syncPPsDefaults = function() {
-        const wt = document.getElementById('pps-woodtype').value;
+      window.syncSpDefaults = function() {
+        const wt = document.getElementById('sp-woodtype').value;
         const props = PPS_WOOD_PROPS[wt];
-        document.getElementById('pps-density').value     = props.density;
-        document.getElementById('pps-carbon-frac').value = props.carbonFraction;
+        document.getElementById('sp-density').value     = props.density;
+        document.getElementById('sp-carbon-frac').value = props.carbonFraction;
       };
 
-      window.resetPPsParams = function() {
-        syncPPsDefaults();
-        onPPsChange();
+      window.resetSpParams = function() {
+        syncSpDefaults();
+        onSpChange();
       };
 
-      window.resetPPsEfficiency = function() {
-        const val = selectedPPsProduct && PPS_EFFICIENCY_DEFAULTS[selectedPPsProduct]
-                    ? PPS_EFFICIENCY_DEFAULTS[selectedPPsProduct] : 0.90;
-        document.getElementById('pps-efficiency').value = val;
-        onPPsChange();
+      window.resetSpEfficiency = function() {
+        const val = selectedSpProduct && PPS_EFFICIENCY_DEFAULTS[selectedSpProduct]
+                    ? PPS_EFFICIENCY_DEFAULTS[selectedSpProduct] : 0.90;
+        document.getElementById('sp-efficiency').value = val;
+        onSpChange();
       };
 
-      function calcPPsVolume() {
-        const t = currentPPsType;
+      function calcSpVolume() {
+        const t = currentSpType;
         if (t === 'lumber') {
-          const th = parseFloat(document.getElementById('pps-thickness').value) / 1000;
-          const w  = parseFloat(document.getElementById('pps-width').value) / 1000;
-          const l  = parseFloat(document.getElementById('pps-length').value);
-          const q  = parseFloat(document.getElementById('pps-qty').value) || 1;
+          const th = parseFloat(document.getElementById('sp-thickness').value) / 1000;
+          const w  = parseFloat(document.getElementById('sp-width').value) / 1000;
+          const l  = parseFloat(document.getElementById('sp-length').value);
+          const q  = parseFloat(document.getElementById('sp-qty').value) || 1;
           if (!th || !w || !l) return null;
-          return { vol: th * w * l * q, label: `${document.getElementById('pps-thickness').value}×${document.getElementById('pps-width').value} mm × ${l} m × ${q} pcs` };
+          return { vol: th * w * l * q, label: `${document.getElementById('sp-thickness').value}×${document.getElementById('sp-width').value} mm × ${l} m × ${q} pcs` };
         } else if (t === 'panel') {
-          const th = parseFloat(document.getElementById('pps-panel-t').value) / 1000;
-          const w  = parseFloat(document.getElementById('pps-panel-w').value);
-          const l  = parseFloat(document.getElementById('pps-panel-l').value);
-          const q  = parseFloat(document.getElementById('pps-panel-q').value) || 1;
+          const th = parseFloat(document.getElementById('sp-panel-t').value) / 1000;
+          const w  = parseFloat(document.getElementById('sp-panel-w').value);
+          const l  = parseFloat(document.getElementById('sp-panel-l').value);
+          const q  = parseFloat(document.getElementById('sp-panel-q').value) || 1;
           if (!th || !w || !l) return null;
-          return { vol: th * w * l * q, label: `${document.getElementById('pps-panel-t').value} mm × ${w}×${l} m × ${q} sheets` };
+          return { vol: th * w * l * q, label: `${document.getElementById('sp-panel-t').value} mm × ${w}×${l} m × ${q} sheets` };
         } else if (t === 'engineered') {
-          const d  = parseFloat(document.getElementById('pps-eng-d').value) / 1000;
-          const w  = parseFloat(document.getElementById('pps-eng-w').value) / 1000;
-          const l  = parseFloat(document.getElementById('pps-eng-l').value);
-          const q  = parseFloat(document.getElementById('pps-eng-q').value) || 1;
-          const sub = document.getElementById('pps-eng-sub').value.toUpperCase();
+          const d  = parseFloat(document.getElementById('sp-eng-d').value) / 1000;
+          const w  = parseFloat(document.getElementById('sp-eng-w').value) / 1000;
+          const l  = parseFloat(document.getElementById('sp-eng-l').value);
+          const q  = parseFloat(document.getElementById('sp-eng-q').value) || 1;
+          const sub = document.getElementById('sp-eng-sub').value.toUpperCase();
           if (!d || !w || !l) return null;
-          return { vol: d * w * l * q, label: `${sub} ${document.getElementById('pps-eng-d').value}×${document.getElementById('pps-eng-w').value} mm × ${l} m × ${q} pcs` };
+          return { vol: d * w * l * q, label: `${sub} ${document.getElementById('sp-eng-d').value}×${document.getElementById('sp-eng-w').value} mm × ${l} m × ${q} pcs` };
         } else {
-          const vol = parseFloat(document.getElementById('pps-other-vol').value);
+          const vol = parseFloat(document.getElementById('sp-other-vol').value);
           if (!vol) return null;
-          return { vol, label: document.getElementById('pps-other-desc').value || 'Custom volume' };
+          return { vol, label: document.getElementById('sp-other-desc').value || 'Custom volume' };
         }
       }
 
-      window.onPPsChange = function() {
-        const wt = document.getElementById('pps-woodtype').value;
-        const density = parseFloat(document.getElementById('pps-density').value) || PPS_WOOD_PROPS[wt].density;
-        const cfrac   = parseFloat(document.getElementById('pps-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
-        const eff     = parseFloat(document.getElementById('pps-efficiency').value) || 0.90;
-        const vr = calcPPsVolume();
+      window.onSpChange = function() {
+        const wt = document.getElementById('sp-woodtype').value;
+        const density = parseFloat(document.getElementById('sp-density').value) || PPS_WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('sp-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
+        const eff     = parseFloat(document.getElementById('sp-efficiency').value) || 0.90;
+        const vr = calcSpVolume();
         if (vr && vr.vol > 0) {
           const mass = vr.vol * density;
           const cTotal = mass * cfrac;
           const cProduct = cTotal * eff;
-          document.getElementById('pps-estimate').classList.remove('hidden');
-          document.getElementById('pps-estimate-display').innerHTML =
+          document.getElementById('sp-estimate').classList.remove('hidden');
+          document.getElementById('sp-estimate-display').innerHTML =
             `Product: <b>${vr.label}</b><br>` +
             `Volume: <b>${vr.vol.toFixed(4)} m³</b> &nbsp;|&nbsp; Mass: <b>${mass.toFixed(1)} kg</b><br>` +
             `Total carbon: <b>${cTotal.toFixed(2)} kg C</b> &nbsp;|&nbsp; ` +
             `Serviceable carbon: <b>${cProduct.toFixed(2)} kg C</b> (eff. ${(eff*100).toFixed(0)}%)`;
           // auto-suggest end-use
-          if (!selectedPPsProduct) {
-            const sug = (currentPPsType === 'panel' || currentPPsType === 'engineered') ? 'Construction' : 'Household';
-            selectPPsProduct(sug);
+          if (!selectedSpProduct) {
+            const sug = (currentSpType === 'panel' || currentSpType === 'engineered') ? 'Construction' : 'Household';
+            selectSpProduct(sug);
           }
         }
       };
 
-      window.selectPPsProduct = function(name) {
-        selectedPPsProduct = name;
-        document.querySelectorAll('#pps-product-grid .product-card').forEach(card => {
+      window.selectSpProduct = function(name) {
+        selectedSpProduct = name;
+        document.querySelectorAll('#sp-product-grid .product-card').forEach(card => {
           card.classList.toggle('selected', card.dataset.product === name);
         });
-        const effField = document.getElementById('pps-efficiency');
+        const effField = document.getElementById('sp-efficiency');
         if (effField && PPS_EFFICIENCY_DEFAULTS[name]) {
           const cur = parseFloat(effField.value);
           const isDefault = Object.values(PPS_EFFICIENCY_DEFAULTS).some(v => Math.abs(v - cur) < 0.001);
           if (isDefault) effField.value = PPS_EFFICIENCY_DEFAULTS[name];
         }
-        onPPsChange();
+        onSpChange();
       };
 
-      function setPPsStatus(msg) { document.getElementById('pps-status').textContent = msg; }
+      function setSpStatus(msg) { document.getElementById('sp-status').textContent = msg; }
 
-      window.runPPsTracker = async function() {
+      window.runSpTracker = async function() {
         if (!pyReady) {
-          setPPsStatus('⏳ Initializing Python…');
+          setSpStatus('â³ Initializing Pythonâ¦');
           await initPy();
-          if (!pyReady) { setPPsStatus('❌ Initialization failed.'); return; }
+          if (!pyReady) { setSpStatus('â Initialization failed.'); return; }
         }
-        if (!selectedPPsProduct) { setPPsStatus('Please select an end-use category first.'); return; }
+        if (!selectedSpProduct) { setSpStatus('Please select an end-use category first.'); return; }
 
-        const wt = document.getElementById('pps-woodtype').value;
-        const nYears  = parseInt(document.getElementById('pps-years').value) || 100;
-        const density = parseFloat(document.getElementById('pps-density').value) || PPS_WOOD_PROPS[wt].density;
-        const cfrac   = parseFloat(document.getElementById('pps-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
-        const eff     = parseFloat(document.getElementById('pps-efficiency').value) || 0.90;
-        const vr = calcPPsVolume();
-        if (!vr || vr.vol <= 0) { setPPsStatus('Please enter valid product dimensions.'); return; }
+        const wt = document.getElementById('sp-woodtype').value;
+        const nYears  = parseInt(document.getElementById('sp-years').value) || 100;
+        const density = parseFloat(document.getElementById('sp-density').value) || PPS_WOOD_PROPS[wt].density;
+        const cfrac   = parseFloat(document.getElementById('sp-carbon-frac').value) || PPS_WOOD_PROPS[wt].carbonFraction;
+        const eff     = parseFloat(document.getElementById('sp-efficiency').value) || 0.90;
+        const vr = calcSpVolume();
+        if (!vr || vr.vol <= 0) { setSpStatus('Please enter valid product dimensions.'); return; }
 
         const mass       = vr.vol * density;
         const cTotal     = mass * cfrac;
         const carbonKg   = cTotal * eff;   // serviceable carbon entering the product
-        setPPsStatus('Running carbon tracker…');
+        setSpStatus('Running carbon trackerâ¦');
 
         try {
           pyodide.globals.set('pps_carbon_kg',    carbonKg);
-          pyodide.globals.set('pps_product_name', selectedPPsProduct);
-          pyodide.globals.set('pps_n_years',      nYears);
+          pyodide.globals.set('sp_product_name', selectedSpProduct);
+          pyodide.globals.set('sp_n_years',      nYears);
           pyodide.globals.set('pps_para_path',    '/data/WPs_Tracker_paras.csv');
 
           const jsonStr = await pyodide.runPythonAsync(`
@@ -2867,8 +2887,8 @@ sys.path.append('/app')
 import WPsCT_Functions as wf
 
 para = pd.read_csv(pps_para_path)
-prod = pps_product_name
-n    = int(pps_n_years)
+prod = sp_product_name
+n    = int(sp_n_years)
 C0   = float(pps_carbon_kg)
 
 def get_para(product, variable):
@@ -2913,22 +2933,22 @@ json.dumps(out, allow_nan=False)
           `);
 
           const res = JSON.parse(jsonStr);
-          renderPPsResults(res, cTotal, carbonKg, eff, vr, wt, nYears);
-          setPPsStatus(`Done — tracked ${nYears} years for ${selectedPPsProduct} (${vr.label}).`);
+          renderSpResults(res, cTotal, carbonKg, eff, vr, wt, nYears);
+          setSpStatus(`Done — tracked ${nYears} years for ${selectedSpProduct} (${vr.label}).`);
         } catch(err) {
           console.error(err);
-          setPPsStatus('Run failed. See browser console.');
+          setSpStatus('Run failed. See browser console.');
         }
       };
 
-      function renderPPsResults(res, cTotal, carbonKg, eff, vr, wt, nYears) {
+      function renderSpResults(res, cTotal, carbonKg, eff, vr, wt, nYears) {
         const finalRetained = res.total_retained[res.total_retained.length-1];
         const finalReleased = res.cumul_released[res.cumul_released.length-1];
         const retPct = (finalRetained/carbonKg*100).toFixed(1);
         const relPct = (finalReleased/carbonKg*100).toFixed(1);
         const effPct = (eff*100).toFixed(0);
 
-        document.getElementById('pps-summary-badges').innerHTML = `
+        document.getElementById('sp-summary-badges').innerHTML = `
           <div class="flex flex-col items-center p-3 bg-gray-50 rounded-xl border border-gray-200">
             <span class="text-lg font-bold text-gray-700">${cTotal.toFixed(2)} kg C</span>
             <span class="text-xs text-gray-500 mt-1 text-center">Total product carbon</span>
@@ -2945,7 +2965,7 @@ json.dumps(out, allow_nan=False)
             <span class="text-lg font-bold text-red-600">${finalReleased.toFixed(2)} kg C</span>
             <span class="text-xs text-gray-500 mt-1 text-center">Released at year ${nYears}<br>(${relPct}%)</span>
           </div>`;
-        document.getElementById('pps-summary-panel').classList.remove('hidden');
+        document.getElementById('sp-summary-panel').classList.remove('hidden');
 
         const traces = [
           { x:res.years, y:res.total_retained, mode:'lines', name:'Total Retained',
@@ -2962,7 +2982,7 @@ json.dumps(out, allow_nan=False)
           legend:{orientation:'h',y:-0.28},
           xaxis:{title:{text:'Years after production',standoff:20}},
           yaxis:{title:{text:'Carbon (kg C)',standoff:12}},
-          title:{text:`Sawn Product Carbon — ${selectedPPsProduct} (${wt}, ${vr.vol.toFixed(4)} m³, eff.${effPct}%)`,font:{size:12}},
+          title:{text:`Sawn Product Carbon — ${selectedSpProduct} (${wt}, ${vr.vol.toFixed(4)} m³, eff.${effPct}%)`,font:{size:12}},
           hovermode:'x unified'
         }, { responsive:true, displayModeBar:true });
 
@@ -2977,30 +2997,4 @@ json.dumps(out, allow_nan=False)
           const bg = i%2===0?'#fff':'#f8fafc';
           html += `<tr style="background:${bg}">`;
           [res.years[i], res.inuse[i].toFixed(3), res.lf_pool[i].toFixed(3),
-           res.total_retained[i].toFixed(3), res.cumul_released[i].toFixed(3)].forEach(v => {
-            html += `<td style="border:1px solid #e2e8f0;padding:3px 7px;text-align:right">${v}</td>`;
-          });
-          html += '</tr>';
-        }
-        html += '</tbody></table>';
-        document.getElementById('pps-results-preview').innerHTML = html;
-
-        const ppsHeaders = ['Year','In-use (kg C)','Landfill Pool (kg C)',
-                             'Total Retained (kg C)','Cumul. Released (kg C)'];
-        let ppsCsvRows = [ppsHeaders.join(',')];
-        for (let i=0;i<res.years.length;i++) {
-          ppsCsvRows.push([res.years[i], res.inuse[i].toFixed(6),
-            res.lf_pool[i].toFixed(6), res.total_retained[i].toFixed(6),
-            res.cumul_released[i].toFixed(6)].join(','));
-        }
-        const ppsBlob = new Blob([ppsCsvRows.join('\n')],{type:'text/csv'});
-        const ppsLink = document.getElementById('pps-download-link');
-        if (ppsLink) {
-          ppsLink.href = URL.createObjectURL(ppsBlob);
-          ppsLink.classList.remove('hidden');
-        }
-      } // end renderPPsResults
-
-    </script>
-  </body>
-</html>
+           res.total_retained[i].toFixed(3), 
