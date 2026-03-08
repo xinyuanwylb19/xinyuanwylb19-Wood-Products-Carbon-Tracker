@@ -1976,11 +1976,11 @@ window.switchTab = function(name, btn) {
 
       async function initPy(){
         try{
-          setStatus('Loading Pythonâ¦');
+          setStatus('Loading Python…');
           pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.1/full/' });
-          setProgress('Loading packages (pandas, numpy)â¦');
+          setProgress('Loading packages (pandas, numpy)…');
           await pyodide.loadPackage(['pandas','numpy']);
-          setProgress('Writing embedded modules & dataâ¦');
+          setProgress('Writing embedded modules & data…');
           pyodide.FS.mkdirTree('/app'); pyodide.FS.mkdirTree('/data'); pyodide.FS.mkdirTree('/tmp');
           pyodide.FS.writeFile('/app/WPsCT_Main.py',      new TextEncoder().encode(b64text('emb-main')));
           pyodide.FS.writeFile('/app/WPsCT_Functions.py', new TextEncoder().encode(b64text('emb-funcs')));
@@ -2032,7 +2032,7 @@ window.switchTab = function(name, btn) {
       async function runTracker(){
         if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
         try{
-          setStatus('Running trackerâ¦');
+          setStatus('Running tracker…');
           const dataPath=await resolveDataPath();
           const parasPath=await resolveParaPath();
           const outCsv='/tmp/WPsCT_Results.csv';
@@ -2109,7 +2109,7 @@ html_preview = df.head(40).to_html(index=False)
       async function plotData(){
         if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Loading input dataâ¦');
+          setStatus('Loading input data…');
           const inUnit=getInputUnit(); const pUnit=getPlotUnit();
           const dataPath=await resolveDataPath();
           pyodide.globals.set('data_path',dataPath);
@@ -2151,7 +2151,7 @@ json.dumps(out, allow_nan=False)
       async function plotStorage(){
         if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
         try{
-          setStatus('Running model and preparing storage plotâ¦');
+          setStatus('Running model and preparing storage plot…');
           const pUnit=getPlotUnit();
           const outCsv='/tmp/WPsCT_Results.csv';
           try{ pyodide.FS.stat(outCsv); }catch(e){ await runTracker(); }
@@ -2443,10 +2443,10 @@ json.dumps(out, allow_nan=False)
 
       window.runLogTracker = async function runLogTracker() {
         if (!pyReady) {
-          setLogStatus('â³ Initializing Python environment, please waitâ¦');
+          setLogStatus('⏳ Initializing Python environment, please wait…');
           await initPy();
           if (!pyReady) {
-            setLogStatus('â Initialization failed. Please check your internet connection and try again.');
+            setLogStatus('❌ Initialization failed. Please check your internet connection and try again.');
             return;
           }
         }
@@ -2467,7 +2467,7 @@ json.dumps(out, allow_nan=False)
         const carbonKg    = carbonKgLog * efficiency;  // carbon entering the product
         const L           = volResult.L;
 
-        setLogStatus('Running log carbon trackerâ¦');
+        setLogStatus('Running log carbon tracker…');
 
         try {
           // Build a 1-year production series: carbon enters in year 1, zeros thereafter
@@ -2692,6 +2692,18 @@ json.dumps(out, allow_nan=False)
         setLogStatus('Cleared. Select product type and run again.');
       }
 
+      function clearPPsTracker() {
+        selectedPPsProduct = null;
+        document.querySelectorAll('#pps-product-grid .product-card').forEach(el => el.classList.remove('selected'));
+        document.getElementById('pps-summary-panel').classList.add('hidden');
+        document.getElementById('pps-results-preview').innerHTML = '';
+        document.getElementById('pps-download-link').classList.add('hidden');
+        document.getElementById('pps-estimate-display').classList.add('hidden');
+        document.getElementById('pps-suggestion-note').classList.add('hidden');
+        Plotly.purge('pps-plot-area');
+        setPPsStatus('Cleared. Select end-use category and run again.');
+      }
+
       // Initialise estimate display on page load
       onLogInputChange();
 
@@ -2824,9 +2836,9 @@ json.dumps(out, allow_nan=False)
 
       window.runPPsTracker = async function() {
         if (!pyReady) {
-          setPPsStatus('â³ Initializing Pythonâ¦');
+          setPPsStatus('⏳ Initializing Python…');
           await initPy();
-          if (!pyReady) { setPPsStatus('â Initialization failed.'); return; }
+          if (!pyReady) { setPPsStatus('❌ Initialization failed.'); return; }
         }
         if (!selectedPPsProduct) { setPPsStatus('Please select an end-use category first.'); return; }
 
@@ -2841,7 +2853,7 @@ json.dumps(out, allow_nan=False)
         const mass       = vr.vol * density;
         const cTotal     = mass * cfrac;
         const carbonKg   = cTotal * eff;   // serviceable carbon entering the product
-        setPPsStatus('Running carbon trackerâ¦');
+        setPPsStatus('Running carbon tracker…');
 
         try {
           pyodide.globals.set('pps_carbon_kg',    carbonKg);
