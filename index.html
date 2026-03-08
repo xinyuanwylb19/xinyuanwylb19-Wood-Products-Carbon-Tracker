@@ -371,7 +371,7 @@
               </h2>
               <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run — no need to visit the HWPs Carbon tab first.</p>
               <div class="flex flex-wrap gap-2">
-                <button id="btn-il-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runIlTracker()">Run Log Tracker</button>
+                <button id="btn-il-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runIlTracker()">Run Tracker</button>
                 <button id="btn-il-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearIlTracker()">Clear</button>
               </div>
               <div id="il-status" class="text-sm text-gray-600 mt-2">Select product type, then click Run.</div>
@@ -692,15 +692,15 @@
                 Run Tracker
               </h2>
               <div class="space-y-2">
-                <button id="btn-init" class="btn w-full px-3 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">⚙️ Initialize Python</button>
-                <button id="btn-run"  class="btn w-full px-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" disabled>▶ Run Carbon Tracker</button>
+                <button id="btn-init" class="btn w-full px-3 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors">⚙️ Initialize Tracker</button>
+                <button id="btn-run"  class="btn w-full px-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors" disabled>▶ Run Tracker</button>
                 <div class="grid grid-cols-2 gap-2">
                   <button id="btn-plot-data"    class="btn px-3 py-2 rounded-xl bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 transition-colors" disabled>📊 Input Data</button>
                   <button id="btn-plot-storage" class="btn px-3 py-2 rounded-xl bg-violet-600 text-white text-sm font-semibold hover:bg-violet-700 transition-colors" disabled>📈 Carbon Stock</button>
                 </div>
                 <button id="btn-clear" class="btn w-full px-3 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 transition-colors border border-gray-200">✕ Clear All</button>
               </div>
-              <div id="status"   class="text-sm text-indigo-700 font-medium mt-3">Click "Initialize Python" to begin.</div>
+              <div id="status"   class="text-sm text-indigo-700 font-medium mt-3">Click "Initialize Tracker" to begin.</div>
               <div id="progress" class="text-xs text-gray-400 mt-1"></div>
             </div>
 
@@ -945,12 +945,12 @@
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">3</span>
-                <div><p class="font-semibold text-gray-800 text-sm">⚙️ Initialize Python</p>
-                <p class="text-gray-500 text-xs mt-0.5">Click "Initialize Python". The first load downloads the Python runtime (~50 MB, 30–90 sec). Subsequent loads within the same session are instant.</p></div>
+                <div><p class="font-semibold text-gray-800 text-sm">⚙️ Initialize Tracker</p>
+                <p class="text-gray-500 text-xs mt-0.5">Click "Initialize Tracker". The first load downloads the Python runtime (~50 MB, 30–90 sec). Subsequent loads within the same session are instant.</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-600 text-white text-sm font-bold flex items-center justify-center">4</span>
-                <div><p class="font-semibold text-gray-800 text-sm">▶ Run Carbon Tracker</p>
+                <div><p class="font-semibold text-gray-800 text-sm">▶ Run Tracker</p>
                 <p class="text-gray-500 text-xs mt-0.5">Runs the full life-cycle model. Results appear in the table; the Download button activates.</p></div>
               </li>
               <li class="flex gap-3">
@@ -2162,7 +2162,7 @@ html_preview = df.head(40).to_html(index=False)
       }
 
       async function plotData(){
-        if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
+        if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
         try{
           setStatus('Loading input data…');
           const inUnit=getInputUnit(); const pUnit=getPlotUnit();
@@ -2204,7 +2204,7 @@ json.dumps(out, allow_nan=False)
       }
 
       async function plotStorage(){
-        if(!pyReady){ setStatus('Please click "Initialize Python" first.'); return; }
+        if(!pyReady){ setStatus('Please click "Initialize Tracker" first.'); return; }
         try{
           setStatus('Running model and preparing storage plot…');
           const pUnit=getPlotUnit();
@@ -2291,7 +2291,7 @@ json.dumps(out, allow_nan=False)
         const panel=document.getElementById('eup-summary-panel');
         if(panel) panel.classList.add('hidden');
         Plotly.purge('plot-data-area'); Plotly.purge('plot-storage-area');
-        setStatus('Cleared. Click "Initialize Python" to begin.');
+        setStatus('Cleared. Click "Initialize Tracker" to begin.');
       }
 
       document.getElementById('btn-init').addEventListener('click', initPy);
