@@ -339,7 +339,7 @@
                 <span class="bg-green-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">4</span>
                 Run Log Carbon Tracker
               </h2>
-              <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run — no need to visit the HWPs Carbon tab first.</p>
+              <p class="text-xs text-gray-500 mb-3">Python will initialize automatically on first run.</p>
               <div class="flex flex-wrap gap-2">
                 <button id="btn-il-run" class="btn px-4 py-2 rounded-xl bg-green-700 text-white hover:bg-green-800" onclick="runIlTracker()">Run Tracker</button>
                 <button id="btn-il-clear" class="btn px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300" onclick="clearIlTracker()">Clear</button>
@@ -614,7 +614,7 @@
                 <label class="flex items-start gap-2 cursor-pointer p-2 rounded-xl hover:bg-indigo-50 transition-colors">
                   <input type="radio" name="paraChoice" id="rb-upload-para" class="h-4 w-4 accent-indigo-600 mt-0.5">
                   <div><span class="font-semibold text-gray-800">Upload Custom Parameters</span>
-                  <p class="text-xs text-gray-400">CSV with disposal/decay values</p></div>
+                  <p class="text-xs text-gray-400">Service life, disposal, decay parameters</p></div>
                 </label>
                 <input id="file-paras" type="file" accept=".csv" class="mt-1 block w-full text-sm text-gray-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" disabled>
               </div>
@@ -694,7 +694,7 @@
           <div class="lg:col-span-2 bg-white rounded-2xl shadow p-4">
             <div class="flex items-center justify-between mb-2">
               <div>
-                <h3 class="text-sm font-bold text-gray-800">Global Wood Products Carbon Storage</h3>
+                <h3 class="text-sm font-bold text-gray-800">Global Wood Products Carbon Storage (Based on FAO Data)</h3>
               </div>
               <div class="flex items-center gap-2">
                 <select id="gl-map-metric" onchange="glUpdateMap()"
@@ -815,7 +815,7 @@
               <div>
                 <h1 class="text-2xl font-bold mb-1">📖 User Guide</h1>
                 <p class="text-indigo-100 text-sm">How to prepare data, run the tracker, and interpret results</p>
-                <p class="text-indigo-200 text-xs mt-1">Based on: Wei et al. (2023) · Carbon Balance and Management 18:1</p>
+                <p class="text-indigo-200 text-xs mt-1">Based on: Wei et al. (2023) · Carbon Balance and Management </p>
               </div>
               <a href="./assets/docs/WPsCT_UserManual.docx" download
                  class="flex items-center gap-2 px-4 py-2.5 bg-white text-indigo-700 rounded-xl text-sm font-bold hover:bg-indigo-50 transition-colors shadow">
@@ -830,12 +830,12 @@
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">1</span>
                 <div><p class="font-semibold text-gray-800 text-sm">Select a Data Source</p>
-                <p class="text-gray-500 text-xs mt-0.5">Choose the built-in Maine or US example, or upload your own production CSV (see format below).</p></div>
+                <p class="text-gray-500 text-xs mt-0.5">Choose a built-in example, or upload your own data (see format below).</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">2</span>
                 <div><p class="font-semibold text-gray-800 text-sm">Choose Model Parameters</p>
-                <p class="text-gray-500 text-xs mt-0.5">Use the default parameters (Wei et al. 2023) or upload a custom parameters CSV for your region.</p></div>
+                <p class="text-gray-500 text-xs mt-0.5">Use the default parameters or upload a custom parameters for your region.</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-600 text-white text-sm font-bold flex items-center justify-center">3</span>
@@ -845,7 +845,7 @@
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-600 text-white text-sm font-bold flex items-center justify-center">4</span>
                 <div><p class="font-semibold text-gray-800 text-sm">▶ Run Tracker</p>
-                <p class="text-gray-500 text-xs mt-0.5">Runs the full life-cycle model. Results appear in the table; the Download button activates.</p></div>
+                <p class="text-gray-500 text-xs mt-0.5">Runs the model. Results appear in the table; the Download button activates.</p></div>
               </li>
               <li class="flex gap-3">
                 <span class="flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white text-sm font-bold flex items-center justify-center">5</span>
@@ -1081,6 +1081,13 @@
                     <p class="text-xs text-gray-500">USDA Forest Service</p>
                   </div>
                 </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-red-600">GD</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Grant Daniels</p>
+                    <p class="text-xs text-gray-500">University of Maine</p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1215,7 +1222,7 @@
       <div class="mx-auto px-4 py-4 max-w-[1400px] flex flex-wrap items-center justify-between gap-2">
         <p>© 2025 Wood Products Carbon Tracker &nbsp;·&nbsp; Xinyuan Wei &nbsp;·&nbsp;
            <a href="mailto:xinyuan.wei@maine.edu" class="underline text-indigo-600 hover:text-indigo-800">xinyuan.wei@maine.edu</a></p>
-        <p class="text-gray-400">Supported by USDA · NSRC &nbsp;·&nbsp; University of Maine</p>
+        <p class="text-gray-400">Supported by USDA · NSRC</p>
       </div>
     </footer>
 
@@ -1776,8 +1783,11 @@
             z: vals,
             text: names,
             colorscale: [
-              [0,'#ecfdf5'],[0.1,'#a7f3d0'],[0.25,'#34d399'],
-              [0.5,'#10b981'],[0.75,'#065f46'],[1,'#022c22']
+              [0.0,'#1d4ed8'],
+              [0.2,'#60a5fa'],
+              [0.4,'#fde047'],
+              [0.7,'#f97316'],
+              [1.0,'#dc2626']
             ],
             colorbar:{
               title: unitLbl(),
