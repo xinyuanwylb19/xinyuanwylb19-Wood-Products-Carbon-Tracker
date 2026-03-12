@@ -702,7 +702,6 @@
                   <option value="inuse">Total In-Use Stock</option>
                   <option value="lf">Landfill Stock</option>
                   <option value="biochar">Biochar Stock</option>
-                  <option value="emissions">Biofuel Emissions</option>
                 </select>
               </div>
             </div>
@@ -786,7 +785,6 @@
                 <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-emis" class="accent-indigo-600" checked> Biofuel Emis.</label>
                 <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-lfdecay" class="accent-indigo-600" checked> LF Decay</label>
                 <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-bcdecay" class="accent-indigo-600"> Biochar Decay</label>
-                <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" id="glv-lfinflow" class="accent-indigo-600"> LF Inflow</label>
               </div>
             </div>
             <div id="gl-chart-emis" style="height:280px;"></div>
@@ -995,7 +993,7 @@
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Principal Investigator</h3>
               <div class="flex items-start gap-3">
-                <div class="team-avatar bg-green-700 text-xl">🌲</div>
+                <div class="team-avatar bg-green-700">XW</div>
                 <div>
                   <p class="font-bold text-gray-900 text-base">Xinyuan Wei</p>
                   <p class="text-xs text-gray-500">University of Maine</p>
@@ -1006,7 +1004,7 @@
 
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Co-Investigators</h3>
-              <div class="space-y-3">
+              <div class="grid md:grid-cols-2 gap-3">
                 <div class="flex items-center gap-3">
                   <div class="team-avatar bg-blue-600">DH</div>
                   <div>
@@ -1047,7 +1045,7 @@
 
             <div class="p-5 bg-white rounded-2xl shadow">
               <h3 class="text-sm font-bold text-teal-800 uppercase tracking-wide mb-4">Collaborators</h3>
-              <div class="space-y-3">
+              <div class="grid md:grid-cols-2 gap-3">
                 <div class="flex items-center gap-3">
                   <div class="team-avatar bg-emerald-600">CW</div>
                   <div>
@@ -1067,6 +1065,20 @@
                   <div>
                     <p class="font-semibold text-gray-800 text-sm">Lei Ma</p>
                     <p class="text-xs text-gray-500">University of Maryland</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-orange-600">JF</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Jereme Frank</p>
+                    <p class="text-xs text-gray-500">Maine Forest Service</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="team-avatar bg-cyan-700">PN</div>
+                  <div>
+                    <p class="font-semibold text-gray-800 text-sm">Prakash Nepal</p>
+                    <p class="text-xs text-gray-500">USDA Forest Service</p>
                   </div>
                 </div>
               </div>
@@ -1145,6 +1157,18 @@
 
                 <div class="pub-card">
                   <p class="text-sm text-gray-800 leading-relaxed">
+                    Poulter, B., Murray-Tortarolo, G., Hayes, D., Ciais, P., Andrew, R., Byrne, B., ... Wei, X., ... &amp; Zhang, Z. (2025).
+                    The North American Greenhouse Gas Budget: emissions, removals, and integration for CO2, CH4, and N2O (2010-2019): Results from the Second REgional Carbon Cycle Assessment and Processes Study (RECCAP2).
+                    <em>Global Biogeochemical Cycles</em>. <strong>39</strong>(4), e2024GB008310.
+                  </p>
+                  <a href="https://doi.org/10.1029/2024GB008310" target="_blank"
+                     class="inline-block mt-2 text-xs bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full hover:bg-teal-200 font-mono">
+                    doi.org/10.1029/2024GB008310 ↗
+                  </a>
+                </div>
+
+                <div class="pub-card">
+                  <p class="text-sm text-gray-800 leading-relaxed">
                     Zhao, J., Wei, X., Diao, J., Chen, H., Lin, S., Zhu, Z., Jiang, X., &amp; Zhu, H. (2023).
                     Exploring plausible contributions of end-use harvested wood products to store atmospheric carbon in China.
                     <em>Biomass and Bioenergy</em>. <strong>177</strong>, 106934.
@@ -1220,14 +1244,14 @@
           Construction:'#1d4ed8', Exterior:'#0891b2', Household:'#7c3aed',
           GraphicPaper:'#059669', HouseholdPaper:'#65a30d', OtherPaper:'#16a34a',
           Landfill:'#92400e', Biochar:'#78350f',
-          FuelEmis:'#f97316', LFDecay:'#b45309', BCDecay:'#a16207', LFInflow:'#9ca3af'
+          FuelEmis:'#f97316', LFDecay:'#b45309', BCDecay:'#a16207'
         };
         const LABELS = {
           Construction:'Construction', Exterior:'Exterior', Household:'Household',
           GraphicPaper:'Graphic Paper', HouseholdPaper:'Household Paper', OtherPaper:'Other Paper',
           Landfill:'Landfill Stock', Biochar:'Biochar Stock',
           FuelEmis:'Biofuel Emissions', LFDecay:'Landfill Decay',
-          BCDecay:'Biochar Decay', LFInflow:'Landfill Inflow'
+          BCDecay:'Biochar Decay'
         };
 
         const GL_COUNTRIES = ["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antigua and Barbuda","Argentina","Armenia","Aruba","Ascension, Saint Helena and Tristan da Cunha","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belgium-Luxembourg","Belize","Benin","Bermuda","Bhutan","Bolivia (Plurinational State of)","Bosnia and Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Cayman Islands","Central African Republic","Chad","Chile","China","China, Hong Kong SAR","China, Macao SAR","China, Taiwan Province of","China, mainland","Christmas Island","Cocos (Keeling) Islands","Colombia","Comoros","Congo","Cook Islands","Costa Rica","Croatia","Cuba","Curaçao","Cyprus","Czechia","Czechoslovakia","Côte d'Ivoire","Democratic People's Republic of Korea","Democratic Republic of the Congo","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Ethiopia PDR","Falkland Islands (Malvinas)","Faroe Islands","Fiji","Finland","France","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran (Islamic Republic of)","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Lao People's Democratic Republic","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Martinique","Mauritania","Mauritius","Mayotte","Melanesia","Mexico","Micronesia","Micronesia (Federated States of)","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands (Kingdom of the)","Netherlands Antilles (former)","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","North Macedonia","Northern Mariana Islands","Norway","Oman","Pacific Islands Trust Territory","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Polynesia","Portugal","Qatar","Republic of Korea","Republic of Moldova","Romania","Russian Federation","Rwanda","Réunion","Saint Kitts and Nevis","Saint Lucia","Saint Martin (French part)","Saint Pierre and Miquelon","Saint Vincent and the Grenadines","Samoa","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Serbia and Montenegro","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South America","South Sudan","Spain","Sri Lanka","Sudan","Sudan (former)","Suriname","Sweden","Switzerland","Syrian Arab Republic","Tajikistan","Thailand","Timor-Leste","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkmenistan","Turks and Caicos Islands","Tuvalu","Türkiye","USSR","Uganda","Ukraine","United Arab Emirates","United Kingdom of Great Britain and Northern Ireland","United Republic of Tanzania","United States of America","Uruguay","Uzbekistan","Vanuatu","Venezuela (Bolivarian Republic of)","Viet Nam","Wallis and Futuna Islands","Western Sahara","Yemen","Yugoslav SFR","Zambia","Zimbabwe"];
@@ -1609,7 +1633,6 @@
           const showEmis  = document.getElementById('glv-emis')?.checked ?? true;
           const showLFD   = document.getElementById('glv-lfdecay')?.checked ?? true;
           const showBCD   = document.getElementById('glv-bcdecay')?.checked ?? false;
-          const showLFI   = document.getElementById('glv-lfinflow')?.checked ?? false;
 
           const mk = (col,key,vis) => ({
             x:years, y:rows.map(r=>fromKg(r[col]||0)),
@@ -1622,7 +1645,6 @@
             mk('Fuel_Emissions','FuelEmis', showEmis),
             mk('LF_Decay_Total','LFDecay',  showLFD),
             mk('Biochar_Decay','BCDecay',   showBCD),
-            mk('LF_Input_Total','LFInflow', showLFI),
           ];
           Plotly.newPlot('gl-chart-emis', traces, glLayout(
             'Year', 'Carbon Flux (' + unitLbl() + '/yr)'),
@@ -1740,14 +1762,13 @@
             if (metric==='inuse')     val = IN_USE_COLS.reduce((s,c)=>s+(row[c]||0),0);
             else if (metric==='lf')   val = row.LF_Stock_Total||0;
             else if (metric==='biochar') val = row.Biochar_Stock||0;
-            else if (metric==='emissions') val = row.Fuel_Emissions||0;
             isos.push(iso);
             vals.push(fromKg(val));
             names.push(name);
           }
 
           const metricLabels = {inuse:'Total In-Use Stock',lf:'Landfill Stock',
-            biochar:'Biochar Stock',emissions:'Biofuel Emissions'};
+            biochar:'Biochar Stock'};
           const trace = {
             type:'choropleth',
             locationmode:'ISO-3',
@@ -1807,7 +1828,7 @@
           if (el) el.textContent = msg;
         }
 
-        ['glv-emis','glv-lfdecay','glv-bcdecay','glv-lfinflow'].forEach(id => {
+        ['glv-emis','glv-lfdecay','glv-bcdecay'].forEach(id => {
           document.addEventListener('change', e => {
             if (e.target && e.target.id === id && globalSelectedData) glDrawEmisChart(globalSelectedData);
           });
